@@ -22,6 +22,7 @@ app.get('/health', (req, res) => {
 });
 
 app.get('/gps', (req, res) => res.redirect(301, '/gps/'));
+app.get('/obrigado', (req, res) => res.redirect(301, '/obrigado/'));
 
 app.use(
   express.static(path.join(__dirname, 'public'), {
