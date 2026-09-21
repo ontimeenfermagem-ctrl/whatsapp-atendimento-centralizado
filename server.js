@@ -21,9 +21,8 @@ app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok' });
 });
 
-app.get('/gps', (req, res) => res.redirect(301, '/gps/'));
-app.get('/obrigado', (req, res) => res.redirect(301, '/obrigado/'));
-
+// /gps e /obrigado ganham a barra final pelo proprio express.static:
+// uma rota manual aqui vira loop, porque o Express trata "/gps" e "/gps/" como a mesma rota.
 app.use(
   express.static(path.join(__dirname, 'public'), {
     etag: true,
