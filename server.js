@@ -29,11 +29,16 @@ app.get(LP, (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'igps_set_lp_26-ingresso', 'index.html'));
 });
 
-// Endereco antigo continua levando para a pagina nova.
-app.get('/gps', (req, res) => res.redirect(301, LP));
+// Pagina de obrigado: mesma ideia, serve direto com ou sem a barra final.
+const TY = '/igps_set_lp_26-obrigado';
+app.get(TY, (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'igps_set_lp_26-obrigado', 'index.html'));
+});
 
-// /obrigado ganha a barra final pelo proprio express.static: uma rota manual
-// aqui vira loop, porque o Express trata "/obrigado" e "/obrigado/" como a mesma rota.
+// Enderecos antigos continuam levando para as paginas novas.
+app.get('/gps', (req, res) => res.redirect(301, LP));
+app.get('/obrigado', (req, res) => res.redirect(301, TY));
+
 app.use(
   express.static(path.join(__dirname, 'public'), {
     etag: true,
