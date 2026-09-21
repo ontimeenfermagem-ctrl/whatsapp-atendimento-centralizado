@@ -21,8 +21,19 @@ app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok' });
 });
 
-// /gps e /obrigado ganham a barra final pelo proprio express.static:
-// uma rota manual aqui vira loop, porque o Express trata "/gps" e "/gps/" como a mesma rota.
+// Pagina de vendas: serve o arquivo direto, sem redirecionar, para o link do
+// anuncio funcionar com ou sem a barra final. Os arquivos dela usam caminho
+// absoluto, entao carregam nos dois casos.
+const LP = '/igps_set_lp_26-ingresso';
+app.get(LP, (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'igps_set_lp_26-ingresso', 'index.html'));
+});
+
+// Endereco antigo continua levando para a pagina nova.
+app.get('/gps', (req, res) => res.redirect(301, LP));
+
+// /obrigado ganha a barra final pelo proprio express.static: uma rota manual
+// aqui vira loop, porque o Express trata "/obrigado" e "/obrigado/" como a mesma rota.
 app.use(
   express.static(path.join(__dirname, 'public'), {
     etag: true,
