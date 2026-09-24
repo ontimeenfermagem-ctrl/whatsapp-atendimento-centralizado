@@ -26,6 +26,15 @@ fbq('track','PageView');
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<!-- O pré-formulário manda o lead para o paginas (CORS, sem cookie: por isso o crossorigin) e depois
+     leva ao checkout da Hotmart. As conexões já ficam abertas antes do clique. -->
+<link rel="preconnect" href="https://lp.escolaenfermagemdevalor.com.br" crossorigin>
+<link rel="preconnect" href="https://pay.hotmart.com">
+<!-- Pré-formulário antes do checkout (ver README). lead-rules.js e checkout-config.js são CÓPIAS
+     dos arquivos do repo paginas: mudou lá, copie para cá. -->
+<script src="/igps_set_lp_26-ingresso/js/lead-rules.js" defer></script>
+<script src="/igps_set_lp_26-ingresso/js/checkout-config.js" defer></script>
+<script src="/igps_set_lp_26-ingresso/js/pre-formulario.js" defer></script>
 <style>
 :root{
   --cream:#FAF7FC; --cream-2:#F1EAF6; --paper:#FFFFFF;
@@ -195,6 +204,66 @@ footer b{color:rgba(255,255,255,.85);font-weight:500}
 .vid.playing .i-play{display:none}.vid.playing .i-pause{display:block}
 .vid.playing button{opacity:0}
 .vid.playing:hover button,.vid.playing button:focus-visible{opacity:1}
+/* pré-formulário: o modal que abre no lugar do checkout (js/pre-formulario.js) */
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+html:has(.pf[open]){overflow:hidden;scrollbar-gutter:stable}
+#ingresso{scroll-margin-top:96px}
+.pf:not([open]){display:none}
+.pf{--pf-erro:#B42318;--pf-borda:#93809F;width:min(460px,calc(100% - 24px));max-width:none;max-height:none;margin:auto;padding:0;border:0;background:transparent;color:var(--ink);overflow:visible}
+.pf [hidden]{display:none!important}
+.pf::backdrop{background:rgba(26,18,32,.66);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.pf[open]{animation:pf-entra .26s cubic-bezier(.2,.8,.2,1)}
+.pf[open]::backdrop{animation:pf-fundo .26s ease-out}
+@keyframes pf-entra{from{opacity:0;transform:translateY(16px) scale(.98)}}
+@keyframes pf-fundo{from{opacity:0}}
+.pf-in{max-height:calc(100vh - 24px);max-height:calc(100dvh - 24px);overflow-y:auto;overscroll-behavior:contain;background:var(--paper);border:1px solid var(--line);border-radius:22px;box-shadow:0 40px 80px -30px rgba(26,18,32,.75)}
+.pf-h{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:7px 7px 7px 20px;background:linear-gradient(100deg,#8B4FC0,var(--rust));color:#fff}
+.pf-fechar{flex:none;width:40px;height:40px;display:grid;place-items:center;padding:0;border:0;border-radius:50%;background:rgba(255,255,255,.16);color:#fff;cursor:pointer;transition:background-color .15s}
+.pf-fechar:hover{background:rgba(255,255,255,.28)}
+.pf-fechar:focus-visible{outline:3px solid #fff;outline-offset:1px}
+.pf-fechar svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round}
+.pf-b{padding:24px 24px 20px}
+.pf-titulo{font-size:clamp(27px,7.4vw,33px);line-height:1.06}
+.pf-titulo:focus{outline:none}
+.pf-sub{margin:10px 0 0;color:var(--ink-2);font-size:15.5px;line-height:1.5}
+.pf-form{display:flex;flex-direction:column;gap:14px;margin-top:20px}
+.pf-campo{display:flex;flex-direction:column;gap:6px}
+.pf-campo label{font-size:14.5px;font-weight:700;line-height:1.3}
+.pf-campo input{width:100%;min-height:52px;padding:12px 15px;border:1.5px solid var(--pf-borda);border-radius:12px;background:var(--cream);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.3;outline:none;-webkit-appearance:none;appearance:none;transition:border-color .15s,box-shadow .15s,background-color .15s}
+.pf-campo input::placeholder{color:#8A7B94;opacity:1}
+.pf-campo input:focus{border-color:var(--rust);background:var(--paper);box-shadow:0 0 0 4px rgba(106,47,160,.16)}
+.pf-campo input:focus-visible{outline:2px solid var(--rust);outline-offset:2px}
+.pf-campo.tem-erro input{border-color:var(--pf-erro);background:#FFF8F7}
+.pf-campo.tem-erro input:focus{box-shadow:0 0 0 4px rgba(180,35,24,.14)}
+.pf-erro{display:flex;gap:7px;align-items:flex-start;margin:0;color:var(--pf-erro);font-size:14px;font-weight:700;line-height:1.4}
+.pf-erro::before{content:"!";flex:0 0 18px;height:18px;margin-top:1px;border-radius:50%;background:var(--pf-erro);color:#fff;font-size:12px;font-weight:800;line-height:18px;text-align:center}
+.pf-sugestao{margin-top:2px;padding:12px 14px;border:1.5px solid #D9C2E8;border-radius:12px;background:var(--peach)}
+.pf-sugestao p{margin:0;font-size:15px;line-height:1.4;overflow-wrap:anywhere}
+.pf-sugestao strong{color:var(--rust-text)}
+.pf-sugestao-botoes{display:flex;flex-wrap:wrap;align-items:center;gap:4px 12px;margin-top:10px}
+.pf-sugestao-sim{min-height:44px;padding:10px 18px;border:0;border-radius:99px;background:var(--rust);color:#fff;font-family:var(--body);font-size:15px;font-weight:700;cursor:pointer}
+.pf-sugestao-sim:hover{background:var(--rust-text)}
+.pf-sugestao-nao{min-height:44px;padding:10px 4px;border:0;background:none;color:var(--ink-2);font-family:var(--body);font-size:14.5px;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.pf-sugestao.destaque{border-color:var(--rust);box-shadow:0 0 0 4px rgba(106,47,160,.14);animation:pf-chama .38s ease}
+@keyframes pf-chama{25%{transform:translateX(-4px)}50%{transform:translateX(4px)}75%{transform:translateX(-2px)}}
+.pf-status{margin:0;color:var(--pf-erro);font-size:14.5px;font-weight:700}
+.pf-status:empty{display:none}
+.pf-ir{margin-top:4px;min-height:56px;line-height:1.25;text-wrap:balance}
+/* Verde mais escuro que o dos CTAs da página: texto branco com contraste AA (>= 4,5:1). */
+.btn.block.pf-ir{background:linear-gradient(180deg,#159A46,#0F7A37)}
+.pf-direto{margin:0;text-align:center;font-size:14px;line-height:1.45;color:var(--ink-2)}
+.pf-direto a{color:var(--rust-text);font-weight:700;text-underline-offset:3px}
+.pf-ir:disabled{cursor:progress;transform:none;filter:saturate(.85)}
+.pf-gira{display:none;flex:none;width:20px;height:20px;border-radius:50%;border:3px solid rgba(255,255,255,.4);border-top-color:#fff;animation:pf-gira .8s linear infinite}
+.pf-ir[aria-busy="true"] .pf-gira{display:inline-block}
+@keyframes pf-gira{to{transform:rotate(360deg)}}
+.pf-seguro{margin:0;text-align:center;color:var(--ink-2);font-size:13px;line-height:1.4;text-wrap:balance}
+.pf-seguro svg{display:inline-block;width:15px;height:15px;margin-right:6px;vertical-align:-2px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round}
+@media (max-width:400px){.pf-b{padding:20px 18px 18px}.pf-h{padding-left:16px}.pf-form{gap:12px;margin-top:18px}}
+@media (max-width:380px){.btn.block.pf-ir{padding-inline:14px;font-size:15px;letter-spacing:.02em}}
+/* celular baixo (360x640, navegador do Instagram): o botão e o cadeado cabem sem rolar */
+@media (max-height:700px){.pf-b{padding-top:16px;padding-bottom:14px}.pf-titulo{font-size:clamp(24px,6.6vw,28px)}.pf-sub{margin-top:6px;font-size:14.5px;line-height:1.45}.pf-form{gap:10px;margin-top:14px}.pf-campo{gap:4px}.pf-campo input{min-height:48px;padding-block:10px}.pf-ir{min-height:52px;margin-top:2px}}
+@media (prefers-reduced-motion:reduce){.pf[open],.pf[open]::backdrop,.pf-sugestao.destaque{animation:none}.pf-gira{animation-duration:2.4s}.pf-campo input,.pf-fechar{transition:none}}
 @media (max-width:860px){
   .vids{grid-template-columns:1fr}
   .hero{grid-template-columns:1fr;gap:32px}
@@ -213,8 +282,6 @@ footer b{color:rgba(255,255,255,.85);font-weight:500}
 </style>
 </head>
 <body>
-
-<!-- Substitua # pelo link de checkout -->
 
 <div class="wrap bar">
   <div class="bar-in">
@@ -247,7 +314,7 @@ footer b{color:rgba(255,255,255,.85);font-weight:500}
         <div class="t">pagamento único · Pix ou cartão</div>
       </div>
       <div class="ticket-f">
-        <a class="btn block" href="https://pay.hotmart.com/R107667362D?off=l0r77by6&amp;checkoutMode=10" data-checkout>Garantir minha vaga por R$5,00</a>
+        <a class="btn block" href="https://pay.hotmart.com/R107667362D?off=l0r77by6&amp;checkoutMode=10" data-checkout data-valor="5.00">Garantir minha vaga por R$5,00</a>
         <small>Garantia de 7 dias · Estude do seu jeito e em qualquer dispositivo</small>
       </div>
     </div>
@@ -382,7 +449,7 @@ footer b{color:rgba(255,255,255,.85);font-weight:500}
         <div class="t">pagamento único · Pix ou cartão</div>
       </div>
       <div class="ticket-f">
-        <a class="btn block" href="https://pay.hotmart.com/R107667362D?off=l0r77by6&amp;checkoutMode=10" data-checkout>Quero minha vaga agora</a>
+        <a class="btn block" href="https://pay.hotmart.com/R107667362D?off=l0r77by6&amp;checkoutMode=10" data-checkout data-valor="5.00">Quero minha vaga agora</a>
         <small>Vagas limitadas · as inscrições fecham 07/10/2026 às 20h</small>
       </div>
     </div>
@@ -426,13 +493,104 @@ footer b{color:rgba(255,255,255,.85);font-weight:500}
   <b>ON TIME ENFERMAGEM LTDA</b><br>
   Todos os direitos reservados.
 </footer>
+
+<!-- Pré-formulário: todo botão [data-checkout] abre este modal (js/pre-formulario.js). O envio vai
+     para o data-api (o /api/inscricao do paginas, que grava o lead com as UTMs) e segue para o
+     checkout. Sem JavaScript o modal nunca abre e o botão leva direto ao checkout. -->
+<dialog class="pf" id="pre-formulario" aria-labelledby="pf-titulo" aria-describedby="pf-sub">
+  <div class="pf-in">
+    <div class="pf-h">
+      <span class="mono">Ingresso · Imersão GPS</span>
+      <button type="button" class="pf-fechar" id="pf-fechar" aria-label="Fechar"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+    <div class="pf-b">
+      <h2 class="pf-titulo" id="pf-titulo" tabindex="-1">Falta pouco, <span class="grad">preciosa!</span> <span aria-hidden="true">💚</span></h2>
+      <p class="pf-sub" id="pf-sub">Preenche seus dados pra eu saber pra quem enviar o seu acesso.</p>
+
+      <form class="pf-form" id="pf-form" novalidate data-api="https://lp.escolaenfermagemdevalor.com.br/api/inscricao">
+        <div class="pf-campo" data-campo="nome">
+          <label for="pf-nome">Nome completo</label>
+          <input id="pf-nome" name="nome" type="text" autocomplete="name" autocapitalize="words" enterkeyhint="next" maxlength="120" aria-describedby="pf-erro-nome" placeholder="Como você se chama?">
+          <p class="pf-erro" id="pf-erro-nome" role="alert" hidden></p>
+        </div>
+
+        <div class="pf-campo" data-campo="whatsapp">
+          <label for="pf-whatsapp">WhatsApp com DDD</label>
+          <input id="pf-whatsapp" name="whatsapp" type="tel" inputmode="numeric" autocomplete="tel-national" enterkeyhint="next" maxlength="25" aria-describedby="pf-erro-whatsapp" placeholder="(00) 00000-0000">
+          <p class="pf-erro" id="pf-erro-whatsapp" role="alert" hidden></p>
+        </div>
+
+        <div class="pf-campo" data-campo="email">
+          <label for="pf-email">E-mail</label>
+          <input id="pf-email" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="go" maxlength="254" aria-describedby="pf-erro-email" placeholder="seuemail@exemplo.com">
+          <p class="pf-erro" id="pf-erro-email" role="alert" hidden></p>
+          <div class="pf-sugestao" id="pf-sugestao" role="group" aria-labelledby="pf-sugestao-texto" hidden>
+            <p id="pf-sugestao-texto">Você quis dizer <strong id="pf-sugestao-valor"></strong>?</p>
+            <div class="pf-sugestao-botoes">
+              <button type="button" class="pf-sugestao-sim" id="pf-sugestao-sim">Sim, corrigir</button>
+              <button type="button" class="pf-sugestao-nao" id="pf-sugestao-nao">Não, meu e-mail está certo</button>
+            </div>
+          </div>
+        </div>
+
+        <p class="pf-status" id="pf-status" role="alert"></p>
+
+        <button type="submit" class="btn block pf-ir" id="pf-ir"><span id="pf-ir-texto">Continuar para o pagamento</span><span class="pf-gira" aria-hidden="true"></span></button>
+
+        <p class="pf-seguro"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="5.5" y="10.5" width="13" height="9.5" rx="2.5"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></svg>Pagamento pelo checkout oficial da Hotmart</p>
+
+        <!-- Só aparece depois de 2 envios recusados (celular de fora do Brasil, e-mail que não é
+             .com/.com.br): a régua não pode impedir a compra. -->
+        <p class="pf-direto" id="pf-direto" hidden>Não está conseguindo? <a id="pf-direto-link" href="https://pay.hotmart.com/R107667362D?off=l0r77by6&amp;checkoutMode=10">Ir direto para o pagamento</a></p>
+
+        <!-- Avisos para leitor de tela (sugestão de e-mail, saída para o checkout). Fica DENTRO do
+             modal: com ele aberto, o resto da página é inerte e o aviso não seria lido. -->
+        <div class="sr-only" id="pf-aviso" aria-live="polite"></div>
+      </form>
+    </div>
+  </div>
+</dialog>
+
 <script>
-/* Avisa o pixel quando alguem vai para o checkout */
-document.querySelectorAll('[data-checkout]').forEach(function(a){
-  a.addEventListener('click',function(){
-    if(window.fbq)fbq('track','InitiateCheckout',{value:5.00,currency:'BRL'});
+/* As UTMs da URL vão para os botões de compra na hora em que a página é lida, antes de qualquer
+   arquivo de fora: quem toca no botão antes do pre-formulario.js carregar (rede ruim) também leva a
+   campanha. utm_content vira o sck, como no checkout-config. O pre-formulario.js depois troca pelo
+   primeiro toque guardado; o link original fica em data-checkout-base. Enquanto os .js não chegam,
+   é também este script que avisa o Pixel (InitiateCheckout) de quem vai direto ao checkout.
+   Sem o script de widget da Hotmart de propósito: ele não repassa UTM e pode apagar os botões de
+   compra (ver README). */
+(function(){
+  [].forEach.call(document.querySelectorAll('a[data-checkout]'),function(a){
+    a.addEventListener('click',function(){
+      if(window.EVPreFormularioAtivo||!window.fbq)return;
+      var v=parseFloat(a.getAttribute('data-valor')||'');
+      try{fbq('track','InitiateCheckout',v>0?{value:v,currency:'BRL'}:{currency:'BRL'});}catch(e){}
+    });
   });
-});
+  var q=location.search.slice(1);if(!q)return;
+  var utm={};
+  q.split('&').forEach(function(p){
+    var i=p.indexOf('='),k=i<0?p:p.slice(0,i),v=i<0?'':p.slice(i+1);
+    try{k=decodeURIComponent(k.replace(/\+/g,' '));v=decodeURIComponent(v.replace(/\+/g,' '));}catch(e){return;}
+    v=v.trim().slice(0,500);
+    if(/^utm_(source|medium|campaign|term|content)$/.test(k)&&v)utm[k]=v;
+  });
+  if(utm.utm_content)utm.sck=utm.utm_content;
+  var chaves=Object.keys(utm);if(!chaves.length)return;
+  [].forEach.call(document.querySelectorAll('a[href*="pay.hotmart.com"]'),function(a){
+    try{
+      var h=a.getAttribute('href')||'';
+      if(!a.hasAttribute('data-checkout-base'))a.setAttribute('data-checkout-base',h);
+      var partes=h.split('#'),base=partes[0],hash=partes.length>1?'#'+partes.slice(1).join('#'):'';
+      var q2=base.indexOf('?'),caminho=q2<0?base:base.slice(0,q2);
+      var pares=(q2<0?'':base.slice(q2+1)).split('&').filter(function(par){
+        return par&&!Object.prototype.hasOwnProperty.call(utm,par.split('=')[0]);
+      });
+      chaves.forEach(function(k){pares.push(encodeURIComponent(k)+'='+encodeURIComponent(utm[k]));});
+      a.setAttribute('href',caminho+'?'+pares.join('&')+hash);
+    }catch(e){}
+  });
+})();
 </script>
 
 <script>
