@@ -35,6 +35,12 @@ app.get(TY, (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'igps_set_lp_26-obrigado', 'index.html'));
 });
 
+// Pagina de pagamento pendente (Pix aguardando confirmacao).
+const WAIT = '/igps_set_lp_26-aguardando-pagamento';
+app.get(WAIT, (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'igps_set_lp_26-aguardando-pagamento', 'index.html'));
+});
+
 // Enderecos antigos continuam levando para as paginas novas.
 app.get('/gps', (req, res) => res.redirect(301, LP));
 app.get('/obrigado', (req, res) => res.redirect(301, TY));

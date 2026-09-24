@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pagamento em análise | GPS do Plantão Sem Medo</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#5B2A86">
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','538380380948773');
+fbq('track','PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=538380380948773&ev=PageView&noscript=1"></noscript>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#FAF7FC; --paper:#fff;
+  --ink:#1A1220; --ink-2:#5B4E66; --line:#E4D8EC;
+  --coral:#B98AD9; --rust:#5B2A86; --rust-text:#6A2FA0; --peach:#EFE4F5;
+  --amber:#B4700A; --amber-bg:#FDF2DC; --amber-line:#EDD5A6;
+  --dark:#1A1220;
+  --display:'Bricolage Grotesque','Arial Narrow',sans-serif;
+  --body:'DM Sans',system-ui,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55}
+.wrap{max-width:640px;margin-inline:auto;padding-inline:20px}
+h1,h2{font-family:var(--display);letter-spacing:-.035em;line-height:1.04;margin:0;text-wrap:balance}
+.grad{background:linear-gradient(100deg,var(--coral),var(--rust));-webkit-background-clip:text;background-clip:text;color:transparent}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+:focus-visible{outline:3px solid var(--rust);outline-offset:3px}
+
+.top{background:linear-gradient(180deg,#1A1220,#3A1F55 70%,#5B2A86);color:#fff;padding-block:32px 60px;text-align:center}
+.logo{display:block;margin:0 auto 22px;width:min(240px,66%);height:auto}
+.logo-fb{color:#fff;font-family:var(--display);font-weight:800;font-size:22px;margin-bottom:22px}
+.status{display:inline-flex;align-items:center;gap:9px;background:var(--amber-bg);color:var(--amber);border-radius:99px;padding:8px 16px;font-weight:700;margin-bottom:18px}
+.status .dot{width:9px;height:9px;border-radius:50%;background:currentColor;animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+.top h1{font-size:clamp(36px,8vw,52px)}
+.top .sub{margin:14px 0 0;color:rgba(255,255,255,.78)}
+
+.card{background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:26px 22px;box-shadow:0 30px 60px -34px rgba(70,30,100,.55);margin-top:-30px;position:relative}
+.card h2{font-size:24px;margin-bottom:6px}
+.card .intro{color:var(--ink-2);margin:0 0 22px;font-size:16px}
+
+ol.steps{list-style:none;counter-reset:s;padding:0;margin:0;display:grid;gap:2px}
+ol.steps li{counter-increment:s;display:grid;grid-template-columns:34px 1fr;gap:14px;padding:16px 0;border-top:1px solid var(--line)}
+ol.steps li:first-child{border-top:0;padding-top:0}
+ol.steps li::before{content:counter(s);grid-row:span 2;width:34px;height:34px;border-radius:50%;background:var(--peach);color:var(--rust-text);font-family:var(--mono);font-weight:700;font-size:14px;display:grid;place-items:center}
+ol.steps b{display:block;font-size:17px}
+ol.steps span{color:var(--ink-2);font-size:15.5px;line-height:1.45}
+
+.note{margin-top:22px;padding:16px 18px;border-radius:14px;background:var(--amber-bg);border:1px solid var(--amber-line);font-size:15.5px}
+.note b{color:var(--amber)}
+
+.when{margin-top:22px;border-top:1px dashed var(--line);padding-top:20px;display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between}
+.when div{flex:1 1 140px}
+.when small{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.when b{font-family:var(--display);font-size:20px;letter-spacing:-.02em}
+
+.help{text-align:center;padding-block:48px}
+.help h2{font-size:clamp(26px,5.5vw,34px);margin-bottom:10px}
+.help p{color:var(--ink-2);margin:0 0 22px}
+.btn2{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:12px 26px;border-radius:14px;background:var(--rust);color:#fff;font-weight:700;text-decoration:none;width:100%;max-width:420px}
+.btn2:hover{background:#4A2070}
+footer{background:#120C17;color:rgba(255,255,255,.55);text-align:center;padding:28px 20px;font-size:13px}
+@media (prefers-reduced-motion:reduce){.status .dot{animation:none}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <img class="logo" src="/igps_set_lp_26-aguardando-pagamento/logo.png" alt="Imersão GPS Plantão Sem Medo" width="738" height="299" fetchpriority="high" onerror="this.outerHTML='&lt;div class=logo-fb&gt;Imersão GPS Plantão Sem Medo&lt;/div&gt;'">
+    <span class="status"><span class="dot"></span>Pagamento em análise</span>
+    <h1>Falta só a <span class="grad">confirmação.</span></h1>
+    <p class="sub">Seu pedido foi gerado. A vaga fica reservada até o pagamento ser confirmado.</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="card">
+    <h2>O que acontece agora</h2>
+    <p class="intro">São três passos, e os dois últimos são automáticos.</p>
+    <ol class="steps">
+      <li><b>Conclua o pagamento</b><span>Se você escolheu Pix, o código tem prazo de validade: pague antes de ele expirar. Se pagou no cartão, é só aguardar a análise do banco.</span></li>
+      <li><b>A confirmação chega sozinha</b><span>No Pix costuma levar poucos minutos. No cartão, pode demorar um pouco mais.</span></li>
+      <li><b>Você recebe o acesso</b><span>Assim que o pagamento for aprovado, chega o e-mail de confirmação com o link do grupo de WhatsApp, onde a imersão acontece.</span></li>
+    </ol>
+
+    <div class="note"><b>Importante:</b> enquanto o pagamento não é confirmado, a sua vaga não está garantida. Se o código Pix expirar, refaça a compra pela página do ingresso.</div>
+
+    <div class="when">
+      <div><small>Imersão</small><b>30/09/2026</b></div>
+      <div><small>Horário</small><b>20h</b></div>
+      <div><small>Formato</small><b>100% online</b></div>
+    </div>
+  </div>
+
+  <section class="help">
+    <h2>Já pagou e não recebeu nada?</h2>
+    <p>Se passou bastante tempo e a confirmação não chegou, fale com a nossa equipe. Tenha em mãos o comprovante e o e-mail usado na compra.</p>
+    <a class="btn2" href="https://www.io.tecnicodevalor.com.br/suporte_ontime" target="_blank" rel="noopener">Falar com a equipe</a>
+  </section>
+</main>
+
+<footer>ON TIME ENFERMAGEM LTDA · Todos os direitos reservados.</footer>
+</body>
+</html>
