@@ -1,6 +1,7 @@
 const express = require('express');
 const compression = require('compression');
 const path = require('path');
+const hotmartWebhook = require('./hotmart-webhook');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -24,6 +25,9 @@ app.use((req, res, next) => {
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok' });
 });
+
+// Postback de venda da Hotmart -> API de Conversoes do Meta.
+hotmartWebhook.registrar(app, express);
 
 // As paginas sao servidas pelo index.html da pasta, sempre revalidado (no-cache,
 // como o express.static faz com HTML/JS/CSS la embaixo): sem isto o sendFile manda
