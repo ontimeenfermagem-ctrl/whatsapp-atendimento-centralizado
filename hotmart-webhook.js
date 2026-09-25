@@ -153,11 +153,20 @@ function registrar(app, express) {
 
   // Conferencia rapida pelo navegador, sem expor token nenhum.
   app.get('/webhook/hotmart', (req, res) => {
+    // Diagnostico: so os NOMES das variaveis parecidas com as nossas, nunca o
+    // conteudo delas. Serve para achar erro de digitacao no painel do Railway.
+    // Pode sair daqui depois que as duas chaves estiverem valendo.
+    const nomesParecidos = Object.keys(process.env)
+      .filter((k) => /HOTMART|HOTTOK|META|PIXEL|CAPI/i.test(k))
+      .sort();
+
     res.status(200).json({
       rota: 'ativa',
       hottok_cadastrado: Boolean(HOTTOK),
       token_meta_cadastrado: Boolean(CAPI_TOKEN),
       pixel: PIXEL_ID,
+      nomes_encontrados: nomesParecidos,
+      total_de_variaveis: Object.keys(process.env).length,
     });
   });
 }
