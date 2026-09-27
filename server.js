@@ -43,6 +43,12 @@ function enviarPagina(pasta) {
 const LP = '/igps_set_lp_26-ingresso';
 app.get(LP, enviarPagina('igps_set_lp_26-ingresso'));
 
+// Versao B, rodando o lote 2 (R$ 9,90) ao mesmo tempo que a A. Ela usa as imagens e os .js
+// da pasta da A, entao existe um arquivo so de cada coisa: o que muda de uma para a outra
+// e apenas preco, rotulo do lote e a oferta do checkout.
+const LP_B = '/igps_set_lp_26-ingresso-b';
+app.get(LP_B, enviarPagina('igps_set_lp_26-ingresso-b'));
+
 // Pagina de obrigado: mesma ideia, serve direto com ou sem a barra final.
 const TY = '/igps_set_lp_26-obrigado';
 app.get(TY, enviarPagina('igps_set_lp_26-obrigado'));
