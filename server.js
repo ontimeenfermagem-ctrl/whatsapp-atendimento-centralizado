@@ -57,6 +57,25 @@ app.get(TY, enviarPagina('igps_set_lp_26-obrigado'));
 const WAIT = '/igps_set_lp_26-aguardando-pagamento';
 app.get(WAIT, enviarPagina('igps_set_lp_26-aguardando-pagamento'));
 
+// Calculadora de medicacao. O endereco divulgado tem acento (/calculo-de-medicação-calculadora) e o
+// navegador manda os acentos codificados (%C3%A7%C3%A3o), entao a comparacao e feita com o caminho
+// decodificado e sem acentos: abre com ou sem acento, com ou sem a barra final. Os arquivos dela
+// ficam numa pasta sem acento e sao pedidos por caminho absoluto.
+const CALC = '/calculo-de-medicacao-calculadora';
+const enviarCalc = enviarPagina('calculo-de-medicacao-calculadora');
+app.use((req, res, next) => {
+  if (req.method !== 'GET' && req.method !== 'HEAD') return next();
+  let caminho;
+  try {
+    caminho = decodeURIComponent(req.path);
+  } catch {
+    return next();
+  }
+  caminho = caminho.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/\/+$/, '');
+  if (caminho === CALC) return enviarCalc(req, res);
+  next();
+});
+
 // Enderecos antigos continuam levando para as paginas novas, com a query junto: um anuncio ou QR
 // antigo com UTM (/gps?utm_content=...) nao pode chegar na pagina sem campanha.
 function comQuery(req, destino) {

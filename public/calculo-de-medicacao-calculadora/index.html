@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de Medicação para Enfermagem | Escola Enfermagem de Valor</title>
+<meta name="description" content="Calculadora de medicação para enfermagem: dose, diluição, mg para mL, gotejamento, bomba de infusão e conferência de segurança antes de administrar.">
+<link rel="canonical" href="https://io.escolaenfermagemdevalor.com.br/calculo-de-medica%C3%A7%C3%A3o-calculadora">
+<meta name="theme-color" content="#5B2A86">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%235B2A86'/%3E%3Cpath d='M14 7h4v7h7v4h-7v7h-4v-7H7v-4h7z' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --roxo: #5B2A86;
+    --roxo-2: #6A2FA0;
+    --roxo-claro: #EFE4F5;
+    --fundo: #FAF7FC;
+    --papel: #FFFFFF;
+    --tinta: #1A1220;
+    --tinta-2: #544a5c;
+    --linha: #E4D8EC;
+    --borda: #93809F;
+    --vermelho: #B42318; --vermelho-f: #FEF3F2; --vermelho-b: #FDA29B;
+    --ambar: #93370D;   --ambar-f: #FFFAEB;    --ambar-b: #FEC84B;
+    --verde: #067647;   --verde-f: #ECFDF3;    --verde-b: #75E0A7;
+    --azul: #175CD3;    --azul-f: #EFF8FF;     --azul-b: #B2DDFF;
+    --display: 'Bricolage Grotesque', system-ui, sans-serif;
+    --body: 'DM Sans', system-ui, sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+    --raio: 14px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --roxo: #C9A3EA; --roxo-2: #D8BCF0; --roxo-claro: #2C2036;
+      --fundo: #140E18; --papel: #1D1623; --tinta: #F3EDF7; --tinta-2: #BCB0C6;
+      --linha: #362A40; --borda: #6F6079;
+      --vermelho: #FDA29B; --vermelho-f: #3A1512; --vermelho-b: #7A271A;
+      --ambar: #FEC84B; --ambar-f: #33240A; --ambar-b: #7A4B0C;
+      --verde: #75E0A7; --verde-f: #0B2A1C; --verde-b: #085D3A;
+      --azul: #84CAFF; --azul-f: #0F2440; --azul-b: #1849A9;
+    }
+  }
+  :root[data-theme="dark"] {
+    --roxo: #C9A3EA; --roxo-2: #D8BCF0; --roxo-claro: #2C2036;
+    --fundo: #140E18; --papel: #1D1623; --tinta: #F3EDF7; --tinta-2: #BCB0C6;
+    --linha: #362A40; --borda: #6F6079;
+    --vermelho: #FDA29B; --vermelho-f: #3A1512; --vermelho-b: #7A271A;
+    --ambar: #FEC84B; --ambar-f: #33240A; --ambar-b: #7A4B0C;
+    --verde: #75E0A7; --verde-f: #0B2A1C; --verde-b: #085D3A;
+    --azul: #84CAFF; --azul-f: #0F2440; --azul-b: #1849A9;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--fundo); color: var(--tinta); font: 16px/1.5 var(--body); }
+  button, input, select { font: inherit; color: inherit; }
+  a { color: var(--roxo-2); }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 16px; }
+
+  header.topo { background: #5B2A86; color: #fff; padding: 22px 0 18px; }
+  .marca { font: 600 13px/1 var(--body); letter-spacing: .08em; text-transform: uppercase; opacity: .85; }
+  header h1 { font: 800 clamp(26px, 6vw, 36px)/1.1 var(--display); margin: 8px 0 6px; letter-spacing: -.01em; }
+  header p { margin: 0; opacity: .92; max-width: 560px; }
+
+  .aviso { background: var(--ambar-f); border: 1px solid var(--ambar-b); color: var(--tinta); border-radius: var(--raio); padding: 12px 14px; margin: 16px 0 0; font-size: 14px; }
+  .aviso b { color: var(--ambar); }
+
+  nav.abas { position: sticky; top: 0; z-index: 5; background: var(--fundo); border-bottom: 1px solid var(--linha); margin-top: 16px; }
+  nav.abas .wrap { display: flex; gap: 4px; overflow-x: auto; }
+  nav.abas button { flex: 1 0 auto; background: none; border: 0; border-bottom: 3px solid transparent; padding: 12px 10px; font-weight: 700; color: var(--tinta-2); cursor: pointer; min-height: 48px; }
+  nav.abas button[aria-selected="true"] { color: var(--roxo); border-bottom-color: var(--roxo); }
+
+  main { padding: 16px 0 48px; }
+  .painel[hidden] { display: none; }
+
+  .card { background: var(--papel); border: 1px solid var(--linha); border-radius: var(--raio); padding: 18px 16px; margin: 0 0 16px; }
+  .card h2 { font: 800 20px/1.2 var(--display); margin: 0 0 4px; display: flex; align-items: center; gap: 10px; }
+  .card h2 .n { flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--roxo); color: var(--papel); font: 700 15px/28px var(--body); text-align: center; }
+  .card > p.sub { margin: 0 0 14px; color: var(--tinta-2); font-size: 15px; }
+
+  label, .rot { display: block; font-weight: 700; font-size: 15px; margin: 14px 0 6px; }
+  .opc { font-weight: 400; color: var(--tinta-2); }
+  input[type="text"], input[type="search"], select {
+    width: 100%; min-height: 48px; padding: 10px 12px; border: 1.5px solid var(--borda); border-radius: 10px; background: var(--papel);
+  }
+  input:focus-visible, select:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--roxo-2); outline-offset: 2px; }
+  .linha { display: flex; gap: 8px; }
+  .linha > * { min-width: 0; }
+  .linha .g { flex: 1 1 auto; }
+  .linha .p { flex: 0 0 38%; }
+  .eco { display: block; min-height: 20px; font: 500 13px/1.5 var(--mono); color: var(--tinta-2); margin-top: 4px; }
+  .eco.erro { color: var(--vermelho); font-family: var(--body); font-weight: 700; }
+  .ajuda { font-size: 14px; color: var(--tinta-2); margin: 6px 0 0; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chips label { margin: 0; font-weight: 600; }
+  .chips input { position: absolute; opacity: 0; pointer-events: none; }
+  .chips span { display: inline-flex; align-items: center; min-height: 44px; padding: 8px 14px; border: 1.5px solid var(--borda); border-radius: 999px; cursor: pointer; background: var(--papel); }
+  .chips input:checked + span { background: var(--roxo); border-color: var(--roxo); color: var(--papel); }
+  .chips input:focus-visible + span { outline: 3px solid var(--roxo-2); outline-offset: 2px; }
+
+  .checks label { display: flex; gap: 10px; align-items: flex-start; font-weight: 500; margin: 8px 0; cursor: pointer; }
+  .checks input { width: 22px; height: 22px; flex: none; margin: 1px 0 0; accent-color: var(--roxo); }
+
+  /* Lista de medicamentos */
+  .lista-med { list-style: none; margin: 10px 0 0; padding: 0; max-height: 360px; overflow-y: auto; border: 1px solid var(--linha); border-radius: 10px; }
+  .lista-med li + li { border-top: 1px solid var(--linha); }
+  .lista-med button { width: 100%; text-align: left; background: none; border: 0; padding: 12px 14px; cursor: pointer; display: flex; justify-content: space-between; gap: 10px; align-items: center; min-height: 52px; }
+  .lista-med button:hover { background: var(--roxo-claro); }
+  .lista-med .nm { font-weight: 700; }
+  .lista-med .cl { display: block; font-size: 13px; color: var(--tinta-2); }
+  .tag { flex: none; font: 700 11px/1 var(--body); letter-spacing: .04em; padding: 5px 7px; border-radius: 6px; background: var(--vermelho-f); color: var(--vermelho); border: 1px solid var(--vermelho-b); }
+
+  .med-sel { border: 2px solid var(--roxo); border-radius: 12px; padding: 14px; background: var(--roxo-claro); }
+  .med-sel .topo-sel { display: flex; justify-content: space-between; gap: 10px; align-items: flex-start; }
+  .med-sel h3 { margin: 0; font: 800 20px/1.2 var(--display); }
+  .med-sel .cl { color: var(--tinta-2); font-size: 14px; }
+  .btn-link { background: none; border: 0; color: var(--roxo-2); font-weight: 700; text-decoration: underline; cursor: pointer; padding: 6px 0; min-height: 44px; }
+  .proib { margin: 10px 0 0; padding: 0; list-style: none; }
+  .proib li { color: var(--vermelho); font-weight: 700; font-size: 14px; }
+
+  .btn { display: inline-flex; justify-content: center; align-items: center; gap: 8px; min-height: 52px; padding: 12px 22px; border-radius: 12px; border: 0; background: var(--roxo); color: var(--papel); font-weight: 700; font-size: 17px; cursor: pointer; width: 100%; }
+  .btn.sec { background: var(--papel); color: var(--roxo); border: 2px solid var(--roxo); }
+  .btns { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+  .btns .btn { flex: 1 1 200px; }
+
+  .erros { background: var(--vermelho-f); border: 1.5px solid var(--vermelho-b); border-radius: 12px; padding: 12px 14px; margin-top: 14px; }
+  .erros b { color: var(--vermelho); }
+  .erros ul { margin: 6px 0 0; padding-left: 20px; }
+
+  /* Resultado */
+  .res { border-radius: var(--raio); border: 2px solid var(--verde-b); background: var(--papel); overflow: hidden; margin-bottom: 16px; }
+  .res.n-atencao { border-color: var(--ambar-b); }
+  .res.n-alto, .res.n-bloqueio { border-color: var(--vermelho); }
+  .res-topo { padding: 14px 16px; background: var(--verde-f); }
+  .res.n-atencao .res-topo { background: var(--ambar-f); }
+  .res.n-alto .res-topo, .res.n-bloqueio .res-topo { background: var(--vermelho-f); }
+  .selo { display: inline-block; font: 800 13px/1 var(--body); letter-spacing: .06em; text-transform: uppercase; padding: 6px 10px; border-radius: 6px; background: var(--verde); color: var(--papel); }
+  .res.n-atencao .selo { background: var(--ambar); }
+  .res.n-alto .selo, .res.n-bloqueio .selo { background: var(--vermelho); }
+  .res-topo h2 { font: 800 19px/1.25 var(--display); margin: 10px 0 2px; }
+  .res-topo p { margin: 0; color: var(--tinta-2); font-size: 14px; }
+  .res-corpo { padding: 16px; }
+  .destaque { text-align: center; padding: 16px 12px; border-radius: 12px; background: var(--roxo-claro); }
+  .destaque .r { font-weight: 700; color: var(--tinta-2); }
+  .destaque .v { font: 700 clamp(34px, 10vw, 48px)/1.1 var(--mono); color: var(--roxo); margin: 4px 0; word-break: break-word; }
+  .destaque .s { font-size: 14px; color: var(--tinta-2); }
+  .destaque .ser { font-size: 14px; margin-top: 8px; font-weight: 600; }
+  .trava { border: 2px dashed var(--vermelho); border-radius: 12px; padding: 14px; background: var(--vermelho-f); }
+  .trava h3 { margin: 0 0 6px; color: var(--vermelho); font: 800 18px/1.2 var(--display); }
+  .trava p { margin: 0 0 10px; }
+  .res h3.sec { font: 800 17px/1.2 var(--display); margin: 20px 0 8px; }
+  ol.passos { margin: 0; padding-left: 22px; }
+  ol.passos li { margin: 6px 0; }
+  .alertas { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+  .alertas li { border-left: 5px solid var(--azul); background: var(--azul-f); border-radius: 8px; padding: 10px 12px; }
+  .alertas li b { display: block; }
+  .alertas .bloqueio, .alertas .alto { border-color: var(--vermelho); background: var(--vermelho-f); }
+  .alertas .bloqueio b, .alertas .alto b { color: var(--vermelho); }
+  .alertas .atencao { border-color: var(--ambar-b); background: var(--ambar-f); }
+  .alertas .atencao b { color: var(--ambar); }
+  .alertas .mav { border-color: var(--roxo); background: var(--roxo-claro); }
+  .alertas .mav b { color: var(--roxo); }
+  .alertas .ok { border-color: var(--verde); background: var(--verde-f); }
+  .alertas .ok b { color: var(--verde); }
+  .alertas .nivel { font: 700 11px/1 var(--body); letter-spacing: .06em; text-transform: uppercase; opacity: .8; }
+  details { border: 1px solid var(--linha); border-radius: 10px; padding: 0 14px; margin-top: 12px; }
+  details summary { cursor: pointer; font-weight: 700; padding: 12px 0; min-height: 44px; }
+  details .calc p { font: 500 14px/1.6 var(--mono); margin: 4px 0; overflow-wrap: anywhere; }
+  details[open] { padding-bottom: 12px; }
+  .ci li { margin: 4px 0; }
+
+  /* Ferramentas */
+  .ferr-saida { margin-top: 14px; padding: 14px; border-radius: 12px; background: var(--roxo-claro); min-height: 56px; }
+  .ferr-saida .v { font: 700 26px/1.2 var(--mono); color: var(--roxo); }
+  .ferr-saida .erro { color: var(--vermelho); font-weight: 700; }
+  .ferr-saida p { margin: 4px 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  th, td { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--linha); vertical-align: top; }
+  th { font-weight: 700; color: var(--tinta-2); font-size: 13px; }
+  .tabela { overflow-x: auto; }
+
+  .seg h3 { font: 800 17px/1.2 var(--display); margin: 18px 0 6px; }
+  .seg ul, .seg ol { padding-left: 20px; margin: 6px 0; }
+  .seg li { margin: 4px 0; }
+  footer { color: var(--tinta-2); font-size: 13px; padding: 8px 0 40px; }
+  footer ul { padding-left: 18px; }
+  .so-leitor { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  @media (min-width: 560px) { .card { padding: 22px 22px; } .res-corpo { padding: 20px 22px; } }
+  @media print { nav.abas, .btns, header .marca { display: none; } body { background: #fff; } }
+</style>
+</head>
+<body>
+<header class="topo">
+  <div class="wrap">
+    <div class="marca">Escola Enfermagem de Valor</div>
+    <h1>Calculadora de Medicação</h1>
+    <p>Confira a dose, a diluição e a velocidade antes de administrar. Diga qual é o medicamento, a idade do paciente e a prescrição: a calculadora faz a conta e aponta o que pode dar errado.</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="aviso" role="note">
+    <b>Ferramenta de apoio, não de prescrição.</b> Ela confere a conta e compara com faixas de referência, mas não substitui a prescrição, a bula do fabricante, o protocolo da instituição, o farmacêutico nem a dupla checagem. Nenhum dado digitado sai do seu celular.
+  </div>
+</div>
+
+<nav class="abas" aria-label="Seções">
+  <div class="wrap" role="tablist">
+    <button role="tab" id="aba-calc" aria-controls="p-calc" aria-selected="true">Calculadora</button>
+    <button role="tab" id="aba-ferr" aria-controls="p-ferr" aria-selected="false" tabindex="-1">Ferramentas</button>
+    <button role="tab" id="aba-seg" aria-controls="p-seg" aria-selected="false" tabindex="-1">Segurança</button>
+  </div>
+</nav>
+
+<main class="wrap">
+  <!-- ================= CALCULADORA ================= -->
+  <section class="painel" id="p-calc" role="tabpanel" aria-labelledby="aba-calc">
+    <div class="card" id="passo-med">
+      <h2><span class="n">1</span>Qual é o medicamento?</h2>
+      <p class="sub">Busque pelo nome genérico ou comercial.</p>
+      <div id="busca-area">
+        <label for="busca" class="so-leitor">Buscar medicamento</label>
+        <input type="search" id="busca" placeholder="Ex.: dipirona, ceftriaxona, Buscopan…" autocomplete="off">
+        <ul class="lista-med" id="lista-med" aria-label="Medicamentos"></ul>
+      </div>
+      <div id="med-escolhido" hidden></div>
+    </div>
+
+    <form id="form" novalidate hidden>
+      <div class="card">
+        <h2><span class="n">2</span>Quem é o paciente?</h2>
+        <p class="sub">A idade e o peso mudam a dose e as contraindicações.</p>
+        <span class="rot" id="rot-idade">Idade</span>
+        <div class="linha" role="group" aria-labelledby="rot-idade">
+          <input type="text" class="g" id="idade" inputmode="decimal" autocomplete="off" aria-label="Idade" aria-describedby="eco-idade">
+          <select class="p" id="idade-un" aria-label="Unidade da idade">
+            <option value="anos">anos</option>
+            <option value="meses">meses</option>
+            <option value="dias">dias</option>
+          </select>
+        </div>
+        <span class="eco" id="eco-idade" aria-live="polite"></span>
+
+        <label for="peso">Peso (kg) <span class="opc" id="peso-opc">— obrigatório para crianças</span></label>
+        <input type="text" id="peso" inputmode="decimal" autocomplete="off" placeholder="Ex.: 18,5" aria-describedby="eco-peso">
+        <span class="eco" id="eco-peso" aria-live="polite"></span>
+
+        <span class="rot">Condições do paciente <span class="opc">(marque se houver)</span></span>
+        <div class="checks">
+          <label><input type="checkbox" name="cond" value="gestante"> Gestante</label>
+          <label><input type="checkbox" name="cond" value="lactante"> Amamentando</label>
+          <label><input type="checkbox" name="cond" value="renal"> Insuficiência renal</label>
+          <label><input type="checkbox" name="cond" value="hepatica"> Insuficiência hepática</label>
+        </div>
+
+        <label for="alergias">Alergias relatadas</label>
+        <input type="text" id="alergias" autocomplete="off" placeholder="Ex.: penicilina, dipirona">
+        <div class="checks"><label><input type="checkbox" id="nega-alergias"> Perguntei e o paciente nega alergias</label></div>
+      </div>
+
+      <div class="card">
+        <h2><span class="n">3</span>O que foi prescrito?</h2>
+        <p class="sub">Copie exatamente o que está na prescrição.</p>
+        <div id="campos-prescricao"></div>
+      </div>
+
+      <button type="submit" class="btn">Calcular e conferir</button>
+      <div id="erros" class="erros" role="alert" hidden></div>
+    </form>
+
+    <div id="resultado" tabindex="-1" aria-live="polite" style="margin-top:16px"></div>
+  </section>
+
+  <!-- ================= FERRAMENTAS ================= -->
+  <section class="painel" id="p-ferr" role="tabpanel" aria-labelledby="aba-ferr" hidden>
+    <div class="card">
+      <h2>Regra de três (dose → mL)</h2>
+      <p class="sub">Quantos mL aspirar de uma solução.</p>
+      <form data-ferr="regra">
+        <span class="rot">Dose prescrita</span>
+        <div class="linha"><input type="text" class="g" name="dose" inputmode="decimal" aria-label="Dose prescrita"><select class="p" name="udose" aria-label="Unidade"><option>mg</option><option>g</option><option>mcg</option><option>UI</option><option>mEq</option></select></div>
+        <span class="eco" data-eco="dose"></span>
+        <span class="rot">Tenho (no rótulo)</span>
+        <div class="linha"><input type="text" class="g" name="tenho" inputmode="decimal" aria-label="Quantidade no rótulo"><select class="p" name="utenho" aria-label="Unidade"><option>mg</option><option>g</option><option>mcg</option><option>UI</option><option>mEq</option></select></div>
+        <span class="eco" data-eco="tenho"></span>
+        <label>em quantos mL <input type="text" name="ml" inputmode="decimal" placeholder="Ex.: 2"></label>
+        <span class="eco" data-eco="ml"></span>
+        <div class="ferr-saida" aria-live="polite"></div>
+      </form>
+    </div>
+
+    <div class="card">
+      <h2>Gotejamento</h2>
+      <p class="sub">Gotas/min, microgotas/min e mL/h a partir do volume e do tempo.</p>
+      <form data-ferr="gotas">
+        <label>Volume a infundir (mL) <input type="text" name="vol" inputmode="decimal" placeholder="Ex.: 500"></label>
+        <span class="eco" data-eco="vol"></span>
+        <span class="rot">Tempo</span>
+        <div class="linha"><input type="text" class="g" name="tempo" inputmode="decimal" aria-label="Tempo"><select class="p" name="ut" aria-label="Unidade do tempo"><option value="h">horas</option><option value="min">minutos</option></select></div>
+        <span class="eco" data-eco="tempo"></span>
+        <div class="ferr-saida" aria-live="polite"></div>
+      </form>
+    </div>
+
+    <div class="card">
+      <h2>Bomba de infusão (dose × peso × tempo)</h2>
+      <p class="sub">Para drogas contínuas (noradrenalina, dobutamina, midazolam, insulina…).</p>
+      <form data-ferr="bomba">
+        <span class="rot">Dose prescrita</span>
+        <div class="linha"><input type="text" class="g" name="dose" inputmode="decimal" aria-label="Dose"><select class="p" name="udose" aria-label="Unidade da dose">
+          <option value="mcg/kg/min">mcg/kg/min</option><option value="mcg/min">mcg/min</option><option value="mg/kg/h">mg/kg/h</option><option value="mg/h">mg/h</option><option value="UI/kg/h">UI/kg/h</option><option value="UI/h">UI/h</option></select></div>
+        <span class="eco" data-eco="dose"></span>
+        <label>Peso (kg) <span class="opc">— se a dose for por kg</span><input type="text" name="peso" inputmode="decimal"></label>
+        <span class="eco" data-eco="peso"></span>
+        <span class="rot">Solução preparada: quantidade de droga</span>
+        <div class="linha"><input type="text" class="g" name="qtd" inputmode="decimal" aria-label="Quantidade de droga"><select class="p" name="uqtd" aria-label="Unidade"><option value="mg">mg</option><option value="UI">UI</option></select></div>
+        <span class="eco" data-eco="qtd"></span>
+        <label>Volume total da solução (mL) <input type="text" name="vol" inputmode="decimal" placeholder="Ex.: 250"></label>
+        <span class="eco" data-eco="vol"></span>
+        <div class="ferr-saida" aria-live="polite"></div>
+        <p class="ajuda">Confira a concentração da solução-padrão da sua instituição. Droga vasoativa é de alta vigilância: dupla checagem da programação da bomba.</p>
+      </form>
+    </div>
+
+    <div class="card">
+      <h2>Transformar soro glicosado</h2>
+      <p class="sub">Ex.: tenho SG 5% 500 mL e preciso de SG 10%.</p>
+      <form data-ferr="soro">
+        <label>Volume do frasco (mL) <input type="text" name="vol" inputmode="decimal" value="500"></label>
+        <span class="eco" data-eco="vol"></span>
+        <label>Concentração que tenho (%) <input type="text" name="ci" inputmode="decimal" value="5"></label>
+        <span class="eco" data-eco="ci"></span>
+        <label>Concentração que preciso (%) <input type="text" name="cf" inputmode="decimal" placeholder="Ex.: 10"></label>
+        <span class="eco" data-eco="cf"></span>
+        <label>Ampola de glicose disponível (%) <input type="text" name="ca" inputmode="decimal" value="50"></label>
+        <span class="eco" data-eco="ca"></span>
+        <div class="ferr-saida" aria-live="polite"></div>
+      </form>
+    </div>
+
+    <div class="card">
+      <h2>Porcentagem → mg/mL</h2>
+      <p class="sub">X% = X gramas em 100 mL.</p>
+      <form data-ferr="pct">
+        <label>Concentração (%) <input type="text" name="pct" inputmode="decimal" placeholder="Ex.: 19,1"></label>
+        <span class="eco" data-eco="pct"></span>
+        <div class="ferr-saida" aria-live="polite"></div>
+      </form>
+      <h3 style="font:800 16px var(--display);margin:18px 0 6px">Soluções concentradas mais usadas</h3>
+      <div class="tabela"><table>
+        <thead><tr><th>Solução</th><th>Concentração</th><th>Ampola</th></tr></thead>
+        <tbody>
+          <tr><td>KCl 19,1%</td><td>2,56 mEq/mL</td><td>10 mL = 25,6 mEq</td></tr>
+          <tr><td>KCl 10%</td><td>1,34 mEq/mL</td><td>10 mL = 13,4 mEq</td></tr>
+          <tr><td>NaCl 20%</td><td>3,4 mEq/mL</td><td>10 mL = 34 mEq</td></tr>
+          <tr><td>NaCl 0,9% (SF)</td><td>0,154 mEq/mL</td><td>1 L = 154 mEq</td></tr>
+          <tr><td>Bicarbonato de sódio 8,4%</td><td>1 mEq/mL</td><td>10 mL = 10 mEq</td></tr>
+          <tr><td>Gluconato de cálcio 10%</td><td>0,45 mEq/mL de Ca</td><td>10 mL = 4,5 mEq</td></tr>
+          <tr><td>Sulfato de magnésio 50%</td><td>4 mEq/mL</td><td>10 mL = 5 g</td></tr>
+          <tr><td>Glicose 50%</td><td>0,5 g/mL</td><td>10 mL = 5 g</td></tr>
+          <tr><td>Glicose 25%</td><td>0,25 g/mL</td><td>10 mL = 2,5 g</td></tr>
+        </tbody>
+      </table></div>
+      <p class="ajuda">Todas são de alta vigilância: nunca IV direto sem diluir (exceto quando o protocolo manda, como glicose na hipoglicemia).</p>
+    </div>
+
+    <div class="card">
+      <h2>Insulina: UI → mL</h2>
+      <p class="sub">Para quando só há seringa comum graduada em mL (evite: prefira sempre a seringa de insulina).</p>
+      <form data-ferr="insulina">
+        <label>Dose prescrita (UI) <input type="text" name="ui" inputmode="decimal" placeholder="Ex.: 8"></label>
+        <span class="eco" data-eco="ui"></span>
+        <label>Concentração <select name="conc"><option value="100">U-100 (100 UI/mL) — frascos comuns</option><option value="200">U-200 (200 UI/mL) — só caneta</option><option value="300">U-300 (300 UI/mL) — só caneta</option></select></label>
+        <div class="ferr-saida" aria-live="polite"></div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ================= SEGURANCA ================= -->
+  <section class="painel seg" id="p-seg" role="tabpanel" aria-labelledby="aba-seg" hidden>
+    <div class="card">
+      <h2>Os 9 certos da medicação</h2>
+      <ol>
+        <li><b>Paciente certo:</b> dois identificadores (nome completo + data de nascimento), pulseira.</li>
+        <li><b>Medicamento certo:</b> leia o rótulo três vezes (ao pegar, ao preparar, antes de descartar).</li>
+        <li><b>Via certa:</b> a apresentação serve para essa via? (ex.: benzatina só IM; lidocaína da ceftriaxona só IM).</li>
+        <li><b>Hora certa:</b> horário e intervalo da prescrição.</li>
+        <li><b>Dose certa:</b> faça a conta, confira com a faixa de referência e peça dupla checagem em MAV.</li>
+        <li><b>Registro certo:</b> anote logo após administrar (nunca antes).</li>
+        <li><b>Orientação certa:</b> explique ao paciente o que é e para que serve.</li>
+        <li><b>Forma certa:</b> forma farmacêutica certa para a via e para o paciente (triturar? diluir?).</li>
+        <li><b>Resposta certa:</b> reavalie o efeito e as reações adversas.</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h2>Medicamentos de alta vigilância (MAV)</h2>
+      <p class="sub">Erro com eles causa dano grave. Sempre dupla checagem independente.</p>
+      <ul>
+        <li>Eletrólitos concentrados: <b>cloreto de potássio</b>, cloreto de sódio &gt; 0,9%, sulfato de magnésio, fosfato de potássio</li>
+        <li><b>Insulinas</b> (todas)</li>
+        <li><b>Anticoagulantes:</b> heparina, enoxaparina, varfarina</li>
+        <li><b>Opioides:</b> morfina, fentanil, metadona</li>
+        <li><b>Sedativos:</b> midazolam, propofol, dexmedetomidina</li>
+        <li><b>Drogas vasoativas:</b> adrenalina, noradrenalina, dopamina, dobutamina, nitroprussiato</li>
+        <li><b>Antiarrítmicos:</b> amiodarona, lidocaína IV</li>
+        <li>Glicose hipertônica (≥ 20%), bloqueadores neuromusculares, quimioterápicos</li>
+      </ul>
+      <h3>Dupla checagem independente</h3>
+      <p>Outro profissional confere prescrição, medicamento, dose, cálculo e programação da bomba <b>sozinho, sem ver a sua conta</b>. Se os resultados forem diferentes, ninguém administra até resolver.</p>
+    </div>
+
+    <div class="card">
+      <h2>Erros que mais causam dano</h2>
+      <ul>
+        <li><b>Vírgula e zeros:</b> nunca escreva zero depois da vírgula (“1,0 mg” vira 10 mg) e sempre escreva zero antes (“0,5 mg”, nunca “,5 mg”).</li>
+        <li><b>Abreviações proibidas:</b> “U” ou “UI” mal escrito (vira 0 ou 4) — escreva “unidades”; “µg” — escreva “mcg”.</li>
+        <li><b>mg × mL:</b> a prescrição é em mg, a seringa é em mL. Sempre faça a regra de três.</li>
+        <li><b>Ampolas parecidas:</b> mesma cor e tamanho, concentrações diferentes (heparina 5.000 × 20.000 UI/mL; midazolam 1 × 5 mg/mL).</li>
+        <li><b>KCl IV direto:</b> causa parada cardíaca. Sempre diluído, em bomba.</li>
+        <li><b>Via errada:</b> suspensão na veia (benzatina, NPH), diluente com lidocaína na veia, dieta enteral em acesso venoso.</li>
+        <li><b>Criança com dose de adulto:</b> sempre por kg e nunca acima do máximo de adulto.</li>
+        <li><b>Seringa oral × injetável:</b> medicamento oral só em seringa oral (não conecta no acesso).</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Fórmulas de bolso</h2>
+      <div class="tabela"><table>
+        <tbody>
+          <tr><th>Regra de três</th><td>mL = dose prescrita × volume ÷ quantidade do rótulo</td></tr>
+          <tr><th>Macrogotas/min</th><td>volume (mL) ÷ (tempo em h × 3) · 1 mL = 20 gotas</td></tr>
+          <tr><th>Microgotas/min</th><td>volume (mL) ÷ tempo em h · 1 mL = 60 microgotas</td></tr>
+          <tr><th>mL/h</th><td>volume (mL) ÷ tempo (h) = microgotas/min</td></tr>
+          <tr><th>Tempo em min</th><td>macrogotas/min = volume × 20 ÷ minutos</td></tr>
+          <tr><th>Porcentagem</th><td>X% = X g em 100 mL = X × 10 mg/mL</td></tr>
+          <tr><th>Penicilina cristalina</th><td>5.000.000 UI + 8 mL AD = 10 mL → 500.000 UI/mL</td></tr>
+          <tr><th>mcg/kg/min → mL/h</th><td>dose × peso × 60 ÷ concentração (mcg/mL)</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="card">
+      <h2>Volume máximo por aplicação IM</h2>
+      <div class="tabela"><table>
+        <thead><tr><th>Músculo</th><th>Adulto</th><th>Criança</th></tr></thead>
+        <tbody>
+          <tr><td>Deltoide</td><td>até 2 mL</td><td>até 0,5–1 mL (crianças maiores)</td></tr>
+          <tr><td>Ventroglúteo</td><td>até 4–5 mL</td><td>até 1–2 mL</td></tr>
+          <tr><td>Vasto lateral da coxa</td><td>até 4–5 mL</td><td>lactente até 1 mL; criança até 2 mL</td></tr>
+          <tr><td>Dorsoglúteo</td><td>até 4–5 mL</td><td>evitar em menores de 2 anos</td></tr>
+        </tbody>
+      </table></div>
+      <p class="ajuda">Valores de referência dos manuais de técnica; siga o protocolo da sua instituição.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <p><b>Como usar com segurança.</b> As faixas de dose servem para <b>pegar erro</b> (vírgula, zero a mais, unidade trocada, dose de adulto em criança), não para decidir a dose. Quem prescreve é o médico; na dúvida, pare e pergunte ao prescritor ou ao farmacêutico. Doses neonatais não são validadas aqui.</p>
+  <p>Referências consultadas:</p>
+  <ul>
+    <li><a href="https://consultas.anvisa.gov.br/#/bulario/" target="_blank" rel="noopener">Bulário eletrônico da ANVISA</a></li>
+    <li><a href="https://guiafarmaceutico.hsl.org.br/" target="_blank" rel="noopener">Guia Farmacêutico do Hospital Sírio-Libanês</a></li>
+    <li><a href="https://www.ismp-brasil.org/" target="_blank" rel="noopener">ISMP Brasil — medicamentos potencialmente perigosos</a></li>
+    <li>Protocolo de segurança na prescrição, uso e administração de medicamentos (Ministério da Saúde/ANVISA)</li>
+    <li>Diretrizes de suporte avançado de vida AHA (ACLS/PALS)</li>
+  </ul>
+  <p>Conteúdo revisado em setembro de 2026 · Escola Enfermagem de Valor</p>
+</footer>
+
+<script src="/calculo-de-medicacao-calculadora/meds.js"></script>
+<script src="/calculo-de-medicacao-calculadora/calc.js"></script>
+<script src="/calculo-de-medicacao-calculadora/app.js"></script>
+</body>
+</html>
