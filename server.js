@@ -49,6 +49,11 @@ app.get(LP, enviarPagina('igps_set_lp_26-ingresso'));
 const LP_B = '/igps_set_lp_26-ingresso-b';
 app.get(LP_B, enviarPagina('igps_set_lp_26-ingresso-b'));
 
+// Versao C: R$ 3,00 com desconto que expira 24 h depois da primeira visita. Tambem usa as
+// imagens e os .js da pasta da A.
+const LP_C = '/igps_set_lp_26-ingresso-c';
+app.get(LP_C, enviarPagina('igps_set_lp_26-ingresso-c'));
+
 // Pagina de obrigado: mesma ideia, serve direto com ou sem a barra final.
 const TY = '/igps_set_lp_26-obrigado';
 app.get(TY, enviarPagina('igps_set_lp_26-obrigado'));
