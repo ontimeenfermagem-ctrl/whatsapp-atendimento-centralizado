@@ -11,38 +11,72 @@
 <meta property="og:url" content="https://io.escolaenfermagemdevalor.com.br/igps_set_lp_26-ingresso-b">
 <meta property="og:image" content="https://io.escolaenfermagemdevalor.com.br/igps_set_lp_26-ingresso/iza.jpg">
 <meta name="theme-color" content="#8A6A12">
-<link rel="preload" as="image" href="/igps_set_lp_26-ingresso/iza.jpg">
-<!-- Meta Pixel -->
+<link rel="icon" href="data:,">
+<!-- Fontes servidas por este site (antes vinham do Google Fonts, cujo CSS travava a primeira
+     pintura). As duas que pintam o topo (título e texto) já são pedidas aqui; as regras ficam no
+     <style> logo abaixo, idênticas às do Google (mesmos pesos, mesmas faixas de caracteres). -->
+<link rel="preload" href="/fonts/bricolage-grotesque-latin-v1.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/dm-sans-latin-v1.woff2" as="font" type="font/woff2" crossorigin>
+<!-- A foto da Iza é o maior elemento da primeira tela no COMPUTADOR: lá ela é pedida já, na
+     frente. No celular ela fica abaixo da dobra e não disputa banda com as fontes do título. -->
+<link rel="preload" as="image" type="image/avif" imagesrcset="/igps_set_lp_26-ingresso/img/iza-480.avif 480w, /igps_set_lp_26-ingresso/img/iza-720.avif 720w, /igps_set_lp_26-ingresso/img/iza-900.avif 900w" imagesizes="(max-width: 860px) calc(100vw - 40px), 462px" media="(min-width: 861px)" fetchpriority="high">
+<!-- Meta Pixel. A fila (fbq) nasce na hora e guarda o PageView e qualquer evento; o arquivo do
+     Pixel (~250 KB, com a configuração) só é baixado no primeiro toque, tecla ou rolagem, ou 3 s
+     depois de a página carregar. Assim ele não disputa banda com o título e a foto, nem trava a
+     tela na abertura. Nada se perde: quando o arquivo chega, ele envia a fila inteira. -->
 <script>
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-document,'script','https://connect.facebook.net/en_US/fbevents.js');
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];
+var feito=0,gatilhos=['pointerdown','keydown','touchstart','scroll','wheel'];
+function carregar(){if(feito)return;feito=1;gatilhos.forEach(function(x){f.removeEventListener(x,carregar,true)});
+t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+f.EVCarregarPixel=carregar;
+gatilhos.forEach(function(x){f.addEventListener(x,carregar,{capture:true,passive:true})});
+function depois(){setTimeout(carregar,3000)}
+if(b.readyState==='complete')depois();else f.addEventListener('load',depois);
+}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
 fbq('init','538380380948773');
 fbq('track','PageView');
 </script>
 <noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=538380380948773&ev=PageView&noscript=1"></noscript>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<!-- O pré-formulário manda o lead para o paginas (CORS, sem cookie: por isso o crossorigin) e depois
-     leva ao checkout da Hotmart. As conexões já ficam abertas antes do clique. -->
-<link rel="preconnect" href="https://lp.escolaenfermagemdevalor.com.br" crossorigin>
-<link rel="preconnect" href="https://pay.hotmart.com">
 <!-- Pré-formulário antes do checkout (ver README). lead-rules.js e checkout-config.js são CÓPIAS
      dos arquivos do repo paginas: mudou lá, copie para cá. -->
 <script src="/igps_set_lp_26-ingresso/js/lead-rules.js" defer></script>
 <script src="/igps_set_lp_26-ingresso/js/checkout-config.js" defer></script>
 <script src="/igps_set_lp_26-ingresso/js/pre-formulario.js" defer></script>
 <style>
+/* Fontes (antes: Google Fonts). Os arquivos em /fonts são os MESMOS do Google, byte a byte;
+   só mudou de onde vêm. */
+@font-face{font-family:'Bricolage Grotesque';font-style:normal;font-weight:500;font-stretch:100%;font-display:swap;src:url(/fonts/bricolage-grotesque-latin-ext-v1.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Bricolage Grotesque';font-style:normal;font-weight:500;font-stretch:100%;font-display:swap;src:url(/fonts/bricolage-grotesque-latin-v1.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Bricolage Grotesque';font-style:normal;font-weight:700;font-stretch:100%;font-display:swap;src:url(/fonts/bricolage-grotesque-latin-ext-v1.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Bricolage Grotesque';font-style:normal;font-weight:700;font-stretch:100%;font-display:swap;src:url(/fonts/bricolage-grotesque-latin-v1.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Bricolage Grotesque';font-style:normal;font-weight:800;font-stretch:100%;font-display:swap;src:url(/fonts/bricolage-grotesque-latin-ext-v1.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Bricolage Grotesque';font-style:normal;font-weight:800;font-stretch:100%;font-display:swap;src:url(/fonts/bricolage-grotesque-latin-v1.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/dm-sans-latin-ext-v1.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/dm-sans-latin-v1.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/dm-sans-latin-ext-v1.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/dm-sans-latin-v1.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:700;font-display:swap;src:url(/fonts/dm-sans-latin-ext-v1.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:700;font-display:swap;src:url(/fonts/dm-sans-latin-v1.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/jetbrains-mono-latin-ext-v1.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/jetbrains-mono-latin-v1.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/jetbrains-mono-latin-ext-v1.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/jetbrains-mono-latin-v1.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:700;font-display:swap;src:url(/fonts/jetbrains-mono-latin-ext-v1.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:700;font-display:swap;src:url(/fonts/jetbrains-mono-latin-v1.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Bricolage Grotesque reserva';font-weight:400 600;src:local('Arial'),local('ArialMT');size-adjust:99.7%;ascent-override:93.3%;descent-override:27.1%;line-gap-override:0%;unicode-range:U+0020-007E,U+00A0-00A3,U+00A5-00AC,U+00AE-0107,U+010A-0113,U+0116-011B,U+011E-0123,U+0126-012B,U+012E-0133,U+0136-0137,U+0139-013E,U+0141-0148,U+014A-014D,U+0150-015B,U+015E-0161,U+0164-0165,U+0168-017E,U+01A0-01A1,U+01AF-01B0,U+01CD-01CE,U+0218-021B,U+0237,U+02C6-02C7,U+02DA,U+02DC-02DD,U+0304,U+0308,U+1E80-1E85,U+1E9E,U+1EF2-1EF9,U+2002,U+2009,U+200B,U+2013-2014,U+2018-201A,U+201C-201E,U+2020,U+2022,U+2026,U+2032-2033,U+2039-203A,U+2044,U+20A1,U+20A4,U+20A6,U+20A8-20A9,U+20AB-20AE,U+20B1-20B2,U+20B4-20B5,U+20B8-20BA,U+20BC-20BF,U+2113,U+2122,U+2191,U+2193,U+2212}
+@font-face{font-family:'Bricolage Grotesque reserva';font-weight:700 900;src:local('Arial Bold'),local('Arial-BoldMT');size-adjust:99.6%;ascent-override:93.4%;descent-override:27.1%;line-gap-override:0%;unicode-range:U+0020-007E,U+00A0-00A3,U+00A5-00AC,U+00AE-0107,U+010A-0113,U+0116-011B,U+011E-0123,U+0126-012B,U+012E-0133,U+0136-0137,U+0139-013E,U+0141-0148,U+014A-014D,U+0150-015B,U+015E-0161,U+0164-0165,U+0168-017E,U+01A0-01A1,U+01AF-01B0,U+01CD-01CE,U+0218-021B,U+0237,U+02C6-02C7,U+02DA,U+02DC-02DD,U+0304,U+0308,U+1E80-1E85,U+1E9E,U+1EF2-1EF9,U+2002,U+2009,U+200B,U+2013-2014,U+2018-201A,U+201C-201E,U+2020,U+2022,U+2026,U+2032-2033,U+2039-203A,U+2044,U+20A1,U+20A4,U+20A6,U+20A8-20A9,U+20AB-20AE,U+20B1-20B2,U+20B4-20B5,U+20B8-20BA,U+20BC-20BF,U+2113,U+2122,U+2191,U+2193,U+2212}
+@font-face{font-family:'DM Sans reserva';font-weight:400 600;src:local('Arial'),local('ArialMT');size-adjust:103.5%;ascent-override:95.8%;descent-override:30%;line-gap-override:0%;unicode-range:U+000D,U+0020-007E,U+00A0-00AC,U+00AE-0107,U+010A-011B,U+011E-0123,U+0126-0133,U+0136-0137,U+0139-0148,U+014A-015B,U+015E-0165,U+0168-017E,U+018F,U+0192,U+01FC-01FD,U+0218-021B,U+0237,U+0259,U+02C6-02C7,U+02DA,U+02DC-02DD,U+0304,U+0308,U+1E80-1E85,U+1E9E,U+1EF2-1EF3,U+1EF8-1EF9,U+2013-2014,U+2018-201A,U+201C-201E,U+2020,U+2022,U+2026,U+2039-203A,U+2044,U+20A8,U+20AC,U+20B9-20BA,U+20BD,U+2113,U+2122,U+2191,U+2193,U+2212,U+2215}
+@font-face{font-family:'DM Sans reserva';font-weight:700 900;src:local('Arial Bold'),local('Arial-BoldMT');size-adjust:100.8%;ascent-override:98.4%;descent-override:30.8%;line-gap-override:0%;unicode-range:U+000D,U+0020-007E,U+00A0-00AC,U+00AE-0107,U+010A-011B,U+011E-0123,U+0126-0133,U+0136-0137,U+0139-0148,U+014A-015B,U+015E-0165,U+0168-017E,U+018F,U+0192,U+01FC-01FD,U+0218-021B,U+0237,U+0259,U+02C6-02C7,U+02DA,U+02DC-02DD,U+0304,U+0308,U+1E80-1E85,U+1E9E,U+1EF2-1EF3,U+1EF8-1EF9,U+2013-2014,U+2018-201A,U+201C-201E,U+2020,U+2022,U+2026,U+2039-203A,U+2044,U+20A8,U+20AC,U+20B9-20BA,U+20BD,U+2113,U+2122,U+2191,U+2193,U+2212,U+2215}
 :root{
   --cream:#FDFAF2; --cream-2:#F6EEDA; --paper:#FFFFFF;
   --ink:#211A0C; --ink-2:#63563C; --line:#EADCBB;
   --coral:#DCB552; --rust:#8A6A12; --rust-text:#7A5A08; --peach:#F7EBCF;
   --green:#1FBF5B; --green-d:#159A46; --dark:#211A0C; --dark-2:#2F2614;
-  --display:'Bricolage Grotesque','Arial Narrow',sans-serif;
-  --body:'DM Sans',system-ui,sans-serif;
+  --display:'Bricolage Grotesque','Bricolage Grotesque reserva','Arial Narrow',sans-serif;
+  --body:'DM Sans','DM Sans reserva',system-ui,sans-serif;
   --mono:'JetBrains Mono',ui-monospace,monospace;
 }
 *{box-sizing:border-box}
@@ -207,6 +241,15 @@ footer b{color:rgba(255,255,255,.85);font-weight:500}
 .vid.playing .i-play{display:none}.vid.playing .i-pause{display:block}
 .vid.playing button{opacity:0}
 .vid.playing:hover button,.vid.playing button:focus-visible{opacity:1}
+/* Vídeos: a capa é a mesma imagem que o player do YouTube mostra parado; o player (~1,5 MB de
+   JavaScript por vídeo) só é montado quando a pessoa toca no play (ver o script no fim). */
+.vid .vid-capa{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.vid.carregando button span{animation:vid-pulsa 1s ease-in-out infinite}
+@keyframes vid-pulsa{50%{opacity:.55}}
+/* Navegador que barra o play automático com som (iPhone): o toque passa a ir direto no player. */
+.vid.direto iframe{pointer-events:auto}
+.vid.direto button{display:none}
+@media (prefers-reduced-motion:reduce){.vid.carregando button span{animation:none}}
 /* pré-formulário: o modal que abre no lugar do checkout (js/pre-formulario.js) */
 .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 html:has(.pf[open]){overflow:hidden;scrollbar-gutter:stable}
@@ -325,7 +368,7 @@ html:has(.pf[open]){overflow:hidden;scrollbar-gutter:stable}
 
   <div>
     <div class="media">
-      <img src="/igps_set_lp_26-ingresso/iza.jpg" width="900" height="1125" fetchpriority="high" decoding="async" alt="Iza Gonçalves preparando medicação em ambiente hospitalar" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+      <picture><source type="image/avif" srcset="/igps_set_lp_26-ingresso/img/iza-480.avif 480w, /igps_set_lp_26-ingresso/img/iza-720.avif 720w, /igps_set_lp_26-ingresso/img/iza-900.avif 900w" sizes="(max-width: 860px) calc(100vw - 40px), 462px"><source type="image/webp" srcset="/igps_set_lp_26-ingresso/img/iza-480.webp 480w, /igps_set_lp_26-ingresso/img/iza-720.webp 720w, /igps_set_lp_26-ingresso/img/iza-900.webp 900w" sizes="(max-width: 860px) calc(100vw - 40px), 462px"><img src="/igps_set_lp_26-ingresso/iza.jpg" width="900" height="1125" fetchpriority="low" decoding="async" alt="Iza Gonçalves preparando medicação em ambiente hospitalar" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></picture>
       <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 65%,rgba(33,26,12,.85))"></div>
       <div class="who">
         <span class="mono">Sua instrutora</span>
@@ -342,11 +385,11 @@ html:has(.pf[open]){overflow:hidden;scrollbar-gutter:stable}
     <h2 class="sec-h">Conheça a Iza e a <span class="grad">Formação Enfermagem de Valor.</span></h2>
     <p class="sec-p">Assista antes de decidir.</p>
     <div class="vids">
-      <div class="vid"><iframe id="yt1" title="Vídeo 1" loading="lazy" src="https://www.youtube-nocookie.com/embed/9yvyNjJAEG0?controls=0&modestbranding=1&rel=0&disablekb=1&fs=0&iv_load_policy=3&playsinline=1&enablejsapi=1" allow="autoplay; encrypted-media" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+      <div class="vid" data-yt="9yvyNjJAEG0" data-id="yt1" data-titulo="Vídeo 1"><picture><source type="image/webp" data-srcset="/igps_set_lp_26-ingresso/videos/9yvyNjJAEG0.webp"><img class="vid-capa" data-src="/igps_set_lp_26-ingresso/videos/9yvyNjJAEG0.jpg" alt="" width="640" height="480" decoding="async"></picture>
         <button type="button" aria-label="Reproduzir ou pausar vídeo 1"><span><svg class="i-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="i-pause" viewBox="0 0 24 24"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg></span></button></div>
-      <div class="vid"><iframe id="yt2" title="Vídeo 2" loading="lazy" src="https://www.youtube-nocookie.com/embed/VmFMkNjssi8?controls=0&modestbranding=1&rel=0&disablekb=1&fs=0&iv_load_policy=3&playsinline=1&enablejsapi=1" allow="autoplay; encrypted-media" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+      <div class="vid" data-yt="VmFMkNjssi8" data-id="yt2" data-titulo="Vídeo 2"><picture><source type="image/webp" data-srcset="/igps_set_lp_26-ingresso/videos/VmFMkNjssi8.webp"><img class="vid-capa" data-src="/igps_set_lp_26-ingresso/videos/VmFMkNjssi8.jpg" alt="" width="640" height="480" decoding="async"></picture>
         <button type="button" aria-label="Reproduzir ou pausar vídeo 2"><span><svg class="i-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="i-pause" viewBox="0 0 24 24"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg></span></button></div>
-      <div class="vid"><iframe id="yt3" title="Vídeo 3" loading="lazy" src="https://www.youtube-nocookie.com/embed/CYABiwqXl54?controls=0&modestbranding=1&rel=0&disablekb=1&fs=0&iv_load_policy=3&playsinline=1&enablejsapi=1" allow="autoplay; encrypted-media" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+      <div class="vid" data-yt="CYABiwqXl54" data-id="yt3" data-titulo="Vídeo 3"><picture><source type="image/webp" data-srcset="/igps_set_lp_26-ingresso/videos/CYABiwqXl54.webp"><img class="vid-capa" data-src="/igps_set_lp_26-ingresso/videos/CYABiwqXl54.jpg" alt="" width="640" height="480" decoding="async"></picture>
         <button type="button" aria-label="Reproduzir ou pausar vídeo 3"><span><svg class="i-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="i-pause" viewBox="0 0 24 24"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg></span></button></div>
     </div>
   </div>
@@ -597,34 +640,94 @@ html:has(.pf[open]){overflow:hidden;scrollbar-gutter:stable}
 </script>
 
 <script>
-/* Provas: coloque os prints em public/igps_set_lp_26-ingresso/provas/ como 1.jpg, 2.jpg, 3.jpg... (ate 20). Os que existirem aparecem sozinhos. */
+/* Provas: coloque os prints em public/igps_set_lp_26-ingresso/provas/ como 1.jpg, 2.jpg, 3.jpg... (ate 20). Os que existirem aparecem sozinhos.
+   A lista vem do servidor (/igps_set_lp_26-ingresso/provas.json) e só é pedida quando a seção chega
+   perto da tela: a abertura da página não faz nenhuma requisição por causa dela. (A versão anterior
+   tentava as 20 imagens com loading=lazy fora da página, e o navegador nunca as baixava.) */
 (function(){
-  var box=document.getElementById('prints');
-  for(var i=1;i<=20;i++){
-    (function(n){
-      var im=new Image();
-      im.alt='Mensagem de aluna do Método 3D';im.loading='lazy';
-      im.onload=function(){box.hidden=false;box.appendChild(im);};
-      im.src='/igps_set_lp_26-ingresso/provas/'+n+'.jpg';
-    })(i);
+  var box=document.getElementById('prints');if(!box)return;
+  var pedido=false;
+  function carregar(){
+    if(pedido)return;pedido=true;
+    fetch('/igps_set_lp_26-ingresso/provas.json',{credentials:'same-origin'}).then(function(r){return r.ok?r.json():[];}).then(function(lista){
+      (Array.isArray(lista)?lista:[]).forEach(function(src){
+        var im=new Image();
+        im.alt='Mensagem de aluna do Método 3D';im.decoding='async';
+        im.onload=function(){box.hidden=false;};
+        im.src=src;box.appendChild(im);
+      });
+    }).catch(function(){});
   }
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){
+      for(var i=0;i<es.length;i++)if(es[i].isIntersecting){io.disconnect();carregar();return;}
+    },{rootMargin:'800px 0px'});
+    io.observe(box.parentNode);
+  }else carregar();
 })();
+/* Vídeos: até o primeiro play, cada um é a capa do próprio YouTube + o botão. No play, o player é
+   montado com os MESMOS parâmetros de antes e autoplay=1 (o toque da pessoa libera o som); depois,
+   play e pausa seguem pelo mesmo postMessage de antes. Se o navegador barrar o play automático
+   (iPhone), em 4 s o toque passa a ir direto no botão do próprio YouTube. */
 (function(){
-  var vids=[].slice.call(document.querySelectorAll('.vid'));
-  function cmd(v,f){var w=v.querySelector('iframe').contentWindow;if(w)w.postMessage(JSON.stringify({event:'command',func:f,args:[]}),'*');}
+  var vids=[].slice.call(document.querySelectorAll('.vid[data-yt]'));
+  // As capas só são baixadas quando a seção chega a 600 px da tela. O loading=lazy do navegador não
+  // serve aqui: o Chrome baixa tudo o que está a menos de ~1250 px, e no celular isso é a abertura.
+  function capas(){
+    vids.forEach(function(v){
+      var s=v.querySelector('source[data-srcset]'),i=v.querySelector('img[data-src]');
+      if(s){s.srcset=s.getAttribute('data-srcset');s.removeAttribute('data-srcset');}
+      if(i){i.src=i.getAttribute('data-src');i.removeAttribute('data-src');}
+    });
+  }
+  if('IntersectionObserver' in window&&vids.length){
+    var vio=new IntersectionObserver(function(es){
+      for(var i=0;i<es.length;i++)if(es[i].isIntersecting){vio.disconnect();capas();return;}
+    },{rootMargin:'600px 0px'});
+    vio.observe(vids[0].parentNode);
+  }else capas();
+  var PARAMS='controls=0&modestbranding=1&rel=0&disablekb=1&fs=0&iv_load_policy=3&playsinline=1&enablejsapi=1';
+  function frame(v){return v.querySelector('iframe');}
+  function cmd(v,f){var fr=frame(v),w=fr&&fr.contentWindow;if(w)w.postMessage(JSON.stringify({event:'command',func:f,args:[]}),'*');}
+  function montar(v){
+    var fr=document.createElement('iframe');
+    fr.id=v.getAttribute('data-id');fr.title=v.getAttribute('data-titulo');
+    fr.setAttribute('allow','autoplay; encrypted-media');
+    fr.setAttribute('referrerpolicy','strict-origin-when-cross-origin');
+    fr.src='https://www.youtube-nocookie.com/embed/'+v.getAttribute('data-yt')+'?'+PARAMS+'&autoplay=1';
+    fr.addEventListener('load',function(){fr.contentWindow.postMessage(JSON.stringify({event:'listening',id:fr.id}),'*');});
+    v.insertBefore(fr,v.querySelector('button'));
+    v.classList.add('carregando');
+    v._espera=setTimeout(function(){
+      if(v.classList.contains('tocou'))return;
+      v.classList.remove('carregando');v.classList.add('direto');
+    },4000);
+  }
   vids.forEach(function(v){
-    var f=v.querySelector('iframe');
-    f.addEventListener('load',function(){f.contentWindow.postMessage(JSON.stringify({event:'listening',id:f.id}),'*');});
     v.querySelector('button').addEventListener('click',function(){
-      if(v.classList.contains('playing')){cmd(v,'pauseVideo');v.classList.remove('playing');}
-      else{vids.forEach(function(o){if(o!==v&&o.classList.contains('playing')){cmd(o,'pauseVideo');o.classList.remove('playing');}});cmd(v,'playVideo');v.classList.add('playing');}
+      if(v.classList.contains('carregando'))return;
+      if(v.classList.contains('playing')){cmd(v,'pauseVideo');v.classList.remove('playing');return;}
+      vids.forEach(function(o){if(o!==v&&o.classList.contains('playing')){cmd(o,'pauseVideo');o.classList.remove('playing');}});
+      if(!frame(v)){montar(v);return;}
+      cmd(v,'playVideo');v.classList.add('playing');
     });
   });
   window.addEventListener('message',function(e){
     if(!/youtube/.test(e.origin))return;
     var d;try{d=typeof e.data==='string'?JSON.parse(e.data):e.data;}catch(x){return;}
     if(!d||d.event!=='onStateChange')return;
-    vids.forEach(function(v){if(v.querySelector('iframe').contentWindow===e.source){v.classList.toggle('playing',d.info===1||d.info===3);}});
+    vids.forEach(function(v){
+      var fr=frame(v);if(!fr||fr.contentWindow!==e.source)return;
+      var tocando=d.info===1||d.info===3;
+      // Antes do primeiro play de verdade, os estados "parado/carregando" do player não mudam nada.
+      if(!v.classList.contains('tocou')&&!tocando)return;
+      if(tocando&&!v.classList.contains('tocou')){
+        v.classList.add('tocou');clearTimeout(v._espera);
+        v.classList.remove('carregando','direto');
+        vids.forEach(function(o){if(o!==v&&o.classList.contains('playing')){cmd(o,'pauseVideo');o.classList.remove('playing');}});
+      }
+      v.classList.toggle('playing',tocando);
+    });
   });
 })();
 </script>

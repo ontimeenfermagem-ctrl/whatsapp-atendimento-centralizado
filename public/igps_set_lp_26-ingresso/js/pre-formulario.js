@@ -319,7 +319,28 @@
     return null;
   }
 
+  // As conexões com o paginas (o envio do formulário) e com a Hotmart (o checkout) abrem quando o
+  // formulário abre, e não na carga da página, onde só disputariam banda com o topo. Enquanto a
+  // pessoa digita, elas ficam prontas.
+  let conectou = false;
+  function preconectar() {
+    if (conectou) return;
+    conectou = true;
+    try {
+      for (const [href, cors] of [[new URL(API).origin, true], ["https://pay.hotmart.com", false]]) {
+        const link = document.createElement("link");
+        link.rel = "preconnect";
+        link.href = href;
+        if (cors) link.crossOrigin = "anonymous";
+        document.head.appendChild(link);
+      }
+    } catch {
+      // Sem preconnect, o envio funciona igual (só sem a conexão adiantada).
+    }
+  }
+
   function abrir(link) {
+    preconectar();
     try {
       if (!dialogo.open) dialogo.showModal();
     } catch {

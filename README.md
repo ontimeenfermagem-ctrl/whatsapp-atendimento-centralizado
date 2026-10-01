@@ -6,14 +6,51 @@ https://io.escolaenfermagemdevalor.com.br (Express mínimo em `server.js`):
 
 | Rota | Arquivo | O que é |
 | --- | --- | --- |
-| `/igps_set_lp_26-ingresso` | `public/igps_set_lp_26-ingresso/index.html` | página de venda (com o pré-formulário) |
+| `/igps_set_lp_26-ingresso` | `public/igps_set_lp_26-ingresso/index.html` | página de venda A, lote 1 (com o pré-formulário) |
+| `/igps_set_lp_26-ingresso-b` | `public/igps_set_lp_26-ingresso-b/index.html` | versão B, lote 2 (R$ 9,90), dourada; usa os `.js` e as imagens da pasta da A |
+| `/igps_set_lp_26-ingresso-c` | `public/igps_set_lp_26-ingresso-c/index.html` | versão C, R$ 3,00 com desconto de 24 h; usa os `.js` e as imagens da pasta da A |
 | `/igps_set_lp_26-obrigado` | `public/igps_set_lp_26-obrigado/index.html` | obrigado (compra aprovada) |
 | `/igps_set_lp_26-aguardando-pagamento` | `public/igps_set_lp_26-aguardando-pagamento/index.html` | Pix aguardando confirmação |
 | `/calculo-de-medicação-calculadora` | `public/calculo-de-medicacao-calculadora/index.html` | calculadora de medicação para enfermagem (abre também sem acento). Base de medicamentos em `meds.js`, contas e conferências em `calc.js`, tela em `app.js` |
 | `/gps`, `/obrigado` | — | endereços antigos: 301 para a página de venda e para o obrigado, **mantendo a query** |
 
 HTML, JS e CSS saem com `Cache-Control: no-cache` (revalidam pelo ETag a cada visita): com a
-campanha no ar, qualquer correção entra na hora. Imagens e fontes ficam 30 dias em cache.
+campanha no ar, qualquer correção entra na hora. Imagens ficam 30 dias em cache; as fontes de
+`public/fonts/` (nome com versão, `-v1`) ficam 1 ano, `immutable`.
+
+## Velocidade das páginas
+
+O que deixa as páginas rápidas, e o que não desfazer sem querer (medido com o Lighthouse no perfil
+celular, o mesmo do PageSpeed):
+
+- **Fontes do próprio site.** Os arquivos em `public/fonts/` são os MESMOS do Google Fonts, byte a
+  byte (Bricolage Grotesque, DM Sans e JetBrains Mono, faixas `latin` e `latin-ext`), e as regras
+  `@font-face` estão no `<style>` de cada página, iguais às do Google (pesos, faixas de caracteres,
+  `font-display: swap`). O CSS do Google bloqueava a primeira pintura (até 1,2 s no celular) e abria
+  duas conexões a mais. Fonte nova ou peso novo: baixe o arquivo do Google, salve com nome novo
+  (`-v2`), acrescente a regra e não reaproveite o nome antigo (o cache é de 1 ano).
+- **Reserva com a largura certa.** Enquanto a fonte não chega, o texto usa `Bricolage Grotesque
+  reserva` / `DM Sans reserva` (Arial com `size-adjust` medido nos textos da página), que ocupam o
+  mesmo espaço; a troca não empurra o layout (era um CLS de 0,159: a reserva antiga, Arial Narrow, é
+  23% mais estreita). Elas só cobrem os caracteres que a fonte web desenha.
+- **Meta Pixel adiado (só nas páginas de venda).** O `fbq` nasce na hora e enfileira o PageView e
+  qualquer evento; o arquivo do Pixel (~250 KB com a configuração, ~500 ms de tela travada no
+  celular) só é baixado no primeiro toque, tecla ou rolagem, ou 3 s depois de a página carregar, e
+  aí envia a fila inteira. No obrigado e no aguardando o Pixel continua imediato (o obrigado
+  redireciona em 16 s).
+- **Vídeos sob demanda.** Cada vídeo é a capa do próprio YouTube (`public/igps_set_lp_26-ingresso/videos/<id>.webp`
+  e `.jpg`) + o botão de play; as capas só são baixadas quando a seção chega perto da tela. No play,
+  o player é montado com os mesmos parâmetros de antes e `autoplay=1`. Antes, os 3 players vinham na
+  abertura: ~1,6 MB e ~3 s de JavaScript no celular. Vídeo novo: `data-yt="<id>"` no `<div class="vid">`
+  e as duas capas na pasta `videos/` (`https://i.ytimg.com/vi_webp/<id>/sddefault.webp` e `/vi/<id>/sddefault.jpg`).
+- **Foto da Iza responsiva.** `public/igps_set_lp_26-ingresso/img/iza-{480,720,900}.{avif,webp}`
+  (diferença máxima de 18/255 para o `iza.jpg`, que segue de reserva e no `og:image`); no computador
+  ela é pré-carregada (é o maior elemento da primeira tela), no celular não (fica abaixo da dobra).
+  Foto nova: gere as 6 versões com a mesma largura e qualidade.
+- **Provas sob demanda.** A lista vem de `/igps_set_lp_26-ingresso/provas.json` (o `server.js` lê a
+  pasta `provas/`) só quando a seção chega perto da tela.
+- **Conexões do formulário só quando ele abre.** O `pre-formulario.js` abre a conexão com o paginas e
+  com a Hotmart ao abrir o modal (no `<head>` elas só disputavam banda com o topo).
 
 Toda resposta sai também com `X-Frame-Options: DENY` (nenhum outro site consegue pôr a página dentro
 de uma moldura e sobrepor o formulário ou o botão de pagamento), `Strict-Transport-Security:

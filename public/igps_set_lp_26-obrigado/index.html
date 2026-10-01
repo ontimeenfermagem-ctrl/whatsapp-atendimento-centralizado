@@ -17,17 +17,40 @@ fbq('init','538380380948773');
 fbq('track','PageView');
 </script>
 <noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=538380380948773&ev=PageView&noscript=1"></noscript>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:,">
+<!-- Fontes servidas por este site (antes vinham do Google Fonts, cujo CSS travava a primeira
+     pintura). As duas que pintam o topo (título e texto) já são pedidas aqui; as regras ficam no
+     <style> logo abaixo, idênticas às do Google (mesmos pesos, mesmas faixas de caracteres). -->
+<link rel="preload" href="/fonts/bricolage-grotesque-latin-v1.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/dm-sans-latin-v1.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+/* Fontes (antes: Google Fonts). Os arquivos em /fonts são os MESMOS do Google, byte a byte;
+   só mudou de onde vêm. */
+@font-face{font-family:'Bricolage Grotesque';font-style:normal;font-weight:700;font-stretch:100%;font-display:swap;src:url(/fonts/bricolage-grotesque-latin-ext-v1.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Bricolage Grotesque';font-style:normal;font-weight:700;font-stretch:100%;font-display:swap;src:url(/fonts/bricolage-grotesque-latin-v1.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Bricolage Grotesque';font-style:normal;font-weight:800;font-stretch:100%;font-display:swap;src:url(/fonts/bricolage-grotesque-latin-ext-v1.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Bricolage Grotesque';font-style:normal;font-weight:800;font-stretch:100%;font-display:swap;src:url(/fonts/bricolage-grotesque-latin-v1.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/dm-sans-latin-ext-v1.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/dm-sans-latin-v1.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/dm-sans-latin-ext-v1.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/dm-sans-latin-v1.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:700;font-display:swap;src:url(/fonts/dm-sans-latin-ext-v1.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:700;font-display:swap;src:url(/fonts/dm-sans-latin-v1.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/jetbrains-mono-latin-ext-v1.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/jetbrains-mono-latin-v1.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:700;font-display:swap;src:url(/fonts/jetbrains-mono-latin-ext-v1.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:700;font-display:swap;src:url(/fonts/jetbrains-mono-latin-v1.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Bricolage Grotesque reserva';font-weight:400 600;src:local('Arial'),local('ArialMT');size-adjust:99.7%;ascent-override:93.3%;descent-override:27.1%;line-gap-override:0%;unicode-range:U+0020-007E,U+00A0-00A3,U+00A5-00AC,U+00AE-0107,U+010A-0113,U+0116-011B,U+011E-0123,U+0126-012B,U+012E-0133,U+0136-0137,U+0139-013E,U+0141-0148,U+014A-014D,U+0150-015B,U+015E-0161,U+0164-0165,U+0168-017E,U+01A0-01A1,U+01AF-01B0,U+01CD-01CE,U+0218-021B,U+0237,U+02C6-02C7,U+02DA,U+02DC-02DD,U+0304,U+0308,U+1E80-1E85,U+1E9E,U+1EF2-1EF9,U+2002,U+2009,U+200B,U+2013-2014,U+2018-201A,U+201C-201E,U+2020,U+2022,U+2026,U+2032-2033,U+2039-203A,U+2044,U+20A1,U+20A4,U+20A6,U+20A8-20A9,U+20AB-20AE,U+20B1-20B2,U+20B4-20B5,U+20B8-20BA,U+20BC-20BF,U+2113,U+2122,U+2191,U+2193,U+2212}
+@font-face{font-family:'Bricolage Grotesque reserva';font-weight:700 900;src:local('Arial Bold'),local('Arial-BoldMT');size-adjust:99.6%;ascent-override:93.4%;descent-override:27.1%;line-gap-override:0%;unicode-range:U+0020-007E,U+00A0-00A3,U+00A5-00AC,U+00AE-0107,U+010A-0113,U+0116-011B,U+011E-0123,U+0126-012B,U+012E-0133,U+0136-0137,U+0139-013E,U+0141-0148,U+014A-014D,U+0150-015B,U+015E-0161,U+0164-0165,U+0168-017E,U+01A0-01A1,U+01AF-01B0,U+01CD-01CE,U+0218-021B,U+0237,U+02C6-02C7,U+02DA,U+02DC-02DD,U+0304,U+0308,U+1E80-1E85,U+1E9E,U+1EF2-1EF9,U+2002,U+2009,U+200B,U+2013-2014,U+2018-201A,U+201C-201E,U+2020,U+2022,U+2026,U+2032-2033,U+2039-203A,U+2044,U+20A1,U+20A4,U+20A6,U+20A8-20A9,U+20AB-20AE,U+20B1-20B2,U+20B4-20B5,U+20B8-20BA,U+20BC-20BF,U+2113,U+2122,U+2191,U+2193,U+2212}
+@font-face{font-family:'DM Sans reserva';font-weight:400 600;src:local('Arial'),local('ArialMT');size-adjust:103.5%;ascent-override:95.8%;descent-override:30%;line-gap-override:0%;unicode-range:U+000D,U+0020-007E,U+00A0-00AC,U+00AE-0107,U+010A-011B,U+011E-0123,U+0126-0133,U+0136-0137,U+0139-0148,U+014A-015B,U+015E-0165,U+0168-017E,U+018F,U+0192,U+01FC-01FD,U+0218-021B,U+0237,U+0259,U+02C6-02C7,U+02DA,U+02DC-02DD,U+0304,U+0308,U+1E80-1E85,U+1E9E,U+1EF2-1EF3,U+1EF8-1EF9,U+2013-2014,U+2018-201A,U+201C-201E,U+2020,U+2022,U+2026,U+2039-203A,U+2044,U+20A8,U+20AC,U+20B9-20BA,U+20BD,U+2113,U+2122,U+2191,U+2193,U+2212,U+2215}
+@font-face{font-family:'DM Sans reserva';font-weight:700 900;src:local('Arial Bold'),local('Arial-BoldMT');size-adjust:100.8%;ascent-override:98.4%;descent-override:30.8%;line-gap-override:0%;unicode-range:U+000D,U+0020-007E,U+00A0-00AC,U+00AE-0107,U+010A-011B,U+011E-0123,U+0126-0133,U+0136-0137,U+0139-0148,U+014A-015B,U+015E-0165,U+0168-017E,U+018F,U+0192,U+01FC-01FD,U+0218-021B,U+0237,U+0259,U+02C6-02C7,U+02DA,U+02DC-02DD,U+0304,U+0308,U+1E80-1E85,U+1E9E,U+1EF2-1EF3,U+1EF8-1EF9,U+2013-2014,U+2018-201A,U+201C-201E,U+2020,U+2022,U+2026,U+2039-203A,U+2044,U+20A8,U+20AC,U+20B9-20BA,U+20BD,U+2113,U+2122,U+2191,U+2193,U+2212,U+2215}
 :root{
   --cream:#FAF7FC; --paper:#fff;
   --ink:#1A1220; --ink-2:#5B4E66; --line:#E4D8EC;
   --coral:#B98AD9; --rust:#5B2A86; --rust-text:#6A2FA0; --peach:#EFE4F5;
   --green:#1FBF5B; --green-d:#159A46; --dark:#1A1220;
-  --display:'Bricolage Grotesque','Arial Narrow',sans-serif;
-  --body:'DM Sans',system-ui,sans-serif;
+  --display:'Bricolage Grotesque','Bricolage Grotesque reserva','Arial Narrow',sans-serif;
+  --body:'DM Sans','DM Sans reserva',system-ui,sans-serif;
   --mono:'JetBrains Mono',ui-monospace,monospace;
 }
 *{box-sizing:border-box}
@@ -75,7 +98,7 @@ footer{background:#120C17;color:rgba(255,255,255,.55);text-align:center;padding:
 <body>
 <header class="top">
   <div class="wrap">
-    <img class="logo" src="/igps_set_lp_26-obrigado/logo.png" alt="Imersão GPS Plantão Sem Medo" width="738" height="299" fetchpriority="high" onerror="this.outerHTML='&lt;div class=logo-fb&gt;Imersão GPS Plantão Sem Medo&lt;/div&gt;'">
+    <picture><source type="image/webp" srcset="/igps_set_lp_26-obrigado/logo.webp"><img class="logo" src="/igps_set_lp_26-obrigado/logo.png" alt="Imersão GPS Plantão Sem Medo" width="738" height="299" fetchpriority="high" onerror="this.outerHTML='&lt;div class=logo-fb&gt;Imersão GPS Plantão Sem Medo&lt;/div&gt;'"></picture>
     <p class="when mono">07/10/2026 · 20h · Online ao vivo</p>
     <h1>Você está <span class="grad">quase lá!</span></h1>
   </div>

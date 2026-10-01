@@ -1,5 +1,6 @@
 const express = require('express');
 const compression = require('compression');
+const fs = require('fs');
 const path = require('path');
 const hotmartWebhook = require('./hotmart-webhook');
 
@@ -90,16 +91,41 @@ function comQuery(req, destino) {
 app.get('/gps', (req, res) => res.redirect(301, comQuery(req, LP)));
 app.get('/obrigado', (req, res) => res.redirect(301, comQuery(req, TY)));
 
+// Lista das provas (prints de alunas) que existem em public/igps_set_lp_26-ingresso/provas/:
+// 1.jpg ... 20.jpg, em ordem. As tres versoes da pagina de venda pedem esta lista so quando a secao
+// chega perto da tela, em vez de tentar as 20 imagens uma a uma.
+const PROVAS = path.join(__dirname, 'public', 'igps_set_lp_26-ingresso', 'provas');
+app.get('/igps_set_lp_26-ingresso/provas.json', (req, res) => {
+  fs.readdir(PROVAS, (erro, arquivos) => {
+    const lista = (erro ? [] : arquivos)
+      .map((nome) => /^([1-9]|1[0-9]|20)\.jpg$/.exec(nome))
+      .filter(Boolean)
+      .map((m) => Number(m[1]))
+      .sort((a, b) => a - b)
+      .map((n) => `/igps_set_lp_26-ingresso/provas/${n}.jpg`);
+    res.setHeader('Cache-Control', 'no-cache');
+    res.json(lista);
+  });
+});
+
 app.use(
   express.static(path.join(__dirname, 'public'), {
     etag: true,
     setHeaders(res, filePath) {
+      // O mime do Express nao conhece AVIF e mandaria application/octet-stream (com o nosniff
+      // acima, ha navegador que recusa a imagem).
+      if (/\.avif$/i.test(filePath)) res.setHeader('Content-Type', 'image/avif');
+      if (/[\\/]fonts[\\/][^\\/]+-v\d+\.woff2$/i.test(filePath)) {
+        // Fontes com versao no nome (-v1): o arquivo nunca muda, fonte nova ganha nome novo.
+        res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+        return;
+      }
       if (/\.(html|js|css)$/i.test(filePath)) {
         // HTML, JS e CSS sempre revalidados (o ETag evita baixar de novo o que nao mudou):
         // com campanha no ar, correcao de copy, do pre-formulario ou de link de checkout
         // entra na hora, sem ninguem ficar preso a um script velho no cache.
         res.setHeader('Cache-Control', 'no-cache');
-      } else if (/\.(jpg|jpeg|png|webp|svg|ico|woff2?)$/i.test(filePath)) {
+      } else if (/\.(jpg|jpeg|png|webp|avif|svg|ico|woff2?)$/i.test(filePath)) {
         res.setHeader('Cache-Control', 'public, max-age=2592000');
       }
     },
