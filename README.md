@@ -12,6 +12,7 @@ https://io.escolaenfermagemdevalor.com.br (Express mínimo em `server.js`):
 | `/igps_set_lp_26-obrigado` | `public/igps_set_lp_26-obrigado/index.html` | obrigado (compra aprovada) |
 | `/igps_set_lp_26-aguardando-pagamento` | `public/igps_set_lp_26-aguardando-pagamento/index.html` | Pix aguardando confirmação |
 | `/calculo-de-medicação-calculadora` | `public/calculo-de-medicacao-calculadora/index.html` | calculadora de medicação para enfermagem (abre também sem acento). Base de medicamentos em `meds.js`, contas e conferências em `calc.js`, tela em `app.js` |
+| `/BF_out_LS_26-inscricao-a` | `public/bf_out_ls_26-inscricao/index.html` | captação gratuita da Black Friday (lista VIP do vitalício): nome, e-mail e WhatsApp vão para a planilha `BF_out_LS_26` (ver "Lista VIP da Black Friday") |
 | `/gps`, `/obrigado` | — | endereços antigos: 301 para a página de venda e para o obrigado, **mantendo a query** |
 
 HTML, JS e CSS saem com `Cache-Control: no-cache` (revalidam pelo ETag a cada visita): com a
@@ -66,6 +67,26 @@ vai preenchido para a Hotmart.
 npm install
 npm start            # http://localhost:3000/igps_set_lp_26-ingresso
 ```
+
+## Lista VIP da Black Friday
+
+`/BF_out_LS_26-inscricao-a` pede nome completo, e-mail e WhatsApp (mesma régua do `lead-rules.js`, na
+tela e no servidor) e manda um POST para `/api/bf_out_ls_26/lead` (`bf-leads.js`). O servidor valida
+de novo e repassa para o Apps Script da planilha
+[BF_out_LS_26](https://docs.google.com/spreadsheets/d/1k_hGE6VnSyDiazuwBA3YY9wesnxe_0sbjAka2_6Xduk/edit),
+que grava uma linha com data/hora, contato, UTMs do primeiro toque, dispositivo e página. A oferta
+abre no dia 26/10 às 20h.
+
+- **Instalação do Apps Script**: passo a passo no topo de `apps-script/bf_out_ls_26.gs`. No fim, o
+  Railway precisa de `BF_SHEETS_URL` (URL `/exec` da implantação) e `BF_SHEETS_TOKEN` (o token que a
+  função `configurar` mostra). Os cabeçalhos da planilha são criados pelo próprio script.
+- **A inscrição nunca trava pela planilha**: se ela falhar ou as variáveis faltarem, a pessoa vê a
+  confirmação normalmente e o lead sai no log do Railway com a etiqueta `BF_LEAD_NAO_GRAVADO`.
+- **Link do grupo**: atributo `data-grupo` do `<form id="bf-form">`. Com um link `https://`, a
+  confirmação mostra o botão "Entrar no grupo do WhatsApp"; vazio, diz que o link chega no WhatsApp.
+- **Pixel**: `PageView` ao abrir e `Lead` na inscrição confirmada.
+- **Anti-robô**: campo escondido `site` (preenchido = descartado em silêncio) e no máximo 8 envios
+  por IP a cada 10 minutos.
 
 ## Pré-formulário da página de venda
 

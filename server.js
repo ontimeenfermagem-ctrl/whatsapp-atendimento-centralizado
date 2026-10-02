@@ -3,6 +3,7 @@ const compression = require('compression');
 const fs = require('fs');
 const path = require('path');
 const hotmartWebhook = require('./hotmart-webhook');
+const bfLeads = require('./bf-leads');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -29,6 +30,9 @@ app.get('/health', (req, res) => {
 
 // Postback de venda da Hotmart -> API de Conversoes do Meta.
 hotmartWebhook.registrar(app, express);
+
+// Inscricoes da lista VIP da Black Friday -> planilha BF_out_LS_26 (Apps Script).
+bfLeads.registrar(app, express);
 
 // As paginas sao servidas pelo index.html da pasta, sempre revalidado (no-cache,
 // como o express.static faz com HTML/JS/CSS la embaixo): sem isto o sendFile manda
@@ -58,6 +62,13 @@ app.get(LP_C, enviarPagina('igps_set_lp_26-ingresso-c'));
 // Pagina de obrigado: mesma ideia, serve direto com ou sem a barra final.
 const TY = '/igps_set_lp_26-obrigado';
 app.get(TY, enviarPagina('igps_set_lp_26-obrigado'));
+
+// Captacao gratuita da Black Friday (lista VIP do vitalicio), oferta abre em 26/10 as 20h.
+// O Express compara rota sem diferenciar maiuscula de minuscula: abre tambem como
+// /bf_out_ls_26-inscricao-a. A pasta continua bf_out_ls_26-inscricao e as imagens ficam em
+// /bf_out_ls_26-inscricao/img/ e sao pedidas por caminho absoluto.
+const BF = '/BF_out_LS_26-inscricao-a';
+app.get(BF, enviarPagina('bf_out_ls_26-inscricao'));
 
 // Pagina de pagamento pendente (Pix aguardando confirmacao).
 const WAIT = '/igps_set_lp_26-aguardando-pagamento';
