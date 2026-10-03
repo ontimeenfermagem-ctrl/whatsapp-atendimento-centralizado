@@ -70,6 +70,11 @@ app.get(TY, enviarPagina('igps_set_lp_26-obrigado'));
 const BF = '/BF_out_LS_26-inscricao-a';
 app.get(BF, enviarPagina('bf_out_ls_26-inscricao'));
 
+// Versao B da captacao (layout do modelo "vitalicio", coluna unica), no ar junto com a A para o
+// teste A/B. Mesmo formulario, mesma API e mesma obrigada; as capas e a Izabel vem da pasta da A.
+const BF_B = '/BF_out_LS_26-inscricao-b';
+app.get(BF_B, enviarPagina('bf_out_ls_26-inscricao-b'));
+
 // Obrigada da lista VIP: botao e redirecionamento para o grupo do WhatsApp e contagem ate 26/10 20h.
 const BF_TY = '/BF_out_LS_26-obrigada';
 app.get(BF_TY, enviarPagina('bf_out_ls_26-obrigada'));

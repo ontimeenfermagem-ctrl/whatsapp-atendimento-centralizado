@@ -13,6 +13,7 @@ https://io.escolaenfermagemdevalor.com.br (Express mínimo em `server.js`):
 | `/igps_set_lp_26-aguardando-pagamento` | `public/igps_set_lp_26-aguardando-pagamento/index.html` | Pix aguardando confirmação |
 | `/calculo-de-medicação-calculadora` | `public/calculo-de-medicacao-calculadora/index.html` | calculadora de medicação para enfermagem (abre também sem acento). Base de medicamentos em `meds.js`, contas e conferências em `calc.js`, tela em `app.js` |
 | `/BF_out_LS_26-inscricao-a` | `public/bf_out_ls_26-inscricao/index.html` | captação gratuita da Black Friday (lista VIP do vitalício): nome, e-mail e WhatsApp vão para a planilha `BF_out_LS_26`, o n8n e o painel do paginas (ver "Lista VIP da Black Friday") |
+| `/BF_out_LS_26-inscricao-b` | `public/bf_out_ls_26-inscricao-b/index.html` | versão B da captação (teste A/B): layout do modelo "vitalício" em coluna única; mesmo formulário, API, obrigada e Pixel da A. Capas e Izabel vêm da pasta da A. O n8n recebe `pagina.variante` (`a`/`b`), tirada do `page_url`; planilha e painel já recebem o `page_url` |
 | `/BF_out_LS_26-obrigada` | `public/bf_out_ls_26-obrigada/index.html` | obrigada da lista VIP: botão do grupo do WhatsApp (abre sozinho em 15 s), suporte e contagem até 26/10 20h |
 | `/gps`, `/obrigado` | — | endereços antigos: 301 para a página de venda e para o obrigado, **mantendo a query** |
 

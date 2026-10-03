@@ -65,6 +65,18 @@ function texto(valor, max) {
   return typeof valor === 'string' ? valor.trim().slice(0, max) : '';
 }
 
+// Qual versao da captacao mandou o lead (teste A/B): sai do caminho do page_url que a pagina envia.
+// Qualquer coisa que nao seja a B conta como A, a pagina original.
+function variante(pageUrl) {
+  let caminho = '';
+  try {
+    caminho = new URL(pageUrl).pathname;
+  } catch {
+    return 'a';
+  }
+  return /^\/bf_out_ls_26-inscricao-b\/?$/i.test(caminho) ? 'b' : 'a';
+}
+
 async function gravarNaPlanilha(lead) {
   if (!SHEETS_URL || !SHEETS_TOKEN) throw new Error('BF_SHEETS_URL/BF_SHEETS_TOKEN nao configurados');
   const controle = new AbortController();
@@ -91,7 +103,7 @@ function payloadN8n(lead) {
   const digitos = L.normalizePhoneDigits(lead.whatsapp);
   return {
     evento: 'inscricao_bf_out_ls_26',
-    pagina: { id: 'bf_out_ls_26', rota: '/BF_out_LS_26-inscricao-a' },
+    pagina: { id: 'bf_out_ls_26', variante: variante(lead.page_url), rota: `/BF_out_LS_26-inscricao-${variante(lead.page_url)}` },
     inscrito_em: new Date().toISOString(),
     lead: {
       nome: lead.nome,
