@@ -115,7 +115,7 @@ body::after{ /* grão: textura de impresso */
    ============================================================ */
 .ticker{position:relative; z-index:60; background:var(--accent); color:#000; overflow:hidden}
 .marquee{display:flex; width:max-content}
-.marquee__track{display:flex; animation:slide 38s linear infinite; will-change:transform}
+.marquee__track{display:flex; animation:slide 76s linear infinite; will-change:transform}
 .marquee span{
   font-family:var(--font-display); font-size:11.5px; font-weight:750; font-stretch:92%;
   text-transform:uppercase; letter-spacing:.15em; padding:10px 0; white-space:nowrap;
@@ -147,7 +147,10 @@ body::after{ /* grão: textura de impresso */
    ============================================================ */
 .hero{position:relative; overflow:hidden; padding-bottom:clamp(56px,7vw,96px)}
 .hero__aura{
-  position:absolute; inset:-25% -15% auto -15%; height:130%; z-index:0; pointer-events:none;
+  /* o mesmo lugar do layout (topo a -25% da altura do hero, 130% de altura), mas o topo da caixa
+     fica no 0 e a subida vem do translate (19,23% de 130% = 25%): assim, quando o hero cresce durante
+     a carga (HTML chegando, fonte trocando), a aura não "anda" e não entra no CLS */
+  position:absolute; inset:0 -15% auto -15%; height:130%; translate:0 -19.2308%; z-index:0; pointer-events:none;
   background:
     radial-gradient(42% 40% at 50% 34%, color-mix(in oklab, var(--plum) 85%, transparent), transparent 68%),
     radial-gradient(38% 34% at 14% 10%, color-mix(in oklab, var(--rose) 22%, transparent), transparent 70%);
@@ -157,11 +160,38 @@ body::after{ /* grão: textura de impresso */
 @keyframes drift{to{transform:translate3d(-2%,2%,0) scale(1.07)}}
 
 .ty{position:relative; z-index:2; max-width:760px; margin-inline:auto; text-align:center}
-.hero .ty{padding-top:clamp(18px,3vw,40px)}
-.ty h1{
-  font-size:clamp(40px,7.2vw,86px); font-weight:800; font-stretch:112%;
+
+/* O topo: o botão do grupo precisa estar na primeira tela. No celular: título, painel (com o botão)
+   e a data embaixo; a partir de 1041 px, título à esquerda e painel à direita, como o topo da
+   página de inscrição. */
+.topo{
+  position:relative; z-index:2; max-width:760px; margin-inline:auto; text-align:center;
+  display:grid; grid-template-columns:minmax(0,1fr); grid-template-areas:"titulo" "painel" "quando";
+  padding-top:clamp(8px,2vw,24px);
+}
+.topo__titulo{grid-area:titulo}
+.topo .painel{grid-area:painel}
+.topo__quando{grid-area:quando}
+.topo .eyebrow{justify-content:center}
+.topo .eyebrow::after{content:''; width:26px; height:1px; background:var(--accent); flex:none}
+.topo h1{
+  font-size:clamp(38px,7.2vw,86px); font-weight:800; font-stretch:112%;
   line-height:.88; letter-spacing:-.035em; text-transform:uppercase;
-  margin-top:22px;
+  margin-top:16px;
+}
+@media (min-width:1041px){
+  .topo{
+    max-width:none; text-align:left; align-items:center;
+    grid-template-columns:minmax(0,1fr) minmax(0,.92fr); column-gap:clamp(32px,4vw,64px);
+    grid-template-areas:"titulo painel" "quando painel";
+    grid-template-rows:auto 1fr;
+  }
+  .topo__titulo{align-self:end}
+  .topo__quando{align-self:start}
+  .topo .eyebrow{justify-content:flex-start}
+  .topo .eyebrow::after{display:none}
+  .topo h1{font-size:clamp(56px,5.6vw,84px)}
+  .topo .painel{margin-top:0}
 }
 .ty__quando{
   margin-top:20px; font-family:var(--font-display); font-size:11.5px; font-weight:700;
@@ -171,10 +201,10 @@ body::after{ /* grão: textura de impresso */
 
 /* o painel do botão: o mesmo vidro escuro do formulário da inscrição */
 .painel{
-  margin:clamp(28px,4vw,40px) auto 0; max-width:620px; text-align:center;
+  margin:clamp(20px,3vw,28px) auto 0; max-width:620px; width:100%; text-align:center;
   background:rgba(18,16,22,.82);
   border:1px solid var(--border-strong); border-radius:4px;
-  padding:clamp(22px,3vw,34px);
+  padding:clamp(18px,2.6vw,30px);
   -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px);
   box-shadow:0 36px 80px -40px #000, 0 1px 0 rgba(255,255,255,.06) inset;
 }
@@ -183,9 +213,10 @@ body::after{ /* grão: textura de impresso */
   font-family:var(--font-display); font-size:10.5px; font-weight:750;
   text-transform:uppercase; letter-spacing:.16em; color:var(--accent);
 }
+.painel__top{margin-bottom:14px}
 .painel__lead{
   font-family:var(--font-display); font-size:clamp(18px,2.2vw,22px); font-weight:600;
-  line-height:1.3; letter-spacing:-.012em; color:#D8D2DD; margin:0 auto 24px; max-width:34ch;
+  line-height:1.3; letter-spacing:-.012em; color:#D8D2DD; margin:0 auto 20px; max-width:34ch;
 }
 .atencao{
   display:flex; gap:12px; align-items:flex-start; text-align:left;
@@ -240,9 +271,9 @@ body::after{ /* grão: textura de impresso */
 .ajuda .btn{margin-top:28px}
 
 .contagem .sect-title{margin-top:20px}
-.count{display:flex; gap:10px; margin:28px auto 0; max-width:560px}
+.count{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; margin:28px auto 0; max-width:560px}
 .count__cell{
-  flex:1; background:rgba(255,255,255,.035); border:1px solid var(--border);
+  background:rgba(255,255,255,.035); border:1px solid var(--border);
   border-radius:3px; padding:14px 10px; text-align:center; -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px);
 }
 .count__n{
@@ -260,6 +291,8 @@ body::after{ /* grão: textura de impresso */
   line-height:1.12; letter-spacing:-.022em; text-wrap:balance;
 }
 .comecou[hidden],.count[hidden]{display:none}
+/* telas de 300 px ou menos (capa do Galaxy Fold): os rótulos da contagem cabem nas caixas */
+@media (max-width:300px){.count{gap:6px}.count__cell{padding-inline:4px}.count__u{letter-spacing:.08em}}
 .contagem .ty__quando{margin-top:26px}
 
 /* ============================================================
@@ -279,6 +312,8 @@ body::after{ /* grão: textura de impresso */
   <div class="marquee"><div class="marquee__track">
     <span>Black Friday Vitalício</span><span>26 de outubro · 20h</span><span>Preço reduzido só para inscritos</span><span>Abre no grupo do WhatsApp</span><span>Pague uma vez, estude para sempre</span>
     <span>Black Friday Vitalício</span><span>26 de outubro · 20h</span><span>Preço reduzido só para inscritos</span><span>Abre no grupo do WhatsApp</span><span>Pague uma vez, estude para sempre</span>
+    <span>Black Friday Vitalício</span><span>26 de outubro · 20h</span><span>Preço reduzido só para inscritos</span><span>Abre no grupo do WhatsApp</span><span>Pague uma vez, estude para sempre</span>
+    <span>Black Friday Vitalício</span><span>26 de outubro · 20h</span><span>Preço reduzido só para inscritos</span><span>Abre no grupo do WhatsApp</span><span>Pague uma vez, estude para sempre</span>
   </div></div>
 </div>
 
@@ -291,10 +326,14 @@ body::after{ /* grão: textura de impresso */
       <div class="head-note"><span class="dot"></span> Lista VIP · Inscrição confirmada</div>
     </div>
 
-    <div class="ty">
-      <div class="eyebrow is-center">Último passo · Grupo VIP</div>
-      <h1>Você está <span class="hl">quase lá</span>, preciosa!</h1>
-      <p class="ty__quando"><b>26 de outubro</b> · 20h · Encontro online e gratuito</p>
+    <div class="topo">
+      <div class="topo__titulo">
+        <div class="eyebrow">Último passo · Grupo VIP</div>
+        <!-- as quebras fixas deixam o título com 3 linhas em qualquer fonte: sem elas, enquanto o Archivo
+             não chega ele ocupa 2 linhas, e o painel do botão pulava ao trocar (CLS) -->
+        <h1>Você está<br> <span class="hl">quase lá</span>,<br> preciosa!</h1>
+      </div>
+      <p class="ty__quando topo__quando"><b>26 de outubro</b> · 20h · Encontro online e gratuito</p>
 
       <div class="painel">
         <div class="painel__top"><span class="dot"></span> Falta só entrar no grupo</div>
@@ -330,8 +369,8 @@ body::after{ /* grão: textura de impresso */
       <div class="count" role="timer" aria-label="Tempo até o encontro">
         <div class="count__cell"><div class="count__n" id="d">--</div><div class="count__u">Dias</div></div>
         <div class="count__cell"><div class="count__n" id="h">--</div><div class="count__u">Horas</div></div>
-        <div class="count__cell"><div class="count__n" id="m">--</div><div class="count__u">Minutos</div></div>
-        <div class="count__cell"><div class="count__n" id="s">--</div><div class="count__u">Segundos</div></div>
+        <div class="count__cell"><div class="count__n" id="m">--</div><div class="count__u">Min</div></div>
+        <div class="count__cell"><div class="count__n" id="s">--</div><div class="count__u">Seg</div></div>
       </div>
       <p class="para">Para começar o encontro da <span class="hl">Black Friday Vitalício</span> com a Iza!</p>
     </div>
@@ -358,7 +397,10 @@ body::after{ /* grão: textura de impresso */
   setTimeout(pronto, 1500);
   try {
     requestAnimationFrame(function () {
-      setTimeout(function () { document.fonts.ready.then(pronto, pronto); }, 0);
+      setTimeout(function () {
+        var fontes = document.fonts;
+        if (fontes && fontes.ready) fontes.ready.then(pronto, pronto); else pronto();
+      }, 0);
     });
   } catch (e) { pronto(); }
 })();

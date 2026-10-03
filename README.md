@@ -40,8 +40,28 @@ celular, o mesmo do PageSpeed):
   qualquer evento; o arquivo do Pixel (~250 KB com a configuração, ~500 ms de tela travada no
   celular) só é baixado no primeiro toque, tecla ou rolagem, ou 3 s depois de a página carregar, e
   aí envia a fila inteira. No obrigado e no aguardando o Pixel continua imediato (o obrigado
-  redireciona em 16 s). Na Black Friday é igual: adiado na inscrição, imediato na obrigada (é lá
-  que sai o `Lead` da conversão, e a pessoa pode tocar no botão do grupo logo de cara).
+  redireciona em 16 s). Na Black Friday: adiado na inscrição, como aqui; na obrigada a fila (init,
+  PageView e o `Lead` da conversão) nasce no `<head>` e o arquivo é pedido assim que as fontes que a
+  tela pediu ficam prontas, no máximo 1,5 s depois. Quem chega do formulário já tem as fontes no
+  cache, então para essa pessoa o Pixel sai na hora; numa visita fria os ~265 KB dele não disputam a
+  rede com o título.
+- **Black Friday: sem preload de fonte e `font-display: block`.** Num trace do Lighthouse em
+  produção, o `<link rel="preload">` das fontes (e também pedir fonte por script antes da primeira
+  pintura, com `document.fonts.load`) fazia o Chrome segurar a primeira pintura da página inteira até
+  ~2,5 s, com os arquivos já baixados. Sem o preload, as fontes saem na primeira montagem da tela; com
+  `block`, o texto aparece uma vez, já na fonte certa (com `swap` ele nascia em Arial e pulava na
+  troca: CLS de até 0,26 na obrigada). Não volte o preload nessas duas páginas.
+- **Black Friday: a Izabel dentro do HTML no celular.** Até 1040 px de largura, a foto do topo (o
+  maior elemento da tela) vem embutida no HTML em base64 (o mesmo `img/izabel-750.avif`): aparece
+  junto com a página, sem esperar outro pedido (LCP simulado de ~2,4 s para ~1,4 s). No computador
+  ela vem dos arquivos, com preload. Trocou a foto? Regere o base64 (o comando está no comentário do
+  `<picture>` do palco) nos DOIS lugares: o palco e a foto da professora (que reaproveita a mesma
+  imagem; o brotli cobra ~90 bytes pela repetição).
+- **Black Friday: a aura não entra no CLS.** A `.hero__aura` tem o topo da caixa no 0 e sobe com
+  `translate: 0 -19.2308%` (19,23% de 130% = os 25% do layout): fica no mesmo lugar, pixel a pixel,
+  mas não "anda" quando o hero cresce durante a carga (era a maior parte do CLS, e chegou a 0,26
+  numa rodada em produção). Na obrigada, as quebras fixas do título (3 linhas em qualquer fonte)
+  seguram o painel do botão no lugar quando a fonte chega.
 - **Vídeos sob demanda.** Cada vídeo é a capa do próprio YouTube (`public/igps_set_lp_26-ingresso/videos/<id>.webp`
   e `.jpg`) + o botão de play; as capas só são baixadas quando a seção chega perto da tela. No play,
   o player é montado com os mesmos parâmetros de antes e `autoplay=1`. Antes, os 3 players vinham na
