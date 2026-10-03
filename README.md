@@ -12,7 +12,7 @@ https://io.escolaenfermagemdevalor.com.br (Express mínimo em `server.js`):
 | `/igps_set_lp_26-obrigado` | `public/igps_set_lp_26-obrigado/index.html` | obrigado (compra aprovada) |
 | `/igps_set_lp_26-aguardando-pagamento` | `public/igps_set_lp_26-aguardando-pagamento/index.html` | Pix aguardando confirmação |
 | `/calculo-de-medicação-calculadora` | `public/calculo-de-medicacao-calculadora/index.html` | calculadora de medicação para enfermagem (abre também sem acento). Base de medicamentos em `meds.js`, contas e conferências em `calc.js`, tela em `app.js` |
-| `/BF_out_LS_26-inscricao-a` | `public/bf_out_ls_26-inscricao/index.html` | captação gratuita da Black Friday (lista VIP do vitalício): nome, e-mail e WhatsApp vão para a planilha `BF_out_LS_26` (ver "Lista VIP da Black Friday") |
+| `/BF_out_LS_26-inscricao-a` | `public/bf_out_ls_26-inscricao/index.html` | captação gratuita da Black Friday (lista VIP do vitalício): nome, e-mail e WhatsApp vão para a planilha `BF_out_LS_26`, o n8n e o painel do paginas (ver "Lista VIP da Black Friday") |
 | `/BF_out_LS_26-obrigada` | `public/bf_out_ls_26-obrigada/index.html` | obrigada da lista VIP: botão do grupo do WhatsApp (abre sozinho em 15 s), suporte e contagem até 26/10 20h |
 | `/gps`, `/obrigado` | — | endereços antigos: 301 para a página de venda e para o obrigado, **mantendo a query** |
 
@@ -88,6 +88,17 @@ abre no dia 26/10 às 20h.
   e-mail, WhatsApp, só dígitos e com 55), `utm` (as 5), `rastreio` (dispositivo, page_url) e `inscrito_em`.
   A página não espera o n8n; são 3 tentativas (na hora, 3 s e 10 s) e o que não chegar sai no log com a
   etiqueta `BF_N8N_NAO_ENVIADO`. O workflow precisa estar **ativo** no n8n (senão ele responde 404).
+- **Painel (repo `paginas`)**: cada inscrição válida vai também, em paralelo e pelo servidor (nada muda
+  na página), para `POST https://lp.escolaenfermagemdevalor.com.br/api/inscricao` com a página
+  `bf-out-ls-26` (`BF_PAINEL_URL` troca; `off` desliga). É a aba **Black Friday — lista VIP** do
+  `/painel` de lá: inscritos, UTMs por origem, mídia, campanha, conteúdo, termo e dia, a lista com o
+  WhatsApp e o CSV. A mesma pessoa enviando de novo soma envio, não vira inscrita nova. São até 6
+  tentativas (na hora, 3 s, 10 s, 30 s, 1 min e 2 min) para `429` e `5xx`: o paginas aceita 240
+  inscrições por minuto vindas deste servidor, e as esperas espalham um pico. Recusa (`422`, por
+  exemplo um e-mail cujo domínio não existe) não se repete e sai no log como `BF_PAINEL_RECUSOU`; o
+  que não chegar sai como `BF_PAINEL_NAO_ENVIADO`. A página `bf-out-ls-26` está no
+  `js/checkout-config.js` do paginas (`checkout: null`, captação gratuita) e na cópia dele em
+  `public/igps_set_lp_26-ingresso/js/`: mudou lá, copie para cá.
 - **Depois da inscrição**: a página vai para `/BF_out_LS_26-obrigada#inscrito` (atributo
   `data-obrigado` do formulário). O link do grupo fica no botão `#grupo` da obrigada, que também
   redireciona sozinha em 15 s. Trocou o grupo? Mude lá e no `data-grupo` (abaixo).

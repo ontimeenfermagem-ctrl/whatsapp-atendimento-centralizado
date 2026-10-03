@@ -6,6 +6,8 @@
 //   BF_SHEETS_TOKEN - o token que a funcao "configurar" do script mostra
 //   BF_WEBHOOK_URL  - opcional: webhook do n8n que recebe cada inscricao. Vazio = o padrao abaixo
 //                     (black-outubro-26); "off" desliga.
+//   BF_PAINEL_URL   - opcional: o POST /api/inscricao do repo paginas, que grava a inscricao para a
+//                     aba "Black Friday — lista VIP" do /painel. Vazio = o padrao abaixo; "off" desliga.
 //
 // A validacao e a mesma da tela (lead-rules.js, o arquivo que a pagina tambem carrega).
 // Se a planilha falhar ou nao estiver configurada, a pessoa segue normalmente para o
@@ -25,6 +27,19 @@ const WEBHOOK_URL = WEBHOOK_ENV.toLowerCase() === 'off' ? '' : WEBHOOK_ENV || WE
 // Tres tentativas: na hora, 3 s e 10 s depois. Um n8n reiniciando nao faz o lead sumir; o que
 // ainda assim nao chegar sai no log com a etiqueta BF_N8N_NAO_ENVIADO.
 const ESPERAS_N8N_MS = [0, 3000, 10000];
+
+// O painel do repo paginas (lp.escolaenfermagemdevalor.com.br/painel) recebe a inscricao pela
+// mesma API do pre-formulario do GPS, com a pagina "bf-out-ls-26" do js/checkout-config.js de la
+// (captacao gratuita: grava sem checkout). Quem manda e ESTE servidor, e nao o navegador: nada muda
+// na pagina, e bloqueador de anuncio nao derruba o envio.
+const PAINEL_PADRAO = 'https://lp.escolaenfermagemdevalor.com.br/api/inscricao';
+const PAINEL_ENV = String(process.env.BF_PAINEL_URL || '').trim();
+const PAINEL_URL = PAINEL_ENV.toLowerCase() === 'off' ? '' : PAINEL_ENV || PAINEL_PADRAO;
+const PAGINA_PAINEL = 'bf-out-ls-26';
+// O paginas aceita 240 inscricoes por minuto por IP, e todas saem daqui (um IP so). Num pico, quem
+// passar recebe 429 e tenta de novo mais tarde: as esperas vao ate ~4 min, o que espalha o pico.
+// Recusa de contato (422) nao se repete. O que nao chegar sai no log com BF_PAINEL_NAO_ENVIADO.
+const ESPERAS_PAINEL_MS = [0, 3000, 10000, 30000, 60000, 120000];
 
 const RASTREIO = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'dispositivo', 'page_url'];
 
@@ -123,6 +138,54 @@ async function avisarN8n(lead) {
   console.error('BF_N8N_NAO_ENVIADO', corpo);
 }
 
+function payloadPainel(lead) {
+  return {
+    pagina: PAGINA_PAINEL,
+    contato: { nome: lead.nome, whatsapp: lead.whatsapp, email: lead.email },
+    rastreio: {
+      utm_source: lead.utm_source || null,
+      utm_medium: lead.utm_medium || null,
+      utm_campaign: lead.utm_campaign || null,
+      utm_content: lead.utm_content || null,
+      utm_term: lead.utm_term || null,
+      dispositivo: lead.dispositivo || null,
+      page_url: lead.page_url || null,
+    },
+  };
+}
+
+// Sem await de quem chama, como o n8n: o painel nunca atrasa a ida para a pagina de obrigada.
+async function avisarPainel(lead) {
+  if (!PAINEL_URL) return;
+  const corpo = JSON.stringify(payloadPainel(lead));
+  for (let i = 0; i < ESPERAS_PAINEL_MS.length; i += 1) {
+    if (ESPERAS_PAINEL_MS[i]) await new Promise((ok) => setTimeout(ok, ESPERAS_PAINEL_MS[i]).unref());
+    const controle = new AbortController();
+    const timer = setTimeout(() => controle.abort(), TIMEOUT_MS);
+    try {
+      const resp = await fetch(PAINEL_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: corpo,
+        signal: controle.signal,
+      });
+      if (resp.ok) return;
+      const resposta = (await resp.text().catch(() => '')).slice(0, 300);
+      // 429 (pico) e 5xx (deploy, banco fora) passam; o resto e recusa e nao muda tentando de novo.
+      if (resp.status !== 429 && resp.status < 500) {
+        console.error('BF_PAINEL_RECUSOU', resp.status, resposta, corpo);
+        return;
+      }
+      console.error(`[bf-leads] painel respondeu ${resp.status} (tentativa ${i + 1} de ${ESPERAS_PAINEL_MS.length})`);
+    } catch (erro) {
+      console.error(`[bf-leads] falha ao gravar no painel (tentativa ${i + 1} de ${ESPERAS_PAINEL_MS.length}): ${erro && erro.message}`);
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+  console.error('BF_PAINEL_NAO_ENVIADO', corpo);
+}
+
 function registrar(app, express) {
   if (!SHEETS_URL || !SHEETS_TOKEN) {
     console.warn('[bf-leads] BF_SHEETS_URL/BF_SHEETS_TOKEN ausentes: inscricoes da Black Friday vao so para o log');
@@ -151,8 +214,9 @@ function registrar(app, express) {
     };
     for (const campo of RASTREIO) lead[campo] = texto(b[campo], campo === 'page_url' ? 2048 : 300);
 
-    // O n8n recebe em paralelo com a planilha; a resposta para a pagina nao espera por ele.
+    // O n8n e o painel recebem em paralelo com a planilha; a resposta para a pagina nao espera por eles.
     avisarN8n(lead).catch((erro) => console.error('[bf-leads] erro inesperado no aviso ao n8n:', erro && erro.message));
+    avisarPainel(lead).catch((erro) => console.error('[bf-leads] erro inesperado na gravacao do painel:', erro && erro.message));
 
     try {
       await gravarNaPlanilha(lead);
@@ -163,4 +227,4 @@ function registrar(app, express) {
   });
 }
 
-module.exports = { registrar, payloadN8n };
+module.exports = { registrar, payloadN8n, payloadPainel };
