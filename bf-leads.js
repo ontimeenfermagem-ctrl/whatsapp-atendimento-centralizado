@@ -4,6 +4,8 @@
 // Variaveis de ambiente (Railway):
 //   BF_SHEETS_URL   - a URL /exec da implantacao do Apps Script
 //   BF_SHEETS_TOKEN - o token que a funcao "configurar" do script mostra
+//   BF_WEBHOOK_URL  - opcional: webhook do n8n que recebe cada inscricao. Vazio = o padrao abaixo
+//                     (black-outubro-26); "off" desliga.
 //
 // A validacao e a mesma da tela (lead-rules.js, o arquivo que a pagina tambem carrega).
 // Se a planilha falhar ou nao estiver configurada, a pessoa segue normalmente para o
@@ -16,6 +18,13 @@ const L = globalThis.EVLeadRules;
 const SHEETS_URL = process.env.BF_SHEETS_URL || '';
 const SHEETS_TOKEN = process.env.BF_SHEETS_TOKEN || '';
 const TIMEOUT_MS = 10000;
+
+const WEBHOOK_PADRAO = 'https://n8n.tecnicadevalor.com.br/webhook/black-outubro-26';
+const WEBHOOK_ENV = String(process.env.BF_WEBHOOK_URL || '').trim();
+const WEBHOOK_URL = WEBHOOK_ENV.toLowerCase() === 'off' ? '' : WEBHOOK_ENV || WEBHOOK_PADRAO;
+// Tres tentativas: na hora, 3 s e 10 s depois. Um n8n reiniciando nao faz o lead sumir; o que
+// ainda assim nao chegar sai no log com a etiqueta BF_N8N_NAO_ENVIADO.
+const ESPERAS_N8N_MS = [0, 3000, 10000];
 
 const RASTREIO = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'dispositivo', 'page_url'];
 
@@ -63,6 +72,57 @@ async function gravarNaPlanilha(lead) {
   }
 }
 
+function payloadN8n(lead) {
+  const digitos = L.normalizePhoneDigits(lead.whatsapp);
+  return {
+    evento: 'inscricao_bf_out_ls_26',
+    pagina: { id: 'bf_out_ls_26', rota: '/BF_out_LS_26-inscricao-a' },
+    inscrito_em: new Date().toISOString(),
+    lead: {
+      nome: lead.nome,
+      primeiro_nome: lead.nome.split(' ')[0] || '',
+      email: lead.email,
+      whatsapp: lead.whatsapp,
+      whatsapp_digits: digitos,
+      whatsapp_internacional: digitos ? `55${digitos}` : '',
+    },
+    utm: {
+      utm_source: lead.utm_source || null,
+      utm_medium: lead.utm_medium || null,
+      utm_campaign: lead.utm_campaign || null,
+      utm_content: lead.utm_content || null,
+      utm_term: lead.utm_term || null,
+    },
+    rastreio: { dispositivo: lead.dispositivo || null, page_url: lead.page_url || null },
+  };
+}
+
+// Sem await de quem chama: o n8n nunca atrasa a ida da pessoa para a pagina de obrigada.
+async function avisarN8n(lead) {
+  if (!WEBHOOK_URL) return;
+  const corpo = JSON.stringify(payloadN8n(lead));
+  for (let i = 0; i < ESPERAS_N8N_MS.length; i += 1) {
+    if (ESPERAS_N8N_MS[i]) await new Promise((ok) => setTimeout(ok, ESPERAS_N8N_MS[i]).unref());
+    const controle = new AbortController();
+    const timer = setTimeout(() => controle.abort(), TIMEOUT_MS);
+    try {
+      const resp = await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: corpo,
+        signal: controle.signal,
+      });
+      if (resp.ok) return;
+      console.error(`[bf-leads] n8n respondeu ${resp.status} (tentativa ${i + 1} de ${ESPERAS_N8N_MS.length})`);
+    } catch (erro) {
+      console.error(`[bf-leads] falha ao avisar o n8n (tentativa ${i + 1} de ${ESPERAS_N8N_MS.length}): ${erro && erro.message}`);
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+  console.error('BF_N8N_NAO_ENVIADO', corpo);
+}
+
 function registrar(app, express) {
   if (!SHEETS_URL || !SHEETS_TOKEN) {
     console.warn('[bf-leads] BF_SHEETS_URL/BF_SHEETS_TOKEN ausentes: inscricoes da Black Friday vao so para o log');
@@ -91,6 +151,9 @@ function registrar(app, express) {
     };
     for (const campo of RASTREIO) lead[campo] = texto(b[campo], campo === 'page_url' ? 2048 : 300);
 
+    // O n8n recebe em paralelo com a planilha; a resposta para a pagina nao espera por ele.
+    avisarN8n(lead).catch((erro) => console.error('[bf-leads] erro inesperado no aviso ao n8n:', erro && erro.message));
+
     try {
       await gravarNaPlanilha(lead);
     } catch (erro) {
@@ -100,4 +163,4 @@ function registrar(app, express) {
   });
 }
 
-module.exports = { registrar };
+module.exports = { registrar, payloadN8n };

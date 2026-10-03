@@ -83,6 +83,11 @@ abre no dia 26/10 às 20h.
   função `configurar` mostra). Os cabeçalhos da planilha são criados pelo próprio script.
 - **A inscrição nunca trava pela planilha**: se ela falhar ou as variáveis faltarem, a pessoa vê a
   confirmação normalmente e o lead sai no log do Railway com a etiqueta `BF_LEAD_NAO_GRAVADO`.
+- **n8n**: cada inscrição válida vai também, em paralelo, para `https://n8n.tecnicadevalor.com.br/webhook/black-outubro-26`
+  (`BF_WEBHOOK_URL` troca; `off` desliga): evento `inscricao_bf_out_ls_26` com `lead` (nome, primeiro_nome,
+  e-mail, WhatsApp, só dígitos e com 55), `utm` (as 5), `rastreio` (dispositivo, page_url) e `inscrito_em`.
+  A página não espera o n8n; são 3 tentativas (na hora, 3 s e 10 s) e o que não chegar sai no log com a
+  etiqueta `BF_N8N_NAO_ENVIADO`. O workflow precisa estar **ativo** no n8n (senão ele responde 404).
 - **Depois da inscrição**: a página vai para `/BF_out_LS_26-obrigada#inscrito` (atributo
   `data-obrigado` do formulário). O link do grupo fica no botão `#grupo` da obrigada, que também
   redireciona sozinha em 15 s. Trocou o grupo? Mude lá e no `data-grupo` (abaixo).
