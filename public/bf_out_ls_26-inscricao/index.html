@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Black Friday Vitalício · Izabel Gonçalves</title>
 <meta name="description" content="Acesso vitalício a todos os cursos da Izabel Gonçalves. Entre grátis na lista VIP e receba a oferta da Black Friday em primeira mão.">
 <meta property="og:title" content="Black Friday Vitalício · Izabel Gonçalves">
@@ -10,314 +10,916 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://io.escolaenfermagemdevalor.com.br/BF_out_LS_26-inscricao-a">
 <meta property="og:image" content="https://io.escolaenfermagemdevalor.com.br/bf_out_ls_26-inscricao/img/hero.jpg">
-<meta name="theme-color" content="#12081C">
-<link rel="preload" as="image" href="/bf_out_ls_26-inscricao/img/hero.jpg">
-<!-- Meta Pixel -->
+<meta name="theme-color" content="#09080B">
+<link rel="icon" href="data:,">
+<!-- A Izabel recortada é o maior elemento da primeira tela (no celular e no computador): é a
+     primeira coisa pedida. Mesmo srcset/sizes do <picture> do palco, para o pedido ser reaproveitado. -->
+<link rel="preload" as="image" type="image/avif" fetchpriority="high" imagesrcset="/bf_out_ls_26-inscricao/img/izabel-480.avif 480w, /bf_out_ls_26-inscricao/img/izabel-600.avif 600w, /bf_out_ls_26-inscricao/img/izabel-750.avif 750w" imagesizes="(max-width: 1040px) 84vw, 500px">
+<!-- Fontes do layout (Archivo e Instrument Sans) servidas por este site: os MESMOS arquivos do
+     Google, byte a byte, com as mesmas regras (abaixo, no <style>). Sem o CSS do Google na frente,
+     a primeira pintura não espera outro site. -->
+<link rel="preload" href="/fonts/archivo-latin-v1.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/instrument-sans-latin-v1.woff2" as="font" type="font/woff2" crossorigin>
+<!-- Meta Pixel. A fila (fbq) nasce na hora e guarda o PageView; o arquivo do Pixel (~260 KB, com
+     a configuração) só é baixado no primeiro toque, tecla ou rolagem, ou 3 s depois de a página
+     carregar, como nas páginas do GPS. Nada se perde: quando o arquivo chega, ele envia a fila. -->
 <script>
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-document,'script','https://connect.facebook.net/en_US/fbevents.js');
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];
+var feito=0,gatilhos=['pointerdown','keydown','touchstart','scroll','wheel'];
+function carregar(){if(feito)return;feito=1;gatilhos.forEach(function(x){f.removeEventListener(x,carregar,true)});
+t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+f.EVCarregarPixel=carregar;
+gatilhos.forEach(function(x){f.addEventListener(x,carregar,{capture:true,passive:true})});
+function depois(){setTimeout(carregar,3000)}
+if(b.readyState==='complete')depois();else f.addEventListener('load',depois);
+}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
 fbq('init','538380380948773');
 fbq('track','PageView');
 </script>
 <noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=538380380948773&ev=PageView&noscript=1"></noscript>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <!-- Mesma régua de nome, WhatsApp e e-mail das outras páginas (e do servidor, em bf-leads.js). -->
 <script src="/igps_set_lp_26-ingresso/js/lead-rules.js" defer></script>
 <style>
+/* Fontes (antes: Google Fonts). Os arquivos em /fonts são os do Google, byte a byte; as regras são
+   as que o Google manda para o mesmo pedido do layout (Archivo wdth 62-125, wght 400-900;
+   Instrument Sans 400-700). Itálico não entra: a página não usa. */
+@font-face{font-family:'Archivo';font-style:normal;font-weight:400 900;font-stretch:62% 125%;font-display:swap;src:url(/fonts/archivo-vietnamese-v1.woff2) format('woff2');unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB}
+@font-face{font-family:'Archivo';font-style:normal;font-weight:400 900;font-stretch:62% 125%;font-display:swap;src:url(/fonts/archivo-latin-ext-v1.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Archivo';font-style:normal;font-weight:400 900;font-stretch:62% 125%;font-display:swap;src:url(/fonts/archivo-latin-v1.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Instrument Sans';font-style:normal;font-weight:400 700;font-stretch:100%;font-display:swap;src:url(/fonts/instrument-sans-latin-ext-v1.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Instrument Sans';font-style:normal;font-weight:400 700;font-stretch:100%;font-display:swap;src:url(/fonts/instrument-sans-latin-v1.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+
+/* ============================================================
+   BLACK FRIDAY VITALÍCIO — Escola Enfermagem de Valor
+   Preto editorial · berinjela da marca como luz · amarelo BF como acento.
+   Hero: formulário à esquerda, Izabel à direita com as marcas em órbita.
+   ============================================================ */
+
 :root{
-  --bg:#12081C; --bg-2:#1B0E2A; --card:#22123A; --line:#3B2456;
-  --ink:#FFFFFF; --ink-2:rgba(255,255,255,.72); --ink-3:rgba(255,255,255,.5);
-  --gold:#FFD15C; --gold-d:#F2A900; --lilac:#C792FF; --magenta:#E556C9;
-  --green:#1FBF5B; --green-d:#159A46; --red:#FF7A8A;
-  --display:'Bricolage Grotesque','Arial Narrow',sans-serif;
-  --body:'DM Sans',system-ui,sans-serif;
+  --bg:            #09080B;
+  --bg-deep:       #050406;
+  --surface:       #121016;
+  --surface-2:     #1A1721;
+  --fg:            #F7F4F8;
+  --muted:         #9C94A4;
+  --border:        rgba(255,255,255,.08);
+  --border-strong: rgba(255,255,255,.17);
+
+  --accent:        #FFE000;
+  --plum:          #704C63;
+  --rose:          #D39C9A;
+  --gold:          #B49A67;
+
+  --font-display: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  --font-body:    'Instrument Sans', 'Helvetica Neue', Arial, sans-serif;
+
+  --maxw: 1300px;
+  --gut: clamp(20px, 4.4vw, 60px);
+  --ease: cubic-bezier(.22,1,.36,1);
+
+  /* erro de campo: o layout não desenhou; vermelho claro que lê bem sobre o preto */
+  --erro: #FF8A80;
 }
+
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
-img{max-width:100%;display:block}
-.wrap{max-width:1080px;margin-inline:auto;padding-inline:20px}
-h1,h2,h3{font-family:var(--display);letter-spacing:-.03em;line-height:1.05;margin:0;text-wrap:balance}
-.gold{color:var(--gold)}
+html{-webkit-text-size-adjust:100%; scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--fg);
+  font-family:var(--font-body); font-size:17px; line-height:1.6;
+  overflow-x:hidden; -webkit-font-smoothing:antialiased;
+}
+/* height:auto: as imagens têm width/height no HTML (reserva o espaço antes de carregar), e sem isto
+   o height do atributo valeria onde o CSS só define a largura */
+img{max-width:100%; height:auto; display:block}
+/* <picture> só escolhe o formato (AVIF/WebP/PNG): quem entra no layout é o <img>, como no layout original */
+picture{display:contents}
+/* os <source> não desenham nada, mas com o <picture> "transparente" virariam itens do flex/grid */
+picture>source{display:none}
+h1,h2,h3{font-family:var(--font-display); margin:0; text-wrap:balance}
+p{margin:0}
 a{color:inherit}
-:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
-.tag{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);border:1px solid #5A3A1E;background:#2A1A12;border-radius:99px;padding:6px 14px}
-.tag::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px rgba(255,209,92,.18)}
+:focus-visible{outline:2px solid var(--accent); outline-offset:3px}
 
-/* botões */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:56px;padding:16px 22px;border:0;border-radius:12px;cursor:pointer;font-family:var(--body);font-size:16px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;color:#2A1600;background:linear-gradient(180deg,#FFE08A,var(--gold) 45%,var(--gold-d));box-shadow:0 14px 30px -12px rgba(242,169,0,.65),inset 0 1px 0 rgba(255,255,255,.6);transition:transform .15s,filter .15s}
-.btn:hover{transform:translateY(-2px)}
-.btn[disabled]{filter:saturate(.4) brightness(.85);cursor:progress;transform:none}
-.btn.zap{color:#fff;background:linear-gradient(180deg,#22D466,var(--green-d));box-shadow:0 14px 30px -12px rgba(31,191,91,.6),inset 0 1px 0 rgba(255,255,255,.35)}
-.btn.auto{width:auto;padding-inline:34px}
+body::after{ /* grão: textura de impresso */
+  content:''; position:fixed; inset:0; pointer-events:none; z-index:9999;
+  opacity:.04; mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
 
-/* topo */
-/* fundo liso de propósito: hero.jpg foi achatada sobre esta mesma cor, e um degradê aqui mostraria o quadrado dela */
-.hero{position:relative;overflow:hidden;background:var(--bg)}
-.hero-in{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"txt img" "form img";column-gap:40px;row-gap:22px;align-items:center;padding-block:40px 56px}
-.hero-txt{grid-area:txt;align-self:end}
-.hero-img{grid-area:img}
-.hero .form{grid-area:form;align-self:start}
-.brand{font-size:13px;color:var(--ink-3);letter-spacing:.04em;margin:18px 0 10px}
-.hero h1{font-size:clamp(30px,4.4vw,48px);margin-bottom:16px}
-.hero .sub{color:var(--ink-2);margin:0 0 14px}
-.hero .date{margin:0 0 22px;font-weight:700;color:var(--lilac)}
-.hero .date b{color:var(--gold)}
-.hero-img{position:relative}
-.hero-img img{width:100%;height:auto}
+.wrap{max-width:var(--maxw); margin-inline:auto; padding-inline:var(--gut)}
 
-/* formulário */
-.form{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 30px 60px -30px rgba(0,0,0,.8)}
-.form h2{font-size:20px;letter-spacing:-.01em;margin-bottom:14px;text-align:center}
-.campo{margin-bottom:12px}
-.campo label{display:block;font-size:13px;font-weight:700;color:var(--ink-2);margin:0 0 5px 2px}
-.campo input{width:100%;height:52px;border-radius:10px;border:2px solid transparent;background:#fff;color:#1A1220;font:500 16px var(--body);padding:0 14px}
-.campo input::placeholder{color:#8E8396}
-.campo input:focus{outline:none;border-color:var(--gold)}
-.campo input[aria-invalid="true"]{border-color:var(--red)}
-.erro{display:block;min-height:0;color:var(--red);font-size:13.5px;font-weight:500;margin:5px 0 0 2px}
+/* ---------- tipografia ---------- */
+.eyebrow{
+  font-family:var(--font-display); font-size:11.5px; font-weight:700;
+  text-transform:uppercase; letter-spacing:.16em; color:var(--muted);
+  display:flex; align-items:center; gap:11px;
+}
+.eyebrow::before{content:''; width:26px; height:1px; background:var(--accent); flex:none}
+.eyebrow.is-accent{color:var(--accent)}
+.eyebrow.is-center{justify-content:center}
+
+.sect-title{
+  font-size:clamp(34px,5vw,66px); font-weight:800; font-stretch:108%;
+  line-height:.94; letter-spacing:-.028em; text-transform:uppercase;
+}
+.lede{font-size:clamp(16px,1.8vw,19.5px); line-height:1.55; color:var(--muted); max-width:50ch}
+.hl{color:var(--accent)}
+.hl-box{background:var(--accent); color:#000; padding:0 .14em;
+  box-decoration-break:clone; -webkit-box-decoration-break:clone}
+
+.rv{opacity:0; transform:translateY(24px); transition:opacity .8s var(--ease), transform .8s var(--ease)}
+.rv.in{opacity:1; transform:none}
+@media (prefers-reduced-motion:reduce){
+  .rv{opacity:1; transform:none; transition:none}
+  /* o layout listava .aura e .glow, que não existem: aqui vão as classes de verdade */
+  .marquee__track,.hero__aura,.stage__glow,.stage__her,.dot,.btn::before{animation:none !important}
+}
+
+/* ============================================================
+   TICKER
+   ============================================================ */
+.ticker{position:relative; z-index:60; background:var(--accent); color:#000; overflow:hidden}
+.marquee{display:flex; width:max-content}
+.marquee__track{display:flex; animation:slide 38s linear infinite; will-change:transform}
+.marquee span{
+  font-family:var(--font-display); font-size:11.5px; font-weight:750; font-stretch:92%;
+  text-transform:uppercase; letter-spacing:.15em; padding:10px 0; white-space:nowrap;
+}
+.marquee span::after{content:'—'; margin:0 18px; opacity:.4}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.site-head{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:20px; padding-block:20px; position:relative; z-index:40;
+}
+.site-head img{height:28px; width:auto}
+.head-note{
+  font-family:var(--font-display); font-size:10.5px; font-weight:700;
+  text-transform:uppercase; letter-spacing:.16em; color:var(--muted);
+  display:flex; align-items:center; gap:9px;
+}
+@media (max-width:760px){.head-note{display:none}}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{position:relative; overflow:hidden; padding-bottom:clamp(50px,7vw,90px)}
+.hero__aura{
+  position:absolute; inset:-25% -15% auto -15%; height:130%; z-index:0; pointer-events:none;
+  background:
+    radial-gradient(42% 40% at 72% 30%, color-mix(in oklab, var(--plum) 85%, transparent), transparent 68%),
+    radial-gradient(38% 34% at 14% 10%, color-mix(in oklab, var(--rose) 22%, transparent), transparent 70%);
+  filter:blur(70px); opacity:.6;
+  animation:drift 20s ease-in-out infinite alternate;
+}
+@keyframes drift{to{transform:translate3d(-2%,2%,0) scale(1.07)}}
+
+.hero__grid{
+  position:relative; z-index:2;
+  display:grid; grid-template-columns:1fr 1.02fr;
+  gap:clamp(24px,4vw,60px); align-items:center;
+  padding-top:clamp(10px,2vw,26px);
+}
+@media (max-width:1040px){
+  .hero__grid{grid-template-columns:1fr; gap:38px}
+  .hero__stage{order:-1}
+}
+
+.hero h1{
+  font-size:clamp(44px,6.6vw,92px); font-weight:800; font-stretch:112%;
+  line-height:.85; letter-spacing:-.035em; text-transform:uppercase;
+  margin-top:20px;
+}
+.hero h1 .l2{display:block; color:var(--accent)}
+.hero__sub{
+  margin-top:24px; font-family:var(--font-display);
+  font-size:clamp(17px,1.9vw,22px); font-weight:600; font-stretch:100%;
+  line-height:1.3; letter-spacing:-.012em; color:#D8D2DD; max-width:30ch;
+}
+.hero__sub b{color:var(--fg); font-weight:700}
+
+/* ---------- contagem ---------- */
+.count{display:flex; gap:10px; margin-top:28px}
+.count__cell{
+  flex:1; background:rgba(255,255,255,.035); border:1px solid var(--border);
+  border-radius:3px; padding:12px 10px; text-align:center; -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px);
+}
+.count__n{
+  font-family:var(--font-display); font-size:clamp(24px,3.2vw,34px);
+  font-weight:800; font-stretch:106%; line-height:1; letter-spacing:-.03em;
+  font-variant-numeric:tabular-nums;
+}
+.count__u{
+  font-family:var(--font-display); font-size:9px; font-weight:700;
+  text-transform:uppercase; letter-spacing:.16em; color:var(--muted); margin-top:7px;
+}
+
+/* ---------- formulário ---------- */
+.form{
+  margin-top:26px; background:rgba(18,16,22,.82);
+  border:1px solid var(--border-strong); border-radius:4px;
+  padding:clamp(22px,2.4vw,30px);
+  -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px);
+  box-shadow:0 36px 80px -40px #000, 0 1px 0 rgba(255,255,255,.06) inset;
+}
+.form__top{
+  display:flex; align-items:center; gap:9px; margin-bottom:20px;
+  font-family:var(--font-display); font-size:10.5px; font-weight:750;
+  text-transform:uppercase; letter-spacing:.16em; color:var(--accent);
+}
+.dot{width:6px; height:6px; border-radius:50%; background:var(--accent); flex:none;
+  box-shadow:0 0 0 0 rgba(255,224,0,.6); animation:pulse 2.4s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 8px rgba(255,224,0,0)}100%{box-shadow:0 0 0 0 rgba(255,224,0,0)}}
+
+.row{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+@media (max-width:520px){.row{grid-template-columns:1fr}}
+.field{margin-bottom:12px}
+.field label{
+  display:block; font-family:var(--font-display); font-size:9.5px; font-weight:700;
+  text-transform:uppercase; letter-spacing:.16em; color:var(--muted); margin-bottom:8px;
+}
+.field input{
+  width:100%; background:#0B090E; color:var(--fg);
+  border:1px solid var(--border); border-radius:2px;
+  padding:14px 14px; min-height:50px;
+  font-family:var(--font-body); font-size:16px;
+  transition:border-color .22s var(--ease), background .22s var(--ease);
+}
+.field input::placeholder{color:#5F5968}
+.field input:focus{outline:none; border-color:var(--accent); background:#100D14}
+.form__fine{margin-top:14px; font-size:12px; line-height:1.5; color:var(--muted); text-align:center}
+
+/* o que o formulário precisa e o layout não desenhou: erro de cada campo, sugestão de e-mail,
+   campo escondido contra robô, aviso de envio e o "enviando" do botão */
+.field input[aria-invalid="true"]{border-color:var(--erro)}
+.erro{display:block; margin-top:7px; font-size:12.5px; line-height:1.45; color:var(--erro)}
 .erro:empty{display:none}
-.sugestao{display:block;margin:6px 0 0 2px;font-size:13.5px;color:var(--ink-2)}
+.sugestao{display:block; margin-top:7px; font-size:12.5px; line-height:1.45; color:var(--muted)}
 .sugestao[hidden]{display:none}
-.sugestao button{background:none;border:0;padding:0;color:var(--gold);font:700 13.5px var(--body);text-decoration:underline;cursor:pointer}
-.armadilha{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
-.form .btn{margin-top:6px}
-.status{margin:10px 0 0;text-align:center;font-size:14px;color:var(--red)}
+.sugestao button{background:none; border:0; padding:0; color:var(--fg); font:600 12.5px var(--font-body); text-decoration:underline; cursor:pointer}
+.armadilha{position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden}
+.status{margin-top:12px; text-align:center; font-size:13.5px; line-height:1.45; color:var(--erro)}
 .status:empty{display:none}
-.aviso{display:flex;gap:10px;align-items:flex-start;margin:16px 0 0;font-size:14px;line-height:1.45;color:var(--ink-2)}
-.aviso svg{flex:none;width:20px;height:20px;color:var(--gold);margin-top:1px}
-.privado{margin:10px 0 0;text-align:center;font-size:12.5px;color:var(--ink-3)}
-.ok{text-align:center;padding:8px 4px}
+
+/* ---------- botões ---------- */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:11px;
+  font-family:var(--font-display); font-size:14.5px; font-weight:800;
+  font-stretch:100%; text-transform:uppercase; letter-spacing:.07em;
+  background:var(--accent); color:#000; border:0; border-radius:2px;
+  padding:18px 30px; min-height:56px; cursor:pointer; text-decoration:none;
+  position:relative; overflow:hidden; isolation:isolate;
+  box-shadow:0 12px 34px -14px rgba(255,224,0,.6), 0 1px 0 rgba(255,255,255,.45) inset;
+  transition:transform .24s var(--ease), box-shadow .24s var(--ease);
+}
+.btn:hover{transform:translateY(-2px); box-shadow:0 20px 46px -16px rgba(255,224,0,.75), 0 1px 0 rgba(255,255,255,.55) inset}
+.btn::before{
+  content:''; position:absolute; inset:0; z-index:-1;
+  background:linear-gradient(100deg, transparent 35%, rgba(255,255,255,.7) 50%, transparent 65%);
+  transform:translateX(-120%); animation:sheen 4.8s ease-in-out infinite;
+}
+@keyframes sheen{0%,66%{transform:translateX(-120%)}86%,100%{transform:translateX(120%)}}
+.btn svg{flex:none; transition:transform .24s var(--ease)}
+.btn:hover svg{transform:translateX(4px)}
+.btn--wide{width:100%}
+.btn--lg{font-size:clamp(15px,1.6vw,18px); padding:23px 38px; min-height:66px}
+/* O botão de enviar é um <button> (o do layout era um link): mesma altura de linha e o mesmo
+   alinhamento do texto quando ele quebra em duas linhas (o <button> centraliza sozinho); a
+   seta vem por CSS, porque o "Enviando..." troca o texto do botão e levaria um <svg> junto. */
+button.btn{line-height:inherit; text-align:inherit}
+.btn--seta::after{
+  content:''; width:15px; height:12px; flex:none; background:currentColor;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='12' viewBox='0 0 15 12' fill='none'%3E%3Cpath d='M1 6h12M8.5 1.5 13 6l-4.5 4.5' stroke='%23000' stroke-width='1.9' stroke-linecap='square'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='12' viewBox='0 0 15 12' fill='none'%3E%3Cpath d='M1 6h12M8.5 1.5 13 6l-4.5 4.5' stroke='%23000' stroke-width='1.9' stroke-linecap='square'/%3E%3C/svg%3E") center/contain no-repeat;
+  transition:transform .24s var(--ease);
+}
+.btn--seta:hover::after{transform:translateX(4px)}
+.btn[disabled]{cursor:progress; transform:none; opacity:.78}
+
+/* ---------- confirmação na própria página (plano B: só aparece com data-obrigado vazio) ---------- */
+.ok{text-align:center; padding:6px 2px}
 .ok[hidden]{display:none}
-.ok .check{width:56px;height:56px;border-radius:50%;background:var(--green);display:grid;place-items:center;margin:0 auto 14px}
-.ok .check svg{width:28px;height:28px}
-.ok h2{font-size:24px;margin-bottom:8px}
-.ok p{color:var(--ink-2);margin:0 0 18px}
+.ok__check{width:52px; height:52px; border-radius:50%; background:var(--accent); color:#000;
+  display:grid; place-items:center; margin:0 auto 18px}
+.ok h2{font-size:clamp(26px,3vw,34px); font-weight:800; font-stretch:108%; line-height:.95;
+  letter-spacing:-.028em; text-transform:uppercase}
+.ok p{margin:14px auto 22px; color:var(--muted); max-width:36ch}
 
-/* faixa */
-.faixa{background:var(--gold);color:#2A1600;overflow:hidden;white-space:nowrap;padding:12px 0;transform:rotate(-1.2deg);margin:-6px -10px 0;position:relative;z-index:2}
-.faixa-in{display:inline-flex;font-family:var(--display);font-weight:800;font-size:20px;letter-spacing:.02em;text-transform:uppercase;animation:correr 28s linear infinite}
-.faixa-in span{padding-right:28px}
-.faixa-in span::after{content:"★";margin-left:28px}
-/* a faixa é inclinada e mais larga que a tela: sem isto o celular rola para o lado */
-main{overflow-x:hidden;overflow-x:clip}
-@keyframes correr{to{transform:translateX(-50%)}}
-@media (prefers-reduced-motion:reduce){.faixa-in{animation:none}html{scroll-behavior:auto}}
-
-/* seções */
-section{padding-block:72px}
-.sec-h{text-align:center;font-size:clamp(28px,4vw,44px);text-transform:uppercase;margin-bottom:12px}
-.sec-p{text-align:center;color:var(--ink-2);max-width:600px;margin:0 auto 40px}
-
-/* cursos */
-.cursos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
-.curso{background:var(--bg-2);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
-.curso img{width:100%;aspect-ratio:720/1040;object-fit:cover;height:auto}
-.curso div{padding:18px 18px 22px}
-.curso h3{font-size:21px;color:var(--gold);margin-bottom:8px;text-transform:uppercase;letter-spacing:-.01em}
-.curso p{margin:0;font-size:15px;color:var(--ink-2);line-height:1.5}
-.curso.extra{border-style:dashed}
-.curso.extra h3{color:#fff}
-.cta{text-align:center;margin-top:44px}
-
-/* como funciona */
-.passos-sec{background:var(--bg-2)}
-.passos{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;counter-reset:p}
-.passos li{counter-increment:p;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
-.passos li::before{content:counter(p);display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--gold);color:#2A1600;font:800 19px var(--display);margin-bottom:14px}
-.passos b{display:block;font-family:var(--display);font-size:19px;letter-spacing:-.01em;margin-bottom:4px}
-.passos span{color:var(--ink-2);font-size:15px}
-
-/* professora */
-.prof{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:44px;align-items:center}
-.prof-foto{border-radius:18px;overflow:hidden;aspect-ratio:750/705;background:var(--card);border:1px solid var(--line)}
-.prof-foto img{width:100%;height:100%;object-fit:cover}
-.prof h2{font-size:clamp(28px,4vw,42px);text-transform:uppercase;margin-bottom:18px}
-.prof p{color:var(--ink-2);margin:0 0 14px}
-.prof p b{color:#fff}
-.prof .btn{margin-top:12px}
-
-footer{border-top:1px solid var(--line);padding:26px 0 calc(26px + env(safe-area-inset-bottom,0px));text-align:center;font-size:13px;color:var(--ink-3)}
-
-@media (max-width:860px){
-  .hero-in{grid-template-columns:minmax(0,1fr);grid-template-areas:"txt" "form" "img";row-gap:8px;padding-block:28px 40px}
-  .hero-txt{text-align:center}
-  .hero .form{width:100%;max-width:520px;margin-inline:auto}
-  .hero-img{max-width:520px;margin:12px auto 0}
-  .cursos{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-  .passos{grid-template-columns:1fr}
-  .prof{grid-template-columns:minmax(0,1fr);gap:28px}
-  .prof-foto{max-width:420px;margin-inline:auto;width:100%}
-  section{padding-block:56px}
+/* ============================================================
+   PALCO ORBITAL — Izabel + marcas girando
+   ============================================================ */
+.hero__stage{
+  position:relative; aspect-ratio:1/1.04; width:100%;
+  max-width:min(660px, 94vw); margin-inline:auto;
+  display:grid; place-items:center;
 }
-@media (max-width:560px){
-  body{font-size:16px}
-  .wrap{padding-inline:16px}
-  .cursos{grid-template-columns:minmax(0,1fr)}
-  .curso{flex-direction:row}
-  .curso img{width:38%;flex:none;align-self:flex-start}
-  .curso div{padding:14px 14px 16px}
-  .curso h3{font-size:17px}
-  .curso p{font-size:14px}
-  .form{padding:18px 16px}
-  .faixa-in{font-size:17px}
+
+/* luz berinjela atrás dela */
+.stage__glow{
+  position:absolute; top:12%; width:88%; height:80%; border-radius:50%;
+  background:radial-gradient(circle, color-mix(in oklab, var(--plum) 100%, transparent) 0%, transparent 65%);
+  filter:blur(54px); opacity:1; animation:breathe 7s ease-in-out infinite alternate;
 }
+@keyframes breathe{to{transform:scale(1.1); opacity:.68}}
+
+/* chão da órbita: elipse de luz, não tracejado */
+.stage__floor{
+  position:absolute; left:50%; top:72%; translate:-50% 0;
+  width:92%; aspect-ratio:1/.34; border-radius:50%;
+  background:radial-gradient(closest-side, rgba(255,224,0,.14), transparent 72%);
+  filter:blur(16px); pointer-events:none;
+}
+
+/* Izabel */
+.stage__her{
+  position:relative; z-index:3; width:84%; align-self:end;
+  filter:drop-shadow(0 30px 60px rgba(0,0,0,.75));
+  -webkit-mask-image:linear-gradient(to bottom, #000 68%, transparent 98%);
+          mask-image:linear-gradient(to bottom, #000 68%, transparent 98%);
+  animation:float 6.5s ease-in-out infinite alternate;
+}
+@keyframes float{to{transform:translateY(-10px)}}
+
+/* pastilhas das marcas */
+.pod{
+  position:absolute; left:50%; top:50%; width:var(--pod,104px); height:var(--pod,104px);
+  margin:calc(var(--pod,104px) / -2);
+  display:grid; place-items:center;
+  border-radius:22px;
+  background:linear-gradient(160deg, rgba(42,36,50,.96), rgba(14,12,18,.96));
+  border:1px solid rgba(255,255,255,.14);
+  box-shadow:0 18px 40px -16px #000, 0 1px 0 rgba(255,255,255,.1) inset;
+  -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
+  will-change:transform, opacity;
+}
+.pod img{width:58%; height:58%; object-fit:contain}
+.pod--next{
+  background:linear-gradient(160deg, rgba(255,224,0,.3), rgba(28,23,10,.98));
+  border-color:rgba(255,224,0,.7);
+  box-shadow:0 18px 40px -16px #000, 0 0 26px -6px rgba(255,224,0,.4);
+}
+.pod--next span{
+  font-family:var(--font-display); font-size:30px; font-weight:800;
+  color:var(--accent); line-height:1;
+}
+@media (max-width:620px){.pod{--pod:76px; border-radius:17px}.pod--next span{font-size:23px}}
+
+/* ============================================================
+   PROMESSA
+   ============================================================ */
+.promise{
+  border-block:1px solid var(--border); background:var(--bg-deep);
+  padding-block:clamp(52px,6.5vw,86px);
+}
+.promise p{
+  font-family:var(--font-display);
+  font-size:clamp(28px,5vw,62px); font-weight:780; font-stretch:106%;
+  line-height:1.04; letter-spacing:-.03em; max-width:18ch;
+}
+.promise .dim{
+  color:var(--muted); margin-top:16px; font-size:clamp(17px,2.2vw,27px);
+  font-weight:500; line-height:1.28; max-width:33ch; letter-spacing:-.015em;
+}
+
+/* ============================================================
+   CURSOS
+   ============================================================ */
+.sect{padding-block:clamp(58px,7vw,100px)}
+.sect__head{
+  display:flex; align-items:flex-end; justify-content:space-between;
+  gap:28px; flex-wrap:wrap; margin-bottom:clamp(32px,4vw,50px);
+}
+.sect__head .lede{max-width:38ch}
+
+.courses{
+  display:grid; grid-template-columns:repeat(3,1fr);
+  gap:1px; background:var(--border); border:1px solid var(--border);
+}
+@media (max-width:980px){.courses{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:600px){.courses{grid-template-columns:1fr}}
+
+.course{
+  position:relative; background:var(--surface);
+  padding:30px 30px 30px; min-height:330px;
+  display:flex; flex-direction:column; justify-content:space-between;
+  overflow:hidden; isolation:isolate;
+  transition:background .4s var(--ease);
+}
+.course::before{
+  content:''; position:absolute; z-index:-1; inset:auto -30% -62% -30%; height:150%;
+  background:radial-gradient(50% 50% at 50% 100%, color-mix(in oklab, var(--plum) 80%, transparent), transparent 70%);
+  opacity:0; transition:opacity .5s var(--ease);
+}
+.course:hover{background:var(--surface-2)}
+.course:hover::before{opacity:.8}
+
+.course__n{
+  display:flex; align-items:center; justify-content:space-between;
+  font-family:var(--font-display); font-size:10.5px; font-weight:750;
+  letter-spacing:.16em; color:var(--muted);
+}
+.course__n i{
+  font-style:normal; color:var(--accent);
+  opacity:0; transform:translateX(-6px);
+  transition:opacity .35s var(--ease), transform .35s var(--ease);
+}
+.course:hover .course__n i{opacity:1; transform:none}
+
+.course__mid{display:flex; align-items:center; justify-content:center; flex:1; padding:22px 0}
+.course__sym{
+  height:112px; width:auto; max-width:72%; object-fit:contain;
+  filter:drop-shadow(0 10px 26px rgba(0,0,0,.6));
+  transition:transform .55s var(--ease);
+}
+.course:hover .course__sym{transform:translateY(-6px) scale(1.05)}
+
+.course__name{
+  font-family:var(--font-display); font-size:clamp(16px,1.55vw,19px);
+  font-weight:720; font-stretch:102%; line-height:1.14;
+  letter-spacing:-.012em; text-transform:uppercase; max-width:15ch;
+  min-height:3.4em; display:flex; flex-direction:column; justify-content:flex-end;
+}
+.course__name span{display:block; font-size:.72em; font-weight:600;
+  letter-spacing:.03em; color:var(--muted); margin-top:5px; text-transform:none}
+.course--soon{background:linear-gradient(168deg, rgba(255,224,0,.08), transparent 55%), var(--surface)}
+.course__title{
+  font-family:var(--font-display); font-size:clamp(23px,2.5vw,30px);
+  font-weight:780; font-stretch:104%; line-height:1.04;
+  letter-spacing:-.025em; text-transform:uppercase; max-width:11ch;
+}
+.course__title em{font-style:normal; color:var(--accent)}
+
+/* ============================================================
+   PASSOS
+   ============================================================ */
+.steps{border-top:1px solid var(--border)}
+.step{
+  display:grid; grid-template-columns:auto 1fr auto; gap:clamp(18px,3.5vw,46px);
+  align-items:center; padding:clamp(24px,3vw,36px) 0;
+  border-bottom:1px solid var(--border);
+  transition:padding-left .4s var(--ease);
+}
+.step:hover{padding-left:12px}
+.step__n{
+  font-family:var(--font-display); font-size:clamp(38px,5.4vw,78px);
+  font-weight:800; font-stretch:106%; line-height:.8; letter-spacing:-.045em;
+  color:transparent; -webkit-text-stroke:1.4px var(--border-strong);
+  transition:-webkit-text-stroke-color .4s var(--ease); min-width:1.7em;
+}
+.step:hover .step__n{-webkit-text-stroke-color:var(--accent)}
+.step__t{
+  font-family:var(--font-display); font-size:clamp(19px,2.4vw,30px);
+  font-weight:720; font-stretch:104%; line-height:1.1; letter-spacing:-.022em;
+}
+.step__tag{
+  font-family:var(--font-display); font-size:10.5px; font-weight:700;
+  text-transform:uppercase; letter-spacing:.16em; color:var(--muted); white-space:nowrap;
+}
+@media (max-width:680px){
+  .step{grid-template-columns:auto 1fr; row-gap:5px}
+  .step__tag{grid-column:2}
+}
+
+/* ============================================================
+   PROFESSORA
+   ============================================================ */
+.teacher{border-top:1px solid var(--border); background:var(--bg-deep)}
+.teacher__grid{
+  display:grid; grid-template-columns:.92fr 1.08fr;
+  gap:clamp(30px,5vw,70px); align-items:center;
+}
+@media (max-width:860px){.teacher__grid{grid-template-columns:1fr}}
+
+.teacher__photo{
+  position:relative; border:1px solid var(--border-strong); overflow:hidden;
+  aspect-ratio:1/1; display:flex; align-items:flex-end; justify-content:center;
+  background:
+    radial-gradient(64% 58% at 50% 56%, color-mix(in oklab, var(--plum) 90%, transparent), transparent 72%),
+    linear-gradient(170deg, #17121C, #0A080D);
+}
+.teacher__photo::before{ /* textura fina, mesma linguagem do resto */
+  content:''; position:absolute; inset:0;
+  background:repeating-linear-gradient(135deg, rgba(255,255,255,.022) 0 2px, transparent 2px 10px);
+}
+.teacher__photo img{
+  position:relative; z-index:1; width:100%; height:100%;
+  object-fit:contain; object-position:bottom;
+  -webkit-mask-image:linear-gradient(to bottom, #000 82%, transparent 99%);
+          mask-image:linear-gradient(to bottom, #000 82%, transparent 99%);
+}
+.teacher__badge{
+  position:absolute; left:16px; bottom:16px; z-index:2;
+  background:var(--accent); color:#000; padding:8px 14px; border-radius:2px;
+  font-family:var(--font-display); font-size:10px; font-weight:800;
+  text-transform:uppercase; letter-spacing:.16em;
+}
+.teacher__body{margin-top:22px; font-size:clamp(16px,1.8vw,19px); line-height:1.6; color:#CBC4D0; max-width:46ch}
+.teacher__body strong{color:var(--fg); font-weight:600}
+.stat{
+  display:flex; align-items:flex-end; gap:18px;
+  border-top:1px solid var(--border); padding-top:22px; margin-top:32px;
+}
+.stat__n{
+  font-family:var(--font-display); font-size:clamp(44px,6vw,74px);
+  font-weight:800; font-stretch:108%; line-height:.86; letter-spacing:-.04em;
+  color:var(--accent); font-variant-numeric:tabular-nums;
+}
+.stat__t{font-size:14.5px; color:var(--muted); max-width:20ch; line-height:1.4; padding-bottom:6px}
+
+/* ============================================================
+   CTA FINAL
+   ============================================================ */
+.final{position:relative; overflow:hidden; border-top:1px solid var(--border);
+  padding-block:clamp(64px,8vw,112px); text-align:center}
+.final__aura{
+  position:absolute; inset:auto -10% -55% -10%; height:120%; z-index:0; pointer-events:none;
+  background:radial-gradient(50% 60% at 50% 100%, color-mix(in oklab, var(--plum) 85%, transparent), transparent 70%);
+  filter:blur(55px); opacity:.6;
+}
+.final__inner{position:relative; z-index:2}
+.final h2{
+  font-size:clamp(40px,8vw,112px); font-weight:800; font-stretch:112%;
+  line-height:.85; letter-spacing:-.035em; text-transform:uppercase; margin-top:22px;
+}
+.final .lede{margin:22px auto 0; text-align:center}
+.final .btn{margin-top:clamp(28px,3.5vw,40px)}
+
+/* ============================================================
+   RODAPÉ
+   ============================================================ */
+.site-foot{
+  border-top:1px solid var(--border); padding-block:36px;
+  display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap;
+}
+.site-foot img{height:24px; width:auto; opacity:.65}
+.site-foot p{font-size:12px; color:var(--muted); letter-spacing:.02em}
 </style>
+<noscript><style>
+  .rv{opacity:1 !important; transform:none !important}
+  /* sem JS as pastilhas não orbitam — distribui em grade estática legível */
+  .hero__stage{aspect-ratio:auto}
+  .pod{position:static; margin:0; display:inline-grid}
+  .stage__floor{display:none}
+</style></noscript>
 </head>
+
 <body>
 
-<main>
-<header class="hero">
-  <div class="wrap hero-in">
-    <div class="hero-txt">
-      <span class="tag">Black Friday · Vitalício</span>
-      <p class="brand">Enfermagem de Valor · Izabel Gonçalves</p>
-      <h1>Acesso vitalício a <span class="gold">todos os meus cursos</span> para você ganhar mais com a enfermagem.</h1>
-      <p class="sub">Pague uma vez e estude para sempre: os cursos que já existem e todos os que eu lançar depois. Nunca mais gaste um centavo em curso comigo.</p>
-      <p class="date">Entre grátis na lista VIP e receba a oferta especial que abre no dia <b>26 de outubro, às 20h</b>.</p>
+<!-- ======================= TICKER ======================= -->
+<div class="ticker" data-od-id="ticker" aria-hidden="true">
+  <div class="marquee"><div class="marquee__track">
+    <span>Black Friday Vitalício</span><span>26 de outubro · 20h</span><span>Preço reduzido só para inscritos</span><span>Abre no grupo do WhatsApp</span><span>Pague uma vez, estude para sempre</span>
+    <span>Black Friday Vitalício</span><span>26 de outubro · 20h</span><span>Preço reduzido só para inscritos</span><span>Abre no grupo do WhatsApp</span><span>Pague uma vez, estude para sempre</span>
+  </div></div>
+</div>
+
+<!-- ======================= HERO ======================= -->
+<header class="hero" data-od-id="hero">
+  <div class="hero__aura"></div>
+
+  <div class="wrap">
+    <div class="site-head" data-od-id="site-header">
+      <picture><source type="image/webp" srcset="/bf_out_ls_26-inscricao/img/escola-hz-white-96.webp"><img src="/bf_out_ls_26-inscricao/img/escola-hz-white-96.png" width="331" height="96" alt="Escola Enfermagem de Valor"></picture>
+      <div class="head-note"><span class="dot"></span> Lista VIP · Inscrição gratuita</div>
     </div>
 
-    <div class="hero-img">
-      <img src="/bf_out_ls_26-inscricao/img/hero.jpg" width="960" height="960" fetchpriority="high" decoding="async" alt="Izabel Gonçalves apontando para as capas dos cursos: Valor Sonoro, Furo de Orelha Humanizado, Cuidados Pós Cirurgia Plástica, Body Piercing e Formação Técnico de Enfermagem de Valor">
-    </div>
+    <div class="hero__grid">
 
-    <div class="form" id="inscricao">
-      <form id="bf-form" novalidate data-api="/api/bf_out_ls_26/lead" data-obrigado="/BF_out_LS_26-obrigada" data-grupo="https://sndflw.com/i/z5IpBtnaNxw3utC4y051">
-        <h2>Preencha abaixo para participar gratuitamente</h2>
-        <div class="campo">
-          <label for="bf-nome">Nome completo</label>
-          <input id="bf-nome" name="nome" type="text" autocomplete="name" placeholder="Seu nome e sobrenome" aria-describedby="bf-nome-erro" required>
-          <span class="erro" id="bf-nome-erro" aria-live="polite"></span>
-        </div>
-        <div class="campo">
-          <label for="bf-email">E-mail</label>
-          <input id="bf-email" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" placeholder="seuemail@gmail.com" aria-describedby="bf-email-erro" required>
-          <span class="erro" id="bf-email-erro" aria-live="polite"></span>
-          <span class="sugestao" id="bf-sugestao" hidden>Você quis dizer <button type="button" id="bf-sugestao-sim"></button>?</span>
-        </div>
-        <div class="campo">
-          <label for="bf-whatsapp">WhatsApp com DDD</label>
-          <input id="bf-whatsapp" name="whatsapp" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="(11) 91234-5678" aria-describedby="bf-whatsapp-erro" required>
-          <span class="erro" id="bf-whatsapp-erro" aria-live="polite"></span>
-        </div>
-        <div class="armadilha" aria-hidden="true">
-          <label for="bf-site">Não preencha</label>
-          <input id="bf-site" name="site" type="text" tabindex="-1" autocomplete="off">
-        </div>
-        <button class="btn" type="submit" id="bf-enviar">Participar gratuitamente</button>
-        <p class="status" id="bf-status" role="alert"></p>
-        <p class="aviso"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4M12 17h.01"/></svg><span>A oferta é liberada <b>só dentro do grupo do WhatsApp</b>, com o menor preço do ano. Fora do grupo, ela não aparece.</span></p>
-        <p class="privado">Seus dados ficam só com a Escola Enfermagem de Valor. Nada de spam.</p>
-      </form>
+      <!-- ---------- coluna esquerda: oferta + formulário ---------- -->
+      <div class="rv" data-od-id="hero-left">
+        <div class="eyebrow is-accent">Izabel Gonçalves · Escola Enfermagem de Valor</div>
 
-      <div class="ok" id="bf-ok" hidden tabindex="-1">
-        <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5 10 17.5 19 7"/></svg></div>
-        <h2>Você está na lista VIP!</h2>
-        <p id="bf-ok-texto">Agora entre no grupo do WhatsApp: é lá que a oferta da Black Friday vai ser liberada.</p>
-        <a class="btn zap" id="bf-grupo" href="#" target="_blank" rel="noopener" hidden>Entrar no grupo do WhatsApp</a>
+        <h1 data-od-id="hero-headline">
+          Black Friday<span class="l2">Vitalício</span>
+        </h1>
+
+        <p class="hero__sub" data-od-id="hero-sub">
+          Acesso vitalício a todos os meus cursos para você ganhar mais com a enfermagem.
+        </p>
+
+        <div class="count" data-od-id="countdown" role="timer" aria-label="Tempo até a oferta abrir, em 26 de outubro às 20h">
+          <div class="count__cell"><div class="count__n" id="cd-d">00</div><div class="count__u">Dias</div></div>
+          <div class="count__cell"><div class="count__n" id="cd-h">00</div><div class="count__u">Horas</div></div>
+          <div class="count__cell"><div class="count__n" id="cd-m">00</div><div class="count__u">Min</div></div>
+          <div class="count__cell"><div class="count__n" id="cd-s">00</div><div class="count__u">Seg</div></div>
+        </div>
+
+        <div class="form" id="inscricao" data-od-id="form-hero">
+          <form id="bf-form" novalidate data-api="/api/bf_out_ls_26/lead" data-obrigado="/BF_out_LS_26-obrigada" data-grupo="https://sndflw.com/i/z5IpBtnaNxw3utC4y051">
+            <div class="form__top"><span class="dot"></span> Inscrição gratuita</div>
+
+            <div class="field">
+              <label for="bf-nome">Nome completo</label>
+              <input id="bf-nome" name="nome" type="text" autocomplete="name" placeholder="Como você se chama" aria-describedby="bf-nome-erro" required>
+              <span class="erro" id="bf-nome-erro" aria-live="polite"></span>
+            </div>
+            <div class="row">
+              <div class="field">
+                <label for="bf-email">E-mail</label>
+                <input id="bf-email" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" placeholder="seu@email.com" aria-describedby="bf-email-erro" required>
+                <span class="erro" id="bf-email-erro" aria-live="polite"></span>
+                <span class="sugestao" id="bf-sugestao" hidden>Você quis dizer <button type="button" id="bf-sugestao-sim"></button>?</span>
+              </div>
+              <div class="field">
+                <label for="bf-whatsapp">WhatsApp com DDD</label>
+                <input id="bf-whatsapp" name="whatsapp" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="(00) 00000-0000" aria-describedby="bf-whatsapp-erro" required>
+                <span class="erro" id="bf-whatsapp-erro" aria-live="polite"></span>
+              </div>
+            </div>
+            <div class="armadilha" aria-hidden="true">
+              <label for="bf-site">Não preencha</label>
+              <input id="bf-site" name="site" type="text" tabindex="-1" autocomplete="off">
+            </div>
+
+            <button class="btn btn--wide btn--seta" type="submit" id="bf-enviar" data-od-id="hero-cta">Quero entrar na lista VIP</button>
+            <p class="status" id="bf-status" role="alert"></p>
+            <p class="form__fine">A oferta abre em <b style="color:var(--fg)">26 de outubro, às 20h</b>, só no grupo do WhatsApp, com preço reduzido disponível apenas para inscritos.</p>
+          </form>
+
+          <div class="ok" id="bf-ok" hidden tabindex="-1">
+            <div class="ok__check"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" aria-hidden="true"><path d="M5 12.5 10 17.5 19 7"/></svg></div>
+            <h2>Você está na lista VIP!</h2>
+            <p id="bf-ok-texto">Agora entre no grupo do WhatsApp: é lá que a oferta da Black Friday vai ser liberada.</p>
+            <a class="btn btn--wide" id="bf-grupo" href="#" target="_blank" rel="noopener" hidden>Entrar no grupo do WhatsApp</a>
+          </div>
+        </div>
       </div>
+
+      <!-- ---------- coluna direita: Izabel + marcas em órbita ---------- -->
+      <div class="hero__stage" id="stage" data-od-id="hero-orbit">
+        <div class="stage__glow"></div>
+
+        <div class="stage__floor"></div>
+
+        <picture>
+          <source type="image/avif" srcset="/bf_out_ls_26-inscricao/img/izabel-480.avif 480w, /bf_out_ls_26-inscricao/img/izabel-600.avif 600w, /bf_out_ls_26-inscricao/img/izabel-750.avif 750w" sizes="(max-width: 1040px) 84vw, 500px">
+          <source type="image/webp" srcset="/bf_out_ls_26-inscricao/img/izabel-480.webp 480w, /bf_out_ls_26-inscricao/img/izabel-600.webp 600w, /bf_out_ls_26-inscricao/img/izabel-750.webp 750w" sizes="(max-width: 1040px) 84vw, 500px">
+          <img class="stage__her" src="/bf_out_ls_26-inscricao/img/izabel-750.png" width="750" height="626" fetchpriority="high"
+               alt="Izabel Gonçalves de jaleco branco, apontando para as marcas dos cursos">
+        </picture>
+
+        <!-- as pastilhas são posicionadas em órbita pelo script -->
+        <div class="pod" data-orbit="0"><picture><source type="image/webp" srcset="/bf_out_ls_26-inscricao/img/escola-simbol-white-336.webp"><img src="/bf_out_ls_26-inscricao/img/escola-simbol-white-336.png" width="331" height="336" alt="Formação Técnico de Enfermagem de Valor"></picture></div>
+        <div class="pod" data-orbit="1"><img src="/bf_out_ls_26-inscricao/img/furo-simbol-white.svg" alt="Furo de Orelha Humanizado"></div>
+        <div class="pod" data-orbit="2"><img src="/bf_out_ls_26-inscricao/img/piercing-simbol-white.png" width="215" height="333" alt="Body Piercing · Perfuração Auricular"></div>
+        <div class="pod" data-orbit="3"><img src="/bf_out_ls_26-inscricao/img/cone-simbol-white.svg" alt="Valor Sonoro · Cone Chinês"></div>
+        <div class="pod" data-orbit="4"><img src="/bf_out_ls_26-inscricao/img/posop-simbol-white.png" width="395" height="508" alt="Cuidados Pós Cirurgia Plástica"></div>
+        <div class="pod pod--next" data-orbit="5"><span>+</span></div>
+      </div>
+
     </div>
   </div>
 </header>
 
-<div class="faixa" aria-hidden="true">
-  <div class="faixa-in">
-    <span>Black Friday Vitalício</span><span>Todos os cursos para sempre</span><span>Black Friday Vitalício</span><span>Todos os cursos para sempre</span>
-    <span>Black Friday Vitalício</span><span>Todos os cursos para sempre</span><span>Black Friday Vitalício</span><span>Todos os cursos para sempre</span>
-  </div>
-</div>
-
-<section>
+<!-- ======================= PROMESSA ======================= -->
+<section class="promise" data-od-id="promise">
   <div class="wrap">
-    <h2 class="sec-h">Os <span class="gold">cursos</span> que você terá acesso <span class="gold">para sempre</span></h2>
-    <p class="sec-p">Um acesso só, sem mensalidade e sem prazo para acabar.</p>
-    <div class="cursos">
-      <article class="curso">
-        <img src="/bf_out_ls_26-inscricao/img/tecnico.jpg" width="720" height="1040" loading="lazy" decoding="async" alt="Capa do curso Formação Técnico de Enfermagem de Valor">
-        <div>
-          <h3>Formação Técnico de Enfermagem de Valor</h3>
-          <p>A base para atuar com segurança e ser valorizada como técnica de enfermagem: rotina, procedimentos e postura profissional.</p>
-        </div>
-      </article>
-      <article class="curso">
-        <img src="/bf_out_ls_26-inscricao/img/furo-de-orelha.jpg" width="720" height="1040" loading="lazy" decoding="async" alt="Capa do curso Furo de Orelha Humanizado">
-        <div>
-          <h3>Furo de Orelha Humanizado</h3>
-          <p>A técnica de perfuração do lóbulo com acolhimento, do bebê ao adulto: biossegurança, materiais e os cuidados depois do furo.</p>
-        </div>
-      </article>
-      <article class="curso">
-        <img src="/bf_out_ls_26-inscricao/img/body-piercing.jpg" width="720" height="1040" loading="lazy" decoding="async" alt="Capa do curso Body Piercing, Perfuração Auricular">
-        <div>
-          <h3>Body Piercing · Perfuração Auricular</h3>
-          <p>Além do lóbulo: hélix, tragus, conch, daith, rook e outros pontos da orelha, com anatomia, escolha da joia e cicatrização.</p>
-        </div>
-      </article>
-      <article class="curso">
-        <img src="/bf_out_ls_26-inscricao/img/valor-sonoro.jpg" width="720" height="1040" loading="lazy" decoding="async" alt="Capa do curso Valor Sonoro, Cone Chinês e Limpeza de Ouvido">
-        <div>
-          <h3>Valor Sonoro · Cone Chinês</h3>
-          <p>Limpeza de ouvido e terapia com cone chinês: um atendimento de bem-estar para somar ao seu portfólio de serviços.</p>
-        </div>
-      </article>
-      <article class="curso">
-        <img src="/bf_out_ls_26-inscricao/img/pos-cirurgia.jpg" width="720" height="1040" loading="lazy" decoding="async" alt="Capa do curso Cuidados Pós Cirurgia Plástica">
-        <div>
-          <h3>Cuidados Pós Cirurgia Plástica</h3>
-          <p>Como acompanhar a paciente no pós-operatório: curativos, drenos, sinais de alerta e orientações para uma boa recuperação.</p>
-        </div>
-      </article>
-      <article class="curso extra">
-        <img src="/bf_out_ls_26-inscricao/img/novos-cursos.jpg" width="720" height="1040" loading="lazy" decoding="async" alt="Novos cursos">
-        <div>
-          <h3>+ Todos os próximos cursos</h3>
-          <p>Cada curso novo que eu lançar entra no seu acesso automaticamente, sem pagar nada a mais.</p>
-        </div>
-      </article>
-    </div>
-    <div class="cta"><a class="btn auto" href="#inscricao" data-ir-form>Quero entrar na lista VIP</a></div>
+    <div class="eyebrow rv" style="margin-bottom:26px">A proposta</div>
+    <p class="rv">Pague uma vez e estude <span class="hl-box">para sempre</span>.</p>
+    <p class="dim rv">Os cursos que já existem e todos os que eu lançar depois.</p>
   </div>
 </section>
 
-<section class="passos-sec">
+<!-- ======================= CURSOS ======================= -->
+<section class="sect" data-od-id="cursos">
   <div class="wrap">
-    <h2 class="sec-h">Como <span class="gold">funciona</span></h2>
-    <p class="sec-p">Três passos, e o primeiro leva menos de um minuto.</p>
-    <ol class="passos">
-      <li><b>Inscreva-se grátis</b><span>Preencha nome, e-mail e WhatsApp aqui na página.</span></li>
-      <li><b>Entre no grupo VIP</b><span>Logo depois da inscrição você recebe o acesso ao grupo do WhatsApp.</span></li>
-      <li><b>Garanta o vitalício</b><span>No dia 26 de outubro, às 20h, a oferta abre primeiro para quem está no grupo.</span></li>
-    </ol>
+    <div class="sect__head">
+      <div class="rv">
+        <div class="eyebrow" style="margin-bottom:20px">O que está incluso</div>
+        <h2 class="sect-title">Cinco cursos<br>hoje. Todos os<br><span class="hl">próximos</span> também.</h2>
+      </div>
+      <p class="lede rv">Um pagamento único destrava a biblioteca inteira da Escola Enfermagem de Valor — e tudo o que entrar nela depois.</p>
+    </div>
+
+    <div class="courses" data-od-id="course-grid">
+      <article class="course rv" data-od-id="curso-formacao">
+        <div class="course__n"><span>01</span><i>Incluso</i></div>
+        <div class="course__mid"><picture><source type="image/webp" srcset="/bf_out_ls_26-inscricao/img/escola-simbol-white-336.webp"><img class="course__sym" src="/bf_out_ls_26-inscricao/img/escola-simbol-white-336.png" width="331" height="336" decoding="async" alt=""></picture></div>
+        <h3 class="course__name">Formação Técnico<span>de Enfermagem de Valor</span></h3>
+      </article>
+
+      <article class="course rv" data-od-id="curso-furo">
+        <div class="course__n"><span>02</span><i>Incluso</i></div>
+        <div class="course__mid"><img class="course__sym" src="/bf_out_ls_26-inscricao/img/furo-simbol-white.svg" decoding="async" alt=""></div>
+        <h3 class="course__name">Furo de Orelha<span>Humanizado · Método 3D</span></h3>
+      </article>
+
+      <article class="course rv" data-od-id="curso-piercing">
+        <div class="course__n"><span>03</span><i>Incluso</i></div>
+        <div class="course__mid"><img class="course__sym" src="/bf_out_ls_26-inscricao/img/piercing-simbol-white.png" width="215" height="333" decoding="async" alt=""></div>
+        <h3 class="course__name">Body Piercing<span>Perfuração Auricular</span></h3>
+      </article>
+
+      <article class="course rv" data-od-id="curso-cone">
+        <div class="course__n"><span>04</span><i>Incluso</i></div>
+        <div class="course__mid"><img class="course__sym" src="/bf_out_ls_26-inscricao/img/cone-simbol-white.svg" decoding="async" alt=""></div>
+        <h3 class="course__name">Valor Sonoro<span>Cone Chinês</span></h3>
+      </article>
+
+      <article class="course rv" data-od-id="curso-posop">
+        <div class="course__n"><span>05</span><i>Incluso</i></div>
+        <div class="course__mid"><img class="course__sym" src="/bf_out_ls_26-inscricao/img/posop-simbol-white.png" width="395" height="508" decoding="async" alt=""></div>
+        <h3 class="course__name">Cuidados Pós<span>Cirurgia Plástica</span></h3>
+      </article>
+
+      <article class="course course--soon rv" data-od-id="curso-futuros">
+        <div class="course__n"><span>06 — ∞</span><i>Vitalício</i></div>
+        <div class="course__mid"><h3 class="course__title">Todos os <em>próximos</em> cursos lançados</h3></div>
+        <h3 class="course__name" style="color:var(--muted)">Escola Enfermagem<span>de Valor · Vitalício</span></h3>
+      </article>
+    </div>
   </div>
 </section>
 
-<section>
-  <div class="wrap prof">
-    <div class="prof-foto">
-      <img src="/bf_out_ls_26-inscricao/img/izabel.jpg" width="750" height="705" loading="lazy" decoding="async" alt="Izabel Gonçalves sorrindo, de jaleco branco">
+<!-- ======================= PASSOS ======================= -->
+<section class="sect" style="padding-top:0" data-od-id="passos">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="rv">
+        <div class="eyebrow" style="margin-bottom:20px">Como funciona</div>
+        <h2 class="sect-title">Três passos<br>até o vitalício</h2>
+      </div>
     </div>
-    <div>
-      <h2>A sua professora: <span class="gold">Izabel Gonçalves</span></h2>
-      <p>Eu sou a <b>Iza</b>, enfermeira, criadora do <b>Método 3D</b> e da <b>Escola Enfermagem de Valor</b>.</p>
-      <p>Mais de <b>cinco mil profissionais</b> já passaram pelos meus cursos, aprendendo a atuar com segurança e a transformar o conhecimento da enfermagem em novas fontes de renda.</p>
-      <p>Nesta Black Friday eu abro, pela primeira vez, o acesso vitalício a tudo o que eu ensino. Quem estiver no grupo VIP fica sabendo antes de todo mundo.</p>
-      <p><b>Vamos juntas?</b></p>
-      <a class="btn auto" href="#inscricao" data-ir-form>Quero participar</a>
+    <div class="steps">
+      <div class="step rv" data-od-id="passo-1">
+        <div class="step__n">01</div><div class="step__t">Inscrição gratuita</div><div class="step__tag">Agora</div>
+      </div>
+      <div class="step rv" data-od-id="passo-2">
+        <div class="step__n">02</div><div class="step__t">Acesso ao grupo WhatsApp VIP</div><div class="step__tag">Em seguida</div>
+      </div>
+      <div class="step rv" data-od-id="passo-3">
+        <div class="step__n">03</div><div class="step__t">Acesso ao vitalício</div>
+        <div class="step__tag" style="color:var(--accent)">26 de outubro · 20h</div>
+      </div>
     </div>
   </div>
 </section>
-</main>
 
-<footer>
-  <div class="wrap">Escola Enfermagem de Valor · Izabel Gonçalves · Todos os direitos reservados · 2026</div>
+<!-- ======================= PROFESSORA ======================= -->
+<section class="teacher sect" data-od-id="professora">
+  <div class="wrap">
+    <div class="teacher__grid">
+      <div class="teacher__photo rv" data-od-id="teacher-photo">
+        <picture>
+          <source type="image/avif" srcset="/bf_out_ls_26-inscricao/img/izabel-480.avif 480w, /bf_out_ls_26-inscricao/img/izabel-600.avif 600w, /bf_out_ls_26-inscricao/img/izabel-750.avif 750w" sizes="(max-width: 860px) calc(100vw - 40px), 540px">
+          <source type="image/webp" srcset="/bf_out_ls_26-inscricao/img/izabel-480.webp 480w, /bf_out_ls_26-inscricao/img/izabel-600.webp 600w, /bf_out_ls_26-inscricao/img/izabel-750.webp 750w" sizes="(max-width: 860px) calc(100vw - 40px), 540px">
+          <img src="/bf_out_ls_26-inscricao/img/izabel-750.png" width="750" height="626" loading="lazy" decoding="async" alt="Izabel Gonçalves sorrindo, de jaleco branco">
+        </picture>
+        <div class="teacher__badge">Método 3D</div>
+      </div>
+      <div class="rv">
+        <div class="eyebrow" style="margin-bottom:20px">Quem ensina</div>
+        <h2 class="sect-title">Izabel<br>Gonçalves</h2>
+        <p class="teacher__body">Enfermeira, criadora do <strong>Método 3D</strong> e da Escola Enfermagem de Valor.</p>
+        <div class="stat">
+          <div class="stat__n" data-count="5000">5.000</div>
+          <div class="stat__t">profissionais já fizeram seus cursos</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= CTA FINAL ======================= -->
+<section class="final" data-od-id="cta-final">
+  <div class="final__aura"></div>
+  <div class="wrap final__inner">
+    <div class="eyebrow is-accent is-center rv">26 de outubro · 20h</div>
+    <h2 class="rv">Black Friday<br><span class="hl">Vitalício</span></h2>
+    <p class="lede rv">Preço reduzido disponível apenas para inscritos na lista VIP.</p>
+    <a class="btn btn--lg rv" href="#inscricao" data-ir-form data-od-id="cta-final-btn">
+      Participar gratuitamente
+      <svg width="17" height="13" viewBox="0 0 15 12" fill="none" aria-hidden="true"><path d="M1 6h12M8.5 1.5 13 6l-4.5 4.5" stroke="currentColor" stroke-width="1.9" stroke-linecap="square"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ======================= RODAPÉ ======================= -->
+<footer class="site-foot wrap" data-od-id="site-footer">
+  <picture><source type="image/webp" srcset="/bf_out_ls_26-inscricao/img/escola-hz-white-96.webp"><img src="/bf_out_ls_26-inscricao/img/escola-hz-white-96.png" width="331" height="96" loading="lazy" decoding="async" alt="Escola Enfermagem de Valor"></picture>
+  <p>Escola Enfermagem de Valor · Izabel Gonçalves · Todos os direitos reservados · 2026</p>
 </footer>
 
 <script>
+/* ============================================================
+   ÓRBITA — as marcas giram em elipse ao redor da Izabel.
+   Topo da elipse = atrás dela (menor, mais apagada, z-index baixo).
+   Base da elipse = na frente (maior, opaca, z-index alto).
+   ============================================================ */
+(function(){
+  var stage = document.getElementById('stage');
+  if(!stage) return;
+  var pods = Array.prototype.slice.call(stage.querySelectorAll('.pod'));
+  if(!pods.length) return;
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var N = pods.length;
+  var SPEED = 0.052;          // graus por ms ≈ uma volta a cada 34s
+  var start = performance.now();
+  var paused = false;
+
+  stage.addEventListener('pointerenter', function(){ paused = true; });
+  stage.addEventListener('pointerleave', function(){ paused = false; });
+
+  // Fora da tela, as pastilhas não são redesenhadas (o relógio da órbita continua andando, então
+  // ela volta exatamente onde estaria). Economiza bateria de quem rola a página até o formulário.
+  var visivel = true;
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es){ visivel = es[es.length - 1].isIntersecting; }).observe(stage);
+  }
+
+  var held = 0;   // tempo congelado acumulado
+  var lastT = start;
+
+  function place(now){
+    if(paused) held += (now - lastT);
+    lastT = now;
+    if(!visivel){ requestAnimationFrame(place); return; }
+
+    var w = stage.clientWidth, h = stage.clientHeight;
+    var rx = w * 0.470, ry = h * 0.225;   // elipse achatada: dá a leitura 3D
+    var cy = h * 0.215;                    // centro baixo: a órbita cruza abaixo das mãos
+
+    var t = reduce ? 0 : (now - start - held);
+
+    for(var i = 0; i < N; i++){
+      var ang = (i / N) * Math.PI * 2 + (t * SPEED * Math.PI / 180);
+      var x = Math.cos(ang) * rx;
+      var y = Math.sin(ang) * ry + cy;
+
+      // sin = -1 no topo (fundo) e +1 na base (frente)
+      var depth = (Math.sin(ang) + 1) / 2;
+      var scale = 0.60 + 0.42 * depth;
+      var op    = 0.34 + 0.66 * depth;
+
+      var p = pods[i];
+      p.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px) scale(' + scale.toFixed(3) + ')';
+      p.style.opacity = op.toFixed(3);
+      p.style.zIndex = depth > 0.5 ? 6 : 1;   // a Izabel está no z-index 3
+      p.style.filter = depth < 0.4 ? 'blur(1.2px)' : 'none';
+    }
+    requestAnimationFrame(place);
+  }
+  requestAnimationFrame(place);
+})();
+
+/* ---------- reveal no scroll ---------- */
+(function(){
+  var els = document.querySelectorAll('.rv');
+  if(!('IntersectionObserver' in window)){ els.forEach(function(e){e.classList.add('in')}); return; }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en, i){
+      if(!en.isIntersecting) return;
+      var el = en.target;
+      setTimeout(function(){ el.classList.add('in'); }, Math.min(i,5) * 70);
+      io.unobserve(el);
+    });
+  }, {threshold:.12, rootMargin:'0px 0px -8% 0px'});
+  els.forEach(function(e){ io.observe(e); });
+})();
+
+/* ---------- contagem regressiva até 26/10 às 20h (BRT) ---------- */
+(function(){
+  var target = new Date('2026-10-26T20:00:00-03:00').getTime();
+  var f = function(n){ return String(Math.max(0,n)).padStart(2,'0'); };
+  var d = document.getElementById('cd-d'), h = document.getElementById('cd-h'),
+      m = document.getElementById('cd-m'), s = document.getElementById('cd-s');
+  function tick(){
+    var sec = Math.floor(Math.max(0, target - Date.now())/1000);
+    d.textContent = f(Math.floor(sec/86400));
+    h.textContent = f(Math.floor(sec%86400/3600));
+    m.textContent = f(Math.floor(sec%3600/60));
+    s.textContent = f(sec%60);
+  }
+  tick(); setInterval(tick, 1000);
+})();
+
+/* ---------- número que conta ---------- */
+(function(){
+  var el = document.querySelector('[data-count]');
+  if(!el || !('IntersectionObserver' in window)) return;
+  var done = false;
+  new IntersectionObserver(function(es){
+    es.forEach(function(en){
+      if(!en.isIntersecting || done) return;
+      done = true;
+      var end = parseInt(el.getAttribute('data-count'),10), t0 = null;
+      (function step(t){
+        if(!t0) t0 = t;
+        var p = Math.min((t - t0)/1400, 1), e = 1 - Math.pow(1-p, 3);
+        el.textContent = Math.round(end*e).toLocaleString('pt-BR');
+        if(p < 1) requestAnimationFrame(step);
+      })(performance.now());
+    });
+  }, {threshold:.5}).observe(el);
+})();
+
+/* ---------- formulário da lista VIP (o mesmo de antes: régua, máscara, envio e obrigada) ---------- */
 (function () {
   "use strict";
 

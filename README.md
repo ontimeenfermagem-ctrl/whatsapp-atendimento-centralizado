@@ -26,7 +26,8 @@ O que deixa as páginas rápidas, e o que não desfazer sem querer (medido com o
 celular, o mesmo do PageSpeed):
 
 - **Fontes do próprio site.** Os arquivos em `public/fonts/` são os MESMOS do Google Fonts, byte a
-  byte (Bricolage Grotesque, DM Sans e JetBrains Mono, faixas `latin` e `latin-ext`), e as regras
+  byte (Bricolage Grotesque, DM Sans e JetBrains Mono, faixas `latin` e `latin-ext`; nas páginas da
+  Black Friday, Archivo variável — largura 62–125 e peso 400–900 — e Instrument Sans), e as regras
   `@font-face` estão no `<style>` de cada página, iguais às do Google (pesos, faixas de caracteres,
   `font-display: swap`). O CSS do Google bloqueava a primeira pintura (até 1,2 s no celular) e abria
   duas conexões a mais. Fonte nova ou peso novo: baixe o arquivo do Google, salve com nome novo
@@ -39,7 +40,8 @@ celular, o mesmo do PageSpeed):
   qualquer evento; o arquivo do Pixel (~250 KB com a configuração, ~500 ms de tela travada no
   celular) só é baixado no primeiro toque, tecla ou rolagem, ou 3 s depois de a página carregar, e
   aí envia a fila inteira. No obrigado e no aguardando o Pixel continua imediato (o obrigado
-  redireciona em 16 s).
+  redireciona em 16 s). Na Black Friday é igual: adiado na inscrição, imediato na obrigada (é lá
+  que sai o `Lead` da conversão, e a pessoa pode tocar no botão do grupo logo de cara).
 - **Vídeos sob demanda.** Cada vídeo é a capa do próprio YouTube (`public/igps_set_lp_26-ingresso/videos/<id>.webp`
   e `.jpg`) + o botão de play; as capas só são baixadas quando a seção chega perto da tela. No play,
   o player é montado com os mesmos parâmetros de antes e `autoplay=1`. Antes, os 3 players vinham na
@@ -109,6 +111,19 @@ abre no dia 26/10 às 20h.
   mesmo Pixel). Recarregar a obrigada conta outro lead.
 - **Anti-robô**: campo escondido `site` (preenchido = descartado em silêncio) e no máximo 8 envios
   por IP a cada 10 minutos.
+- **Visual (identidade Black Friday)**: as duas páginas seguem o layout `black-friday-vitalicio.html`
+  do projeto do Open Design (preto editorial, berinjela como luz, amarelo `#FFE000` só no destaque e
+  no botão; Archivo + Instrument Sans). A inscrição é o layout inteiro (CSS e marcação), com o
+  formulário de sempre dentro dele: mesmos ids, régua, máscara, mensagens, campo `site` e envio. O
+  que o layout não desenhou (erro de campo, sugestão de e-mail, "Enviando...", plano B) usa as mesmas
+  peças. A obrigada usa as mesmas peças (faixa, logo, painel, botão, contagem) com o texto e os
+  scripts de antes. Os arquivos do layout estão em `public/bf_out_ls_26-inscricao/img/`: a Izabel
+  recortada em AVIF/WebP (480, 600 e 750 px; a 750 em PNG de reserva, sem perda), o logo e o
+  símbolo da Escola reduzidos a 3x do tamanho na tela (o logo original tinha 3875 px para aparecer
+  com 28) e os outros símbolos como vieram. Comparada com o layout no mesmo navegador, a página
+  difere em 0,03% a 0,06% dos pixels (de 390 a 1440 px de largura), só nas bordas dessas imagens
+  reduzidas. As fontes são as do Google, byte a byte, em `public/fonts/archivo-*` e
+  `instrument-sans-*` (ver "Velocidade das páginas").
 
 ## Pré-formulário da página de venda
 
