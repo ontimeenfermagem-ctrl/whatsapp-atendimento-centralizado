@@ -79,6 +79,10 @@ app.get(BF_B, enviarPagina('bf_out_ls_26-inscricao-b'));
 const BF_TY = '/BF_out_LS_26-obrigada';
 app.get(BF_TY, enviarPagina('bf_out_ls_26-obrigada'));
 
+// Obrigada da versao B: para onde a captacao B manda. Mesmo grupo, Pixel e contagem da obrigada A.
+const BF_TY_B = '/BF_out_LS_26-obrigada-b';
+app.get(BF_TY_B, enviarPagina('bf_out_ls_26-obrigada-b'));
+
 // Pagina de pagamento pendente (Pix aguardando confirmacao).
 const WAIT = '/igps_set_lp_26-aguardando-pagamento';
 app.get(WAIT, enviarPagina('igps_set_lp_26-aguardando-pagamento'));
