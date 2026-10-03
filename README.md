@@ -13,6 +13,7 @@ https://io.escolaenfermagemdevalor.com.br (Express mínimo em `server.js`):
 | `/igps_set_lp_26-aguardando-pagamento` | `public/igps_set_lp_26-aguardando-pagamento/index.html` | Pix aguardando confirmação |
 | `/calculo-de-medicação-calculadora` | `public/calculo-de-medicacao-calculadora/index.html` | calculadora de medicação para enfermagem (abre também sem acento). Base de medicamentos em `meds.js`, contas e conferências em `calc.js`, tela em `app.js` |
 | `/BF_out_LS_26-inscricao-a` | `public/bf_out_ls_26-inscricao/index.html` | captação gratuita da Black Friday (lista VIP do vitalício): nome, e-mail e WhatsApp vão para a planilha `BF_out_LS_26` (ver "Lista VIP da Black Friday") |
+| `/BF_out_LS_26-obrigada` | `public/bf_out_ls_26-obrigada/index.html` | obrigada da lista VIP: botão do grupo do WhatsApp (abre sozinho em 15 s), suporte e contagem até 26/10 20h |
 | `/gps`, `/obrigado` | — | endereços antigos: 301 para a página de venda e para o obrigado, **mantendo a query** |
 
 HTML, JS e CSS saem com `Cache-Control: no-cache` (revalidam pelo ETag a cada visita): com a
@@ -82,9 +83,13 @@ abre no dia 26/10 às 20h.
   função `configurar` mostra). Os cabeçalhos da planilha são criados pelo próprio script.
 - **A inscrição nunca trava pela planilha**: se ela falhar ou as variáveis faltarem, a pessoa vê a
   confirmação normalmente e o lead sai no log do Railway com a etiqueta `BF_LEAD_NAO_GRAVADO`.
-- **Link do grupo**: atributo `data-grupo` do `<form id="bf-form">`. Com um link `https://`, a
-  confirmação mostra o botão "Entrar no grupo do WhatsApp"; vazio, diz que o link chega no WhatsApp.
-- **Pixel**: `PageView` ao abrir e `Lead` na inscrição confirmada.
+- **Depois da inscrição**: a página vai para `/BF_out_LS_26-obrigada#inscrito` (atributo
+  `data-obrigado` do formulário). O link do grupo fica no botão `#grupo` da obrigada, que também
+  redireciona sozinha em 15 s. Trocou o grupo? Mude lá e no `data-grupo` (abaixo).
+- **Plano B**: com `data-obrigado` vazio, a confirmação aparece na própria página, com o botão do
+  `data-grupo`.
+- **Pixel**: `PageView` nas duas páginas; `Lead` na obrigada, só quando chega com `#inscrito` (o
+  `#` sai da barra na hora: recarregar ou visitar direto não conta lead).
 - **Anti-robô**: campo escondido `site` (preenchido = descartado em silêncio) e no máximo 8 envios
   por IP a cada 10 minutos.
 

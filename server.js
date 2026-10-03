@@ -70,6 +70,10 @@ app.get(TY, enviarPagina('igps_set_lp_26-obrigado'));
 const BF = '/BF_out_LS_26-inscricao-a';
 app.get(BF, enviarPagina('bf_out_ls_26-inscricao'));
 
+// Obrigada da lista VIP: botao e redirecionamento para o grupo do WhatsApp e contagem ate 26/10 20h.
+const BF_TY = '/BF_out_LS_26-obrigada';
+app.get(BF_TY, enviarPagina('bf_out_ls_26-obrigada'));
+
 // Pagina de pagamento pendente (Pix aguardando confirmacao).
 const WAIT = '/igps_set_lp_26-aguardando-pagamento';
 app.get(WAIT, enviarPagina('igps_set_lp_26-aguardando-pagamento'));

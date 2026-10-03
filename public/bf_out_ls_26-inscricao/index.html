@@ -187,7 +187,7 @@ footer{border-top:1px solid var(--line);padding:26px 0 calc(26px + env(safe-area
     </div>
 
     <div class="form" id="inscricao">
-      <form id="bf-form" novalidate data-api="/api/bf_out_ls_26/lead" data-grupo="">
+      <form id="bf-form" novalidate data-api="/api/bf_out_ls_26/lead" data-obrigado="/BF_out_LS_26-obrigada" data-grupo="https://sndflw.com/i/z5IpBtnaNxw3utC4y051">
         <h2>Preencha abaixo para participar gratuitamente</h2>
         <div class="campo">
           <label for="bf-nome">Nome completo</label>
@@ -423,6 +423,12 @@ footer{border-top:1px solid var(--line);padding:26px 0 calc(26px + env(safe-area
   }
 
   function sucesso() {
+    // Caminho normal: a página de obrigada (o #inscrito faz o Lead do Pixel disparar lá, uma vez só).
+    var obrigado = (form.getAttribute("data-obrigado") || "").trim();
+    if (obrigado) {
+      location.href = obrigado + "#inscrito";
+      return;
+    }
     var grupo = (form.getAttribute("data-grupo") || "").trim();
     var link = document.getElementById("bf-grupo");
     try { if (typeof fbq === "function") fbq("track", "Lead", {}, { eventID: idEvento() }); } catch (e) {}
