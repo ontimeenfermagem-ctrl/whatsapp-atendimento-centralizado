@@ -88,8 +88,9 @@ abre no dia 26/10 às 20h.
   redireciona sozinha em 15 s. Trocou o grupo? Mude lá e no `data-grupo` (abaixo).
 - **Plano B**: com `data-obrigado` vazio, a confirmação aparece na própria página, com o botão do
   `data-grupo`.
-- **Pixel**: `PageView` nas duas páginas; `Lead` na obrigada, só quando chega com `#inscrito` (o
-  `#` sai da barra na hora: recarregar ou visitar direto não conta lead).
+- **Pixel**: `PageView` nas duas páginas; `Lead` com `content_name: 'BF_out_LS_26'` em toda abertura
+  da obrigada (base da conversão personalizada; o `content_name` separa dos leads do GPS, que usam o
+  mesmo Pixel). Recarregar a obrigada conta outro lead.
 - **Anti-robô**: campo escondido `site` (preenchido = descartado em silêncio) e no máximo 8 envios
   por IP a cada 10 minutos.
 

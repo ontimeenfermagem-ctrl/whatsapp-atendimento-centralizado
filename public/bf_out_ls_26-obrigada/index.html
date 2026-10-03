@@ -7,8 +7,8 @@
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#12081C">
 <link rel="icon" href="data:,">
-<!-- Meta Pixel. O Lead só dispara quando a pessoa chega aqui vinda do formulário (#inscrito):
-     visita direta ou recarregar a página não conta lead de novo. -->
+<!-- Meta Pixel. O Lead dispara em toda abertura desta página (é a base da conversão personalizada
+     da lista VIP). content_name separa este lead dos leads das páginas do GPS, que usam o mesmo Pixel. -->
 <script>
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
@@ -17,8 +17,9 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
 document,'script','https://connect.facebook.net/en_US/fbevents.js');
 fbq('init','538380380948773');
 fbq('track','PageView');
+fbq('track','Lead',{content_name:'BF_out_LS_26'});
+// O formulário chega com #inscrito: tira da barra para o endereço ficar limpo.
 if (location.hash === '#inscrito') {
-  fbq('track','Lead');
   try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {}
 }
 </script>
