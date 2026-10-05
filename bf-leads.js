@@ -66,7 +66,8 @@ function texto(valor, max) {
 }
 
 // Qual versao da captacao mandou o lead (teste A/B): sai do caminho do page_url que a pagina envia.
-// Qualquer coisa que nao seja a B conta como A, a pagina original.
+// 'b' = /BF_out_LS_26-inscricao-b, 'a-b' = /BF_out_LS_26-inscricao-a-b (layout do Open Design);
+// qualquer outra coisa conta como A, a pagina original.
 function variante(pageUrl) {
   let caminho = '';
   try {
@@ -74,7 +75,9 @@ function variante(pageUrl) {
   } catch {
     return 'a';
   }
-  return /^\/bf_out_ls_26-inscricao-b\/?$/i.test(caminho) ? 'b' : 'a';
+  if (/^\/bf_out_ls_26-inscricao-b\/?$/i.test(caminho)) return 'b';
+  if (/^\/bf_out_ls_26-inscricao-a-b\/?$/i.test(caminho)) return 'a-b';
+  return 'a';
 }
 
 async function gravarNaPlanilha(lead) {

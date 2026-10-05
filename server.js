@@ -75,9 +75,19 @@ app.get(BF, enviarPagina('bf_out_ls_26-inscricao'));
 const BF_B = '/BF_out_LS_26-inscricao-b';
 app.get(BF_B, enviarPagina('bf_out_ls_26-inscricao-b'));
 
+// Versao com o layout do Open Design (preto, amarelo, a Izabel com as marcas em orbita), no ar junto
+// com a A original e a B. Tem a propria obrigada (-a-b), no mesmo visual; formulario, API e Pixel
+// sao os mesmos. As imagens e as fontes vem da pasta da A e de /fonts, por caminho absoluto.
+const BF_AB = '/BF_out_LS_26-inscricao-a-b';
+app.get(BF_AB, enviarPagina('bf_out_ls_26-inscricao-a-b'));
+
 // Obrigada da lista VIP: botao e redirecionamento para o grupo do WhatsApp e contagem ate 26/10 20h.
 const BF_TY = '/BF_out_LS_26-obrigada';
 app.get(BF_TY, enviarPagina('bf_out_ls_26-obrigada'));
+
+// Obrigada da versao -a-b (mesmo visual dela).
+const BF_TY_AB = '/BF_out_LS_26-obrigada-a-b';
+app.get(BF_TY_AB, enviarPagina('bf_out_ls_26-obrigada-a-b'));
 
 // Obrigada da versao B: para onde a captacao B manda. Mesmo grupo, Pixel e contagem da obrigada A.
 const BF_TY_B = '/BF_out_LS_26-obrigada-b';

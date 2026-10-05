@@ -12,10 +12,12 @@ https://io.escolaenfermagemdevalor.com.br (Express mínimo em `server.js`):
 | `/igps_set_lp_26-obrigado` | `public/igps_set_lp_26-obrigado/index.html` | obrigado (compra aprovada) |
 | `/igps_set_lp_26-aguardando-pagamento` | `public/igps_set_lp_26-aguardando-pagamento/index.html` | Pix aguardando confirmação |
 | `/calculo-de-medicação-calculadora` | `public/calculo-de-medicacao-calculadora/index.html` | calculadora de medicação para enfermagem (abre também sem acento). Base de medicamentos em `meds.js`, contas e conferências em `calc.js`, tela em `app.js` |
-| `/BF_out_LS_26-inscricao-a` | `public/bf_out_ls_26-inscricao/index.html` | captação gratuita da Black Friday (lista VIP do vitalício): nome, e-mail e WhatsApp vão para a planilha `BF_out_LS_26`, o n8n e o painel do paginas (ver "Lista VIP da Black Friday") |
+| `/BF_out_LS_26-inscricao-a` | `public/bf_out_ls_26-inscricao/index.html` | captação gratuita da Black Friday (lista VIP do vitalício), a página ORIGINAL (roxa, a da CEO; voltou em 05/10 exatamente como era na 68eef0e): nome, e-mail e WhatsApp vão para a planilha `BF_out_LS_26`, o n8n e o painel do paginas (ver "Lista VIP da Black Friday") |
 | `/BF_out_LS_26-inscricao-b` | `public/bf_out_ls_26-inscricao-b/index.html` | versão B da captação (teste A/B): layout do modelo "vitalício" em coluna única; mesmo formulário, API, obrigada e Pixel da A. Capas e Izabel vêm da pasta da A. O n8n recebe `pagina.variante` (`a`/`b`), tirada do `page_url`; planilha e painel já recebem o `page_url` |
 | `/BF_out_LS_26-obrigada` | `public/bf_out_ls_26-obrigada/index.html` | obrigada da lista VIP: botão do grupo do WhatsApp (abre sozinho em 15 s), suporte e contagem até 26/10 20h |
 | `/BF_out_LS_26-obrigada-b` | `public/bf_out_ls_26-obrigada-b/index.html` | obrigada da versão B (a captação B manda para cá): layout do modelo, com o mesmo grupo, suporte, contagem e Pixel (`Lead` com o mesmo `content_name`) da obrigada A |
+| `/BF_out_LS_26-inscricao-a-b` | `public/bf_out_ls_26-inscricao-a-b/index.html` | versão com o layout do Open Design (preto, amarelo, Izabel com as marcas em órbita; ver "Visual" abaixo): mesmo formulário, API e Pixel. Manda para a obrigada `-a-b`. O n8n recebe `pagina.variante: 'a-b'` |
+| `/BF_out_LS_26-obrigada-a-b` | `public/bf_out_ls_26-obrigada-a-b/index.html` | obrigada da versão `-a-b`, no mesmo visual: mesmo grupo, suporte, redirecionamento de 15 s, contagem e Pixel (`Lead` com o mesmo `content_name`) |
 | `/gps`, `/obrigado` | — | endereços antigos: 301 para a página de venda e para o obrigado, **mantendo a query** |
 
 HTML, JS e CSS saem com `Cache-Control: no-cache` (revalidam pelo ETag a cada visita): com a
@@ -42,24 +44,27 @@ celular, o mesmo do PageSpeed):
   qualquer evento; o arquivo do Pixel (~250 KB com a configuração, ~500 ms de tela travada no
   celular) só é baixado no primeiro toque, tecla ou rolagem, ou 3 s depois de a página carregar, e
   aí envia a fila inteira. No obrigado e no aguardando o Pixel continua imediato (o obrigado
-  redireciona em 16 s). Na Black Friday: adiado na inscrição, como aqui; na obrigada a fila (init,
+  redireciona em 16 s). Na Black Friday `-a-b`: adiado na inscrição, como aqui; na obrigada a fila (init,
   PageView e o `Lead` da conversão) nasce no `<head>` e o arquivo é pedido assim que as fontes que a
   tela pediu ficam prontas, no máximo 1,5 s depois. Quem chega do formulário já tem as fontes no
   cache, então para essa pessoa o Pixel sai na hora; numa visita fria os ~265 KB dele não disputam a
   rede com o título.
-- **Black Friday: sem preload de fonte e `font-display: block`.** Num trace do Lighthouse em
+- **Black Friday:** o que vem abaixo vale para a versão `-a-b`. A A original voltou como era (fontes
+  do Google, Pixel na hora e as imagens JPG de antes), então ela tem a velocidade de antes (LCP de
+  ~4 s no celular), e a B segue como a outra sessão fez.
+- **Black Friday `-a-b`: sem preload de fonte e `font-display: block`.** Num trace do Lighthouse em
   produção, o `<link rel="preload">` das fontes (e também pedir fonte por script antes da primeira
   pintura, com `document.fonts.load`) fazia o Chrome segurar a primeira pintura da página inteira até
   ~2,5 s, com os arquivos já baixados. Sem o preload, as fontes saem na primeira montagem da tela; com
   `block`, o texto aparece uma vez, já na fonte certa (com `swap` ele nascia em Arial e pulava na
   troca: CLS de até 0,26 na obrigada). Não volte o preload nessas duas páginas.
-- **Black Friday: a Izabel dentro do HTML no celular.** Até 1040 px de largura, a foto do topo (o
+- **Black Friday `-a-b`: a Izabel dentro do HTML no celular.** Até 1040 px de largura, a foto do topo (o
   maior elemento da tela) vem embutida no HTML em base64 (o mesmo `img/izabel-750.avif`): aparece
   junto com a página, sem esperar outro pedido (LCP simulado de ~2,4 s para ~1,4 s). No computador
   ela vem dos arquivos, com preload. Trocou a foto? Regere o base64 (o comando está no comentário do
   `<picture>` do palco) nos DOIS lugares: o palco e a foto da professora (que reaproveita a mesma
   imagem; o brotli cobra ~90 bytes pela repetição).
-- **Black Friday: a aura não entra no CLS.** A `.hero__aura` tem o topo da caixa no 0 e sobe com
+- **Black Friday `-a-b`: a aura não entra no CLS.** A `.hero__aura` tem o topo da caixa no 0 e sobe com
   `translate: 0 -19.2308%` (19,23% de 130% = os 25% do layout): fica no mesmo lugar, pixel a pixel,
   mas não "anda" quando o hero cresce durante a carga (era a maior parte do CLS, e chegou a 0,26
   numa rodada em produção). Na obrigada, as quebras fixas do título (3 linhas em qualquer fonte)
@@ -133,7 +138,12 @@ abre no dia 26/10 às 20h.
   mesmo Pixel). Recarregar a obrigada conta outro lead.
 - **Anti-robô**: campo escondido `site` (preenchido = descartado em silêncio) e no máximo 8 envios
   por IP a cada 10 minutos.
-- **Visual (identidade Black Friday)**: as duas páginas seguem o layout `black-friday-vitalicio.html`
+- **Três versões no ar**: a A original (`-a` → `obrigada`), a B do modelo "vitalício" (`-b` →
+  `obrigada-b`) e a do Open Design (`-a-b` → `obrigada-a-b`). Todas mandam para a mesma API, planilha,
+  n8n e aba do painel; a versão de cada lead está no `page_url` (e, no n8n, em `pagina.variante`). As
+  três obrigadas disparam o mesmo `Lead` (`content_name: 'BF_out_LS_26'`), então a conversão
+  personalizada conta as três.
+- **Visual da versão `-a-b` (identidade Black Friday)**: as duas páginas `-a-b` seguem o layout `black-friday-vitalicio.html`
   do projeto do Open Design (preto editorial, berinjela como luz, amarelo `#FFE000` só no destaque e
   no botão; Archivo + Instrument Sans). A inscrição é o layout inteiro (CSS e marcação), com o
   formulário de sempre dentro dele: mesmos ids, régua, máscara, mensagens, campo `site` e envio. O

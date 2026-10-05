@@ -2,24 +2,19 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Você está quase lá · Black Friday Vitalício</title>
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#09080B">
+<meta name="theme-color" content="#12081C">
 <link rel="icon" href="data:,">
 <!-- Meta Pixel. O Lead dispara em toda abertura desta página (é a base da conversão personalizada
-     da lista VIP). content_name separa este lead dos leads das páginas do GPS, que usam o mesmo Pixel.
-     A fila (init, PageView e Lead) nasce aqui, na hora; o arquivo do Pixel é pedido assim que as
-     duas fontes estão prontas (logo abaixo do <style>), no máximo 1,5 s depois. Quem chega do
-     formulário já tem as fontes no cache: para essa pessoa o Pixel sai na hora, como antes. Numa
-     visita fria, os ~265 KB do Pixel não disputam a rede com o título. -->
+     da lista VIP). content_name separa este lead dos leads das páginas do GPS, que usam o mesmo Pixel. -->
 <script>
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];
-var feito=0;f.EVCarregarPixel=function(){if(feito)return;feito=1;
-t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)};
-}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
 fbq('init','538380380948773');
 fbq('track','PageView');
 fbq('track','Lead',{content_name:'BF_out_LS_26'});
@@ -29,382 +24,129 @@ if (location.hash === '#inscrito') {
 }
 </script>
 <noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=538380380948773&ev=PageView&noscript=1"></noscript>
-<!-- As mesmas fontes da página de inscrição (o Archivo e a Instrument Sans do Google, servidos por
-     este site): quem chega do formulário já tem as duas no cache. Sem preload e com
-     font-display:block pelo mesmo motivo da inscrição (ver o comentário das fontes lá). -->
+<link rel="preload" href="/fonts/bricolage-grotesque-latin-v1.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/dm-sans-latin-v1.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-@font-face{font-family:'Archivo';font-style:normal;font-weight:400 900;font-stretch:62% 125%;font-display:block;src:url(/fonts/archivo-vietnamese-v1.woff2) format('woff2');unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB}
-@font-face{font-family:'Archivo';font-style:normal;font-weight:400 900;font-stretch:62% 125%;font-display:block;src:url(/fonts/archivo-latin-ext-v1.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
-@font-face{font-family:'Archivo';font-style:normal;font-weight:400 900;font-stretch:62% 125%;font-display:block;src:url(/fonts/archivo-latin-v1.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-@font-face{font-family:'Instrument Sans';font-style:normal;font-weight:400 700;font-stretch:100%;font-display:block;src:url(/fonts/instrument-sans-latin-ext-v1.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
-@font-face{font-family:'Instrument Sans';font-style:normal;font-weight:400 700;font-stretch:100%;font-display:block;src:url(/fonts/instrument-sans-latin-v1.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
-
-/* ============================================================
-   OBRIGADA · BLACK FRIDAY VITALÍCIO — a mesma identidade da página de inscrição:
-   preto editorial, berinjela como luz, amarelo só no destaque e no botão.
-   ============================================================ */
+/* Fontes servidas por este site (mesmos arquivos do Google; regras copiadas de igps_set_lp_26-obrigado). */
+@font-face{font-family:'Bricolage Grotesque';font-style:normal;font-weight:800;font-stretch:100%;font-display:swap;src:url(/fonts/bricolage-grotesque-latin-ext-v1.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Bricolage Grotesque';font-style:normal;font-weight:800;font-stretch:100%;font-display:swap;src:url(/fonts/bricolage-grotesque-latin-v1.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/dm-sans-latin-ext-v1.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/dm-sans-latin-v1.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/dm-sans-latin-ext-v1.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/dm-sans-latin-v1.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:700;font-display:swap;src:url(/fonts/dm-sans-latin-ext-v1.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:700;font-display:swap;src:url(/fonts/dm-sans-latin-v1.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 :root{
-  --bg:            #09080B;
-  --bg-deep:       #050406;
-  --surface:       #121016;
-  --fg:            #F7F4F8;
-  --muted:         #9C94A4;
-  --border:        rgba(255,255,255,.08);
-  --border-strong: rgba(255,255,255,.17);
-
-  --accent:        #FFE000;
-  --plum:          #704C63;
-  --rose:          #D39C9A;
-
-  --font-display: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
-  --font-body:    'Instrument Sans', 'Helvetica Neue', Arial, sans-serif;
-
-  --maxw: 1300px;
-  --gut: clamp(20px, 4.4vw, 60px);
-  --ease: cubic-bezier(.22,1,.36,1);
+  --bg:#12081C; --bg-2:#1B0E2A; --card:#22123A; --line:#3B2456;
+  --ink:#FFFFFF; --ink-2:rgba(255,255,255,.74); --ink-3:rgba(255,255,255,.5);
+  --gold:#FFD15C; --gold-d:#F2A900; --lilac:#C792FF; --purple:#9B4DFF;
+  --green:#1FBF5B; --green-d:#159A46;
+  --display:'Bricolage Grotesque',Arial,sans-serif;
+  --body:'DM Sans',system-ui,sans-serif;
 }
-
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{
-  margin:0; background:var(--bg); color:var(--fg);
-  font-family:var(--font-body); font-size:17px; line-height:1.6;
-  overflow-x:hidden; -webkit-font-smoothing:antialiased;
-}
-/* height:auto: as imagens têm width/height no HTML (reserva o espaço antes de carregar), e sem isto
-   o height do atributo valeria onde o CSS só define a largura */
-img{max-width:100%; height:auto; display:block}
-picture{display:contents}
-picture>source{display:none}
-h1,h2,h3{font-family:var(--font-display); margin:0; text-wrap:balance}
-p{margin:0}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;text-align:center}
+.wrap{max-width:620px;margin-inline:auto;padding-inline:16px}
+h1,h2{font-family:var(--display);font-weight:800;letter-spacing:-.03em;line-height:1.05;margin:0;text-wrap:balance}
+.gold{color:var(--gold)}
 a{color:inherit}
-:focus-visible{outline:2px solid var(--accent); outline-offset:3px}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
 
-body::after{ /* grão: textura de impresso */
-  content:''; position:fixed; inset:0; pointer-events:none; z-index:9999;
-  opacity:.04; mix-blend-mode:overlay;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
-}
+.tag{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);border:1px solid #5A3A1E;background:#2A1A12;border-radius:99px;padding:6px 14px}
+.tag::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px rgba(255,209,92,.18)}
+.quando{margin:18px 0 0;font-weight:700;font-size:15px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
+.quando b{color:#fff}
 
-.wrap{max-width:var(--maxw); margin-inline:auto; padding-inline:var(--gut)}
+.topo{padding:36px 0 56px;background:radial-gradient(80% 60% at 50% 0,#2E1450 0,transparent 75%),var(--bg)}
+.topo h1{font-size:clamp(38px,9vw,58px);margin:18px 0 26px}
 
-/* ---------- tipografia ---------- */
-.eyebrow{
-  font-family:var(--font-display); font-size:11.5px; font-weight:700;
-  text-transform:uppercase; letter-spacing:.16em; color:var(--muted);
-  display:flex; align-items:center; gap:11px;
-}
-.eyebrow::before{content:''; width:26px; height:1px; background:var(--accent); flex:none}
-.eyebrow.is-center{justify-content:center}
-.eyebrow.is-center::after{content:''; width:26px; height:1px; background:var(--accent); flex:none}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px 20px;box-shadow:0 30px 60px -30px rgba(0,0,0,.8)}
+.card .lead{font-size:19px;font-weight:500;line-height:1.4;margin:0 0 22px}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:62px;padding:16px 22px;border-radius:999px;text-decoration:none;font-weight:700;font-size:17px;letter-spacing:.04em;text-transform:uppercase;color:#fff;background:linear-gradient(180deg,#22D466,var(--green-d));box-shadow:0 0 0 8px rgba(31,191,91,.12),0 16px 32px -12px rgba(31,191,91,.7),inset 0 1px 0 rgba(255,255,255,.35);transition:transform .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn svg{width:24px;height:24px;flex:none}
+.atencao{margin:24px 0 0;font-size:15.5px;line-height:1.45;color:var(--ink-2)}
+.atencao b{color:#fff}
+.redir{margin:22px 0 0;font-size:14px;color:var(--ink-3)}
+.redir strong{display:block;margin-top:4px;font-size:16px;color:#fff;letter-spacing:.06em;text-transform:uppercase}
 
-.sect-title{
-  font-size:clamp(30px,4.6vw,56px); font-weight:800; font-stretch:108%;
-  line-height:.94; letter-spacing:-.028em; text-transform:uppercase;
-}
-.lede{font-size:clamp(16px,1.8vw,19.5px); line-height:1.55; color:var(--muted); max-width:44ch; margin-inline:auto}
-.hl{color:var(--accent)}
+section{padding:56px 0}
+.ajuda{background:var(--bg-2)}
+.ajuda h2{font-size:clamp(28px,7vw,40px);text-transform:uppercase;margin-bottom:10px}
+.ajuda p{color:var(--ink-2);margin:0 0 24px}
+.btn2{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:56px;padding:14px 20px;border-radius:14px;text-decoration:none;font-weight:700;font-size:16px;color:#fff;background:var(--purple);border:1px solid #B57CFF;transition:transform .15s}
+.btn2:hover{transform:translateY(-2px)}
+.btn2 svg{width:22px;height:22px;flex:none}
 
-@media (prefers-reduced-motion:reduce){
-  .marquee__track,.hero__aura,.dot,.btn::before{animation:none !important}
-}
+.contagem h2{font-size:clamp(36px,9vw,52px);margin-bottom:20px}
+.relogio{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:0 0 26px}
+.relogio div{background:#FFF1B8;color:#2A1600;border-radius:12px;padding:12px 4px 10px}
+.relogio b{display:block;font-family:var(--display);font-weight:800;font-size:clamp(28px,8vw,40px);line-height:1;font-variant-numeric:tabular-nums}
+.relogio span{display:block;margin-top:6px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.contagem .para{font-family:var(--display);font-weight:800;font-size:clamp(22px,5.5vw,30px);letter-spacing:-.02em;line-height:1.15;margin:0 0 14px;text-wrap:balance}
+.contagem .para span{color:var(--lilac)}
+.contagem .quando{margin-top:0}
+.comecou[hidden],.relogio[hidden]{display:none}
 
-/* ============================================================
-   TICKER
-   ============================================================ */
-.ticker{position:relative; z-index:60; background:var(--accent); color:#000; overflow:hidden}
-.marquee{display:flex; width:max-content}
-.marquee__track{display:flex; animation:slide 76s linear infinite; will-change:transform}
-.marquee span{
-  font-family:var(--font-display); font-size:11.5px; font-weight:750; font-stretch:92%;
-  text-transform:uppercase; letter-spacing:.15em; padding:10px 0; white-space:nowrap;
-}
-.marquee span::after{content:'—'; margin:0 18px; opacity:.4}
-@keyframes slide{to{transform:translateX(-50%)}}
-
-/* ============================================================
-   HEADER
-   ============================================================ */
-.site-head{
-  display:flex; align-items:center; justify-content:space-between;
-  gap:20px; padding-block:20px; position:relative; z-index:40;
-}
-.site-head img{height:28px; width:auto}
-.head-note{
-  font-family:var(--font-display); font-size:10.5px; font-weight:700;
-  text-transform:uppercase; letter-spacing:.16em; color:var(--muted);
-  display:flex; align-items:center; gap:9px;
-}
-@media (max-width:760px){.head-note{display:none}}
-
-.dot{width:6px; height:6px; border-radius:50%; background:var(--accent); flex:none;
-  box-shadow:0 0 0 0 rgba(255,224,0,.6); animation:pulse 2.4s infinite}
-@keyframes pulse{70%{box-shadow:0 0 0 8px rgba(255,224,0,0)}100%{box-shadow:0 0 0 0 rgba(255,224,0,0)}}
-
-/* ============================================================
-   TOPO: o recado e o botão do grupo
-   ============================================================ */
-.hero{position:relative; overflow:hidden; padding-bottom:clamp(56px,7vw,96px)}
-.hero__aura{
-  /* o mesmo lugar do layout (topo a -25% da altura do hero, 130% de altura), mas o topo da caixa
-     fica no 0 e a subida vem do translate (19,23% de 130% = 25%): assim, quando o hero cresce durante
-     a carga (HTML chegando, fonte trocando), a aura não "anda" e não entra no CLS */
-  position:absolute; inset:0 -15% auto -15%; height:130%; translate:0 -19.2308%; z-index:0; pointer-events:none;
-  background:
-    radial-gradient(42% 40% at 50% 34%, color-mix(in oklab, var(--plum) 85%, transparent), transparent 68%),
-    radial-gradient(38% 34% at 14% 10%, color-mix(in oklab, var(--rose) 22%, transparent), transparent 70%);
-  filter:blur(70px); opacity:.6;
-  animation:drift 20s ease-in-out infinite alternate;
-}
-@keyframes drift{to{transform:translate3d(-2%,2%,0) scale(1.07)}}
-
-.ty{position:relative; z-index:2; max-width:760px; margin-inline:auto; text-align:center}
-
-/* O topo: o botão do grupo precisa estar na primeira tela. No celular: título, painel (com o botão)
-   e a data embaixo; a partir de 1041 px, título à esquerda e painel à direita, como o topo da
-   página de inscrição. */
-.topo{
-  position:relative; z-index:2; max-width:760px; margin-inline:auto; text-align:center;
-  display:grid; grid-template-columns:minmax(0,1fr); grid-template-areas:"titulo" "painel" "quando";
-  padding-top:clamp(8px,2vw,24px);
-}
-.topo__titulo{grid-area:titulo}
-.topo .painel{grid-area:painel}
-.topo__quando{grid-area:quando}
-.topo .eyebrow{justify-content:center}
-.topo .eyebrow::after{content:''; width:26px; height:1px; background:var(--accent); flex:none}
-.topo h1{
-  font-size:clamp(38px,7.2vw,86px); font-weight:800; font-stretch:112%;
-  line-height:.88; letter-spacing:-.035em; text-transform:uppercase;
-  margin-top:16px;
-}
-@media (min-width:1041px){
-  .topo{
-    max-width:none; text-align:left; align-items:center;
-    grid-template-columns:minmax(0,1fr) minmax(0,.92fr); column-gap:clamp(32px,4vw,64px);
-    grid-template-areas:"titulo painel" "quando painel";
-    grid-template-rows:auto 1fr;
-  }
-  .topo__titulo{align-self:end}
-  .topo__quando{align-self:start}
-  .topo .eyebrow{justify-content:flex-start}
-  .topo .eyebrow::after{display:none}
-  .topo h1{font-size:clamp(56px,5.6vw,84px)}
-  .topo .painel{margin-top:0}
-}
-.ty__quando{
-  margin-top:20px; font-family:var(--font-display); font-size:11.5px; font-weight:700;
-  text-transform:uppercase; letter-spacing:.16em; color:var(--muted);
-}
-.ty__quando b{color:var(--fg); font-weight:800}
-
-/* o painel do botão: o mesmo vidro escuro do formulário da inscrição */
-.painel{
-  margin:clamp(20px,3vw,28px) auto 0; max-width:620px; width:100%; text-align:center;
-  background:rgba(18,16,22,.82);
-  border:1px solid var(--border-strong); border-radius:4px;
-  padding:clamp(18px,2.6vw,30px);
-  -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px);
-  box-shadow:0 36px 80px -40px #000, 0 1px 0 rgba(255,255,255,.06) inset;
-}
-.painel__top{
-  display:flex; align-items:center; justify-content:center; gap:9px; margin-bottom:18px;
-  font-family:var(--font-display); font-size:10.5px; font-weight:750;
-  text-transform:uppercase; letter-spacing:.16em; color:var(--accent);
-}
-.painel__top{margin-bottom:14px}
-.painel__lead{
-  font-family:var(--font-display); font-size:clamp(18px,2.2vw,22px); font-weight:600;
-  line-height:1.3; letter-spacing:-.012em; color:#D8D2DD; margin:0 auto 20px; max-width:34ch;
-}
-.atencao{
-  display:flex; gap:12px; align-items:flex-start; text-align:left;
-  margin-top:22px; padding-top:20px; border-top:1px solid var(--border);
-  font-size:15px; line-height:1.5; color:var(--muted);
-}
-.atencao svg{flex:none; margin-top:2px; color:var(--accent)}
-.atencao b{color:var(--fg); font-weight:600}
-.redir{margin-top:20px; font-size:13.5px; line-height:1.5; color:var(--muted)}
-.redir strong{
-  display:block; margin-top:6px; font-family:var(--font-display); font-size:15px; font-weight:800;
-  font-stretch:104%; letter-spacing:.08em; text-transform:uppercase; color:var(--fg);
-  font-variant-numeric:tabular-nums;
-}
-
-/* ---------- botões ---------- */
-.btn{
-  display:inline-flex; align-items:center; justify-content:center; gap:12px;
-  font-family:var(--font-display); font-size:14.5px; font-weight:800;
-  font-stretch:100%; text-transform:uppercase; letter-spacing:.07em;
-  background:var(--accent); color:#000; border:0; border-radius:2px;
-  padding:18px 30px; min-height:56px; cursor:pointer; text-decoration:none;
-  position:relative; overflow:hidden; isolation:isolate;
-  box-shadow:0 12px 34px -14px rgba(255,224,0,.6), 0 1px 0 rgba(255,255,255,.45) inset;
-  transition:transform .24s var(--ease), box-shadow .24s var(--ease);
-}
-.btn:hover{transform:translateY(-2px); box-shadow:0 20px 46px -16px rgba(255,224,0,.75), 0 1px 0 rgba(255,255,255,.55) inset}
-.btn::before{
-  content:''; position:absolute; inset:0; z-index:-1;
-  background:linear-gradient(100deg, transparent 35%, rgba(255,255,255,.7) 50%, transparent 65%);
-  transform:translateX(-120%); animation:sheen 4.8s ease-in-out infinite;
-}
-@keyframes sheen{0%,66%{transform:translateX(-120%)}86%,100%{transform:translateX(120%)}}
-.btn svg{flex:none}
-.btn--wide{width:100%}
-.btn--lg{font-size:clamp(15px,1.6vw,18px); padding:22px 30px; min-height:66px}
-/* o secundário: mesma forma, sem o amarelo (o amarelo da tela fica com o botão do grupo) */
-.btn--ghost{
-  background:transparent; color:var(--fg); border:1px solid var(--border-strong);
-  box-shadow:none;
-}
-.btn--ghost::before{display:none}
-.btn--ghost:hover{border-color:var(--fg); box-shadow:none}
-
-/* ============================================================
-   AJUDA E CONTAGEM
-   ============================================================ */
-.sect{padding-block:clamp(58px,7vw,96px)}
-.ajuda{border-block:1px solid var(--border); background:var(--bg-deep)}
-.ajuda .sect-title{margin-top:20px}
-.ajuda .lede{margin-top:16px}
-.ajuda .btn{margin-top:28px}
-
-.contagem .sect-title{margin-top:20px}
-.count{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; margin:28px auto 0; max-width:560px}
-.count__cell{
-  background:rgba(255,255,255,.035); border:1px solid var(--border);
-  border-radius:3px; padding:14px 10px; text-align:center; -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px);
-}
-.count__n{
-  font-family:var(--font-display); font-size:clamp(28px,5vw,46px);
-  font-weight:800; font-stretch:106%; line-height:1; letter-spacing:-.03em;
-  font-variant-numeric:tabular-nums;
-}
-.count__u{
-  font-family:var(--font-display); font-size:9px; font-weight:700;
-  text-transform:uppercase; letter-spacing:.16em; color:var(--muted); margin-top:8px;
-}
-.para{
-  margin:26px auto 0; max-width:26ch; font-family:var(--font-display);
-  font-size:clamp(20px,2.8vw,30px); font-weight:720; font-stretch:104%;
-  line-height:1.12; letter-spacing:-.022em; text-wrap:balance;
-}
-.comecou[hidden],.count[hidden]{display:none}
-/* telas de 300 px ou menos (capa do Galaxy Fold): os rótulos da contagem cabem nas caixas */
-@media (max-width:300px){.count{gap:6px}.count__cell{padding-inline:4px}.count__u{letter-spacing:.08em}}
-.contagem .ty__quando{margin-top:26px}
-
-/* ============================================================
-   RODAPÉ
-   ============================================================ */
-.site-foot{
-  border-top:1px solid var(--border); padding-block:36px calc(36px + env(safe-area-inset-bottom,0px));
-  display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap;
-}
-.site-foot img{height:24px; width:auto; opacity:.65}
-.site-foot p{font-size:12px; color:var(--muted); letter-spacing:.02em}
+footer{border-top:1px solid var(--line);padding:24px 0 calc(24px + env(safe-area-inset-bottom,0px));font-size:13px;color:var(--ink-3)}
 </style>
 </head>
 <body>
-
-<div class="ticker" aria-hidden="true">
-  <div class="marquee"><div class="marquee__track">
-    <span>Black Friday Vitalício</span><span>26 de outubro · 20h</span><span>Preço reduzido só para inscritos</span><span>Abre no grupo do WhatsApp</span><span>Pague uma vez, estude para sempre</span>
-    <span>Black Friday Vitalício</span><span>26 de outubro · 20h</span><span>Preço reduzido só para inscritos</span><span>Abre no grupo do WhatsApp</span><span>Pague uma vez, estude para sempre</span>
-    <span>Black Friday Vitalício</span><span>26 de outubro · 20h</span><span>Preço reduzido só para inscritos</span><span>Abre no grupo do WhatsApp</span><span>Pague uma vez, estude para sempre</span>
-    <span>Black Friday Vitalício</span><span>26 de outubro · 20h</span><span>Preço reduzido só para inscritos</span><span>Abre no grupo do WhatsApp</span><span>Pague uma vez, estude para sempre</span>
-  </div></div>
-</div>
-
 <main>
-<header class="hero">
-  <div class="hero__aura"></div>
+<header class="topo">
   <div class="wrap">
-    <div class="site-head">
-      <picture><source type="image/webp" srcset="/bf_out_ls_26-inscricao/img/escola-hz-white-96.webp"><img src="/bf_out_ls_26-inscricao/img/escola-hz-white-96.png" width="331" height="96" alt="Escola Enfermagem de Valor"></picture>
-      <div class="head-note"><span class="dot"></span> Lista VIP · Inscrição confirmada</div>
-    </div>
+    <span class="tag">Black Friday · Vitalício</span>
+    <p class="quando"><b>26 de outubro</b> · 20h · Encontro online e gratuito</p>
+    <h1>Você está <span class="gold">quase lá</span>, preciosa!</h1>
 
-    <div class="topo">
-      <div class="topo__titulo">
-        <div class="eyebrow">Último passo · Grupo VIP</div>
-        <!-- as quebras fixas deixam o título com 3 linhas em qualquer fonte: sem elas, enquanto o Archivo
-             não chega ele ocupa 2 linhas, e o painel do botão pulava ao trocar (CLS) -->
-        <h1>Você está<br> <span class="hl">quase lá</span>,<br> preciosa!</h1>
-      </div>
-      <p class="ty__quando topo__quando"><b>26 de outubro</b> · 20h · Encontro online e gratuito</p>
-
-      <div class="painel">
-        <div class="painel__top"><span class="dot"></span> Falta só entrar no grupo</div>
-        <p class="painel__lead">Toque no botão abaixo e entre no grupo do WhatsApp para ter acesso à Black Friday do vitalício:</p>
-        <a class="btn btn--wide btn--lg" id="grupo" href="https://sndflw.com/i/z5IpBtnaNxw3utC4y051">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2l-.5-.3Z"/></svg>
-          Entrar no grupo de WhatsApp
-        </a>
-        <p class="atencao"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4M12 17h.01"/></svg><span><b>Atenção: só quem está no grupo recebe a oferta</b> do acesso vitalício a todos os meus cursos. Fora do grupo, ela não aparece.</span></p>
-        <p class="redir" id="redir" aria-live="polite">Você será redirecionada para o grupo em:<strong><span id="seg">15</span> segundos</strong></p>
-      </div>
+    <div class="card">
+      <p class="lead">Toque no botão abaixo e entre no grupo do WhatsApp para ter acesso à Black Friday do vitalício:</p>
+      <a class="btn" id="grupo" href="https://sndflw.com/i/z5IpBtnaNxw3utC4y051">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2l-.5-.3Z"/></svg>
+        Entrar no grupo de WhatsApp
+      </a>
+      <p class="atencao">⚠️ <b>Atenção: só quem está no grupo recebe a oferta</b> do acesso vitalício a todos os meus cursos. Fora do grupo, ela não aparece.</p>
+      <p class="redir" id="redir" aria-live="polite">Você será redirecionada para o grupo em:<strong><span id="seg">15</span> segundos</strong></p>
     </div>
   </div>
 </header>
 
-<section class="ajuda sect">
-  <div class="wrap ty">
-    <div class="eyebrow is-center">Precisa de ajuda?</div>
-    <h2 class="sect-title">Não conseguiu entrar no grupo?</h2>
-    <p class="lede">Fale com a minha equipe que a gente te ajuda!</p>
-    <a class="btn btn--ghost" href="https://www.io.tecnicodevalor.com.br/suporte_ontime" target="_blank" rel="noopener">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1v-6h3v4ZM3 19a2 2 0 0 0 2 2h1v-6H3v4Z"/></svg>
+<section class="ajuda">
+  <div class="wrap">
+    <h2>Não conseguiu entrar no grupo?</h2>
+    <p>Fale com a minha equipe que a gente te ajuda!</p>
+    <a class="btn2" href="https://www.io.tecnicodevalor.com.br/suporte_ontime" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1v-6h3v4ZM3 19a2 2 0 0 0 2 2h1v-6H3v4Z"/></svg>
       Falar com a equipe
     </a>
   </div>
 </section>
 
-<section class="contagem sect">
-  <div class="wrap ty">
+<section class="contagem">
+  <div class="wrap">
     <div id="antes">
-      <div class="eyebrow is-center">Contagem regressiva</div>
-      <h2 class="sect-title">Faltam</h2>
-      <div class="count" role="timer" aria-label="Tempo até o encontro">
-        <div class="count__cell"><div class="count__n" id="d">--</div><div class="count__u">Dias</div></div>
-        <div class="count__cell"><div class="count__n" id="h">--</div><div class="count__u">Horas</div></div>
-        <div class="count__cell"><div class="count__n" id="m">--</div><div class="count__u">Min</div></div>
-        <div class="count__cell"><div class="count__n" id="s">--</div><div class="count__u">Seg</div></div>
+      <h2>Faltam</h2>
+      <div class="relogio" role="timer" aria-label="Tempo até o encontro">
+        <div><b id="d">--</b><span>dias</span></div>
+        <div><b id="h">--</b><span>horas</span></div>
+        <div><b id="m">--</b><span>minutos</span></div>
+        <div><b id="s">--</b><span>segundos</span></div>
       </div>
-      <p class="para">Para começar o encontro da <span class="hl">Black Friday Vitalício</span> com a Iza!</p>
+      <p class="para">Para começar o encontro da <span>Black Friday Vitalício</span> com a Iza!</p>
     </div>
     <div class="comecou" id="comecou" hidden>
-      <h2 class="sect-title">O encontro já começou!</h2>
-      <p class="para">Entre no grupo do WhatsApp para não perder <span class="hl">a oferta do vitalício</span>.</p>
+      <h2>O encontro já começou!</h2>
+      <p class="para">Entre no grupo do WhatsApp para não perder <span>a oferta do vitalício</span>.</p>
     </div>
-    <p class="ty__quando"><b>26 de outubro</b> · 20h · Encontro online e gratuito</p>
+    <p class="quando"><b>26 de outubro</b> · 20h · Encontro online e gratuito</p>
   </div>
 </section>
 </main>
 
-<footer class="site-foot wrap">
-  <picture><source type="image/webp" srcset="/bf_out_ls_26-inscricao/img/escola-hz-white-96.webp"><img src="/bf_out_ls_26-inscricao/img/escola-hz-white-96.png" width="331" height="96" loading="lazy" decoding="async" alt="Escola Enfermagem de Valor"></picture>
-  <p>Escola Enfermagem de Valor · Izabel Gonçalves · Todos os direitos reservados · 2026</p>
+<footer>
+  <div class="wrap">Escola Enfermagem de Valor · Izabel Gonçalves · Todos os direitos reservados · 2026</div>
 </footer>
 
-<script>
-// O arquivo do Pixel sai quando as fontes que a tela pediu estão prontas (ou em 1,5 s, o que vier
-// antes). Espera a primeira montagem da tela de propósito: pedir as fontes por script ANTES dela
-// (document.fonts.load) faz o Chrome segurar a primeira pintura, como o preload fazia.
-(function () {
-  var pronto = function () { window.EVCarregarPixel(); };
-  setTimeout(pronto, 1500);
-  try {
-    requestAnimationFrame(function () {
-      setTimeout(function () {
-        var fontes = document.fonts;
-        if (fontes && fontes.ready) fontes.ready.then(pronto, pronto); else pronto();
-      }, 0);
-    });
-  } catch (e) { pronto(); }
-})();
-</script>
 <script>
 (function () {
   "use strict";
