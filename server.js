@@ -48,6 +48,11 @@ function enviarPagina(pasta) {
 const LP = '/igps_set_lp_26-ingresso';
 app.get(LP, enviarPagina('igps_set_lp_26-ingresso'));
 
+// Antecipacao da Formacao Enfermagem de Valor (Ficha dos Presentes). O CTA
+// ainda esta como "#": falta o link real de checkout/ficha para ligar aqui.
+const LP_FORMACAO = '/igps-lp-formacao';
+app.get(LP_FORMACAO, enviarPagina('igps-lp-formacao'));
+
 // Versao B, rodando o lote 2 (R$ 9,90) ao mesmo tempo que a A. Ela usa as imagens e os .js
 // da pasta da A, entao existe um arquivo so de cada coisa: o que muda de uma para a outra
 // e apenas preco, rotulo do lote e a oferta do checkout.

@@ -1,0 +1,2284 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Preencha a Ficha dos Presentes e receba o link de matrícula da Formação Enfermagem de Valor antes da abertura oficial, com condição especial por tempo limitado.">
+<meta property="og:title" content="Antecipação Enfermagem de Valor">
+<meta property="og:description" content="Receba o link de matrícula antes de todo mundo e garanta presentes exclusivos na Formação Enfermagem de Valor.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://io.escolaenfermagemdevalor.com.br/igps-lp-formacao">
+<meta name="theme-color" content="#15011D">
+<link rel="icon" href="data:,">
+<title>Antecipação Enfermagem de Valor</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap">
+<style>
+/* =========================================================================
+   TPC32 — Antecipação da Oferta (Ficha dos Presentes) — CSS exclusivo
+   Assets 100% próprios desta página (css/js/img em ./assets).
+
+   Princípios:
+   • Mobile-first: tudo é declarado para telas pequenas e cresce em min-width.
+   • Pouquíssimas transições/animações — só transform/opacity, para rodar
+     bem em celulares antigos. Nada de blur, filter ou box-shadow animado.
+   • Paleta migrada 1:1 do Elementor (ver comentário de cada seção).
+   ========================================================================= */
+
+
+/* =========================================================================
+   TOKENS
+   ========================================================================= */
+:root {
+  /* Fundos escuros (Elementor: #15011D, #13031A, #1D0126, #19002C) */
+  --ink-900:   #13031A;
+  --ink-800:   #15011D;
+  --ink-700:   #1D0126;
+  --ink-600:   #19002C;
+
+  /* Roxos das dobras */
+  --purple-900: #260036;
+  --purple-800: #400555;
+  --purple-700: #4C0468;
+  --purple-600: #5B0677;
+  --purple-500: #8D22B6;
+  --purple-400: #802A96;
+  --grape:      #7C0DA4;
+
+  /* Cards claros */
+  --lilac-050: #FDF7FF;
+  --lilac-100: #F8E6FF;
+  --lilac-200: #F3D2FF;
+  --lilac-300: #EDC0FD;
+  --lilac-400: #E191FF;
+  --lilac-500: #D195E7;
+
+  /* Acentos */
+  --gold:      #F3C03E;
+  --gold-soft: #FFE9A8;
+  --gold-deep: #D4A151;
+  --strike:    #B32424;
+  --mint:      #7EF780;
+
+  /* CTA */
+  --cta:        #22C55E;
+  --cta-dark:   #15803D;
+  --cta-shadow: rgba(34, 197, 94, .34);
+
+  /* Texto */
+  --text-light:     #FFFFFF;
+  --text-dim:       rgba(255, 255, 255, .80);
+  --text-dimmer:    rgba(255, 255, 255, .62);
+  --text-dark:      #26062F;
+  /* escurecido para manter 4.5:1 também sobre a ponta mais escura
+     dos gradientes lilás dos cards (#E191FF) */
+  --text-dark-dim:  #4E2C59;
+
+  /* Métricas */
+  --container:     1180px;
+  --pad-x:         clamp(1rem, 5vw, 2rem);
+  /* arredondamento contido — cards mais "sólidos" */
+  --radius-sm:     6px;
+  --radius:        10px;
+  --radius-lg:     12px;
+  --radius-pill:   999px;
+
+  --sp-2:  .5rem;
+  --sp-3:  .75rem;
+  --sp-4:  1rem;
+  --sp-6:  1.5rem;
+  --sp-8:  2rem;
+  --sp-12: 3rem;
+
+  /* Espaço vertical das dobras — cresce com a viewport */
+  --section-y: clamp(2.75rem, 8vw, 5.5rem);
+
+
+  /* Fundo dos cards de bônus e entregáveis — radial no lugar do linear:
+     o centro é um rosa bem claro, o violeta fecha nos cantos, o que dá
+     volume onde o linear só dava uma passagem de cor. O segundo radial é
+     um rubor rosa no pé, e é dele que vem o tom quente da mistura.
+
+     O violeta para em #C9A3F7: é o mais saturado que ainda mantém 4,5:1
+     com o texto de apoio dos cards. O #63e da referência daria 2,9:1. */
+  --card-bonus:
+    radial-gradient(85% 62% at 84% 106%, rgba(233, 120, 205, .32) 0%, rgba(233, 120, 205, 0) 62%),
+    radial-gradient(120% 120% at 50% 8%, #FFF2F8 34%, #F6DDFA 68%, #C9A3F7 100%);
+
+  --z-sticky: 60;
+}
+
+/* =========================================================================
+   RESET / BASE
+   ========================================================================= */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* base maior que 16px no mobile — toda a escala da página parte daqui */
+  font-size: clamp(1.0625rem, 4.4vw, 1.125rem);
+  line-height: 1.6;
+  color: var(--text-light);
+  background: var(--ink-800);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;         /* trava scroll lateral */
+}
+
+img, svg, video { display: block; max-width: 100%; height: auto; }
+
+h1, h2, h3, h4, p, ul, ol, figure, blockquote { margin: 0; }
+ul { padding: 0; list-style: none; }
+
+a { color: inherit; }
+button { font: inherit; }
+
+strong, b { font-weight: 800; }
+
+/* Quebra de linha equilibrada em todos os títulos e textos.
+   Navegadores sem suporte a text-wrap simplesmente ignoram. */
+h1, h2, h3, h4, p, li, figcaption, blockquote { text-wrap: balance; }
+
+::selection { background: rgba(243, 192, 62, .35); }
+
+:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Barra de rolagem na paleta da campanha */
+html { scrollbar-color: var(--purple-500) var(--ink-800); scrollbar-width: thin; }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--ink-800); }
+::-webkit-scrollbar-thumb { background: var(--purple-500); border-radius: var(--radius-pill); }
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--pad-x);
+}
+.container--narrow { max-width: 880px; }
+
+.section { padding-block: var(--section-y); }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+.gold { color: var(--gold); }
+
+/* =========================================================================
+   TIPOGRAFIA DE SEÇÃO
+   ========================================================================= */
+.eyebrow {
+  display: inline-block;
+  font-size: clamp(.74rem, 3vw, .86rem);
+  font-weight: 800;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.h-section {
+  font-size: clamp(1.7rem, 7vw, 3rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -.015em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.h-sub {
+  margin-top: var(--sp-3);
+  font-size: clamp(1.08rem, 4.4vw, 1.3rem);
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--text-dim);
+  text-wrap: balance;
+}
+
+.section-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-3);
+  text-align: center;
+  margin-bottom: clamp(1.75rem, 5vw, 2.75rem);
+}
+.section-head .h-sub { margin-top: 0; }
+
+/* =========================================================================
+   CTA — botão verde (o único elemento com transição)
+   ========================================================================= */
+.cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .55rem;
+  width: 100%;
+  max-width: 520px;
+  margin-inline: auto;
+  min-height: 58px;                 /* alvo de toque folgado */
+  padding: .95rem 1.4rem;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--cta);
+  color: #06280F;
+  font-size: clamp(1rem, 4vw, 1.15rem);
+  font-weight: 800;
+  letter-spacing: .02em;
+  line-height: 1.15;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 10px 24px -10px var(--cta-shadow);
+  transition: background-color .18s ease;
+}
+.cta:hover,
+.cta:focus-visible { background: var(--cta-dark); color: #FFFFFF; }
+.cta:active { background: var(--cta-dark); color: #FFFFFF; }
+
+.cta__icon { flex: none; }
+
+.cta-wrap {
+  margin-top: clamp(1.5rem, 5vw, 2.25rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-3);
+}
+.cta-note {
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--text-dimmer);
+  text-align: center;
+}
+
+/* =========================================================================
+   1) HERO — fundo em degradê (a bg-hero.avif saiu daqui)
+   ========================================================================= */
+/* Fundo só de pintura: dois focos de luz roxa no alto (um violeta largo,
+   um lilás menor deslocado) sobre um degradê que fecha no tom das seções
+   seguintes. Sai a foto de fundo — no celular ela virava textura marrom
+   atrás do texto e ainda custava um download na primeira dobra. */
+.hero {
+  position: relative;
+  /* respiro maior no topo: sem a logo, a headline encostava na barra do
+     navegador */
+  padding-block: clamp(2.25rem, 7vw, 3.5rem) var(--section-y);
+  background:
+    radial-gradient(115% 65% at 50% -8%, rgba(141, 34, 182, .55) 0%, rgba(141, 34, 182, 0) 62%),
+    radial-gradient(70% 45% at 84% 12%, rgba(225, 145, 255, .2) 0%, rgba(225, 145, 255, 0) 68%),
+    linear-gradient(180deg, #2A0140 0%, #1C002A 48%, var(--ink-800) 100%);
+  text-align: center;
+}
+
+/* A caixa alta comia a largura e empurrava a headline para 5 linhas no
+   celular; em caixa normal a mesma frase cabe em 3 e ainda sobra respiro.
+   O limite em ch é o que impede a linha de ficar longa demais no desktop —
+   no celular quem manda é o container. */
+.hero__headline {
+  font-size: clamp(1.62rem, 6.6vw, 3rem);
+  font-weight: 800;
+  line-height: 1.16;
+  letter-spacing: -.022em;
+  text-wrap: balance;
+  margin-inline: auto;
+}
+@media (min-width: 560px) { .hero__headline { max-width: 20ch; } }
+
+/* Destaque da headline: o dourado abre em lilás no fim da frase, puxando a
+   cor do próprio fundo. `color` fica como reserva — sem background-clip em
+   texto, o navegador cai no dourado chapado de antes. */
+.hero__brilho {
+  display: inline-block;
+  color: var(--gold);
+  background-image: linear-gradient(100deg, #FFE9A8 0%, var(--gold) 42%, #E8A6FF 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+@supports (-webkit-background-clip: text) or (background-clip: text) {
+  .hero__brilho { color: transparent; }
+}
+
+/* Duas vozes na mesma frase: o preço recua, a promessa avança. */
+.hero__pitch {
+  margin: clamp(.85rem, 3.2vw, 1.15rem) auto 0;
+  max-width: 40ch;
+  font-size: clamp(1rem, 4vw, 1.16rem);
+  /* 500 (Medium), e não o 400 do corpo: em texto claro sobre fundo escuro a
+     Manrope afina na renderização e o 400 lê como light. */
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--text-dim);
+  /* balance, e não pretty: aqui o problema não era a linha órfã do fim, e
+     sim as três linhas de comprimentos muito diferentes */
+  text-wrap: balance;
+}
+.hero__pitch strong {
+  color: var(--text-light);
+  font-weight: 700;
+}
+.hero__preco {
+  color: rgba(255, 255, 255, .62);
+  font-size: .94em;
+}
+
+/* Player VTurb — reserva de espaço 16:9 para não pular layout no load */
+/* A VSL é VERTICAL (9:16), daí os 400px: a proporção e o tamanho do quadro
+   vêm do próprio embed da ConverteAI, em estilo inline no HTML. Aqui ficam
+   só a moldura e o espaçamento. */
+.player {
+  margin: clamp(1.5rem, 5vw, 2.25rem) auto 0;
+  width: 100%;
+  max-width: 400px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 18px 44px -22px rgba(0, 0, 0, .9);
+}
+
+/* Player em teste A/B (formato direto). Sem fundo/overflow: se a variante
+   trouxer headline acima do vídeo, ela não é cortada. A moldura vem das
+   variáveis do próprio player. Vertical, centralizado, no máx. 400px. */
+.hero__vsl-ab { margin: clamp(1.5rem, 5vw, 2.25rem) auto 0; width: 100%; max-width: 400px; }
+.hero__vsl-ab vturb-smartplayer {
+  --player-border-radius: var(--radius) !important;
+  --player-box-shadow: 0 18px 44px -22px rgba(0, 0, 0, .9) !important;
+}
+
+/* Aviso abaixo do vídeo */
+.notice {
+  display: flex;
+  align-items: flex-start;
+  gap: .6rem;
+  max-width: 640px;
+  margin: clamp(1rem, 4vw, 1.5rem) auto 0;
+  padding: .95rem 1.15rem;
+  border: 1px solid rgba(243, 192, 62, .38);
+  border-radius: var(--radius-sm);
+  background: rgba(243, 192, 62, .10);
+  font-size: clamp(.94rem, 3.9vw, 1.04rem);
+  line-height: 1.5;
+  color: var(--gold-soft);
+  text-align: left;
+}
+.notice__icon { flex: none; margin-top: .1rem; color: var(--gold); }
+.notice strong { color: var(--gold); }
+
+.notice--alert {
+  border-color: rgba(239, 68, 68, .45);
+  background: rgba(239, 68, 68, .12);
+  color: #FFD9D9;
+}
+.notice--alert .notice__icon { color: #FF8A8A; }
+.notice--alert strong { color: #FFB4B4; }
+
+/* =========================================================================
+   2) URGÊNCIA — Elementor: #260036 → #15011D
+   ========================================================================= */
+.urgency {
+  background: linear-gradient(180deg, var(--purple-900) 0%, var(--ink-800) 100%);
+  text-align: center;
+}
+
+/* Benefícios da ficha — um card por linha, imagem grande */
+.perks {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  max-width: 900px;
+  margin: clamp(1.5rem, 5vw, 2.25rem) auto 0;
+}
+
+.perk {
+  display: grid;
+  grid-template-columns: 1fr;
+  border-radius: var(--radius);
+  background: var(--card-bonus);
+  color: var(--text-dark);
+  overflow: hidden;
+}
+@media (min-width: 760px) {
+  .perk {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: clamp(1rem, 3vw, 2rem);
+  }
+  /* alterna o lado da foto para o olho não cansar na sequência */
+  .perk:nth-child(even) .perk__media { order: -1; }
+}
+/* Conteúdo centralizado: check acima, texto embaixo — nas duas larguras */
+.perk__body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .7rem;
+  padding: clamp(1.5rem, 5vw, 2.25rem) clamp(1.35rem, 4.6vw, 2rem);
+  text-align: center;
+  font-size: clamp(1.04rem, 4.3vw, 1.2rem);
+  line-height: 1.45;
+  font-weight: 600;
+  text-wrap: balance;
+}
+.perk__check { flex: none; color: #148A3D; }
+.perk__media {
+  padding: 0 clamp(1.25rem, 4.6vw, 1.9rem) clamp(1.25rem, 4.6vw, 1.9rem);
+}
+@media (min-width: 760px) {
+  .perk__media { padding: clamp(1.25rem, 3.4vw, 1.9rem); }
+}
+.perk__media img {
+  width: 100%;
+  border-radius: var(--radius-sm);
+}
+
+/* Print de depoimento dentro do próprio card do benefício (AromaCorpus).
+   Ocupa a linha inteira, abaixo do texto e da arte. */
+.perk__proof {
+  grid-column: 1 / -1;
+  width: fit-content;
+  max-width: min(100%, 620px);
+  margin: 0 auto;
+  padding: .6rem .6rem .5rem;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, .72);
+  border: 1px solid rgba(124, 13, 164, .16);
+}
+@media (min-width: 760px) {
+  .perk__proof { margin-bottom: clamp(1.25rem, 3.4vw, 1.9rem); }
+}
+@media (max-width: 759px) {
+  .perk__proof { margin-bottom: clamp(1.25rem, 4.6vw, 1.9rem); }
+}
+.perk__proof img {
+  width: auto;
+  max-width: 100%;
+  margin-inline: auto;
+  border-radius: 6px;
+}
+.perk__proof figcaption {
+  margin-top: .5rem;
+  font-size: .7rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: var(--grape);
+  text-align: center;
+}
+
+/* Print de depoimento */
+.proof {
+  /* nunca passa da largura nativa do print (775px) — esticar borrava a imagem */
+  width: fit-content;
+  max-width: min(100%, 620px);
+  margin: clamp(1.5rem, 5vw, 2.25rem) auto 0;
+  padding: .75rem;
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, .07);
+  border: 1px solid rgba(255, 255, 255, .12);
+}
+.proof img {
+  width: auto;
+  max-width: 100%;
+  margin-inline: auto;
+  border-radius: var(--radius-sm);
+}
+.proof figcaption {
+  margin-top: .55rem;
+  font-size: .74rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--text-dimmer);
+  text-align: center;
+}
+
+/* Contador */
+.countdown {
+  margin: clamp(1.75rem, 5vw, 2.5rem) auto 0;
+  max-width: 560px;
+}
+.countdown__label {
+  font-size: clamp(1.05rem, 4.3vw, 1.25rem);
+  font-weight: 800;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: .75rem;
+}
+.countdown__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: .5rem;
+}
+@media (min-width: 480px) { .countdown__grid { gap: .75rem; } }
+
+.countdown__cell {
+  padding: .75rem .3rem .65rem;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(180deg, #7A0F1F 0%, #4A0713 100%);
+  border: 1px solid rgba(255, 255, 255, .12);
+}
+.countdown__num {
+  display: block;
+  font-size: clamp(1.75rem, 8vw, 2.5rem);
+  font-weight: 800;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  color: #FFFFFF;
+}
+.countdown__unit {
+  display: block;
+  margin-top: .2rem;
+  font-size: clamp(.66rem, 2.8vw, .78rem);
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .72);
+}
+/* Contador em card claro (dobra final usa o mesmo componente) */
+.countdown--soft .countdown__cell {
+  background: linear-gradient(180deg, #9A1330 0%, #5A0819 100%);
+}
+
+/* =========================================================================
+   3) PRESENTES — Elementor: #400555 → #15011D
+   ========================================================================= */
+.gifts {
+  background: linear-gradient(180deg, var(--purple-800) 0%, var(--ink-800) 100%);
+}
+.gifts__seal {
+  width: clamp(54px, 14vw, 78px);
+  margin: 0 auto var(--sp-3);
+}
+
+.tiers {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.5rem, 5vw, 2.25rem);
+}
+
+.tier { position: relative; }
+
+/* Faixa dourada de destaque do tier (PRIMEIRA INSCRITA, 10 PRIMEIRAS, …) */
+.tier__badge {
+  display: block;
+  margin: 0 auto -1px;
+  width: fit-content;
+  max-width: 96%;
+  padding: .85rem 1.6rem;
+  border-radius: var(--radius) var(--radius) 0 0;
+  background: linear-gradient(180deg, #FBE29A 0%, var(--gold) 52%, var(--gold-deep) 100%);
+  color: #3A2100;
+  font-size: clamp(1rem, 4.3vw, 1.35rem);
+  font-weight: 800;
+  letter-spacing: .03em;
+  line-height: 1.22;
+  text-transform: uppercase;
+  text-align: center;
+  text-wrap: balance;
+}
+.tier__badge .grape { color: var(--grape); }
+
+.tier__card {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sp-4);
+  padding: clamp(1.35rem, 4.6vw, 2.1rem);
+  border-radius: var(--radius-lg);
+  background: var(--card-bonus);
+  color: var(--text-dark);
+}
+@media (min-width: 820px) {
+  .tier__card {
+    grid-template-columns: 1.05fr .95fr;
+    align-items: center;
+    gap: clamp(1.25rem, 3vw, 2.25rem);
+  }
+  /* Alterna o lado da imagem para o olho não cansar na sequência de cards */
+  .tier:nth-child(even) .tier__media { order: -1; }
+}
+.tier__card--solo { grid-template-columns: 1fr; text-align: center; }
+.tier__card--solo .tier__list { text-align: left; display: inline-block; }
+.tier__card--solo .tier__price { justify-content: center; }
+.tier__card--solo .tier__content { max-width: 62ch; margin-inline: auto; }
+
+.tier__title {
+  font-size: clamp(1.22rem, 5vw, 1.6rem);
+  font-weight: 800;
+  line-height: 1.22;
+  color: var(--grape);
+  text-wrap: balance;
+}
+.tier__text {
+  margin-top: .55rem;
+  font-size: clamp(1.02rem, 4.2vw, 1.1rem);
+  line-height: 1.55;
+  color: var(--text-dark-dim);
+  text-wrap: balance;
+}
+.tier__list {
+  margin-top: .75rem;
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+}
+.tier__list li {
+  display: flex;
+  align-items: flex-start;
+  gap: .5rem;
+  font-size: clamp(1.02rem, 4.2vw, 1.1rem);
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--text-dark);
+}
+.tier__list svg { flex: none; margin-top: .25rem; color: var(--grape); }
+
+.tier__price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .5rem .7rem;
+  margin-top: 1rem;
+}
+.tier__from {
+  font-size: clamp(.98rem, 4vw, 1.1rem);
+  font-weight: 700;
+  color: #7A3A55;
+}
+.tier__from s { color: var(--strike); }
+.tier__free {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  padding: .38rem .85rem;
+  border-radius: var(--radius-pill);
+  background: #148A3D;
+  color: #FFFFFF;
+  font-size: clamp(.9rem, 3.7vw, 1.02rem);
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.tier__media img {
+  width: 100%;
+  border-radius: var(--radius);
+}
+/* Cupons (2 anos, whatsapp, vaga extra): arte pequena e horizontal —
+   limita a largura para não esticar e perder nitidez. */
+.tier__media--ticket img,
+.bonus__media--ticket img {
+  max-width: 445px;
+  margin-inline: auto;
+  border-radius: var(--radius-sm);
+}
+/* Print de depoimento dentro do card (fundo claro) */
+.tier__proof {
+  grid-column: 1 / -1;
+  /* a moldura encolhe até o tamanho do print — nem estica a imagem,
+     nem sobra caixa branca em volta de prints pequenos */
+  width: fit-content;
+  max-width: min(100%, 600px);
+  margin: .25rem auto 0;
+  padding: .65rem;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, .72);
+  border: 1px solid rgba(124, 13, 164, .16);
+}
+.tier__proof img {
+  width: auto;
+  max-width: 100%;
+  margin-inline: auto;
+  border-radius: 8px;
+}
+
+/* =========================================================================
+   4) BÔNUS — Elementor: #8D22B6 → #4C0468
+   ========================================================================= */
+.bonuses {
+  background: linear-gradient(180deg, var(--purple-500) 0%, var(--purple-700) 100%);
+}
+.bonus-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  /* espaço extra no topo/entre cards para o selo que "sai" do card */
+  gap: clamp(3.25rem, 11vw, 4rem) var(--sp-6);
+  padding-top: clamp(2rem, 7vw, 2.75rem);
+}
+@media (min-width: 760px) { .bonus-grid { grid-template-columns: repeat(2, 1fr); } }
+
+.bonus {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  /* cards sem imagem (bônus 1 e 4) centralizam o conteúdo em vez de
+     deixar um vazio embaixo quando a linha do grid estica */
+  justify-content: center;
+  /* padding-top maior: abre espaço para a metade de baixo do selo */
+  padding: clamp(3rem, 9.4vw, 3.75rem) clamp(1.35rem, 4.6vw, 1.9rem) clamp(1.35rem, 4.6vw, 1.9rem);
+  border-radius: var(--radius-lg);
+  background: var(--card-bonus);
+  color: var(--text-dark);
+  text-align: center;
+}
+/* Selo dourado com a metade de cima para fora do card */
+.bonus__seal {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: clamp(84px, 22vw, 118px);
+  margin: 0;
+  transform: translate(-50%, -50%);
+}
+.bonus__tag {
+  font-size: clamp(1.05rem, 4.4vw, 1.35rem);
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--grape);
+}
+.bonus__title {
+  margin-top: .3rem;
+  font-size: clamp(1.2rem, 5vw, 1.5rem);
+  font-weight: 800;
+  line-height: 1.25;
+  color: var(--text-dark);
+}
+.bonus__text {
+  margin-top: .55rem;
+  font-size: clamp(1.02rem, 4.2vw, 1.1rem);
+  line-height: 1.55;
+  color: var(--text-dark-dim);
+  text-wrap: balance;
+}
+/* A arte acompanha o texto: antes o `margin-top: auto` empurrava a imagem
+   para a base do card e, em cards de texto curto (bônus 04), abria um vão. */
+.bonus__media { margin-top: 0; padding-top: clamp(.9rem, 3vw, 1.25rem); }
+.bonus__media img { width: 100%; border-radius: var(--radius); }
+
+/* Print de depoimento dentro do card de bônus — mesma regra dos demais:
+   nunca ampliar além da resolução nativa. */
+.bonus__proof {
+  width: fit-content;
+  max-width: min(100%, 560px);
+  margin: .85rem auto 0;
+  padding: .5rem;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, .72);
+  border: 1px solid rgba(124, 13, 164, .16);
+}
+.bonus__proof img {
+  width: auto;
+  max-width: 100%;
+  margin-inline: auto;
+  border-radius: 6px;
+}
+
+/* =========================================================================
+   5) CURSO / CERTIFICADOS — Elementor: #1D0126
+   ========================================================================= */
+.course { background: var(--ink-700); text-align: center; }
+
+/* Arte dos dois certificados — abre a dobra, sem moldura (a própria arte
+   já tem as molduras douradas). */
+.course__media {
+  max-width: 960px;
+  margin: 0 auto clamp(1.25rem, 4vw, 2rem);
+}
+.course__media img { width: 100%; }
+
+.course__claim {
+  max-width: 60ch;
+  margin: var(--sp-4) auto 0;
+  font-size: clamp(1.12rem, 4.6vw, 1.45rem);
+  font-weight: 700;
+  line-height: 1.4;
+  text-wrap: balance;
+}
+.course__text {
+  max-width: 60ch;
+  margin: var(--sp-4) auto 0;
+  font-size: clamp(1.04rem, 4.3vw, 1.15rem);
+  line-height: 1.6;
+  color: var(--text-dim);
+  text-wrap: balance;
+}
+.course__text strong { color: #FFFFFF; }
+
+/* Os dois certificados em uma linha, na cor de destaque */
+.course__certs {
+  max-width: 52ch;
+  margin: .6rem auto 0;
+  font-size: clamp(1rem, 4.1vw, 1.15rem);
+  font-weight: 800;
+  line-height: 1.45;
+  color: var(--gold);
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+/* =========================================================================
+   6) DEPOIMENTOS — Elementor: #000000
+   ========================================================================= */
+.testimonials { background: #000000; text-align: center; }
+
+/* Player de depoimentos — o markup/JS vem do Elementor (inline no HTML).
+   A largura é limitada NO WRAPPER, não no player: o `padding: 56.25%` do
+   Elementor é calculado sobre a largura do elemento pai, então limitar o
+   próprio player quebraria a proporção 16:9. */
+.testimonials__player {
+  max-width: 880px;
+  margin: clamp(1.25rem, 4vw, 2rem) auto 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #0A0A0A;
+}
+
+/* =========================================================================
+   7) COMPARAÇÃO — Elementor: #5B0677
+   ========================================================================= */
+.compare { background: var(--purple-600); }
+
+.compare__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sp-4);
+}
+@media (min-width: 880px) {
+  .compare__grid { grid-template-columns: repeat(2, 1fr); gap: var(--sp-6); align-items: start; }
+}
+
+.plan {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  /* gradiente mais suave: a ponta rosa forte (#E191FF) pesava demais */
+  background: linear-gradient(170deg, #FDF9FF 0%, #EBD5F8 100%);
+  color: var(--text-dark);
+}
+.plan__head {
+  padding: 1.25rem 1.4rem;
+  background: rgba(124, 13, 164, .12);
+  text-align: center;
+  font-size: clamp(1rem, 4.1vw, 1.2rem);
+  font-weight: 800;
+  line-height: 1.3;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--grape);
+}
+.plan--best .plan__head { background: #148A3D; color: #FFFFFF; }
+.plan--best { border: 2px solid var(--mint); }
+
+.plan__list { padding: 1.4rem 1.35rem .75rem; display: flex; flex-direction: column; gap: .6rem; }
+/* Desktop: respiro maior dentro do card — antes o texto encostava nas bordas */
+@media (min-width: 880px) {
+  .plan__head  { padding: 1.5rem 2.25rem; }
+  .plan__list  { padding: 2rem 2.25rem 1.25rem; gap: .95rem; }
+  .plan__price { padding: 1.75rem 2.25rem 2.1rem; }
+}
+.plan__list li {
+  display: flex;
+  align-items: flex-start;
+  gap: .55rem;
+  font-size: clamp(.98rem, 4vw, 1.08rem);
+  line-height: 1.4;
+}
+.plan__list svg { flex: none; margin-top: .18rem; }
+.plan__list .ic-yes  { color: #148A3D; }
+.plan__list .ic-no   { color: #A03A3A; }
+.plan__list .is-off  { color: #4A2A52; text-decoration: line-through; }
+
+/* O item vira bloco: nome em cima e "(valor: …)" numa linha própria,
+   alinhada com o nome — no mobile os parênteses não flutuam mais soltos. */
+.plan__item { display: block; }
+.plan__list em {
+  display: block;
+  margin-top: .1rem;
+  font-style: normal;
+  font-weight: 700;
+  font-size: .9em;
+  line-height: 1.35;
+  color: var(--grape);
+}
+
+.plan__price {
+  padding: 1.35rem 1.35rem 1.6rem;
+  text-align: center;
+  border-top: 1px solid rgba(124, 13, 164, .16);
+}
+.plan__price-old {
+  font-size: clamp(1.6rem, 6.8vw, 2.1rem);
+  font-weight: 800;
+  color: var(--strike);
+  text-decoration: line-through;
+}
+.plan__price-main {
+  font-size: clamp(2rem, 8.4vw, 2.7rem);
+  font-weight: 800;
+  line-height: 1.1;
+  color: #0F6B31;
+}
+.plan__price-main span {
+  display: block;
+  font-size: .46em;
+  font-weight: 700;
+  color: var(--text-dark-dim);
+}
+.plan__price-alt {
+  margin-top: .35rem;
+  font-size: clamp(1rem, 4.1vw, 1.15rem);
+  font-weight: 600;
+  color: var(--text-dark-dim);
+}
+
+/* =========================================================================
+   8) CARTA DA ANA — Elementor: bg-ana-desk.webp
+   ========================================================================= */
+/* Mobile: a arte vertical do Elementor É o fundo da seção (mesma lógica da
+   garantia). Ancorada embaixo, com largura = largura da tela; o padding-bottom
+   reserva exatamente a faixa da foto (a cabeça da Ana começa a ~134% da
+   largura, contando da base), então o texto nunca cai sobre a imagem.
+   #FAEEFF é a cor do topo da própria arte — a emenda fica invisível. */
+.letter {
+  background:
+    #FAEEFF;
+  padding-bottom: 136vw;
+}
+.letter__card {
+  max-width: 720px;
+  margin-inline: auto;
+  padding: clamp(1.5rem, 5.4vw, 2.85rem);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, .90);
+  color: var(--text-dark);
+}
+/* Desktop: a arte larga entra num bloco à direita com altura controlada —
+   se fosse background da seção inteira, o texto longo esticaria a seção e a
+   foto ampliaria fora de escala. A máscara funde a arte com o fundo lilás. */
+@media (min-width: 768px) {
+  .letter {
+    position: relative;
+    overflow: hidden;
+    padding-bottom: var(--section-y);
+    background: linear-gradient(100deg, #F7E7FF 0%, #EFCCFF 52%, #DFA3FB 100%);
+  }
+  /* A arte cobre toda a altura da dobra — sem faixa vazia acima dela. */
+  .letter::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 42%;
+
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 26%);
+    mask-image: linear-gradient(90deg, transparent 0, #000 26%);
+    pointer-events: none;
+  }
+  .letter .container { position: relative; z-index: 1; display: flex; }
+  /* Coluna de texto mais larga: menos linhas quebradas, dobra mais baixa. */
+  .letter__card {
+    margin: 0;
+    max-width: min(780px, 64%);
+    background: rgba(255, 255, 255, .93);
+  }
+}
+/* A partir de 1024px a carta vira duas colunas: a dobra fica bem mais baixa
+   e a arte volta a aparecer em escala natural (a altura é que a amplia). */
+/* Tablet (768–1023): a coluna da direita seria estreita e alta demais — o
+   cover ampliaria a Ana. Aqui a arte panorâmica vira uma FAIXA no rodapé da
+   dobra, em escala natural (990/2560 = 38.7% da largura), com o texto acima.
+   O gradiente de fundo repete o degradê do topo da própria arte. */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .letter {
+    padding-bottom: calc(38.7vw + var(--section-y));
+    background:
+      linear-gradient(90deg, #FAEEFF 0%, #F7E7FF 25%, #EBC6FE 50%, #E1A5FF 75%, #D484FF 100%);
+  }
+  .letter::before { display: none; }
+  .letter .container { display: block; }
+  .letter .letter__card { max-width: 100%; }
+}
+
+@media (min-width: 1024px) {
+  .letter .letter__card { max-width: min(880px, 71%); }
+  /* seletor mais específico: a regra base de .letter__body (display:flex)
+     é declarada mais abaixo no arquivo e venceria por ordem */
+  .letter .letter__body {
+    display: block;
+    column-count: 2;
+    column-gap: clamp(1.5rem, 3vw, 2.25rem);
+  }
+  .letter .letter__body p {
+    break-inside: avoid;
+    margin-bottom: .8rem;
+  }
+  .letter .letter__body p:last-child { margin-bottom: 0; }
+}
+.letter__title {
+  font-size: clamp(1.4rem, 5.8vw, 2.1rem);
+  font-weight: 800;
+  line-height: 1.25;
+  color: var(--grape);
+  text-wrap: balance;
+}
+.letter__body {
+  margin-top: var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  gap: .85rem;
+  font-size: clamp(1.04rem, 4.3vw, 1.15rem);
+  line-height: 1.65;
+  color: var(--text-dark-dim);
+  text-wrap: balance;
+}
+.letter__body strong { color: var(--text-dark); }
+.letter__sign {
+  margin-top: var(--sp-4);
+  font-size: clamp(1.16rem, 4.8vw, 1.4rem);
+  font-weight: 800;
+  font-style: italic;
+  color: var(--grape);
+}
+
+/* =========================================================================
+   9) FAIXA DOURADA (marquee) — Elementor: #fbdf8a → #d4a151
+   ========================================================================= */
+.marquee {
+  overflow: hidden;
+  background: linear-gradient(276deg, #FBDF8A 0%, #D4A151 100%);
+  padding-block: .55rem;
+}
+.marquee__track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 25s linear infinite;
+}
+.marquee__item {
+  flex: none;
+  padding-inline: .6rem;
+  font-size: clamp(.8rem, 3.2vw, 1rem);
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  white-space: nowrap;
+}
+@keyframes marquee-scroll {
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
+/* =========================================================================
+   10) INVESTIMENTO — Elementor: bg_oferta_amarelo.webp + card roxo
+   ========================================================================= */
+.price {
+  background:
+    #EB81FF;
+}
+/* O mockup vive DENTRO do card roxo, no topo */
+.price__card {
+  max-width: 680px;
+  margin-inline: auto;
+  padding: clamp(1.5rem, 5.4vw, 2.6rem);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(170deg, #8528AC 0%, #42045C 100%);
+  text-align: center;
+}
+.price__mock {
+  max-width: 520px;
+  margin: 0 auto clamp(1rem, 4vw, 1.5rem);
+}
+.price__mock img { width: 100%; border-radius: var(--radius-sm); }
+.price__old {
+  font-size: clamp(1.35rem, 5.6vw, 1.75rem);
+  font-weight: 700;
+  color: #FFB4B4;
+  text-decoration: line-through;
+}
+.price__label {
+  margin-top: .5rem;
+  font-size: clamp(1.05rem, 4.3vw, 1.22rem);
+  font-weight: 600;
+  color: var(--text-dim);
+}
+.price__main {
+  font-size: clamp(2.8rem, 13.5vw, 4.3rem);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--mint);
+  letter-spacing: -.02em;
+}
+.price__alt {
+  margin-top: .5rem;
+  font-size: clamp(1.05rem, 4.3vw, 1.22rem);
+  font-weight: 700;
+  color: #FFFFFF;
+}
+.price__save {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: .5rem 1rem;
+  border-radius: var(--radius-pill);
+  background: rgba(243, 192, 62, .16);
+  border: 1px solid rgba(243, 192, 62, .45);
+  font-size: clamp(.98rem, 4vw, 1.1rem);
+  font-weight: 700;
+  color: var(--gold-soft);
+  text-wrap: balance;
+}
+.price__save strong { color: var(--gold); }
+
+/* =========================================================================
+   11) GARANTIA — Elementor: bg_selo.webp sobre #1E012A
+   ========================================================================= */
+/* Mobile: arte vertical (ezgif-resize-22) com o selo GARANTIA TOTAL no topo.
+   O padding-top empurra o card para baixo do selo — nada cobre a arte.
+   O selo termina a ~80% da largura da tela na imagem (480x1667, cover). */
+.warranty {
+  background:
+    #1E012A;
+  padding-top: 86vw;
+}
+.warranty__card {
+  max-width: 760px;
+  margin-inline: auto;
+  padding: clamp(1.75rem, 5.4vw, 2.85rem);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(170deg, #36044B 0%, #14001C 100%);
+  border: 1px solid rgba(243, 192, 62, .28);
+  text-align: center;
+}
+/* o selo já vem desenhado no fundo — o ícone é só do layout mobile/estreito */
+.warranty__icon { display: none; }
+
+/* Desktop: arte larga com o selo à esquerda e o card encaixado à direita.
+   Mesmo breakpoint da carta da Ana, para as duas dobras virarem juntas. */
+@media (min-width: 768px) {
+  .warranty {
+    padding-top: var(--section-y);
+    /* 42% horizontal: mantém o selo inteiro dentro da tela mesmo quando o
+       cover recorta as laterais da arte (2560x840) em telas médias. */
+    background:
+      #1E012A;
+  }
+  .warranty .container { display: flex; justify-content: flex-end; }
+  .warranty__card {
+    margin: 0;
+    width: min(560px, 48%);
+  }
+}
+@media (min-width: 1280px) {
+  .warranty__card { width: min(600px, 46%); }
+}
+.warranty__title {
+  font-size: clamp(1.6rem, 6.6vw, 2.6rem);
+  font-weight: 800;
+  line-height: 1.15;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+.warranty__text {
+  margin-top: var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+  font-size: clamp(1.04rem, 4.3vw, 1.18rem);
+  line-height: 1.6;
+  color: var(--text-dim);
+  text-wrap: balance;
+}
+.warranty__text strong { color: #FFFFFF; }
+.warranty__text .hl { color: var(--gold-soft); font-weight: 800; }
+.warranty__text em { font-style: italic; color: var(--text-dimmer); }
+
+/* =========================================================================
+   12) PASSOS — Elementor: radial #420A6B → #13031A
+   ========================================================================= */
+.steps {
+  background: radial-gradient(120% 90% at 50% 0%, var(--purple-700) 0%, var(--ink-900) 72%);
+}
+/* Um passo por linha: número em algarismo grande à esquerda, texto à direita,
+   ligados por uma linha vertical dourada que atravessa a sequência. */
+.steps__list {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(.9rem, 3vw, 1.15rem);
+  max-width: 780px;
+  margin-inline: auto;
+}
+
+.step {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: clamp(.9rem, 3.5vw, 1.5rem);
+  padding: clamp(1.25rem, 4.4vw, 1.65rem) clamp(1.35rem, 4.4vw, 1.9rem);
+  border-radius: var(--radius);
+  background: linear-gradient(100deg, rgba(128, 42, 150, .55) 0%, rgba(68, 3, 85, .55) 100%);
+  border: 1px solid rgba(243, 192, 62, .25);
+  border-left: 4px solid var(--gold);
+}
+
+/* Traço que conecta um passo ao próximo */
+.step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: clamp(2.6rem, 8vw, 3.5rem);
+  bottom: calc(-1 * clamp(.9rem, 3vw, 1.15rem) - 1px);
+  width: 2px;
+  height: clamp(.9rem, 3vw, 1.15rem);
+  background: rgba(243, 192, 62, .45);
+}
+
+.step__num {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: clamp(3rem, 12vw, 3.9rem);
+  height: clamp(3rem, 12vw, 3.9rem);
+  border-radius: 50%;
+  background: var(--gold);
+  color: #3A2100;
+  line-height: 1;
+}
+.step__num b {
+  font-size: clamp(1.35rem, 5.5vw, 1.7rem);
+  font-weight: 800;
+  letter-spacing: -.02em;
+}
+.step__num span {
+  font-size: clamp(.5rem, 2vw, .58rem);
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  opacity: .78;
+}
+.step__text {
+  font-size: clamp(1.02rem, 4.2vw, 1.15rem);
+  line-height: 1.5;
+  color: var(--text-dim);
+  text-align: left;
+  text-wrap: balance;
+}
+.step__text strong { color: var(--gold-soft); }
+
+/* =========================================================================
+   13) FECHAMENTO — Elementor: radial #19002C → #13031A
+   ========================================================================= */
+.closing {
+  background: radial-gradient(110% 80% at 50% 0%, var(--ink-600) 0%, var(--ink-900) 70%);
+  text-align: center;
+}
+.closing__sign {
+  margin-top: clamp(1.75rem, 5vw, 2.5rem);
+  font-size: clamp(1.1rem, 4.5vw, 1.32rem);
+  font-weight: 700;
+  font-style: italic;
+  color: var(--text-dim);
+}
+.closing__logo { width: clamp(78px, 20vw, 110px); margin: var(--sp-4) auto .5rem; }
+.closing__name {
+  font-size: clamp(.94rem, 3.8vw, 1.08rem);
+  font-weight: 800;
+  letter-spacing: .34em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* =========================================================================
+   CTA FIXO (mobile) — aparece depois do hero
+   ========================================================================= */
+.sticky-cta {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: var(--z-sticky);
+  padding: .6rem var(--pad-x) calc(.6rem + env(safe-area-inset-bottom, 0px));
+  background: rgba(19, 3, 26, .95);
+  border-top: 1px solid rgba(243, 192, 62, .25);
+  transform: translateY(110%);
+  transition: transform .2s ease;
+}
+.sticky-cta.is-visible { transform: translateY(0); }
+.sticky-cta .cta { min-height: 52px; max-width: 460px; }
+@media (min-width: 880px) { .sticky-cta { display: none; } }
+
+/* Espaço para o CTA fixo não cobrir o rodapé no mobile */
+@media (max-width: 879px) {
+  body.has-sticky-cta { padding-bottom: 76px; }
+}
+
+/* =========================================================================
+   RODAPÉ — mesma estrutura das páginas de captura (design-system.css)
+   ========================================================================= */
+.footer {
+  padding: clamp(2rem, 4vw, 3rem) 0 clamp(1.5rem, 3vw, 2rem);
+  background: #1A0A2E;
+  color: rgba(255, 255, 255, .7);
+}
+.footer__top {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1rem, 2.5vw, 1.5rem);
+  align-items: center;
+  text-align: center;
+  padding-bottom: clamp(1.25rem, 2.5vw, 1.75rem);
+  border-bottom: 1px solid rgba(255, 255, 255, .08);
+}
+@media (min-width: 720px) {
+  .footer__top {
+    grid-template-columns: 1fr 1fr;
+    text-align: left;
+  }
+  .footer__copy  { grid-column: 1; justify-self: start; text-align: left;  }
+  .footer__links { grid-column: 2; justify-self: end;   text-align: right; }
+}
+.footer__copy {
+  font-size: .86rem;
+  font-weight: 500;
+  letter-spacing: .02em;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, .65);
+}
+.footer__links {
+  display: inline-flex;
+  flex-direction: column;
+  gap: .25rem;
+  font-size: .86rem;
+  font-weight: 500;
+}
+.footer__links a {
+  color: rgba(255, 255, 255, .85);
+  text-decoration: none;
+  transition: color .18s ease;
+}
+.footer__links a:hover,
+.footer__links a:focus-visible { color: #FFFFFF; text-decoration: underline; }
+.footer__links-row {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  justify-content: center;
+}
+@media (min-width: 720px) { .footer__links-row { justify-content: flex-end; } }
+.footer__links-row span[aria-hidden] { opacity: .35; }
+.footer__company {
+  font-size: .78rem;
+  letter-spacing: .04em;
+  color: rgba(255, 255, 255, .55);
+  text-transform: uppercase;
+}
+.footer__legal {
+  margin-top: clamp(1rem, 2vw, 1.5rem);
+  font-size: .82rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, .55);
+  text-align: left;
+  max-width: 1100px;
+  margin-inline: auto;
+}
+.footer__legal-label {
+  display: block;
+  font-size: .7rem;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .75);
+  margin-bottom: .35rem;
+}
+
+/* =========================================================================
+   PREFERÊNCIA DE MOVIMENTO REDUZIDO
+   ========================================================================= */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+  .marquee__track { animation: none; }
+  .sticky-cta { transition: none; }
+}
+
+/* =========================================================================
+   SEÇÃO BOLETO PARCELADO — fundo rosa claro · texto à esquerda + imagem à direita
+   (mobile: texto centralizado no topo, imagem embaixo)
+   ========================================================================= */
+.boleto {
+  background: linear-gradient(180deg, #FDEFF6 0%, #FADCEC 100%);
+  padding-top: clamp(1rem, 2.5vw, 1.75rem);   /* menos respiro no topo */
+  padding-bottom: clamp(1.75rem, 3.5vw, 3rem);/* respiro abaixo do botão */
+  overflow: hidden;
+}
+.boleto__grid {
+  display: grid;
+  grid-template-columns: 1fr 1.18fr;
+  align-items: end;           /* imagem alinhada ao fundo da seção */
+  gap: clamp(1.5rem, 4vw, 3rem);
+  max-width: 1240px;
+  margin: 0 auto;
+}
+.boleto__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: center;         /* texto centralizado verticalmente */
+  text-align: left;
+  gap: clamp(.7rem, 2vw, 1.15rem);
+  padding-block: clamp(1rem, 2.5vw, 1.75rem);
+}
+.boleto__title { color: #2A0730; text-align: left; margin: 0; font-size: clamp(1.5rem, 4.4vw, 2.25rem); max-width: 20ch; }
+.boleto__hl { color: #C01C86; }
+.boleto__text {
+  margin: 0;
+  color: #4E2C59;
+  font-size: clamp(1.02rem, 2.6vw, 1.22rem);
+  line-height: 1.5;
+  font-weight: 500;
+}
+.boleto__text strong { color: #C01C86; font-weight: 800; }
+.boleto__label {
+  margin: clamp(.3rem, 1.2vw, .6rem) 0 0;
+  color: #C01C86;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  font-size: clamp(.9rem, 2.4vw, 1.05rem);
+}
+.boleto__price {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .05rem;
+  margin: 0;
+  line-height: 1;
+}
+.boleto__price span { color: #6B4A7A; font-weight: 600; font-size: clamp(1.05rem, 4.3vw, 1.22rem); }
+.boleto__price strong { color: var(--cta); font-weight: 800; font-size: clamp(2.4rem, 7vw, 4rem); line-height: 1; letter-spacing: -.02em; white-space: nowrap; }
+.boleto__cta { margin-top: clamp(.5rem, 1.8vw, .9rem); width: 100%; max-width: 430px; margin-inline: 0; }
+.boleto__media {
+  display: flex; justify-content: center; align-items: flex-end; align-self: end;
+  transform: translateY(clamp(1.75rem, 3.5vw, 3rem));  /* imagem volta a encostar na borda */
+}
+.boleto__media img { width: 100%; max-width: 760px; height: auto; display: block; }
+
+@media (max-width: 959px) {
+  .boleto__grid { grid-template-columns: 1fr; gap: 0; }
+  .boleto__content { align-items: center; text-align: center; padding-block: clamp(1.25rem, 5vw, 2rem) clamp(1.25rem, 5vw, 2rem); }
+  .boleto__title { text-align: center; max-width: none; }
+  .boleto__price { align-items: center; }
+  .boleto__cta { margin-inline: auto; }
+  .boleto__media img { max-width: 520px; }
+}
+
+
+/* =========================================================================
+   AJUSTES PARA ESTA VERSÃO (imagens viram espaços marcados, selos em SVG)
+   ========================================================================= */
+:root { color-scheme: dark; }
+
+/* espaço reservado de imagem */
+.art {
+  width: 100%;
+  aspect-ratio: var(--ar, 16/10);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  text-align: center;
+  font-size: .82rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--text-dark-dim);
+  border-radius: var(--radius-sm);
+  border: 1.5px dashed rgba(124, 13, 164, .45);
+  background: repeating-linear-gradient(135deg, rgba(124,13,164,.06) 0 14px, rgba(124,13,164,.13) 14px 28px);
+}
+.art--proof { max-width: 100%; }
+.art--dark {
+  color: var(--text-dim);
+  border-color: rgba(243, 192, 62, .45);
+  background: repeating-linear-gradient(135deg, rgba(255,255,255,.04) 0 14px, rgba(255,255,255,.09) 14px 28px);
+}
+.art--boleto { border-color: rgba(192, 28, 134, .5); }
+.tier__media--ticket .art,
+.bonus__media--ticket .art { max-width: 445px; margin-inline: auto; }
+
+/* vídeo da hero (VSL vertical) */
+.vsl-ph {
+  max-width: 400px;
+  margin: 0 auto;
+  aspect-ratio: 9 / 16;
+  border-radius: var(--radius);
+  background: linear-gradient(160deg, #5B0677 0%, #1D0126 100%);
+  border: 1px solid rgba(255, 255, 255, .16);
+  box-shadow: 0 18px 44px -22px rgba(0, 0, 0, .9);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .9rem;
+  color: var(--text-dimmer);
+}
+.vsl-play {
+  width: 84px; height: 84px; border-radius: 50%;
+  background: rgba(255, 255, 255, .92); color: var(--grape);
+  display: flex; align-items: center; justify-content: center; padding-left: 5px;
+}
+.vsl-ph small, .vid-ph small { font-size: .8rem; font-weight: 600; letter-spacing: .04em; }
+
+/* vídeo de depoimentos */
+.vid-ph {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  display: flex; align-items: flex-end; justify-content: center;
+  padding-bottom: 1rem;
+  background: radial-gradient(90% 90% at 50% 40%, #2a0a3a 0%, #0A0A0A 100%);
+  color: var(--text-dimmer);
+}
+.vsl-sem-autoplay-botao {
+  position: absolute; top: 50%; left: 50%;
+  width: 74px; height: 74px; border: 0; border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, .55); color: #fff;
+  font-size: 30px; line-height: 1; padding: 0 0 0 5px; cursor: pointer;
+}
+
+/* casos reais (abaixo do player) */
+.cases { display: grid; grid-template-columns: 1fr; gap: var(--sp-4); max-width: 880px; margin: clamp(1.5rem, 5vw, 2.25rem) auto 0; text-align: left; }
+@media (min-width: 880px) { .cases { grid-template-columns: repeat(3, 1fr); } }
+.case {
+  padding: 1.15rem 1.15rem 1.25rem;
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, .07);
+  border: 1px solid rgba(255, 255, 255, .12);
+  display: flex; flex-direction: column; gap: .6rem;
+}
+.case__name { font-size: 1.15rem; font-weight: 800; color: var(--gold); }
+.case p { font-size: .98rem; line-height: 1.5; color: var(--text-dim); text-wrap: pretty; }
+.case .art { margin-top: auto; }
+.cases__note { margin-top: clamp(1.25rem, 4vw, 1.75rem); }
+
+/* selos dourados em SVG */
+.gifts__seal {
+  display: grid; place-items: center; position: relative;
+  width: clamp(54px, 14vw, 78px); aspect-ratio: 1; margin: 0 auto var(--sp-3);
+}
+.gifts__seal svg, .bonus__seal svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.bonus__seal {
+  display: grid; place-items: center;
+  aspect-ratio: 1;
+  color: #4A2C00;
+  font-size: clamp(.8rem, 2.6vw, 1.05rem);
+  letter-spacing: .04em;
+}
+.bonus__seal b { position: relative; font-weight: 800; }
+
+/* carta da Iza: sem arte de fundo, foto vira espaço marcado */
+.letter { background: linear-gradient(100deg, #F7E7FF 0%, #EFCCFF 52%, #DFA3FB 100%); padding-bottom: var(--section-y); }
+.letter::before { display: none; }
+.letter .container { display: block; }
+.letter .letter__card { max-width: 720px; margin-inline: auto; }
+.letter__photo { max-width: 360px; margin: clamp(1.25rem, 4vw, 2rem) auto 0; }
+@media (min-width: 1024px) {
+  .letter .letter__body { column-count: 1; }
+  .letter .letter__card { max-width: 780px; }
+}
+
+/* investimento: fundo amarelo-rosa no lugar da arte */
+.price { background: linear-gradient(135deg, #F7D774 0%, #EB81FF 100%); }
+
+/* boleto */
+.boleto__media .art { max-width: 420px; transform: translateY(0); margin-bottom: 1.5rem; }
+.boleto__media { transform: none; }
+
+/* garantia: sem arte de fundo, o ícone do escudo aparece */
+.warranty { background: radial-gradient(90% 70% at 50% 0%, #4C0468 0%, #1E012A 70%); padding-top: var(--section-y); }
+.warranty .container { display: block; }
+.warranty__card { margin-inline: auto; width: 100%; max-width: 640px; }
+.warranty__icon {
+  display: block;
+  width: clamp(64px, 16vw, 88px); height: auto;
+  margin: 0 auto var(--sp-4);
+  color: var(--gold);
+}
+
+/* rodapé sem linha de CNPJ */
+.footer__links { flex-direction: column; }
+
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="ic-check" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm-1.1 14.3-4.2-4.2 1.5-1.5 2.7 2.7 5.8-5.8 1.5 1.5-7.3 7.3Z"/></symbol>
+    <symbol id="ic-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+    <symbol id="ic-alert" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2 1 21h22L12 2Zm1 14h-2v2h2v-2Zm0-7h-2v5h2V9Z"/></symbol>
+    <symbol id="ic-shield" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M12 3 4 6v6c0 5 3.4 8.4 8 9 4.6-.6 8-4 8-9V6l-8-3Z"/>
+      <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="m8.6 12 2.3 2.3 4.5-4.6"/>
+    </symbol>
+    <symbol id="ic-play" viewBox="0 0 24 24"><path fill="currentColor" d="M8 5.5v13l11-6.5-11-6.5Z"/></symbol>
+    <symbol id="ic-dot" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" fill="currentColor"/></symbol>
+    <symbol id="ic-x" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm4 12.6L14.6 16 12 13.4 9.4 16 8 14.6 10.6 12 8 9.4 9.4 8 12 10.6 14.6 8 16 9.4 13.4 12 16 14.6Z"/></symbol>
+    <linearGradient id="gold-g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFE9A8"/><stop offset=".5" stop-color="#F3C03E"/><stop offset="1" stop-color="#B98524"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<main>
+
+  <!-- 1 — HERO -->
+  <section class="hero" id="hero" aria-labelledby="hero-title">
+    <div class="container">
+      <h1 class="hero__headline" id="hero-title">
+        Falta um passo para você
+        <span class="hero__brilho">ganhar o curso de Cálculo de Medicação de presente</span>
+      </h1>
+
+      <p class="hero__pitch">
+        Assista o vídeo até o final e descubra como receber seu acesso ao Curso
+        Completo de Cálculo de Medicação <span class="hero__preco">(que custa R$&nbsp;197)</span>
+        <strong>de graça na segunda-feira.</strong>
+      </p>
+
+      <div class="hero__vsl-ab">
+        <div class="vsl-ph" role="img" aria-label="Espaço reservado para o vídeo da Iza">
+          <span class="vsl-play"><svg width="34" height="34" aria-hidden="true"><use href="#ic-play"/></svg></span>
+          <small>vídeo da Iza (vertical 9:16)</small>
+        </div>
+      </div>
+
+      <p class="notice">
+        <svg class="notice__icon" width="20" height="20" aria-hidden="true"><use href="#ic-alert"/></svg>
+        <span><strong>ATENÇÃO:</strong> O vídeo acima contém informações exclusivas sobre como garantir presentes especiais. Assista até o final antes de preencher a ficha.</span>
+      </p>
+
+      <div class="cta-wrap">
+        <a class="cta" href="#" data-cta>
+          Quero garantir meus presentes!
+          <svg class="cta__icon" width="20" height="20" aria-hidden="true"><use href="#ic-arrow"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 — URGÊNCIA -->
+  <section class="section urgency" aria-labelledby="urgency-title">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="h-section" id="urgency-title">As inscrições abrem <span class="gold">segunda-feira!</span></h2>
+        <p class="h-sub">Mas quem preencher a <strong class="gold">Ficha dos Presentes:</strong></p>
+      </div>
+
+      <ul class="perks">
+        <li class="perk">
+          <div class="perk__body">
+            <svg class="perk__check" width="22" height="22" aria-hidden="true"><use href="#ic-check"/></svg>
+            <span>Recebe o link <strong>1 HORA ANTES</strong> de todo mundo às 7h, pelo Grupo do WhatsApp</span>
+          </div>
+          <div class="perk__media"><div class="art" style="--ar:800/500">mockup da Formação Enfermagem de Valor em computador, tablet e celular</div></div>
+        </li>
+
+        <li class="perk">
+          <div class="perk__body">
+            <svg class="perk__check" width="22" height="22" aria-hidden="true"><use href="#ic-check"/></svg>
+            <span>Garante o curso <strong>Cálculo de Medicação (R$ 197)</strong> ao se inscrever</span>
+          </div>
+          <div class="perk__media"><div class="art" style="--ar:800/521">capa do curso de Cálculo de Medicação</div></div>
+          <figure class="perk__proof">
+            <div class="art art--proof" style="--ar:775/145">print de depoimento de aluna</div>
+            <figcaption>Depoimento real de aluna da Formação</figcaption>
+          </figure>
+        </li>
+
+        <li class="perk">
+          <div class="perk__body">
+            <svg class="perk__check" width="22" height="22" aria-hidden="true"><use href="#ic-check"/></svg>
+            <span>Tem mais chances de ficar entre as primeiras e ganhar <strong>presentes especiais.</strong></span>
+          </div>
+          <div class="perk__media"><div class="art" style="--ar:744/547">foto do Kit Plantão Enfermagem de Valor</div></div>
+        </li>
+      </ul>
+
+      <div class="countdown" data-countdown>
+        <p class="countdown__label">Faltam</p>
+        <div class="countdown__grid">
+          <div class="countdown__cell"><span class="countdown__num" data-unit="d">00</span><span class="countdown__unit">Dias</span></div>
+          <div class="countdown__cell"><span class="countdown__num" data-unit="h">00</span><span class="countdown__unit">Horas</span></div>
+          <div class="countdown__cell"><span class="countdown__num" data-unit="m">00</span><span class="countdown__unit">Minutos</span></div>
+          <div class="countdown__cell"><span class="countdown__num" data-unit="s">00</span><span class="countdown__unit">Segundos</span></div>
+        </div>
+      </div>
+
+      <div class="cta-wrap">
+        <a class="cta" href="#" data-cta>
+          Preencher minha ficha agora!
+          <svg class="cta__icon" width="20" height="20" aria-hidden="true"><use href="#ic-arrow"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 — PRESENTES -->
+  <section class="section gifts" aria-labelledby="gifts-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="gifts__seal" aria-hidden="true"><svg viewBox="0 0 100 100" aria-hidden="true"><polygon points="50.00,2.00 54.81,7.27 60.68,3.20 64.20,9.41 70.83,6.75 72.88,13.59 79.93,12.47 80.41,19.59 87.53,20.07 86.41,27.12 93.25,29.17 90.59,35.80 96.80,39.32 92.73,45.19 98.00,50.00 92.73,54.81 96.80,60.68 90.59,64.20 93.25,70.83 86.41,72.88 87.53,79.93 80.41,80.41 79.93,87.53 72.88,86.41 70.83,93.25 64.20,90.59 60.68,96.80 54.81,92.73 50.00,98.00 45.19,92.73 39.32,96.80 35.80,90.59 29.17,93.25 27.12,86.41 20.07,87.53 19.59,80.41 12.47,79.93 13.59,72.88 6.75,70.83 9.41,64.20 3.20,60.68 7.27,54.81 2.00,50.00 7.27,45.19 3.20,39.32 9.41,35.80 6.75,29.17 13.59,27.12 12.47,20.07 19.59,19.59 20.07,12.47 27.12,13.59 29.17,6.75 35.80,9.41 39.32,3.20 45.19,7.27" fill="url(#gold-g)" stroke="#8A5F10" stroke-width=".8"/><g fill="none" stroke="#4A2C00" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"><rect x="29" y="44" width="42" height="26" rx="2"/><rect x="26" y="36" width="48" height="10" rx="2"/><path d="M50 36v34"/><path d="M50 36c-6-10-16-8-14-2 1.5 4 9 3 14 2Zm0 0c6-10 16-8 14-2-1.5 4-9 3-14 2Z"/></g></svg></span>
+        <h2 class="h-section" id="gifts-title">Olha tudo que você <span class="gold">vai receber:</span></h2>
+      </div>
+
+      <div class="tiers">
+
+        <article class="tier">
+          <p class="tier__badge"><span class="grape">Primeira</span> inscrita:</p>
+          <div class="tier__card">
+            <div class="tier__content">
+              <h3 class="tier__title">Kit Plantão Enfermagem de Valor completo</h3>
+              <ul class="tier__list">
+                <li><svg width="18" height="18" aria-hidden="true"><use href="#ic-dot"/></svg> Jaleco Enfermagem de Valor</li>
+                <li><svg width="18" height="18" aria-hidden="true"><use href="#ic-dot"/></svg> Kit Evolução e Rotina de Plantão</li>
+                <li><svg width="18" height="18" aria-hidden="true"><use href="#ic-dot"/></svg> E o Kit do Primeiro Atendimento completo!</li>
+              </ul>
+              <p class="tier__price"><span class="tier__from">Valor: +<s>R$ 491,98</s></span><span class="tier__free">De graça</span></p>
+            </div>
+            <div class="tier__media"><div class="art" style="--ar:744/547">foto do Kit Plantão completo</div></div>
+          </div>
+        </article>
+
+        <article class="tier">
+          <p class="tier__badge">Para as <span class="grape">10 primeiras</span> inscritas:</p>
+          <div class="tier__card">
+            <div class="tier__content">
+              <h3 class="tier__title">Kit Evolução e Rotina de Plantão + Kit do Primeiro Atendimento:</h3>
+              <p class="tier__text">Modelos para organizar anotação, evolução e rotina profissional, mais uma ferramenta para sua preparação no primeiro atendimento. Menos improvisação, mais organização.</p>
+              <p class="tier__price"><span class="tier__from">Valor: <s>R$ 194,98</s></span><span class="tier__free">De graça</span></p>
+            </div>
+            <div class="tier__media"><div class="art" style="--ar:500/304">foto dos kits</div></div>
+          </div>
+        </article>
+
+        <article class="tier">
+          <p class="tier__badge">Para as <span class="grape">50 primeiras</span> inscritas:</p>
+          <div class="tier__card">
+            <div class="tier__content">
+              <h3 class="tier__title">Jaleco Enfermagem de Valor:</h3>
+              <p class="tier__text">Mais que um bônus, um símbolo: de "eu tenho medo" para "eu estou me preparando para ocupar meu lugar".</p>
+              <p class="tier__price"><span class="tier__from">Valor: <s>R$ 297,00</s></span><span class="tier__free">De graça</span></p>
+            </div>
+            <div class="tier__media"><div class="art" style="--ar:1/1">foto da Iza segurando o jaleco</div></div>
+          </div>
+        </article>
+
+        <article class="tier">
+          <p class="tier__badge">Para todas as inscritas na segunda-feira <span class="grape">entre 7h e 9h da manhã:</span></p>
+          <div class="tier__card">
+            <div class="tier__content">
+              <h3 class="tier__title">Kit do Primeiro Atendimento:</h3>
+              <p class="tier__text">Quem se inscrever nas primeiras horas do carrinho, das 7h às 9h da segunda-feira, ganha mais uma ferramenta complementar para a sua preparação profissional.</p>
+              <p class="tier__price"><span class="tier__from">Valor: <s>R$ 97,98</s></span><span class="tier__free">De graça</span></p>
+            </div>
+            <div class="tier__media tier__media--ticket"><div class="art" style="--ar:445/196">cupom: Kit do Primeiro Atendimento</div></div>
+          </div>
+        </article>
+
+        <article class="tier">
+          <p class="tier__badge">Para todas as inscritas na segunda-feira <span class="grape">até às 23h59:</span></p>
+          <div class="tier__card">
+            <div class="tier__content">
+              <h3 class="tier__title">Kit Evolução e Rotina de Plantão:</h3>
+              <p class="tier__text">Modelos para auxiliar na organização da anotação, evolução e rotina profissional, para você ter menos improviso e mais organização no plantão.</p>
+              <p class="tier__price"><span class="tier__from">Valor: <s>R$ 97,00</s></span><span class="tier__free">De graça</span></p>
+            </div>
+            <div class="tier__media"><div class="art" style="--ar:800/500">arte do Kit Evolução e Rotina</div></div>
+          </div>
+        </article>
+
+        <article class="tier">
+          <p class="tier__badge">Somente para quem <span class="grape">preencher a ficha e se inscrever:</span></p>
+          <div class="tier__card">
+            <div class="tier__content">
+              <h3 class="tier__title">Curso Completo de Cálculo de Medicação:</h3>
+              <p class="tier__text">Se cálculo ainda é um daqueles assuntos que fazem você gelar, essa lacuna não precisa ficar aberta. Um treinamento específico para desenvolver esse conhecimento.</p>
+              <p class="tier__price"><span class="tier__from">Valor: <s>R$ 197,00</s></span><span class="tier__free">De graça</span></p>
+            </div>
+            <div class="tier__media"><div class="art" style="--ar:800/500">capa do curso de Cálculo de Medicação</div></div>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="cta-wrap">
+        <a class="cta" href="#" data-cta>
+          Quero todos esses presentes!
+          <svg class="cta__icon" width="20" height="20" aria-hidden="true"><use href="#ic-arrow"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 — BÔNUS -->
+  <section class="section bonuses" aria-labelledby="bonus-title">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="h-section" id="bonus-title"><span class="gold">Bônus exclusivos</span> dessa turma:</h2>
+        <p class="h-sub">Essa turma tem presentes muito especiais:</p>
+      </div>
+
+      <div class="bonus-grid">
+
+        <article class="bonus">
+          <span class="bonus__seal" aria-hidden="true"><svg viewBox="0 0 100 100" aria-hidden="true"><polygon points="50.00,2.00 54.81,7.27 60.68,3.20 64.20,9.41 70.83,6.75 72.88,13.59 79.93,12.47 80.41,19.59 87.53,20.07 86.41,27.12 93.25,29.17 90.59,35.80 96.80,39.32 92.73,45.19 98.00,50.00 92.73,54.81 96.80,60.68 90.59,64.20 93.25,70.83 86.41,72.88 87.53,79.93 80.41,80.41 79.93,87.53 72.88,86.41 70.83,93.25 64.20,90.59 60.68,96.80 54.81,92.73 50.00,98.00 45.19,92.73 39.32,96.80 35.80,90.59 29.17,93.25 27.12,86.41 20.07,87.53 19.59,80.41 12.47,79.93 13.59,72.88 6.75,70.83 9.41,64.20 3.20,60.68 7.27,54.81 2.00,50.00 7.27,45.19 3.20,39.32 9.41,35.80 6.75,29.17 13.59,27.12 12.47,20.07 19.59,19.59 20.07,12.47 27.12,13.59 29.17,6.75 35.80,9.41 39.32,3.20 45.19,7.27" fill="url(#gold-g)" stroke="#8A5F10" stroke-width=".8"/><circle cx="50" cy="50" r="36" fill="none" stroke="#FFF3CF" stroke-width="1.6"/><circle cx="50" cy="50" r="33" fill="none" stroke="#8A5F10" stroke-width=".7" opacity=".6"/></svg><b>BÔNUS</b></span>
+          <p class="bonus__tag">Bônus 01</p>
+          <h3 class="bonus__title">Comunidade Enfermagem de Valor:</h3>
+          <p class="bonus__text">Você não precisa caminhar sozinha. Um ambiente com outras profissionais buscando conhecimento e crescimento, com troca de experiências, networking, apoio, indicações, dificuldades e vitórias.</p>
+          <div class="bonus__media bonus__media--ticket"><div class="art" style="--ar:445/196">cupom: Comunidade Enfermagem de Valor</div></div>
+        </article>
+
+        <article class="bonus">
+          <span class="bonus__seal" aria-hidden="true"><svg viewBox="0 0 100 100" aria-hidden="true"><polygon points="50.00,2.00 54.81,7.27 60.68,3.20 64.20,9.41 70.83,6.75 72.88,13.59 79.93,12.47 80.41,19.59 87.53,20.07 86.41,27.12 93.25,29.17 90.59,35.80 96.80,39.32 92.73,45.19 98.00,50.00 92.73,54.81 96.80,60.68 90.59,64.20 93.25,70.83 86.41,72.88 87.53,79.93 80.41,80.41 79.93,87.53 72.88,86.41 70.83,93.25 64.20,90.59 60.68,96.80 54.81,92.73 50.00,98.00 45.19,92.73 39.32,96.80 35.80,90.59 29.17,93.25 27.12,86.41 20.07,87.53 19.59,80.41 12.47,79.93 13.59,72.88 6.75,70.83 9.41,64.20 3.20,60.68 7.27,54.81 2.00,50.00 7.27,45.19 3.20,39.32 9.41,35.80 6.75,29.17 13.59,27.12 12.47,20.07 19.59,19.59 20.07,12.47 27.12,13.59 29.17,6.75 35.80,9.41 39.32,3.20 45.19,7.27" fill="url(#gold-g)" stroke="#8A5F10" stroke-width=".8"/><circle cx="50" cy="50" r="36" fill="none" stroke="#FFF3CF" stroke-width="1.6"/><circle cx="50" cy="50" r="33" fill="none" stroke="#8A5F10" stroke-width=".7" opacity=".6"/></svg><b>BÔNUS</b></span>
+          <p class="bonus__tag">Bônus 02</p>
+          <h3 class="bonus__title">60 dias de acompanhamento com a Iza:</h3>
+          <p class="bonus__text">Programa de acompanhamento supervisionado dos primeiros 60 dias, para combater a inércia e colocar em prática o que você está aprendendo. Porque existe uma diferença entre "eu assisti" e "eu comecei a colocar em prática".</p>
+          <div class="bonus__media"><div class="art" style="--ar:800/500">acompanhamento de 60 dias em um notebook</div></div>
+          <figure class="bonus__proof"><div class="art art--proof" style="--ar:620/247">print de depoimento</div></figure>
+        </article>
+
+        <article class="bonus">
+          <span class="bonus__seal" aria-hidden="true"><svg viewBox="0 0 100 100" aria-hidden="true"><polygon points="50.00,2.00 54.81,7.27 60.68,3.20 64.20,9.41 70.83,6.75 72.88,13.59 79.93,12.47 80.41,19.59 87.53,20.07 86.41,27.12 93.25,29.17 90.59,35.80 96.80,39.32 92.73,45.19 98.00,50.00 92.73,54.81 96.80,60.68 90.59,64.20 93.25,70.83 86.41,72.88 87.53,79.93 80.41,80.41 79.93,87.53 72.88,86.41 70.83,93.25 64.20,90.59 60.68,96.80 54.81,92.73 50.00,98.00 45.19,92.73 39.32,96.80 35.80,90.59 29.17,93.25 27.12,86.41 20.07,87.53 19.59,80.41 12.47,79.93 13.59,72.88 6.75,70.83 9.41,64.20 3.20,60.68 7.27,54.81 2.00,50.00 7.27,45.19 3.20,39.32 9.41,35.80 6.75,29.17 13.59,27.12 12.47,20.07 19.59,19.59 20.07,12.47 27.12,13.59 29.17,6.75 35.80,9.41 39.32,3.20 45.19,7.27" fill="url(#gold-g)" stroke="#8A5F10" stroke-width=".8"/><circle cx="50" cy="50" r="36" fill="none" stroke="#FFF3CF" stroke-width="1.6"/><circle cx="50" cy="50" r="33" fill="none" stroke="#8A5F10" stroke-width=".7" opacity=".6"/></svg><b>BÔNUS</b></span>
+          <p class="bonus__tag">Bônus 03</p>
+          <h3 class="bonus__title">Currículo Magnético + Aula de Entrevista</h3>
+          <p class="bonus__text">Organização do currículo, apresentação, posicionamento e preparação para entrevista. Sua competência precisa chegar até quem está contratando.</p>
+          <div class="bonus__media"><div class="art" style="--ar:800/500">arte do Currículo Magnético</div></div>
+          <figure class="bonus__proof"><div class="art art--proof" style="--ar:628/207">print de depoimento</div></figure>
+        </article>
+
+        <article class="bonus">
+          <span class="bonus__seal" aria-hidden="true"><svg viewBox="0 0 100 100" aria-hidden="true"><polygon points="50.00,2.00 54.81,7.27 60.68,3.20 64.20,9.41 70.83,6.75 72.88,13.59 79.93,12.47 80.41,19.59 87.53,20.07 86.41,27.12 93.25,29.17 90.59,35.80 96.80,39.32 92.73,45.19 98.00,50.00 92.73,54.81 96.80,60.68 90.59,64.20 93.25,70.83 86.41,72.88 87.53,79.93 80.41,80.41 79.93,87.53 72.88,86.41 70.83,93.25 64.20,90.59 60.68,96.80 54.81,92.73 50.00,98.00 45.19,92.73 39.32,96.80 35.80,90.59 29.17,93.25 27.12,86.41 20.07,87.53 19.59,80.41 12.47,79.93 13.59,72.88 6.75,70.83 9.41,64.20 3.20,60.68 7.27,54.81 2.00,50.00 7.27,45.19 3.20,39.32 9.41,35.80 6.75,29.17 13.59,27.12 12.47,20.07 19.59,19.59 20.07,12.47 27.12,13.59 29.17,6.75 35.80,9.41 39.32,3.20 45.19,7.27" fill="url(#gold-g)" stroke="#8A5F10" stroke-width=".8"/><circle cx="50" cy="50" r="36" fill="none" stroke="#FFF3CF" stroke-width="1.6"/><circle cx="50" cy="50" r="33" fill="none" stroke="#8A5F10" stroke-width=".7" opacity=".6"/></svg><b>BÔNUS</b></span>
+          <p class="bonus__tag">Bônus 04</p>
+          <h3 class="bonus__title">Kit de E-books da Enfermagem:</h3>
+          <p class="bonus__text">Materiais complementares para apoiar sua jornada de estudo e de preparação para o plantão.</p>
+          <div class="bonus__media bonus__media--ticket"><div class="art" style="--ar:445/196">cupom: Kit de E-books da Enfermagem</div></div>
+        </article>
+
+      </div>
+
+      <div class="cta-wrap">
+        <a class="cta" href="#" data-cta>
+          Quero meus presentes
+          <svg class="cta__icon" width="20" height="20" aria-hidden="true"><use href="#ic-arrow"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 — CERTIFICADO -->
+  <section class="section course" aria-labelledby="course-title">
+    <div class="container">
+      <div class="course__media"><div class="art art--dark" style="--ar:786/376">imagem do certificado de extensão universitária emoldurado</div></div>
+
+      <h2 class="h-section" id="course-title">Você vai ter certificado!</h2>
+
+      <p class="course__claim">
+        A <span class="gold">Formação Enfermagem de Valor 2.0</span> tem
+        <span class="gold">365 dias de acesso</span> para você estudar, revisar e desenvolver seu conhecimento no seu ritmo.
+      </p>
+
+      <p class="course__text">
+        Ao cumprir os critérios da Formação, <strong>você ganha seu certificado</strong> para acrescentar à sua trajetória e
+        <strong>mostrar seu conhecimento para quem está contratando:</strong>
+      </p>
+
+      <p class="course__certs">Certificado de extensão universitária</p>
+
+      <div class="cta-wrap">
+        <a class="cta" href="#" data-cta>
+          Quero meus presentes
+          <svg class="cta__icon" width="20" height="20" aria-hidden="true"><use href="#ic-arrow"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 — DEPOIMENTOS -->
+  <section class="section testimonials" aria-labelledby="testimonials-title">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="h-section" id="testimonials-title">Resultados reais, <span class="gold">sem promessa mágica:</span></h2>
+      </div>
+
+      <div class="testimonials__player">
+        <div class="vid-ph" role="img" aria-label="Espaço reservado para o vídeo de depoimentos">
+          <button type="button" class="vsl-sem-autoplay-botao" aria-label="Reproduzir vídeo">▶</button>
+          <small>vídeo de depoimentos das alunas</small>
+        </div>
+      </div>
+
+      <div class="cases">
+        <article class="case">
+          <h3 class="case__name">Lúcia</h3>
+          <p>9 anos formada sem exercer. Depois de entrar para a Formação, foi contratada por um hospital em 15 dias. Relatou renda aproximada de R$ 3.700, comparada a cerca de R$ 2.000 anteriormente.</p>
+          <div class="art art--dark" style="--ar:16/7">print / vídeo da Lúcia</div>
+        </article>
+        <article class="case">
+          <h3 class="case__name">Aluna aos 58 anos</h3>
+          <p>Concluiu o técnico aos 58 anos e relatava não ter conhecimento suficiente, especialmente sobre dispositivos. Depois conseguiu seu primeiro plantão e chegou à alta complexidade.</p>
+          <div class="art art--dark" style="--ar:16/7">prova original</div>
+        </article>
+        <article class="case">
+          <h3 class="case__name">Ronaldo</h3>
+          <p>Recebia R$ 80 por 12 horas como cuidador. Depois de mudar sua postura de negociação, passou a pedir R$ 150 pelas mesmas 12 horas.</p>
+          <div class="art art--dark" style="--ar:16/7">prova original</div>
+        </article>
+      </div>
+
+      <p class="notice cases__note">
+        <svg class="notice__icon" width="20" height="20" aria-hidden="true"><use href="#ic-alert"/></svg>
+        <span><strong>IMPORTANTE:</strong> esses são resultados individuais. Não representam promessa de contratação, renda, prazo ou resultado específico. Dependem de dedicação, aplicação, região, oportunidades e contexto de cada profissional.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- 7 — COMPARAÇÃO -->
+  <section class="section compare" aria-labelledby="compare-title">
+    <div class="container">
+      <div class="section-head"><h2 class="h-section" id="compare-title">Olha a diferença:</h2></div>
+
+      <div class="compare__grid">
+
+        <div class="plan">
+          <h3 class="plan__head">Formação Enfermagem de Valor normal</h3>
+          <ul class="plan__list">
+            <li><svg class="ic-yes" width="18" height="18" aria-hidden="true"><use href="#ic-check"/></svg> Formação Enfermagem de Valor 2.0</li>
+            <li><svg class="ic-yes" width="18" height="18" aria-hidden="true"><use href="#ic-check"/></svg> GPS do Plantão Sem Medo (3 Domínios)</li>
+            <li><svg class="ic-yes" width="18" height="18" aria-hidden="true"><use href="#ic-check"/></svg> 365 dias de acesso</li>
+            <li><svg class="ic-yes" width="18" height="18" aria-hidden="true"><use href="#ic-check"/></svg> Certificado de extensão universitária</li>
+            <li><svg class="ic-no" width="18" height="18" aria-hidden="true"><use href="#ic-x"/></svg> <span class="is-off">Comunidade Enfermagem de Valor</span></li>
+            <li><svg class="ic-no" width="18" height="18" aria-hidden="true"><use href="#ic-x"/></svg> <span class="is-off">60 dias de acompanhamento com a Iza</span></li>
+            <li><svg class="ic-no" width="18" height="18" aria-hidden="true"><use href="#ic-x"/></svg> <span class="is-off">Currículo Magnético + Aula de Entrevista</span></li>
+            <li><svg class="ic-no" width="18" height="18" aria-hidden="true"><use href="#ic-x"/></svg> <span class="is-off">Kit de E-books da Enfermagem</span></li>
+            <li><svg class="ic-no" width="18" height="18" aria-hidden="true"><use href="#ic-x"/></svg> <span class="is-off">Kit Evolução e Rotina de Plantão</span></li>
+            <li><svg class="ic-no" width="18" height="18" aria-hidden="true"><use href="#ic-x"/></svg> <span class="is-off">Kit do Primeiro Atendimento</span></li>
+            <li><svg class="ic-no" width="18" height="18" aria-hidden="true"><use href="#ic-x"/></svg> <span class="is-off">Jaleco Enfermagem de Valor</span></li>
+            <li><svg class="ic-no" width="18" height="18" aria-hidden="true"><use href="#ic-x"/></svg> <span class="is-off">Curso de Cálculo de Medicação</span></li>
+          </ul>
+          <div class="plan__price"><p class="plan__price-old">R$ 1.297,00</p></div>
+        </div>
+
+        <div class="plan plan--best">
+          <h3 class="plan__head">Promoção Antecipação Enfermagem de Valor</h3>
+          <ul class="plan__list">
+            <li><svg class="ic-yes" width="18" height="18" aria-hidden="true"><use href="#ic-check"/></svg> Formação Enfermagem de Valor 2.0</li>
+            <li><svg class="ic-yes" width="18" height="18" aria-hidden="true"><use href="#ic-check"/></svg> GPS do Plantão Sem Medo (3 Domínios)</li>
+            <li><svg class="ic-yes" width="18" height="18" aria-hidden="true"><use href="#ic-check"/></svg> 365 dias de acesso</li>
+            <li><svg class="ic-yes" width="18" height="18" aria-hidden="true"><use href="#ic-check"/></svg> Certificado de extensão universitária</li>
+            <li><svg class="ic-yes" width="18" height="18" aria-hidden="true"><use href="#ic-check"/></svg> <span class="plan__item"><strong>Comunidade Enfermagem de Valor</strong><em>(valor: R$ 497)</em></span></li>
+            <li><svg class="ic-yes" width="18" height="18" aria-hidden="true"><use href="#ic-check"/></svg> <span class="plan__item"><strong>60 dias de acompanhamento com a Iza</strong><em>(valor: R$ 3.000)</em></span></li>
+            <li><svg class="ic-yes" width="18" height="18" aria-hidden="true"><use href="#ic-check"/></svg> <span class="plan__item"><strong>Currículo Magnético + Aula de Entrevista</strong><em>(valor: R$ 49,97)</em></span></li>
+            <li><svg class="ic-yes" width="18" height="18" aria-hidden="true"><use href="#ic-check"/></svg> <span class="plan__item"><strong>Kit de E-books da Enfermagem</strong><em>(valor: R$ 69,98)</em></span></li>
+            <li><svg class="ic-yes" width="18" height="18" aria-hidden="true"><use href="#ic-check"/></svg> <span class="plan__item"><strong>Kit Evolução e Rotina de Plantão</strong><em>(valor: R$ 97 - até 23:59 de segunda)*</em></span></li>
+            <li><svg class="ic-yes" width="18" height="18" aria-hidden="true"><use href="#ic-check"/></svg> <span class="plan__item"><strong>Kit do Primeiro Atendimento</strong><em>(valor: R$ 97,98 - das 7h às 9h de segunda)*</em></span></li>
+            <li><svg class="ic-yes" width="18" height="18" aria-hidden="true"><use href="#ic-check"/></svg> <span class="plan__item"><strong>Jaleco Enfermagem de Valor</strong><em>(valor: R$ 297)</em></span></li>
+            <li><svg class="ic-yes" width="18" height="18" aria-hidden="true"><use href="#ic-check"/></svg> <span class="plan__item"><strong>Curso de Cálculo de Medicação</strong><em>(valor: R$ 197)*</em></span></li>
+          </ul>
+          <div class="plan__price">
+            <p class="plan__price-main"><span>12x de</span>R$ 70,18</p>
+            <p class="plan__price-alt">ou R$ 698,98 à vista.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 — CARTA DA IZA -->
+  <section class="section letter" aria-labelledby="letter-title">
+    <div class="container">
+      <div class="letter__card">
+
+        <h2 class="letter__title" id="letter-title">"Iza, por que você está dando <strong>tudo isso?"</strong></h2>
+
+        <div class="letter__body">
+          <p>A resposta é simples: porque eu não quero que você espere <strong>mais um ano</strong> para começar a viver da enfermagem.</p>
+          <p>A Lúcia ficou <strong>9 anos</strong> formada sem exercer. 15 dias depois de entrar para a Formação, foi contratada por um hospital. É um resultado individual, não uma promessa, mas mostra que esperar sentir confiança não faz o medo desaparecer.</p>
+          <p>Eu sei que o medo trava. A insegurança trava. O "e se eu não der conta?" trava.</p>
+          <p>Por isso eu decidi tirar TODAS as suas desculpas.</p>
+          <p>Não tem cartão? <strong>Parcelei no boleto em 12x de R$ 89,25.</strong></p>
+          <p>Tem medo de não ser para você? Coloquei <strong>7 dias de garantia incondicional.</strong></p>
+          <p>Não sabe por onde começar? Criei os <strong>60 dias de acompanhamento</strong> para segurar a sua bicicleta.</p>
+          <p>Trava na hora do currículo e da entrevista? Incluí o <strong>Currículo Magnético</strong> com aula completa.</p>
+          <p>Preciosa, eu estou colocando o meu conhecimento e a minha história à sua disposição.</p>
+          <p>Agora só falta você dar o <strong>primeiro passo.</strong></p>
+          <p>Preenche a <strong>Ficha dos Presentes</strong> e me encontra na <strong>segunda-feira às 7h.</strong></p>
+        </div>
+
+        <p class="letter__sign">Vamos juntas?</p>
+
+        <div class="cta-wrap">
+          <a class="cta" href="#" data-cta>
+            Eu quero essa promoção
+            <svg class="cta__icon" width="20" height="20" aria-hidden="true"><use href="#ic-arrow"/></svg>
+          </a>
+        </div>
+
+      </div>
+      <div class="letter__photo"><div class="art" style="--ar:4/5">foto da Iza</div></div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      <span class="marquee__item">Técnica de Enfermagem de Valor •</span>
+      <span class="marquee__item">Técnica de Enfermagem de Valor •</span>
+      <span class="marquee__item">Técnica de Enfermagem de Valor •</span>
+      <span class="marquee__item">Técnica de Enfermagem de Valor •</span>
+      <span class="marquee__item">Técnica de Enfermagem de Valor •</span>
+      <span class="marquee__item">Técnica de Enfermagem de Valor •</span>
+      <span class="marquee__item">Técnica de Enfermagem de Valor •</span>
+      <span class="marquee__item">Técnica de Enfermagem de Valor •</span>
+      <span class="marquee__item">Técnica de Enfermagem de Valor •</span>
+      <span class="marquee__item">Técnica de Enfermagem de Valor •</span>
+      <span class="marquee__item">Técnica de Enfermagem de Valor •</span>
+      <span class="marquee__item">Técnica de Enfermagem de Valor •</span>
+      <span class="marquee__item">Técnica de Enfermagem de Valor •</span>
+      <span class="marquee__item">Técnica de Enfermagem de Valor •</span>
+      <span class="marquee__item">Técnica de Enfermagem de Valor •</span>
+      <span class="marquee__item">Técnica de Enfermagem de Valor •</span>
+    </div>
+  </div>
+
+  <!-- 9 — INVESTIMENTO -->
+  <section class="section price" aria-labelledby="price-title">
+    <div class="container">
+      <div class="price__card">
+        <div class="price__mock"><div class="art art--dark" style="--ar:860/500">mockup: tudo que está incluso na Formação</div></div>
+
+        <h2 class="h-section" id="price-title">Quanto custa <span class="gold">tudo isso?</span></h2>
+
+        <p class="price__old">R$ 1.297,00</p>
+        <p class="price__label">12x de</p>
+        <p class="price__main">R$ 70,18</p>
+        <p class="price__alt">ou <strong>R$ 698,98 à vista</strong></p>
+        <p class="price__save"><strong>Você economiza R$ 598,02</strong> nessa turma especial!</p>
+
+        <div class="cta-wrap">
+          <a class="cta" href="#" data-cta>
+            Quero meus presentes
+            <svg class="cta__icon" width="20" height="20" aria-hidden="true"><use href="#ic-arrow"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOLETO -->
+  <section class="section boleto" aria-labelledby="boleto-title">
+    <div class="container">
+      <div class="boleto__grid">
+        <div class="boleto__content">
+          <h2 class="h-section boleto__title" id="boleto-title">Você vai poder entrar com o <span class="boleto__hl">boleto parcelado</span> também!</h2>
+          <p class="boleto__text">Você vai poder garantir a sua vaga na Formação Enfermagem de Valor 2.0 com o <strong>Parcelamento no Boleto</strong> desde o primeiro dia!</p>
+          <p class="boleto__text">Você vai pagar o valor da parcela mensalmente, <strong>sem precisar de cartão de crédito!</strong></p>
+          <p class="boleto__label">Por apenas:</p>
+          <p class="boleto__price"><span>12x de</span><strong>R$ 89,25</strong></p>
+          <a class="cta boleto__cta" href="#" data-cta>
+            Quero boleto parcelado!
+            <svg class="cta__icon" width="20" height="20" aria-hidden="true"><use href="#ic-arrow"/></svg>
+          </a>
+        </div>
+        <div class="boleto__media"><div class="art art--boleto" style="--ar:884/942">foto da Iza surpresa abrindo um baú de boletos</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 — GARANTIA -->
+  <section class="section warranty" aria-labelledby="warranty-title">
+    <div class="container">
+      <div class="warranty__card">
+        <svg class="warranty__icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-shield"/></svg>
+
+        <h2 class="warranty__title" id="warranty-title">Garantia <span class="gold">incondicional de 7 dias</span></h2>
+
+        <div class="warranty__text">
+          <p>Entre. Acesse. Conheça a plataforma. Assista. <strong>Entenda a proposta.</strong></p>
+          <p class="hl">Se dentro do período de garantia você perceber que a Formação não faz sentido para você, poderá solicitar o reembolso conforme o procedimento informado.</p>
+          <p><em>Eu não quero que você fique porque se sente presa. Quero que fique porque decidiu construir esse caminho.</em></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 — PASSOS -->
+  <section class="section steps" aria-labelledby="steps-title">
+    <div class="container">
+      <div class="section-head"><h2 class="h-section" id="steps-title">Como garantir <span class="gold">seus presentes?</span></h2></div>
+
+      <ol class="steps__list">
+        <li class="step"><span class="step__num"><span>Passo</span><b>01</b></span><p class="step__text">Preencha a <strong>Ficha dos Presentes</strong> clicando no botão abaixo</p></li>
+        <li class="step"><span class="step__num"><span>Passo</span><b>02</b></span><p class="step__text">Receba o link de inscrição <strong>às 7h da manhã</strong> de segunda-feira (1 hora antes de todo mundo!)</p></li>
+        <li class="step"><span class="step__num"><span>Passo</span><b>03</b></span><p class="step__text">Corra para se inscrever nos <strong>primeiros minutos</strong> e garanta presentes incríveis.</p></li>
+      </ol>
+
+      <div class="cta-wrap">
+        <a class="cta" href="#" data-cta>
+          Preencher ficha agora!
+          <svg class="cta__icon" width="20" height="20" aria-hidden="true"><use href="#ic-arrow"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 — FECHAMENTO -->
+  <section class="section closing" aria-labelledby="closing-title">
+    <div class="container container--narrow">
+
+      <p class="notice notice--alert">
+        <svg class="notice__icon" width="20" height="20" aria-hidden="true"><use href="#ic-alert"/></svg>
+        <span><strong>ATENÇÃO:</strong> A Formação continua disponível depois, mas a condição especial de <strong>R$ 698,98</strong> vale só enquanto o seu cronômetro estiver ativo.</span>
+      </p>
+
+      <div class="countdown countdown--soft" data-countdown>
+        <h2 class="countdown__label" id="closing-title">As inscrições abrem em:</h2>
+        <div class="countdown__grid">
+          <div class="countdown__cell"><span class="countdown__num" data-unit="d">00</span><span class="countdown__unit">Dias</span></div>
+          <div class="countdown__cell"><span class="countdown__num" data-unit="h">00</span><span class="countdown__unit">Horas</span></div>
+          <div class="countdown__cell"><span class="countdown__num" data-unit="m">00</span><span class="countdown__unit">Minutos</span></div>
+          <div class="countdown__cell"><span class="countdown__num" data-unit="s">00</span><span class="countdown__unit">Segundos</span></div>
+        </div>
+      </div>
+
+      <div class="cta-wrap">
+        <a class="cta" href="#" data-cta>
+          Quero meus presentes
+          <svg class="cta__icon" width="20" height="20" aria-hidden="true"><use href="#ic-arrow"/></svg>
+        </a>
+      </div>
+
+      <p class="closing__sign">Seja a técnica de enfermagem que age e transforma sua vida!</p>
+      <p class="closing__name">Iza Gonçalves</p>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer__top">
+      <p class="footer__copy">Copyright &copy; Enfermagem de Valor.<br />Todos os direitos reservados.</p>
+      <div class="footer__links">
+        <span class="footer__links-row">
+          <a href="#">Política de privacidade</a>
+          <span aria-hidden="true">|</span>
+          <a href="#">Termos de uso</a>
+        </span>
+      </div>
+    </div>
+    <div class="footer__legal">
+      <span class="footer__legal-label">Aviso Legal:</span>
+      Os resultados podem variar de pessoa para pessoa. Este método tem caráter educacional e de desenvolvimento profissional, não garantindo contratação, renda, prazo ou ganhos financeiros imediatos ou específicos. O sucesso depende da aplicação prática de cada participante. Este site não é afiliado, endossado ou patrocinado pelo Google ou Meta.
+    </div>
+  </div>
+</footer>
+
+<div class="sticky-cta" id="sticky-cta">
+  <a class="cta" href="#" data-cta>
+    Preencher a Ficha dos Presentes
+    <svg class="cta__icon" width="18" height="18" aria-hidden="true"><use href="#ic-arrow"/></svg>
+  </a>
+</div>
+
+<script>(function () {
+  "use strict";
+
+  /* Ajuste aqui: link da Ficha dos Presentes e abertura das inscrições */
+  var PAGE_CONFIG = {
+    ficha: "#",
+    deadline: "2026-09-28T07:00:00-03:00"
+  };
+
+  function wireCtas() {
+    var links = document.querySelectorAll("[data-cta]");
+    for (var i = 0; i < links.length; i++) {
+      links[i].setAttribute("href", PAGE_CONFIG.ficha);
+      if (PAGE_CONFIG.ficha !== "#") {
+        links[i].setAttribute("target", "_blank");
+        links[i].setAttribute("rel", "noopener");
+      }
+    }
+  }
+
+  function resolveDeadline() {
+    var target = new Date(PAGE_CONFIG.deadline).getTime();
+    if (isNaN(target) || target <= Date.now()) {
+      var d = new Date();
+      var daysAhead = (8 - d.getUTCDay()) % 7 || 7;
+      d.setUTCDate(d.getUTCDate() + daysAhead);
+      d.setUTCHours(10, 0, 0, 0);
+      target = d.getTime();
+    }
+    return target;
+  }
+
+  function pad(n) { return n < 10 ? "0" + n : String(n); }
+
+  function startCountdowns() {
+    var boxes = document.querySelectorAll("[data-countdown]");
+    if (!boxes.length) return;
+    var target = resolveDeadline();
+    var cells = [];
+    for (var i = 0; i < boxes.length; i++) {
+      cells.push({
+        d: boxes[i].querySelector('[data-unit="d"]'),
+        h: boxes[i].querySelector('[data-unit="h"]'),
+        m: boxes[i].querySelector('[data-unit="m"]'),
+        s: boxes[i].querySelector('[data-unit="s"]')
+      });
+    }
+    function tick() {
+      var diff = Math.max(0, target - Date.now());
+      var t = Math.floor(diff / 1000);
+      var v = { d: Math.floor(t / 86400), h: Math.floor((t % 86400) / 3600), m: Math.floor((t % 3600) / 60), s: t % 60 };
+      for (var i = 0; i < cells.length; i++) {
+        for (var k in v) { if (cells[i][k]) cells[i][k].textContent = pad(v[k]); }
+      }
+      if (diff > 0) window.setTimeout(tick, 1000);
+    }
+    tick();
+  }
+
+  function stickyCta() {
+    var bar = document.getElementById("sticky-cta");
+    var hero = document.getElementById("hero");
+    if (!bar || !hero) return;
+    document.body.classList.add("has-sticky-cta");
+    if (!("IntersectionObserver" in window)) { bar.classList.add("is-visible"); return; }
+    new IntersectionObserver(function (entries) {
+      bar.classList.toggle("is-visible", !entries[0].isIntersecting);
+    }, { threshold: 0 }).observe(hero);
+  }
+
+  wireCtas();
+  startCountdowns();
+  stickyCta();
+
+  var original = document.title;
+  document.addEventListener("visibilitychange", function () {
+    document.title = document.hidden ? "Volte aqui, preciosa!" : original;
+  });
+})();
+</script>
+</body>
+</html>
