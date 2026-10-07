@@ -48,8 +48,9 @@ function enviarPagina(pasta) {
 const LP = '/igps_set_lp_26-ingresso';
 app.get(LP, enviarPagina('igps_set_lp_26-ingresso'));
 
-// Antecipacao da Formacao Enfermagem de Valor (Ficha dos Presentes). O CTA
-// ainda esta como "#": falta o link real de checkout/ficha para ligar aqui.
+// Antecipacao da Formacao Enfermagem de Valor (Ficha dos Presentes). Os botoes
+// abrem o pop-up da ficha (js/pre-formulario.js), que grava no painel do paginas;
+// enquanto nao ha link de checkout, a ficha so capta (ver o README).
 const LP_FORMACAO = '/igps-lp-formacao';
 app.get(LP_FORMACAO, enviarPagina('igps-lp-formacao'));
 

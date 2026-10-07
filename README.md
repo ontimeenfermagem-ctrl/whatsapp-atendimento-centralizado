@@ -10,6 +10,7 @@ https://io.escolaenfermagemdevalor.com.br (Express mínimo em `server.js`):
 | `/igps_set_lp_26-ingresso-b` | `public/igps_set_lp_26-ingresso-b/index.html` | versão B, lote 2 (R$ 9,90), dourada; usa os `.js` e as imagens da pasta da A |
 | `/igps_set_lp_26-ingresso-c` | `public/igps_set_lp_26-ingresso-c/index.html` | versão C, R$ 3,00 com desconto de 24 h; usa os `.js` e as imagens da pasta da A |
 | `/igps_set_lp_26-obrigado` | `public/igps_set_lp_26-obrigado/index.html` | obrigado (compra aprovada) |
+| `/igps-lp-formacao` | `public/igps-lp-formacao/index.html` | antecipação da Formação Enfermagem de Valor 2.0: os botões abrem a Ficha dos Presentes (nome, WhatsApp e e-mail), que vai para o painel do paginas (ver "Ficha dos Presentes da Formação") |
 | `/igps_set_lp_26-aguardando-pagamento` | `public/igps_set_lp_26-aguardando-pagamento/index.html` | Pix aguardando confirmação |
 | `/calculo-de-medicação-calculadora` | `public/calculo-de-medicacao-calculadora/index.html` | calculadora de medicação para enfermagem (abre também sem acento). Base de medicamentos em `meds.js`, contas e conferências em `calc.js`, tela em `app.js` |
 | `/BF_out_LS_26-inscricao-a` | `public/bf_out_ls_26-inscricao/index.html` | captação gratuita da Black Friday (lista VIP do vitalício), a página ORIGINAL (roxa, a da CEO; voltou em 05/10 exatamente como era na 68eef0e): nome, e-mail e WhatsApp vão para a planilha `BF_out_LS_26`, o n8n e o painel do paginas (ver "Lista VIP da Black Friday") |
@@ -286,8 +287,9 @@ Até copiar, a página recusa o link que a API devolve (não é o caminho do con
 
 `js/lead-rules.js` (nome, WhatsApp e e-mail) e `js/checkout-config.js` (link do checkout, sck,
 régua do e-mail) são os mesmos arquivos que o servidor do paginas usa para validar e gravar: é o
-que garante que a tela e a gravação nunca discordam. A fonte é o repo paginas. Mudou lá? Copie
-para cá mantendo as 3 linhas de comentário do topo (com os dois repos lado a lado):
+que garante que a tela e a gravação nunca discordam. A Ficha dos Presentes da Formação usa as
+mesmas cópias (entrada `formacao-ev`). A fonte é o repo paginas. Mudou lá? Copie para cá mantendo
+as 3 linhas de comentário do topo (com os dois repos lado a lado):
 
 ```sh
 for f in lead-rules checkout-config; do
@@ -305,3 +307,45 @@ done
    paginas local (`http://localhost:8080/api/inscricao`). Não publique essa troca.
 3. Abra `http://localhost:3000/igps_set_lp_26-ingresso?utm_source=teste&utm_content=criativo-1`,
    toque num botão e confira a linha em `inscricoes` e o link final (com `sck=criativo-1`).
+
+## Ficha dos Presentes da Formação
+
+Os 11 botões de `/igps-lp-formacao` (`a[data-cta]`) abrem um pop-up com **nome completo**,
+**WhatsApp com DDD** (máscara `(11) 91234-5678`) e **e-mail** (só `.com` ou `.com.br`). É o mesmo
+pré-formulário da venda do GPS, nas cores desta página. O script é
+`public/igps-lp-formacao/js/pre-formulario.js`, uma cópia adaptada do da venda do GPS (aquele está
+vendendo e não é mexido). As regras vêm das mesmas cópias do paginas em
+`public/igps_set_lp_26-ingresso/js/` (entrada `formacao-ev` do `checkout-config.js`).
+
+- **Para onde vai**: POST no `/api/inscricao` do paginas com `pagina: "formacao-ev"`. A ficha cai na
+  aba **"Formação EV 2.0 — antecipação"** do `/painel`, com as UTMs, `fbclid`/`gclid`, `page_url`,
+  dispositivo e o id do aparelho. Não há webhook do n8n para ela (o paginas só tem o do GPS).
+- **Por enquanto só capta**: a `formacao-ev` está com `checkout: null` no config do paginas. A
+  resposta vem com `checkout: null` e o pop-up mostra **"Ficha recebida!"** com o WhatsApp enviado e
+  um "Corrigir". A pessoa continua na página.
+- **UTMs só da URL aberta**: diferente da venda do GPS, nenhuma campanha fica guardada no aparelho.
+  Quem volta sem UTM envia sem UTM.
+- **Nada trava**: com 3,5 s sem resposta, erro 5xx ou rede caída, a ficha vai de novo por
+  `sendBeacon` e o pop-up mostra "Ficha recebida". Só o 422 de contato inválido segura a pessoa
+  (erro no campo).
+- **Toque antes do `.js` chegar** (rede lenta): o script inline do fim da página segura o toque (o
+  `href="#"` levaria ao topo) e o pop-up abre quando o arquivo carrega.
+- **localStorage**: `ev_formacao_inscricao_v1` (o contato, que volta preenchido por 24 h) e
+  `ev_pesquisa_visitante` (o id do aparelho, o mesmo da venda do GPS).
+- **Pixel**: a página não tem. Se um dia entrar, o script já dispara `Lead` (e `InitiateCheckout`,
+  com checkout) como na venda do GPS.
+
+### Quando o link do checkout chegar
+
+1. No paginas: o link (com o `off=`) vai em `checkout` da `formacao-ev`, e a oferta em
+   `hotmart.ofertas`. Se o botão do boleto (12x de R$ 89,25) for outra oferta do mesmo produto, ela
+   também entra em `hotmart.ofertas`. Publique.
+2. Aqui: copie o `checkout-config.js` de novo (ver "As cópias do paginas"). Com isso o mesmo envio
+   passa a seguir para o checkout da Hotmart já preenchido, com as UTMs e `sck` = `utm_content`, sem
+   mexer no script.
+3. No HTML:
+   - Ponha o link nos `href` dos botões; o do boleto leva a oferta dele. É o caminho de quem não
+     tem o pop-up e o que manda a oferta do botão tocado.
+   - Troque o texto do botão do pop-up para "Continuar para o pagamento".
+   - Se quiser, acrescente a linha do cadeado e o "Ir direto para o pagamento" (`#pf-direto`), como
+     na venda do GPS.

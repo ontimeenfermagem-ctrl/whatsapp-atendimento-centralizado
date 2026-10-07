@@ -1,6 +1,6 @@
 /* CÓPIA de paginas/js/checkout-config.js (repo ontimeenfermagem-ctrl/paginas): não edite aqui, edite lá
  * e copie de novo. É o mesmo arquivo que o servidor do paginas usa para montar o link do checkout e
- * reconhecer a venda da Hotmart; esta página usa a entrada "imersao-gps". */
+ * reconhecer a venda da Hotmart; o ingresso do GPS usa a entrada "imersao-gps" e a Formação, "formacao-ev". */
 /*
  * checkout-config.js — as páginas de inscrição: as que levam a um checkout da Hotmart e as de
  * captação gratuita (sem checkout: só o contato e as UTMs, para o painel).
@@ -111,6 +111,25 @@
       sck: "utm_term",
       // A mesma régua da página: qualquer domínio real (ela chama emailError sem somenteComBr).
       emailSomenteComBr: false,
+      hotmart: Object.freeze({ ofertas: Object.freeze([]), produtos: Object.freeze([]) })
+    }),
+    // A ordem desta lista é a ordem das abas do painel: página nova entra no FIM.
+    "formacao-ev": Object.freeze({
+      id: "formacao-ev",
+      // O pré-checkout da Formação (o lançamento da Imersão GPS), no outro site: o formulário de lá
+      // manda a inscrição para o /api/inscricao daqui, como o ingresso do GPS.
+      rota: "/igps-lp-formacao",
+      origem: "https://io.escolaenfermagemdevalor.com.br",
+      nome: "Formação EV 2.0 — antecipação",
+      produto: "Formação Enfermagem de Valor 2.0",
+      // O link da Hotmart ainda não chegou: até lá a página só CAPTA (a inscrição grava e aparece na
+      // aba, e a resposta vem com checkout null). Quando chegar: o link aqui, e a oferta (off=) em
+      // hotmart.ofertas — é ela que faz a venda cair nesta aba e casar com a inscrição.
+      checkout: null,
+      // Como no ingresso do GPS: o utm_content (o criativo do anúncio) vira o sck.
+      sck: "utm_content",
+      // A régua de sempre da imersão: só .com e .com.br.
+      emailSomenteComBr: true,
       hotmart: Object.freeze({ ofertas: Object.freeze([]), produtos: Object.freeze([]) })
     })
   });
