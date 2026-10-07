@@ -320,16 +320,21 @@ vendendo e não é mexido). As regras vêm das mesmas cópias do paginas em
 - **Para onde vai**: POST no `/api/inscricao` do paginas com `pagina: "formacao-ev"`. A ficha cai na
   aba **"Formação EV 2.0 — antecipação"** do `/painel`, com as UTMs, `fbclid`/`gclid`, `page_url`,
   dispositivo e o id do aparelho. Não há webhook do n8n para ela (o paginas só tem o do GPS).
-- **Por enquanto só capta**: a `formacao-ev` está com `checkout: null` no config do paginas. A
-  resposta vem com `checkout: null` e o pop-up mostra **"Ficha recebida!"** com o WhatsApp enviado e
-  um "Corrigir". A pessoa continua na página.
+- **Leva ao checkout** (desde 07/10): a `formacao-ev` tem o link
+  `https://pay.hotmart.com/P105490833M?off=sg9gmkyc&checkoutMode=10` no config do paginas (e na
+  cópia daqui), com a oferta `sg9gmkyc` em `hotmart.ofertas`. A resposta do paginas traz o checkout
+  já preenchido (nome, e-mail, `phoneac`/`phonenumber`, as UTMs e `sck` = `utm_content`) e o pop-up
+  segue para ele. Com o paginas lento ou fora, o mesmo link é montado aqui. Os 11 botões têm o link
+  no `href` (com `data-valor="698.98"`), e um script inline põe as UTMs neles assim que a página é
+  lida. A tela "Ficha recebida!" só volta se o `checkout` do config voltar a `null`.
 - **UTMs só da URL aberta**: diferente da venda do GPS, nenhuma campanha fica guardada no aparelho.
   Quem volta sem UTM envia sem UTM.
 - **Nada trava**: com 3,5 s sem resposta, erro 5xx ou rede caída, a ficha vai de novo por
   `sendBeacon` e o pop-up mostra "Ficha recebida". Só o 422 de contato inválido segura a pessoa
   (erro no campo).
-- **Toque antes do `.js` chegar** (rede lenta): o script inline do fim da página segura o toque (o
-  `href="#"` levaria ao topo) e o pop-up abre quando o arquivo carrega.
+- **Toque antes do `.js` chegar** (rede lenta): o botão segue o próprio link, direto para o
+  checkout, já com as UTMs (o script inline do fim da página). Com `href="#"` (captação), o toque
+  fica guardado e o pop-up abre quando o arquivo carrega.
 - **localStorage**: `ev_formacao_inscricao_v1` (o contato, que volta preenchido por 24 h) e
   `ev_pesquisa_visitante` (o id do aparelho, o mesmo da venda do GPS).
 - **Pixel**: a página não tem. Se um dia entrar, o script já dispara `Lead` (e `InitiateCheckout`,

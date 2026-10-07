@@ -122,15 +122,15 @@
       origem: "https://io.escolaenfermagemdevalor.com.br",
       nome: "Formação EV 2.0 — antecipação",
       produto: "Formação Enfermagem de Valor 2.0",
-      // O link da Hotmart ainda não chegou: até lá a página só CAPTA (a inscrição grava e aparece na
-      // aba, e a resposta vem com checkout null). Quando chegar: o link aqui, e a oferta (off=) em
-      // hotmart.ofertas — é ela que faz a venda cair nesta aba e casar com a inscrição.
-      checkout: null,
+      // O link que o cliente entregou em 07/10, sem o bid= (um carimbo de hora que a Hotmart põe ao
+      // copiar o link). Com ele aqui, a ficha da página leva ao checkout já preenchido (nome, e-mail,
+      // WhatsApp, UTMs e o sck), e a oferta em hotmart.ofertas faz a venda cair nesta aba.
+      checkout: "https://pay.hotmart.com/P105490833M?off=sg9gmkyc&checkoutMode=10",
       // Como no ingresso do GPS: o utm_content (o criativo do anúncio) vira o sck.
       sck: "utm_content",
       // A régua de sempre da imersão: só .com e .com.br.
       emailSomenteComBr: true,
-      hotmart: Object.freeze({ ofertas: Object.freeze([]), produtos: Object.freeze([]) })
+      hotmart: Object.freeze({ ofertas: Object.freeze(["sg9gmkyc"]), produtos: Object.freeze([]) })
     })
   });
 

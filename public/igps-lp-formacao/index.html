@@ -1882,6 +1882,12 @@ html:has(.pf[open]) { overflow: hidden; scrollbar-gutter: stable; }
 .pf-ir[aria-busy="true"] .pf-gira { display: inline-block; }
 @keyframes pf-gira { to { transform: rotate(360deg); } }
 
+/* O cadeado embaixo do botão e a saída "Ir direto para o pagamento" (como na venda do GPS) */
+.pf-seguro { margin: 0; text-align: center; color: var(--text-dark-dim); font-size: .84rem; line-height: 1.4; text-wrap: balance; }
+.pf-seguro svg { display: inline-block; width: 15px; height: 15px; margin-right: 6px; vertical-align: -2px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; }
+.pf-direto { margin: 0; text-align: center; color: var(--text-dark-dim); font-size: .9rem; line-height: 1.45; }
+.pf-direto a { color: var(--grape); font-weight: 700; text-underline-offset: 3px; }
+
 /* "Ficha recebida" (enquanto a página só capta, sem checkout) */
 .pf-numero {
   display: flex;
@@ -1985,7 +1991,7 @@ html:has(.pf[open]) { overflow: hidden; scrollbar-gutter: stable; }
       </p>
 
       <div class="cta-wrap">
-        <a class="cta" href="#" data-cta>
+        <a class="cta" href="https://pay.hotmart.com/P105490833M?off=sg9gmkyc&amp;checkoutMode=10" data-cta data-valor="698.98">
           Quero garantir meus presentes!
           <svg class="cta__icon" width="20" height="20" aria-hidden="true"><use href="#ic-arrow"/></svg>
         </a>
@@ -2016,10 +2022,6 @@ html:has(.pf[open]) { overflow: hidden; scrollbar-gutter: stable; }
             <span>Garante o curso <strong>Cálculo de Medicação (R$ 197)</strong> ao se inscrever</span>
           </div>
           <div class="perk__media"><img src="/igps-lp-formacao/img/calculo-medicacao.jpg" alt="Curso de Cálculo de Medicação" width="1600" height="899" loading="lazy" decoding="async"></div>
-          <figure class="perk__proof">
-            <div class="art art--proof" style="--ar:775/145">print de depoimento de aluna</div>
-            <figcaption>Depoimento real de aluna da Formação</figcaption>
-          </figure>
         </li>
 
         <li class="perk">
@@ -2042,7 +2044,7 @@ html:has(.pf[open]) { overflow: hidden; scrollbar-gutter: stable; }
       </div>
 
       <div class="cta-wrap">
-        <a class="cta" href="#" data-cta>
+        <a class="cta" href="https://pay.hotmart.com/P105490833M?off=sg9gmkyc&amp;checkoutMode=10" data-cta data-valor="698.98">
           Preencher minha ficha agora!
           <svg class="cta__icon" width="20" height="20" aria-hidden="true"><use href="#ic-arrow"/></svg>
         </a>
@@ -2102,13 +2104,12 @@ html:has(.pf[open]) { overflow: hidden; scrollbar-gutter: stable; }
 
         <article class="tier">
           <p class="tier__badge">Para todas as inscritas na quinta-feira <span class="grape">entre 7h e 9h da manhã:</span></p>
-          <div class="tier__card">
+          <div class="tier__card tier__card--solo">
             <div class="tier__content">
               <h3 class="tier__title">Kit do Primeiro Atendimento:</h3>
               <p class="tier__text">Quem se inscrever nas primeiras horas do carrinho, das 7h às 9h da quinta-feira, ganha mais uma ferramenta complementar para a sua preparação profissional.</p>
               <p class="tier__price"><span class="tier__from">Valor: <s>R$ 97,98</s></span><span class="tier__free">De graça</span></p>
             </div>
-            <div class="tier__media tier__media--ticket"><div class="art" style="--ar:445/196">cupom: Kit do Primeiro Atendimento</div></div>
           </div>
         </article>
 
@@ -2139,7 +2140,7 @@ html:has(.pf[open]) { overflow: hidden; scrollbar-gutter: stable; }
       </div>
 
       <div class="cta-wrap">
-        <a class="cta" href="#" data-cta>
+        <a class="cta" href="https://pay.hotmart.com/P105490833M?off=sg9gmkyc&amp;checkoutMode=10" data-cta data-valor="698.98">
           Quero todos esses presentes!
           <svg class="cta__icon" width="20" height="20" aria-hidden="true"><use href="#ic-arrow"/></svg>
         </a>
@@ -2171,7 +2172,6 @@ html:has(.pf[open]) { overflow: hidden; scrollbar-gutter: stable; }
           <h3 class="bonus__title">60 dias de acompanhamento com a Iza:</h3>
           <p class="bonus__text">Programa de acompanhamento supervisionado dos primeiros 60 dias, para combater a inércia e colocar em prática o que você está aprendendo. Porque existe uma diferença entre "eu assisti" e "eu comecei a colocar em prática".</p>
           <div class="bonus__media"><img src="/igps-lp-formacao/img/desafio-60-dias.jpg" alt="Desafio 60 Dias: acompanhamento completo com a Iza" width="1600" height="900" loading="lazy" decoding="async"></div>
-          <figure class="bonus__proof"><div class="art art--proof" style="--ar:620/247">print de depoimento</div></figure>
         </article>
 
         <article class="bonus">
@@ -2180,7 +2180,6 @@ html:has(.pf[open]) { overflow: hidden; scrollbar-gutter: stable; }
           <h3 class="bonus__title">Currículo Magnético + Aula de Entrevista</h3>
           <p class="bonus__text">Organização do currículo, apresentação, posicionamento e preparação para entrevista. Sua competência precisa chegar até quem está contratando.</p>
           <div class="bonus__media"><img src="/igps-lp-formacao/img/curriculo-magnetico.jpg" alt="Currículo Magnético + Aula de Entrevista" width="1600" height="900" loading="lazy" decoding="async"></div>
-          <figure class="bonus__proof"><div class="art art--proof" style="--ar:628/207">print de depoimento</div></figure>
         </article>
 
         <article class="bonus">
@@ -2194,7 +2193,7 @@ html:has(.pf[open]) { overflow: hidden; scrollbar-gutter: stable; }
       </div>
 
       <div class="cta-wrap">
-        <a class="cta" href="#" data-cta>
+        <a class="cta" href="https://pay.hotmart.com/P105490833M?off=sg9gmkyc&amp;checkoutMode=10" data-cta data-valor="698.98">
           Quero meus presentes
           <svg class="cta__icon" width="20" height="20" aria-hidden="true"><use href="#ic-arrow"/></svg>
         </a>
@@ -2222,7 +2221,7 @@ html:has(.pf[open]) { overflow: hidden; scrollbar-gutter: stable; }
       <p class="course__certs">Certificado de Extensão Universitária, validado pela Faculdade FaCiencia e credenciado pelo MEC</p>
 
       <div class="cta-wrap">
-        <a class="cta" href="#" data-cta>
+        <a class="cta" href="https://pay.hotmart.com/P105490833M?off=sg9gmkyc&amp;checkoutMode=10" data-cta data-valor="698.98">
           Quero meus presentes
           <svg class="cta__icon" width="20" height="20" aria-hidden="true"><use href="#ic-arrow"/></svg>
         </a>
@@ -2284,17 +2283,14 @@ html:has(.pf[open]) { overflow: hidden; scrollbar-gutter: stable; }
         <article class="case">
           <h3 class="case__name">Lúcia</h3>
           <p>9 anos formada sem exercer. Depois de entrar para a Formação, foi contratada por um hospital em 15 dias. Relatou renda aproximada de R$ 3.700, comparada a cerca de R$ 2.000 anteriormente.</p>
-          <div class="art art--dark" style="--ar:16/7">print / vídeo da Lúcia</div>
         </article>
         <article class="case">
           <h3 class="case__name">Aluna aos 58 anos</h3>
           <p>Concluiu o técnico aos 58 anos e relatava não ter conhecimento suficiente, especialmente sobre dispositivos. Depois conseguiu seu primeiro plantão e chegou à alta complexidade.</p>
-          <div class="art art--dark" style="--ar:16/7">prova original</div>
         </article>
         <article class="case">
           <h3 class="case__name">Ronaldo</h3>
           <p>Recebia R$ 80 por 12 horas como cuidador. Depois de mudar sua postura de negociação, passou a pedir R$ 150 pelas mesmas 12 horas.</p>
-          <div class="art art--dark" style="--ar:16/7">prova original</div>
         </article>
       </div>
 
@@ -2390,7 +2386,7 @@ html:has(.pf[open]) { overflow: hidden; scrollbar-gutter: stable; }
         <p class="letter__sign">Vamos juntas?</p>
 
         <div class="cta-wrap">
-          <a class="cta" href="#" data-cta>
+          <a class="cta" href="https://pay.hotmart.com/P105490833M?off=sg9gmkyc&amp;checkoutMode=10" data-cta data-valor="698.98">
             Eu quero essa promoção
             <svg class="cta__icon" width="20" height="20" aria-hidden="true"><use href="#ic-arrow"/></svg>
           </a>
@@ -2437,7 +2433,7 @@ html:has(.pf[open]) { overflow: hidden; scrollbar-gutter: stable; }
         <p class="price__save"><strong>Você economiza R$ 598,02</strong> nessa turma especial!</p>
 
         <div class="cta-wrap">
-          <a class="cta" href="#" data-cta>
+          <a class="cta" href="https://pay.hotmart.com/P105490833M?off=sg9gmkyc&amp;checkoutMode=10" data-cta data-valor="698.98">
             Quero meus presentes
             <svg class="cta__icon" width="20" height="20" aria-hidden="true"><use href="#ic-arrow"/></svg>
           </a>
@@ -2456,7 +2452,7 @@ html:has(.pf[open]) { overflow: hidden; scrollbar-gutter: stable; }
           <p class="boleto__text">Você vai pagar o valor da parcela mensalmente, <strong>sem precisar de cartão de crédito!</strong></p>
           <p class="boleto__label">Por apenas:</p>
           <p class="boleto__price"><span>12x de</span><strong>R$ 89,25</strong></p>
-          <a class="cta boleto__cta" href="#" data-cta>
+          <a class="cta boleto__cta" href="https://pay.hotmart.com/P105490833M?off=sg9gmkyc&amp;checkoutMode=10" data-cta data-valor="698.98">
             Quero boleto parcelado!
             <svg class="cta__icon" width="20" height="20" aria-hidden="true"><use href="#ic-arrow"/></svg>
           </a>
@@ -2495,7 +2491,7 @@ html:has(.pf[open]) { overflow: hidden; scrollbar-gutter: stable; }
       </ol>
 
       <div class="cta-wrap">
-        <a class="cta" href="#" data-cta>
+        <a class="cta" href="https://pay.hotmart.com/P105490833M?off=sg9gmkyc&amp;checkoutMode=10" data-cta data-valor="698.98">
           Preencher ficha agora!
           <svg class="cta__icon" width="20" height="20" aria-hidden="true"><use href="#ic-arrow"/></svg>
         </a>
@@ -2523,7 +2519,7 @@ html:has(.pf[open]) { overflow: hidden; scrollbar-gutter: stable; }
       </div>
 
       <div class="cta-wrap">
-        <a class="cta" href="#" data-cta>
+        <a class="cta" href="https://pay.hotmart.com/P105490833M?off=sg9gmkyc&amp;checkoutMode=10" data-cta data-valor="698.98">
           Quero meus presentes
           <svg class="cta__icon" width="20" height="20" aria-hidden="true"><use href="#ic-arrow"/></svg>
         </a>
@@ -2557,7 +2553,7 @@ html:has(.pf[open]) { overflow: hidden; scrollbar-gutter: stable; }
 </footer>
 
 <div class="sticky-cta" id="sticky-cta">
-  <a class="cta" href="#" data-cta>
+  <a class="cta" href="https://pay.hotmart.com/P105490833M?off=sg9gmkyc&amp;checkoutMode=10" data-cta data-valor="698.98">
     Preencher a Ficha dos Presentes
     <svg class="cta__icon" width="18" height="18" aria-hidden="true"><use href="#ic-arrow"/></svg>
   </a>
@@ -2565,8 +2561,8 @@ html:has(.pf[open]) { overflow: hidden; scrollbar-gutter: stable; }
 
 <!-- Ficha dos Presentes: todo botão [data-cta] abre este pop-up (js/pre-formulario.js). O envio vai
      para o data-api (o /api/inscricao do paginas, que grava a ficha com as UTMs na aba "Formação EV
-     2.0 — antecipação" do /painel). Enquanto a página não tem checkout, a ficha só capta e mostra
-     "Ficha recebida"; com o link no config, segue para o checkout da Hotmart, como no GPS. -->
+     2.0 — antecipação" do /painel) e segue para o checkout da Hotmart já preenchido (nome, e-mail,
+     WhatsApp, UTMs e sck = utm_content), como no GPS. O link e a oferta vêm do checkout-config. -->
 <dialog class="pf" id="pre-formulario" aria-labelledby="pf-titulo" aria-describedby="pf-sub">
   <div class="pf-in">
     <div class="pf-h">
@@ -2576,7 +2572,7 @@ html:has(.pf[open]) { overflow: hidden; scrollbar-gutter: stable; }
 
     <div class="pf-b" id="pf-ficha">
       <h2 class="pf-titulo" id="pf-titulo" tabindex="-1">Falta pouco, <span class="pf-destaque">preciosa!</span> <span aria-hidden="true">💚</span></h2>
-      <p class="pf-sub" id="pf-sub">Preenche seus dados pra receber o link de inscrição na quinta às 7h, 1 hora antes de todo mundo.</p>
+      <p class="pf-sub" id="pf-sub">Preenche seus dados pra eu saber pra quem enviar o seu acesso e os seus presentes.</p>
 
       <form class="pf-form" id="pf-form" novalidate data-api="https://lp.escolaenfermagemdevalor.com.br/api/inscricao">
         <div class="pf-campo" data-campo="nome">
@@ -2606,7 +2602,13 @@ html:has(.pf[open]) { overflow: hidden; scrollbar-gutter: stable; }
 
         <p class="pf-status" id="pf-status" role="alert"></p>
 
-        <button type="submit" class="cta pf-ir" id="pf-ir"><span id="pf-ir-texto">Enviar minha ficha</span><span class="pf-gira" aria-hidden="true"></span></button>
+        <button type="submit" class="cta pf-ir" id="pf-ir"><span id="pf-ir-texto">Continuar para o pagamento</span><span class="pf-gira" aria-hidden="true"></span></button>
+
+        <p class="pf-seguro"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="5.5" y="10.5" width="13" height="9.5" rx="2.5"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></svg>Pagamento pelo checkout oficial da Hotmart</p>
+
+        <!-- Só aparece depois de 2 envios recusados (celular de fora do Brasil, e-mail que não é
+             .com/.com.br): a régua não pode impedir a compra. -->
+        <p class="pf-direto" id="pf-direto" hidden>Não está conseguindo? <a id="pf-direto-link" href="https://pay.hotmart.com/P105490833M?off=sg9gmkyc&amp;checkoutMode=10">Ir direto para o pagamento</a></p>
       </form>
     </div>
 
@@ -2627,6 +2629,39 @@ html:has(.pf[open]) { overflow: hidden; scrollbar-gutter: stable; }
     <div class="sr-only" id="pf-aviso" aria-live="polite"></div>
   </div>
 </dialog>
+
+<script>
+/* As UTMs da URL vão para os botões de compra na hora em que a página é lida, antes de qualquer
+   arquivo de fora: quem toca no botão antes do pre-formulario.js carregar (rede ruim) vai direto ao
+   checkout e também leva a campanha. utm_content vira o sck, como no checkout-config. O
+   pre-formulario.js depois refaz o link; o original fica em data-checkout-base. (O mesmo script da
+   venda do GPS, sem a parte do Pixel: esta página não tem.) */
+(function(){
+  var q=location.search.slice(1);if(!q)return;
+  var utm={};
+  q.split('&').forEach(function(p){
+    var i=p.indexOf('='),k=i<0?p:p.slice(0,i),v=i<0?'':p.slice(i+1);
+    try{k=decodeURIComponent(k.replace(/\+/g,' '));v=decodeURIComponent(v.replace(/\+/g,' '));}catch(e){return;}
+    v=v.trim().slice(0,500);
+    if(/^utm_(source|medium|campaign|term|content)$/.test(k)&&v)utm[k]=v;
+  });
+  if(utm.utm_content)utm.sck=utm.utm_content;
+  var chaves=Object.keys(utm);if(!chaves.length)return;
+  [].forEach.call(document.querySelectorAll('a[href*="pay.hotmart.com"]'),function(a){
+    try{
+      var h=a.getAttribute('href')||'';
+      if(!a.hasAttribute('data-checkout-base'))a.setAttribute('data-checkout-base',h);
+      var partes=h.split('#'),base=partes[0],hash=partes.length>1?'#'+partes.slice(1).join('#'):'';
+      var q2=base.indexOf('?'),caminho=q2<0?base:base.slice(0,q2);
+      var pares=(q2<0?'':base.slice(q2+1)).split('&').filter(function(par){
+        return par&&!Object.prototype.hasOwnProperty.call(utm,par.split('=')[0]);
+      });
+      chaves.forEach(function(k){pares.push(encodeURIComponent(k)+'='+encodeURIComponent(utm[k]));});
+      a.setAttribute('href',caminho+'?'+pares.join('&')+hash);
+    }catch(e){}
+  });
+})();
+</script>
 
 <script>(function () {
   "use strict";
