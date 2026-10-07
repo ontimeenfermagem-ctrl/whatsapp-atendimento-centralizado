@@ -1543,6 +1543,72 @@ html { scrollbar-color: var(--purple-500) var(--ink-800); scrollbar-width: thin;
 }
 .vsl-ph small, .vid-ph small { font-size: .8rem; font-weight: 600; letter-spacing: .04em; }
 
+/* embeds reais do YouTube (hero e depoimentos) */
+.yt-embed {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 18px 44px -22px rgba(0, 0, 0, .9);
+}
+.yt-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.hero__vsl-ab--wide { max-width: 640px; }
+
+/* galeria de depoimentos em vídeo */
+.proof-videos {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sp-3);
+  max-width: 880px;
+  margin: clamp(1.25rem, 4vw, 2rem) auto 0;
+}
+@media (min-width: 640px) { .proof-videos { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 960px) { .proof-videos { grid-template-columns: repeat(3, 1fr); } }
+.proof-video {
+  display: block; width: 100%; padding: 0; border: 0; margin: 0;
+  border-radius: var(--radius); overflow: hidden; background: #000; cursor: pointer; text-align: left;
+}
+.proof-video__frame {
+  position: relative; width: 100%; aspect-ratio: 16/9;
+  background-size: cover; background-position: center;
+  display: flex; align-items: center; justify-content: center;
+}
+.proof-video__frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.proof-video__play {
+  position: relative; z-index: 1;
+  width: 56px; height: 56px; border-radius: 50%;
+  background: rgba(0, 0, 0, .55); color: #FFFFFF;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem; padding-left: 3px;
+}
+.proof-video__name {
+  padding: .5rem .75rem;
+  background: #0A0A0A;
+  color: var(--text-dim);
+  font-size: .82rem;
+  font-weight: 700;
+  letter-spacing: .03em;
+}
+
+/* mais provas reais: prints de WhatsApp/Instagram, cada um na própria proporção
+   (colunas estilo mosaico — nada de cortar texto de print) */
+.proof-shots {
+  columns: 2 220px;
+  column-gap: var(--sp-3);
+  max-width: 880px;
+  margin: clamp(1.25rem, 4vw, 2rem) auto 0;
+}
+.proof-shots img {
+  width: 100%;
+  display: block;
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--sp-3);
+  break-inside: avoid;
+  box-shadow: var(--shadow-soft, 0 4px 14px rgba(0,0,0,.35));
+}
+
 /* vídeo de depoimentos */
 .vid-ph {
   position: relative;
@@ -1904,13 +1970,12 @@ html:has(.pf[open]) { overflow: hidden; scrollbar-gutter: stable; }
       <p class="hero__pitch">
         Assista o vídeo até o final e descubra como receber seu acesso ao Curso
         Completo de Cálculo de Medicação <span class="hero__preco">(que custa R$&nbsp;197)</span>
-        <strong>de graça na segunda-feira.</strong>
+        <strong>de graça na quinta-feira.</strong>
       </p>
 
-      <div class="hero__vsl-ab">
-        <div class="vsl-ph" role="img" aria-label="Espaço reservado para o vídeo da Iza">
-          <span class="vsl-play"><svg width="34" height="34" aria-hidden="true"><use href="#ic-play"/></svg></span>
-          <small>vídeo da Iza (vertical 9:16)</small>
+      <div class="hero__vsl-ab hero__vsl-ab--wide">
+        <div class="yt-embed">
+          <iframe src="https://www.youtube-nocookie.com/embed/IAybMpAZVUM" title="Vídeo da Iza — Formação Enfermagem de Valor" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         </div>
       </div>
 
@@ -1932,7 +1997,7 @@ html:has(.pf[open]) { overflow: hidden; scrollbar-gutter: stable; }
   <section class="section urgency" aria-labelledby="urgency-title">
     <div class="container">
       <div class="section-head">
-        <h2 class="h-section" id="urgency-title">As inscrições abrem <span class="gold">segunda-feira!</span></h2>
+        <h2 class="h-section" id="urgency-title">As inscrições abrem <span class="gold">quinta-feira!</span></h2>
         <p class="h-sub">Mas quem preencher a <strong class="gold">Ficha dos Presentes:</strong></p>
       </div>
 
@@ -2036,11 +2101,11 @@ html:has(.pf[open]) { overflow: hidden; scrollbar-gutter: stable; }
         </article>
 
         <article class="tier">
-          <p class="tier__badge">Para todas as inscritas na segunda-feira <span class="grape">entre 7h e 9h da manhã:</span></p>
+          <p class="tier__badge">Para todas as inscritas na quinta-feira <span class="grape">entre 7h e 9h da manhã:</span></p>
           <div class="tier__card">
             <div class="tier__content">
               <h3 class="tier__title">Kit do Primeiro Atendimento:</h3>
-              <p class="tier__text">Quem se inscrever nas primeiras horas do carrinho, das 7h às 9h da segunda-feira, ganha mais uma ferramenta complementar para a sua preparação profissional.</p>
+              <p class="tier__text">Quem se inscrever nas primeiras horas do carrinho, das 7h às 9h da quinta-feira, ganha mais uma ferramenta complementar para a sua preparação profissional.</p>
               <p class="tier__price"><span class="tier__from">Valor: <s>R$ 97,98</s></span><span class="tier__free">De graça</span></p>
             </div>
             <div class="tier__media tier__media--ticket"><div class="art" style="--ar:445/196">cupom: Kit do Primeiro Atendimento</div></div>
@@ -2048,14 +2113,14 @@ html:has(.pf[open]) { overflow: hidden; scrollbar-gutter: stable; }
         </article>
 
         <article class="tier">
-          <p class="tier__badge">Para todas as inscritas na segunda-feira <span class="grape">até às 23h59:</span></p>
+          <p class="tier__badge">Para todas as inscritas na quinta-feira <span class="grape">até às 23h59:</span></p>
           <div class="tier__card">
             <div class="tier__content">
               <h3 class="tier__title">Kit Evolução e Rotina de Plantão:</h3>
               <p class="tier__text">Modelos para auxiliar na organização da anotação, evolução e rotina profissional, para você ter menos improviso e mais organização no plantão.</p>
               <p class="tier__price"><span class="tier__from">Valor: <s>R$ 97,00</s></span><span class="tier__free">De graça</span></p>
             </div>
-            <div class="tier__media"><div class="art" style="--ar:800/500">arte do Kit Evolução e Rotina</div></div>
+            <div class="tier__media"><img src="/igps-lp-formacao/img/aulao-evolucao.jpg" alt="Aulão de Anotação e Evolução de Enfermagem" width="1080" height="1080" loading="lazy" decoding="async"></div>
           </div>
         </article>
 
@@ -2172,12 +2237,48 @@ html:has(.pf[open]) { overflow: hidden; scrollbar-gutter: stable; }
         <h2 class="h-section" id="testimonials-title">Resultados reais, <span class="gold">sem promessa mágica:</span></h2>
       </div>
 
-      <div class="testimonials__player">
-        <div class="vid-ph" role="img" aria-label="Espaço reservado para o vídeo de depoimentos">
-          <button type="button" class="vsl-sem-autoplay-botao" aria-label="Reproduzir vídeo">▶</button>
-          <small>vídeo de depoimentos das alunas</small>
-        </div>
+      <div class="proof-videos" id="proof-videos">
+        <button type="button" class="proof-video" data-yt="DkpD-naTs9c">
+          <span class="proof-video__frame" style="background-image:url('https://img.youtube.com/vi/DkpD-naTs9c/hqdefault.jpg')"><span class="proof-video__play">▶</span></span>
+          <span class="proof-video__name">Kit do Primeiro Atendimento</span>
+        </button>
+        <button type="button" class="proof-video" data-yt="CGDMoijn0E8">
+          <span class="proof-video__frame" style="background-image:url('https://img.youtube.com/vi/CGDMoijn0E8/hqdefault.jpg')"><span class="proof-video__play">▶</span></span>
+          <span class="proof-video__name">Simone</span>
+        </button>
+        <button type="button" class="proof-video" data-yt="MZIxIFcuftI">
+          <span class="proof-video__frame" style="background-image:url('https://img.youtube.com/vi/MZIxIFcuftI/hqdefault.jpg')"><span class="proof-video__play">▶</span></span>
+          <span class="proof-video__name">Lúcia</span>
+        </button>
+        <button type="button" class="proof-video" data-yt="MFH0UVe8Wsw">
+          <span class="proof-video__frame" style="background-image:url('https://img.youtube.com/vi/MFH0UVe8Wsw/hqdefault.jpg')"><span class="proof-video__play">▶</span></span>
+          <span class="proof-video__name">Maridalva</span>
+        </button>
+        <button type="button" class="proof-video" data-yt="46q72oQlQ4g">
+          <span class="proof-video__frame" style="background-image:url('https://img.youtube.com/vi/46q72oQlQ4g/hqdefault.jpg')"><span class="proof-video__play">▶</span></span>
+          <span class="proof-video__name">Edileuza</span>
+        </button>
+        <button type="button" class="proof-video" data-yt="suCVFbJ5I5c">
+          <span class="proof-video__frame" style="background-image:url('https://img.youtube.com/vi/suCVFbJ5I5c/hqdefault.jpg')"><span class="proof-video__play">▶</span></span>
+          <span class="proof-video__name">Michele</span>
+        </button>
       </div>
+      <script>
+        document.getElementById("proof-videos").addEventListener("click", function (e) {
+          var btn = e.target.closest(".proof-video");
+          if (!btn) return;
+          var id = btn.getAttribute("data-yt");
+          var frame = btn.querySelector(".proof-video__frame");
+          var iframe = document.createElement("iframe");
+          iframe.src = "https://www.youtube-nocookie.com/embed/" + id + "?autoplay=1";
+          iframe.title = btn.querySelector(".proof-video__name").textContent;
+          iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+          iframe.allowFullscreen = true;
+          frame.innerHTML = "";
+          frame.appendChild(iframe);
+          btn.disabled = true;
+        });
+      </script>
 
       <div class="cases">
         <article class="case">
@@ -2195,6 +2296,14 @@ html:has(.pf[open]) { overflow: hidden; scrollbar-gutter: stable; }
           <p>Recebia R$ 80 por 12 horas como cuidador. Depois de mudar sua postura de negociação, passou a pedir R$ 150 pelas mesmas 12 horas.</p>
           <div class="art art--dark" style="--ar:16/7">prova original</div>
         </article>
+      </div>
+
+      <div class="proof-shots">
+        <img src="/igps-lp-formacao/img/prova-dany.jpg" alt="Print de WhatsApp: aluna conta que reformou a casa da mãe e está comprando o primeiro terreno" width="960" height="2079" loading="lazy" decoding="async">
+        <img src="/igps-lp-formacao/img/prova-diaria.jpg" alt="Print de WhatsApp: negociação de diária de plantão em R$386,00" width="918" height="1600" loading="lazy" decoding="async">
+        <img src="/igps-lp-formacao/img/prova-elaine.jpg" alt="Print de WhatsApp: depoimento de Elaine Barros sobre ser contratada um mês após concluir o curso" width="969" height="1280" loading="lazy" decoding="async">
+        <img src="/igps-lp-formacao/img/prova-rosangela.jpg" alt="Print de WhatsApp: Rosangela relata ter superado o medo de um plantão de alta complexidade" width="1080" height="1080" loading="lazy" decoding="async">
+        <img src="/igps-lp-formacao/img/prova-michelle.jpg" alt="Print de Instagram: comentário de Michelle sobre aprender aspiração e aumentar a renda com plantões" width="1920" height="1080" loading="lazy" decoding="async">
       </div>
 
       <p class="notice cases__note">
@@ -2241,8 +2350,8 @@ html:has(.pf[open]) { overflow: hidden; scrollbar-gutter: stable; }
             <li><svg class="ic-yes" width="18" height="18" aria-hidden="true"><use href="#ic-check"/></svg> <span class="plan__item"><strong>60 dias de acompanhamento com a Iza</strong><em>(valor: R$ 3.000)</em></span></li>
             <li><svg class="ic-yes" width="18" height="18" aria-hidden="true"><use href="#ic-check"/></svg> <span class="plan__item"><strong>Currículo Magnético + Aula de Entrevista</strong><em>(valor: R$ 49,97)</em></span></li>
             <li><svg class="ic-yes" width="18" height="18" aria-hidden="true"><use href="#ic-check"/></svg> <span class="plan__item"><strong>Kit de E-books da Enfermagem</strong><em>(valor: R$ 69,98)</em></span></li>
-            <li><svg class="ic-yes" width="18" height="18" aria-hidden="true"><use href="#ic-check"/></svg> <span class="plan__item"><strong>Kit Evolução e Rotina de Plantão</strong><em>(valor: R$ 97 - até 23:59 de segunda)*</em></span></li>
-            <li><svg class="ic-yes" width="18" height="18" aria-hidden="true"><use href="#ic-check"/></svg> <span class="plan__item"><strong>Kit do Primeiro Atendimento</strong><em>(valor: R$ 97,98 - das 7h às 9h de segunda)*</em></span></li>
+            <li><svg class="ic-yes" width="18" height="18" aria-hidden="true"><use href="#ic-check"/></svg> <span class="plan__item"><strong>Kit Evolução e Rotina de Plantão</strong><em>(valor: R$ 97 - até 23:59 de quinta)*</em></span></li>
+            <li><svg class="ic-yes" width="18" height="18" aria-hidden="true"><use href="#ic-check"/></svg> <span class="plan__item"><strong>Kit do Primeiro Atendimento</strong><em>(valor: R$ 97,98 - das 7h às 9h de quinta)*</em></span></li>
             <li><svg class="ic-yes" width="18" height="18" aria-hidden="true"><use href="#ic-check"/></svg> <span class="plan__item"><strong>Jaleco Enfermagem de Valor</strong><em>(valor: R$ 297)</em></span></li>
             <li><svg class="ic-yes" width="18" height="18" aria-hidden="true"><use href="#ic-check"/></svg> <span class="plan__item"><strong>Curso de Cálculo de Medicação</strong><em>(valor: R$ 197)*</em></span></li>
           </ul>
@@ -2274,7 +2383,7 @@ html:has(.pf[open]) { overflow: hidden; scrollbar-gutter: stable; }
           <p>Trava na hora do currículo e da entrevista? Incluí o <strong>Currículo Magnético</strong> com aula completa.</p>
           <p>Preciosa, eu estou colocando o meu conhecimento e a minha história à sua disposição.</p>
           <p>Agora só falta você dar o <strong>primeiro passo.</strong></p>
-          <p>Preenche a <strong>Ficha dos Presentes</strong> e me encontra na <strong>segunda-feira às 7h.</strong></p>
+          <p>Preenche a <strong>Ficha dos Presentes</strong> e me encontra na <strong>quinta-feira às 7h.</strong></p>
         </div>
 
         <p class="letter__sign">Vamos juntas?</p>
@@ -2380,7 +2489,7 @@ html:has(.pf[open]) { overflow: hidden; scrollbar-gutter: stable; }
 
       <ol class="steps__list">
         <li class="step"><span class="step__num"><span>Passo</span><b>01</b></span><p class="step__text">Preencha a <strong>Ficha dos Presentes</strong> clicando no botão abaixo</p></li>
-        <li class="step"><span class="step__num"><span>Passo</span><b>02</b></span><p class="step__text">Receba o link de inscrição <strong>às 7h da manhã</strong> de segunda-feira (1 hora antes de todo mundo!)</p></li>
+        <li class="step"><span class="step__num"><span>Passo</span><b>02</b></span><p class="step__text">Receba o link de inscrição <strong>às 7h da manhã</strong> de quinta-feira (1 hora antes de todo mundo!)</p></li>
         <li class="step"><span class="step__num"><span>Passo</span><b>03</b></span><p class="step__text">Corra para se inscrever nos <strong>primeiros minutos</strong> e garanta presentes incríveis.</p></li>
       </ol>
 
@@ -2466,7 +2575,7 @@ html:has(.pf[open]) { overflow: hidden; scrollbar-gutter: stable; }
 
     <div class="pf-b" id="pf-ficha">
       <h2 class="pf-titulo" id="pf-titulo" tabindex="-1">Falta pouco, <span class="pf-destaque">preciosa!</span> <span aria-hidden="true">💚</span></h2>
-      <p class="pf-sub" id="pf-sub">Preenche seus dados pra receber o link de inscrição na segunda às 7h, 1 hora antes de todo mundo.</p>
+      <p class="pf-sub" id="pf-sub">Preenche seus dados pra receber o link de inscrição na quinta às 7h, 1 hora antes de todo mundo.</p>
 
       <form class="pf-form" id="pf-form" novalidate data-api="https://lp.escolaenfermagemdevalor.com.br/api/inscricao">
         <div class="pf-campo" data-campo="nome">
@@ -2504,7 +2613,7 @@ html:has(.pf[open]) { overflow: hidden; scrollbar-gutter: stable; }
          conferir: é por ele que o link chega. -->
     <div class="pf-b" id="pf-pronto" hidden>
       <h2 class="pf-titulo" id="pf-pronto-titulo" tabindex="-1">Ficha recebida! <span aria-hidden="true">💚</span></h2>
-      <p class="pf-sub" id="pf-pronto-sub">Na segunda-feira, às 7h, o link de inscrição chega pelo WhatsApp, 1 hora antes de todo mundo.</p>
+      <p class="pf-sub" id="pf-pronto-sub">Na quinta-feira, às 7h, o link de inscrição chega pelo WhatsApp, 1 hora antes de todo mundo.</p>
       <div class="pf-numero">
         <p><span>Seu WhatsApp</span> <strong id="pf-pronto-whatsapp"></strong></p>
         <button type="button" class="pf-corrigir" id="pf-pronto-corrigir">Corrigir</button>
@@ -2524,7 +2633,7 @@ html:has(.pf[open]) { overflow: hidden; scrollbar-gutter: stable; }
   /* Ajuste aqui: abertura das inscrições. Os botões [data-cta] abrem a Ficha dos Presentes, o
      pop-up do js/pre-formulario.js (e não um link). */
   var PAGE_CONFIG = {
-    deadline: "2026-09-28T07:00:00-03:00"
+    deadline: "2026-10-08T07:00:00-03:00"
   };
 
   /* Toque num botão antes de o js/pre-formulario.js chegar (rede lenta): o href="#" jogaria a
@@ -2543,7 +2652,7 @@ html:has(.pf[open]) { overflow: hidden; scrollbar-gutter: stable; }
     var target = new Date(PAGE_CONFIG.deadline).getTime();
     if (isNaN(target) || target <= Date.now()) {
       var d = new Date();
-      var daysAhead = (8 - d.getUTCDay()) % 7 || 7;
+      var daysAhead = (11 - d.getUTCDay()) % 7 || 7; // proxima quinta-feira
       d.setUTCDate(d.getUTCDate() + daysAhead);
       d.setUTCHours(10, 0, 0, 0);
       target = d.getTime();
