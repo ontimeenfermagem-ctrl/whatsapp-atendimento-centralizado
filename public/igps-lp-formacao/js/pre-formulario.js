@@ -638,6 +638,116 @@
 
   const CABECALHOS = { "Content-Type": "text/plain;charset=UTF-8" };
 
+  /* ------------------------------------------------------------------ rascunho: quem começa e desiste */
+  /*
+   * O que a pessoa digita ANTES de enviar sobe para o /api/inscricao/parcial do paginas e aparece no
+   * painel, na lista "Não terminaram" da aba da Formação, com o WhatsApp pronto para a equipe
+   * chamar. É o mesmo rascunho do formulário da Aferição (paginas/js/inscricao.js), e as regras são
+   * as dele, em ordem de importância:
+   *   1. NADA aqui atrapalha a venda: é disparo sem espera, em try/catch, e o envio de verdade não
+   *      depende de resposta nenhuma daqui.
+   *   2. Quem envia some da lista: no envio o rascunho desliga (fichaEnviada), e o paginas ainda
+   *      esconde o rascunho de quem tem inscrição na página (mesmo aparelho, e-mail ou WhatsApp).
+   *   3. Sem rajada: o mesmo conteúdo não sai duas vezes, e entre duas gravações há um intervalo
+   *      mínimo. Saindo da página (ou fechando o pop-up), vale na hora, por beacon.
+   * Vai como text/plain, como a ficha: sem preflight, e o paginas aceita assim das origens liberadas.
+   */
+  const API_PARCIAL = API.replace(/\/api\/inscricao\/?$/, "/api/inscricao/parcial");
+  /** Parou de digitar por este tempo: o rascunho sobe. */
+  const RASCUNHO_ESPERA_MS = 1200;
+  /** Duas gravações nunca saem mais perto que isto (a não ser saindo da página). */
+  const RASCUNHO_INTERVALO_MS = 2500;
+  let rascunhoAssinatura = "";
+  let rascunhoEnviadoEm = 0;
+  let rascunhoTimer = 0;
+  let fichaEnviada = false;
+  let ultimoCampo = "";
+
+  function agendarRascunho(ms) {
+    window.clearTimeout(rascunhoTimer);
+    rascunhoTimer = window.setTimeout(() => salvarRascunho(), ms);
+  }
+
+  function mandarRascunho(corpo, saindo) {
+    // Saindo, o beacon é o único que o navegador promete entregar (com string, vai como text/plain).
+    try {
+      if (saindo && navigator.sendBeacon && navigator.sendBeacon(API_PARCIAL, corpo)) return;
+    } catch {
+      // Beacon recusado (tamanho, webview): tenta o fetch.
+    }
+    try {
+      window
+        .fetch(API_PARCIAL, { method: "POST", mode: "cors", credentials: "omit", headers: CABECALHOS, body: corpo, keepalive: true })
+        .catch(() => {});
+      return;
+    } catch {
+      // fetch recusado: última tentativa pelo beacon.
+    }
+    try {
+      if (navigator.sendBeacon) navigator.sendBeacon(API_PARCIAL, corpo);
+    } catch {
+      // Sem jeito de gravar o rascunho. A página continua exatamente igual.
+    }
+  }
+
+  /** `saindo` = fechando o pop-up ou a página: é a última chance de gravar. */
+  function salvarRascunho({ saindo = false } = {}) {
+    if (fichaEnviada || API_PARCIAL === API) return;
+    window.clearTimeout(rascunhoTimer);
+    const nome = campos.nome.value.trim();
+    const whatsapp = campos.whatsapp.value.trim();
+    const email = campos.email.value.trim();
+    // Pop-up em branco (só abriu e fechou): não existe rascunho.
+    if (!nome && !whatsapp && !email) return;
+
+    const assinatura = `${nome}|${whatsapp}|${email}|${ultimoCampo}`;
+    if (assinatura === rascunhoAssinatura) return;
+
+    const desde = Date.now() - rascunhoEnviadoEm;
+    if (!saindo && rascunhoEnviadoEm && desde < RASCUNHO_INTERVALO_MS) {
+      agendarRascunho(RASCUNHO_INTERVALO_MS - desde);
+      return;
+    }
+
+    rascunhoAssinatura = assinatura;
+    rascunhoEnviadoEm = Date.now();
+    try {
+      mandarRascunho(
+        JSON.stringify({
+          pagina: pagina.id,
+          visitante_id: visitanteDoAparelho(),
+          contato: { nome, whatsapp, email },
+          ultimo_campo: ultimoCampo || null,
+          rastreio: rastreioAtual()
+        }),
+        saindo
+      );
+    } catch {
+      // Nem montar o corpo pode derrubar a página.
+    }
+  }
+
+  for (const campo of ORDEM) {
+    campos[campo].addEventListener("focus", () => {
+      ultimoCampo = campo;
+    });
+    campos[campo].addEventListener("input", () => {
+      ultimoCampo = campo;
+      // Parou de digitar: o rascunho sobe sozinho, sem esperar a pessoa sair do campo.
+      agendarRascunho(RASCUNHO_ESPERA_MS);
+    });
+    // Saiu do campo: o que está nele já vale como rascunho, mesmo que ela pare aqui.
+    campos[campo].addEventListener("blur", () => salvarRascunho());
+  }
+  // Fechou o pop-up sem enviar, trocou de aba, minimizou ou saiu da página: grava na hora. No
+  // celular é no visibilitychange que a página costuma morrer, e não no pagehide; a assinatura
+  // impede a gravação dobrada.
+  dialogo.addEventListener("close", () => salvarRascunho({ saindo: true }));
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "hidden") salvarRascunho({ saindo: true });
+  });
+  window.addEventListener("pagehide", () => salvarRascunho({ saindo: true }));
+
   /**
    * Com checkout: o link que a API devolve só vale se for o checkout do produto do config (mesmo
    * caminho em pay.hotmart.com). Qualquer outra coisa (API trocada, deploy errado) vira o plano B:
@@ -798,10 +908,16 @@
     if (base) pedido.checkout = base;
     const corpo = JSON.stringify(pedido);
 
+    // A partir daqui o rascunho desliga: ela TERMINOU, e a saída para o checkout não pode virar um
+    // "não terminou" no painel.
+    fichaEnviada = true;
+    window.clearTimeout(rascunhoTimer);
     carregando(true);
 
     const resultado = await pedirAoServidor(corpo);
     if (resultado.tipo === "contato") {
+      // O servidor recusou o contato: ela continua aqui, corrigindo. O rascunho volta a valer.
+      fichaEnviada = false;
       carregando(false);
       mostrarErrosDoServidor(resultado.campos);
       contarRecusa();

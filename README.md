@@ -327,6 +327,10 @@ vendendo e não é mexido). As regras vêm das mesmas cópias do paginas em
   segue para ele. Com o paginas lento ou fora, o mesmo link é montado aqui. Os 11 botões têm o link
   no `href` (com `data-valor="698.98"`), e um script inline põe as UTMs neles assim que a página é
   lida. A tela "Ficha recebida!" só volta se o `checkout` do config voltar a `null`.
+- **Rascunho de quem desiste** (desde 07/10): o que a pessoa digita no pop-up sobe para o
+  `/api/inscricao/parcial` do paginas (text/plain, sem preflight) ao parar de digitar, ao sair de um
+  campo, ao fechar o pop-up e ao sair da página, e aparece na lista "Não terminaram" da aba da
+  Formação. No envio da ficha o rascunho desliga; se o paginas recusar o contato (422), volta a valer.
 - **UTMs só da URL aberta**: diferente da venda do GPS, nenhuma campanha fica guardada no aparelho.
   Quem volta sem UTM envia sem UTM.
 - **Nada trava**: com 3,5 s sem resposta, erro 5xx ou rede caída, a ficha vai de novo por
