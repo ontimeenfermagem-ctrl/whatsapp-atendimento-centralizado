@@ -130,7 +130,10 @@
       sck: "utm_content",
       // A régua de sempre da imersão: só .com e .com.br.
       emailSomenteComBr: true,
-      hotmart: Object.freeze({ ofertas: Object.freeze(["sg9gmkyc"]), produtos: Object.freeze([]) })
+      // sg9gmkyc = o checkout da página (à vista e no cartão); rbckw4t6 = "Parcelado Hotmart 12x de
+      // R$ 89,25" (o boleto parcelado). O id do produto (7601657) fica de fora de propósito: é o
+      // mesmo das alunas antigas, e traria para esta aba os avisos delas.
+      hotmart: Object.freeze({ ofertas: Object.freeze(["sg9gmkyc", "rbckw4t6"]), produtos: Object.freeze([]) })
     }),
     // A ordem desta lista é a ordem das abas do painel: página nova entra no FIM.
     "igps-furafila": Object.freeze({
