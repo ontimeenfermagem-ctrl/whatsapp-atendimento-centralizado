@@ -1707,6 +1707,9 @@ html:has(.pf[open]) { overflow: hidden; scrollbar-gutter: stable; }
   background: transparent;
   color: var(--text-dark);
   overflow: visible;
+  /* O cartão é claro numa página escura (:root { color-scheme: dark }): sem isto, o preenchimento
+     automático do Chrome pintava os campos de texto branco em fundo cinza-claro (2:1). */
+  color-scheme: light;
 }
 .pf [hidden] { display: none !important; }
 .pf::backdrop { background: rgba(19, 3, 26, .8); }
@@ -1799,7 +1802,7 @@ html:has(.pf[open]) { overflow: hidden; scrollbar-gutter: stable; }
   appearance: none;
   transition: border-color .15s, box-shadow .15s;
 }
-.pf-campo input::placeholder { color: #85728F; opacity: 1; }
+.pf-campo input::placeholder { color: #76647F; opacity: 1; } /* 5,4:1 no branco, 5,1:1 no fundo de erro */
 .pf-campo input:focus { border-color: var(--grape); box-shadow: 0 0 0 4px rgba(124, 13, 164, .16); }
 .pf-campo input:focus-visible { outline: 2px solid var(--grape); outline-offset: 2px; }
 .pf-campo.tem-erro input { border-color: var(--pf-erro); background: #FFF8F7; }
@@ -1815,6 +1818,7 @@ html:has(.pf[open]) { overflow: hidden; scrollbar-gutter: stable; }
 }
 .pf-erro::before {
   content: "!";
+  content: "!" / "";          /* o "!" é enfeite: o leitor de tela lê só a mensagem */
   flex: 0 0 18px;
   height: 18px;
   margin-top: 1px;
@@ -1868,7 +1872,8 @@ html:has(.pf[open]) { overflow: hidden; scrollbar-gutter: stable; }
 
 /* o botão é o mesmo .cta verde da página */
 .pf .pf-ir { max-width: none; margin-top: 4px; min-height: 56px; line-height: 1.25; text-wrap: balance; }
-.pf .pf-ir:disabled { background: var(--cta); color: #06280F; cursor: progress; }
+.pf .pf-ir:disabled,
+.pf .pf-ir[aria-disabled="true"] { background: var(--cta); color: #06280F; cursor: progress; }
 .pf-gira {
   display: none;
   flex: none;

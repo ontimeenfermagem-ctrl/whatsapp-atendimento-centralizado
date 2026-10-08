@@ -49,8 +49,8 @@ const LP = '/igps_set_lp_26-ingresso';
 app.get(LP, enviarPagina('igps_set_lp_26-ingresso'));
 
 // Antecipacao da Formacao Enfermagem de Valor (Ficha dos Presentes). Os botoes
-// abrem o pop-up da ficha (js/pre-formulario.js), que grava no painel do paginas;
-// enquanto nao ha link de checkout, a ficha so capta (ver o README).
+// abrem o pop-up da ficha (js/pre-formulario.js), que grava no painel do paginas
+// e segue para o checkout da Hotmart ja preenchido (ver o README).
 const LP_FORMACAO = '/igps-lp-formacao';
 app.get(LP_FORMACAO, enviarPagina('igps-lp-formacao'));
 

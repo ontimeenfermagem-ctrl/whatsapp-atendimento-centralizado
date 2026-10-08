@@ -333,9 +333,15 @@ vendendo e não é mexido). As regras vêm das mesmas cópias do paginas em
   Formação. No envio da ficha o rascunho desliga; se o paginas recusar o contato (422), volta a valer.
 - **UTMs só da URL aberta**: diferente da venda do GPS, nenhuma campanha fica guardada no aparelho.
   Quem volta sem UTM envia sem UTM.
-- **Nada trava**: com 3,5 s sem resposta, erro 5xx ou rede caída, a ficha vai de novo por
-  `sendBeacon` e o pop-up mostra "Ficha recebida". Só o 422 de contato inválido segura a pessoa
-  (erro no campo).
+- **Nada trava**: com 3,5 s sem resposta, rede caída ou qualquer resposta que não seja o 200 do
+  paginas (5xx, 429, página desconhecida), a ficha vai de novo por `sendBeacon` e o pop-up segue
+  para o checkout montado aqui. Só o 422 de contato inválido segura a pessoa, com o erro no campo; a
+  recusa do e-mail pelo servidor (domínio sem caixa de entrada) fica no campo até o e-mail mudar.
+  Se a página voltar a só captar, esses mesmos casos mostram "Ficha recebida" e a ficha pode não
+  chegar (o beacon costuma receber a mesma recusa): revise isso antes.
+- **Venda**: chega ao painel pelo webhook da Hotmart. A Formação tem o dela no paginas,
+  `/api/hotmart/venda/formacao-ev`, que casa a venda com a ficha pelo e-mail ou telefone. Na Hotmart,
+  esse webhook tem que valer só para o produto da Formação.
 - **Toque antes do `.js` chegar** (rede lenta): o botão segue o próprio link, direto para o
   checkout, já com as UTMs (o script inline do fim da página). Com `href="#"` (captação), o toque
   fica guardado e o pop-up abre quando o arquivo carrega.
@@ -344,17 +350,15 @@ vendendo e não é mexido). As regras vêm das mesmas cópias do paginas em
 - **Pixel**: a página não tem. Se um dia entrar, o script já dispara `Lead` (e `InitiateCheckout`,
   com checkout) como na venda do GPS.
 
-### Quando o link do checkout chegar
+### Trocar o link ou a oferta do checkout
 
 1. No paginas: o link (com o `off=`) vai em `checkout` da `formacao-ev`, e a oferta em
    `hotmart.ofertas`. Se o botão do boleto (12x de R$ 89,25) for outra oferta do mesmo produto, ela
    também entra em `hotmart.ofertas`. Publique.
-2. Aqui: copie o `checkout-config.js` de novo (ver "As cópias do paginas"). Com isso o mesmo envio
-   passa a seguir para o checkout da Hotmart já preenchido, com as UTMs e `sck` = `utm_content`, sem
-   mexer no script.
-3. No HTML:
-   - Ponha o link nos `href` dos botões; o do boleto leva a oferta dele. É o caminho de quem não
-     tem o pop-up e o que manda a oferta do botão tocado.
-   - Troque o texto do botão do pop-up para "Continuar para o pagamento".
-   - Se quiser, acrescente a linha do cadeado e o "Ir direto para o pagamento" (`#pf-direto`), como
-     na venda do GPS.
+2. Aqui: copie o `checkout-config.js` de novo (ver "As cópias do paginas").
+3. No HTML: o link novo nos `href` dos 11 botões (o do boleto com a oferta dele) e no
+   `#pf-direto-link`. O `href` é o caminho de quem não tem o pop-up, e é dele que vai a oferta do
+   botão tocado.
+
+Para voltar a só captar, o `checkout` volta a `null` no paginas. Aqui, os `href` voltam a `#` e o
+texto do botão do pop-up volta a "Enviar minha ficha" (ver também "Nada trava" acima).

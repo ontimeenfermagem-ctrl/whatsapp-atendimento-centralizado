@@ -316,6 +316,8 @@
   let leadRastreado = false;
   let recusas = 0; // envios barrados pela validação da tela ou pelo 422 do servidor
   let recebida = false; // sem checkout: a ficha desta visita já foi recebida
+  let abertoEm = 0; // quando o pop-up abriu: o toque no fundo só fecha depois de 450 ms
+  let recusaDoEmail = null; // { email, mensagem }: o e-mail que o servidor recusou (domínio sem caixa)
 
   /* ------------------------------------------------------------------ abrir e fechar */
 
@@ -362,7 +364,10 @@
   function abrir(link) {
     preconectar();
     try {
-      if (!dialogo.open) dialogo.showModal();
+      if (!dialogo.open) {
+        dialogo.showModal();
+        abertoEm = Date.now();
+      }
     } catch {
       if (COM_CHECKOUT) initiateCheckout(link);
       return false; // o clique segue o próprio link
@@ -393,10 +398,12 @@
   fechar.addEventListener("click", () => dialogo.close());
 
   // Clique no fundo escuro fecha. O toque tem que COMEÇAR no fundo: quem seleciona o texto de um
-  // campo e solta o mouse fora do cartão não pode perder o que digitou.
+  // campo e solta o mouse fora do cartão não pode perder o que digitou. E não vale nos primeiros
+  // 450 ms: quem dá dois toques no botão da barra fixa acerta o segundo no fundo, e o pop-up
+  // abria e fechava na mesma hora.
   let apertouNoFundo = false;
   dialogo.addEventListener("pointerdown", (evento) => {
-    apertouNoFundo = evento.target === dialogo;
+    apertouNoFundo = evento.target === dialogo && Date.now() - abertoEm > 450;
   });
   dialogo.addEventListener("click", (evento) => {
     if (evento.target === dialogo && apertouNoFundo) dialogo.close();
@@ -470,32 +477,48 @@
       mostrarErro(campo, mensagem);
       if (mensagem && !primeiro) primeiro = campo;
     }
+    // A régua da tela não sabe do domínio sem caixa de entrada (só o servidor consulta): guarda a
+    // recusa para ela não sumir no próximo blur com o e-mail igual.
+    const recusa = camposErro && typeof camposErro.email === "string" ? camposErro.email : "";
+    recusaDoEmail = recusa ? { email: L.normalizeEmail(campos.email.value), mensagem: recusa } : null;
     if (primeiro) campos[primeiro].focus();
     else status.textContent = "Confere os seus dados, por favor.";
   }
 
-  // Quem sai do campo tocando no botão não pode ver o botão fugir do dedo: mostrar erro no blur
-  // empurra o botão para baixo e o toque cai no vazio. Nesse caso o blur não mexe na tela — o
-  // próprio envio valida e mostra tudo. Quem encerra o "apertando" é o CLIQUE, e não um timer.
-  let apertandoEnviar = false;
+  // Quem sai do campo tocando num botão ou link do pop-up (o de enviar, "Ir direto para o
+  // pagamento", a sugestão do e-mail) não pode ver o alvo fugir do dedo: mostrar ou tirar um erro
+  // no blur empurra o que está embaixo, e o toque cai no vazio. Nesse caso o blur não mexe na tela
+  // — o próprio envio valida e mostra tudo. Quem encerra o "apertando" é o CLIQUE, e não um timer.
+  let apertandoBotao = false;
   let soltarTimer = 0;
-  function soltarEnviar() {
+  function soltarBotao() {
     window.clearTimeout(soltarTimer);
-    apertandoEnviar = false;
+    apertandoBotao = false;
   }
-  botao.addEventListener("pointerdown", () => {
-    apertandoEnviar = true;
-    window.clearTimeout(soltarTimer);
-    soltarTimer = window.setTimeout(soltarEnviar, 1000);
-  });
-  botao.addEventListener("click", soltarEnviar, true);
-  botao.addEventListener("pointercancel", soltarEnviar);
+  dialogo.addEventListener(
+    "pointerdown",
+    (evento) => {
+      const alvo = evento.target && typeof evento.target.closest === "function" ? evento.target.closest("button, a") : null;
+      if (!alvo) return;
+      apertandoBotao = true;
+      window.clearTimeout(soltarTimer);
+      soltarTimer = window.setTimeout(soltarBotao, 1000);
+    },
+    true
+  );
+  dialogo.addEventListener("click", soltarBotao, true);
+  dialogo.addEventListener("pointercancel", soltarBotao, true);
 
   for (const campo of ORDEM) {
     campos[campo].addEventListener("blur", () => {
-      if (apertandoEnviar || !dialogo.open) return;
+      if (apertandoBotao || !dialogo.open) return;
       if (campos[campo].value.trim() || tentouEnviar) validarCampo(campo);
-      if (campo === "email") atualizarSugestao(false);
+      if (campo === "email") {
+        if (recusaDoEmail && !erroLocal("email") && L.normalizeEmail(campos.email.value) === recusaDoEmail.email) {
+          mostrarErro("email", recusaDoEmail.mensagem);
+        }
+        atualizarSugestao(false);
+      }
     });
     campos[campo].addEventListener("input", () => {
       // Corrigiu? O erro some na hora, sem esperar sair do campo.
@@ -624,9 +647,13 @@
 
   function carregando(sim) {
     enviando = sim;
-    botao.disabled = sim;
+    // aria-disabled, e não disabled: o botão desligado perdia o foco para o <body>, atrás do
+    // pop-up, e quem usa teclado ou leitor de tela ficava sem saber o que acontecia. O "enviando"
+    // já barra o segundo envio (ver o submit).
+    botao.setAttribute("aria-disabled", sim ? "true" : "false");
     botao.setAttribute("aria-busy", sim ? "true" : "false");
     botaoTexto.textContent = sim ? ROTULO_ENVIANDO : ROTULO_BOTAO;
+    if (sim) anunciar(ROTULO_ENVIANDO);
   }
 
   // Voltando do checkout pelo botão "voltar" (inclusive do bfcache): o botão volta a funcionar,
@@ -833,8 +860,7 @@
   function irParaOCheckout(url, idEvento) {
     indo = true;
     initiateCheckout(abertoPor, idEvento);
-    anunciar("Abrindo o pagamento.");
-    // href e não replace: a pessoa pode querer voltar para conferir o que digitou.
+    // ("Abrindo o pagamento…" já foi anunciado no carregando.) href e não replace: a pessoa pode querer voltar para conferir o que digitou.
     window.location.href = url;
   }
 
