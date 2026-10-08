@@ -2648,6 +2648,8 @@ html:has(.pf[open]) { overflow: hidden; scrollbar-gutter: stable; }
     var i=p.indexOf('='),k=i<0?p:p.slice(0,i),v=i<0?'':p.slice(i+1);
     try{k=decodeURIComponent(k.replace(/\+/g,' '));v=decodeURIComponent(v.replace(/\+/g,' '));}catch(e){return;}
     v=v.trim().slice(0,500);
+    /* o corte pode partir um emoji ao meio, e meio emoji derruba o encodeURIComponent: sai a metade */
+    v=v.replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]|[\uD800-\uDFFF]/g,function(par){return par.length===2?par:'';});
     if(/^utm_(source|medium|campaign|term|content)$/.test(k)&&v)utm[k]=v;
   });
   if(utm.utm_content)utm.sck=utm.utm_content;
@@ -2672,13 +2674,15 @@ html:has(.pf[open]) { overflow: hidden; scrollbar-gutter: stable; }
   "use strict";
 
   /* Ajuste aqui: abertura das inscrições. Os botões [data-cta] abrem a Ficha dos Presentes, o
-     pop-up do js/pre-formulario.js (e não um link). */
+     pop-up do js/pre-formulario.js, que segue para o checkout. */
   var PAGE_CONFIG = {
     deadline: "2026-10-08T07:00:00-03:00"
   };
 
-  /* Toque num botão antes de o js/pre-formulario.js chegar (rede lenta): o href="#" jogaria a
-     página para o topo. O toque fica guardado e o pop-up abre assim que o arquivo carregar. */
+  /* Só vale com os botões em href="#" (a página só captando, sem checkout): o toque antes de o
+     js/pre-formulario.js chegar jogaria a página para o topo, então ele fica guardado e o pop-up
+     abre assim que o arquivo carregar. Com o link do checkout no href (hoje), não faz nada: o
+     toque antes do arquivo vai direto ao checkout, com as UTMs do script acima. */
   function holdEarlyTaps() {
     document.addEventListener("click", function (e) {
       if (window.EVPreFormularioAtivo || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;

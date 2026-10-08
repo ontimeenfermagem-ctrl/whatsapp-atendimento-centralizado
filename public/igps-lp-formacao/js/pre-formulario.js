@@ -144,7 +144,12 @@
 
   function texto(valor, campo) {
     if (valor == null) return null;
-    const limpo = String(valor).trim().slice(0, TETO[campo] || 500);
+    // O corte (aqui ou no rastreioDaUrl) pode partir um emoji ao meio, e meio emoji derruba o
+    // encodeURIComponent que monta o link do checkout: a metade solta sai.
+    const limpo = String(valor)
+      .trim()
+      .slice(0, TETO[campo] || 500)
+      .replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]|[\uD800-\uDFFF]/g, (par) => (par.length === 2 ? par : ""));
     return limpo || null;
   }
 
@@ -397,10 +402,21 @@
 
   fechar.addEventListener("click", () => dialogo.close());
 
-  // Clique no fundo escuro fecha. O toque tem que COMEÇAR no fundo: quem seleciona o texto de um
-  // campo e solta o mouse fora do cartão não pode perder o que digitou. E não vale nos primeiros
-  // 450 ms: quem dá dois toques no botão da barra fixa acerta o segundo no fundo, e o pop-up
-  // abria e fechava na mesma hora.
+  // Nos primeiros 450 ms depois de abrir, nenhum clique dentro do pop-up vale: o segundo toque de
+  // quem dá dois toques no botão da página caía no fundo ou no X (o pop-up abria e fechava na mesma
+  // hora) ou no "Continuar para o pagamento" (ficha vazia, três erros e o teclado subindo).
+  dialogo.addEventListener(
+    "click",
+    (evento) => {
+      if (Date.now() - abertoEm >= 450) return;
+      evento.preventDefault();
+      evento.stopPropagation();
+    },
+    true
+  );
+
+  // Clique no fundo escuro fecha. O toque tem que COMEÇAR no fundo (e depois daqueles 450 ms):
+  // quem seleciona o texto de um campo e solta o mouse fora do cartão não pode perder o que digitou.
   let apertouNoFundo = false;
   dialogo.addEventListener("pointerdown", (evento) => {
     apertouNoFundo = evento.target === dialogo && Date.now() - abertoEm > 450;
@@ -974,7 +990,13 @@
     if (!destino) {
       // Plano B: a mesma URL que o servidor montaria (mesma oferta, UTMs, sck e contato), montada
       // aqui. A venda não espera ninguém.
-      destino = C.urlDoCheckout(pagina, { base, utm: utmDoRastreio(rastreio), contato });
+      try {
+        destino = C.urlDoCheckout(pagina, { base, utm: utmDoRastreio(rastreio), contato });
+      } catch {
+        // Nem um link que não se monta pode prender a pessoa no "Abrindo o pagamento…": vai o link
+        // do botão tocado, sem o contato.
+        destino = (abertoPor && abertoPor.getAttribute("href")) || pagina.checkout;
+      }
       avisarServidor(corpo);
     }
 
