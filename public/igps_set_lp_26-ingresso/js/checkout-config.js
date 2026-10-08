@@ -131,6 +131,21 @@
       // A régua de sempre da imersão: só .com e .com.br.
       emailSomenteComBr: true,
       hotmart: Object.freeze({ ofertas: Object.freeze(["sg9gmkyc"]), produtos: Object.freeze([]) })
+    }),
+    // A ordem desta lista é a ordem das abas do painel: página nova entra no FIM.
+    "igps-furafila": Object.freeze({
+      id: "igps-furafila",
+      // O pop-up do fura-fila da Imersão GPS: nome, WhatsApp e e-mail, e a pessoa vai para o GRUPO
+      // do WhatsApp (`destino`). Captação gratuita: sem checkout, sem sck que vá a lugar nenhum.
+      rota: "/pop-up-igps-furafila",
+      nome: "Imersão GPS — fura-fila (pop-up)",
+      produto: "Grupo do WhatsApp da Imersão GPS",
+      checkout: null,
+      destino: "https://chat.whatsapp.com/CHzUiIg6iu870DD7cfnxQe?s=sw&p=i&ilr=4&iam=0",
+      sck: "utm_content",
+      // Qualquer e-mail de verdade (o grupo não pode barrar quem usa .net, .org, .edu.br...).
+      emailSomenteComBr: false,
+      hotmart: Object.freeze({ ofertas: Object.freeze([]), produtos: Object.freeze([]) })
     })
   });
 
