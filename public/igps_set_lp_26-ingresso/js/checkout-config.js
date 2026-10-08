@@ -77,9 +77,10 @@
       // Como no site da Escola: o utm_content (o criativo do anúncio) vira o sck.
       sck: "utm_content",
       emailSomenteComBr: true,
-      // O id numérico do produto aparece no primeiro aviso de venda (compras.produto_id): cole aqui
-      // quando souber. Até lá, a oferta basta.
-      hotmart: Object.freeze({ ofertas: Object.freeze(["l0r77by6"]), produtos: Object.freeze([]) })
+      // 8549152 = "Imersão GPS do plantão sem medo" (visto nos avisos reais). As outras ofertas do
+      // mesmo produto: urw80fmp ("Ingresso C - R$3,00") e ytcqm8s5 ("Lote 1º"). Conhecidas aqui, um
+      // aviso delas que chegue por outro endereço próprio (/api/hotmart/venda/<id>) continua do GPS.
+      hotmart: Object.freeze({ ofertas: Object.freeze(["l0r77by6", "urw80fmp", "ytcqm8s5"]), produtos: Object.freeze(["8549152"]) })
     }),
     // A ordem desta lista é a ordem das abas do painel: página nova entra no FIM.
     "aplicacao-afericao": Object.freeze({
@@ -93,9 +94,8 @@
       // Pedido do cliente: nesta página o utm_term vira o sck.
       sck: "utm_term",
       emailSomenteComBr: false,
-      // O id numérico do produto aparece no primeiro aviso de venda (compras.produto_id): cole aqui
-      // quando souber. Até lá, a oferta basta para a venda cair nesta página.
-      hotmart: Object.freeze({ ofertas: Object.freeze(["3yiw3399"]), produtos: Object.freeze([]) })
+      // 8627724 = "Sua experiência vale um Diploma de Técnico" (visto nos avisos reais).
+      hotmart: Object.freeze({ ofertas: Object.freeze(["3yiw3399"]), produtos: Object.freeze(["8627724"]) })
     }),
     "bf-out-ls-26": Object.freeze({
       id: "bf-out-ls-26",
