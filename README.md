@@ -15,7 +15,7 @@ https://io.escolaenfermagemdevalor.com.br (Express mínimo em `server.js`):
 | `/calculo-de-medicação-calculadora` | `public/calculo-de-medicacao-calculadora/index.html` | calculadora de medicação para enfermagem (abre também sem acento). Base de medicamentos em `meds.js`, contas e conferências em `calc.js`, tela em `app.js` |
 | `/BF_out_LS_26-inscricao-a` | `public/bf_out_ls_26-inscricao/index.html` | captação gratuita da Black Friday (lista VIP do vitalício), a página ORIGINAL (roxa, a da CEO; voltou em 05/10 exatamente como era na 68eef0e): nome, e-mail e WhatsApp vão para a planilha `BF_out_LS_26`, o n8n e o painel do paginas (ver "Lista VIP da Black Friday") |
 | `/BF_out_LS_26-inscricao-b` | `public/bf_out_ls_26-inscricao-b/index.html` | versão B da captação (teste A/B): layout do modelo "vitalício" em coluna única; mesmo formulário, API, obrigada e Pixel da A. Capas e Izabel vêm da pasta da A. O n8n recebe `pagina.variante` (`a`/`b`), tirada do `page_url`; planilha e painel já recebem o `page_url` |
-| `/BF_out_LS_26-obrigada` | `public/bf_out_ls_26-obrigada/index.html` | obrigada da lista VIP: botão do grupo do WhatsApp (abre sozinho em 15 s), suporte e contagem até 26/10 20h |
+| `/BF_out_LS_26-obrigada` | `public/bf_out_ls_26-obrigada/index.html` | obrigada da lista VIP: botão do grupo do WhatsApp (abre sozinho em 15 s), suporte e contagem até 02/11 20h |
 | `/BF_out_LS_26-obrigada-b` | `public/bf_out_ls_26-obrigada-b/index.html` | obrigada da versão B (a captação B manda para cá): layout do modelo, com o mesmo grupo, suporte, contagem e Pixel (`Lead` com o mesmo `content_name`) da obrigada A |
 | `/BF_out_LS_26-inscricao-a-b` | `public/bf_out_ls_26-inscricao-a-b/index.html` | versão com o layout do Open Design (preto, amarelo, Izabel com as marcas em órbita; ver "Visual" abaixo): mesmo formulário, API e Pixel. Manda para a obrigada `-a-b`. O n8n recebe `pagina.variante: 'a-b'` |
 | `/BF_out_LS_26-obrigada-a-b` | `public/bf_out_ls_26-obrigada-a-b/index.html` | obrigada da versão `-a-b`, no mesmo visual: mesmo grupo, suporte, redirecionamento de 15 s, contagem e Pixel (`Lead` com o mesmo `content_name`) |
@@ -106,7 +106,7 @@ tela e no servidor) e manda um POST para `/api/bf_out_ls_26/lead` (`bf-leads.js`
 de novo e repassa para o Apps Script da planilha
 [BF_out_LS_26](https://docs.google.com/spreadsheets/d/1k_hGE6VnSyDiazuwBA3YY9wesnxe_0sbjAka2_6Xduk/edit),
 que grava uma linha com data/hora, contato, UTMs do primeiro toque, dispositivo e página. A oferta
-abre no dia 26/10 às 20h.
+abre no dia 02/11 às 20h.
 
 - **Instalação do Apps Script**: passo a passo no topo de `apps-script/bf_out_ls_26.gs`. No fim, o
   Railway precisa de `BF_SHEETS_URL` (URL `/exec` da implantação) e `BF_SHEETS_TOKEN` (o token que a

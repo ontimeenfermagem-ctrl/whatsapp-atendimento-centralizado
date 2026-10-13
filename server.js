@@ -69,7 +69,7 @@ app.get(LP_C, enviarPagina('igps_set_lp_26-ingresso-c'));
 const TY = '/igps_set_lp_26-obrigado';
 app.get(TY, enviarPagina('igps_set_lp_26-obrigado'));
 
-// Captacao gratuita da Black Friday (lista VIP do vitalicio), oferta abre em 26/10 as 20h.
+// Captacao gratuita da Black Friday (lista VIP do vitalicio), oferta abre em 02/11 as 20h.
 // O Express compara rota sem diferenciar maiuscula de minuscula: abre tambem como
 // /bf_out_ls_26-inscricao-a. A pasta continua bf_out_ls_26-inscricao e as imagens ficam em
 // /bf_out_ls_26-inscricao/img/ e sao pedidas por caminho absoluto.
@@ -87,7 +87,7 @@ app.get(BF_B, enviarPagina('bf_out_ls_26-inscricao-b'));
 const BF_AB = '/BF_out_LS_26-inscricao-a-b';
 app.get(BF_AB, enviarPagina('bf_out_ls_26-inscricao-a-b'));
 
-// Obrigada da lista VIP: botao e redirecionamento para o grupo do WhatsApp e contagem ate 26/10 20h.
+// Obrigada da lista VIP: botao e redirecionamento para o grupo do WhatsApp e contagem ate 02/11 20h.
 const BF_TY = '/BF_out_LS_26-obrigada';
 app.get(BF_TY, enviarPagina('bf_out_ls_26-obrigada'));
 
