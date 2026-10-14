@@ -1,0 +1,665 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Plantão de Valor · Izabel Gonçalves</title>
+<!--
+  Ebook "Plantão de Valor" (Black Friday Vitalício). Um arquivo só gera os dois PDFs:
+    ebook.html?f=celular  -> páginas 540x960 (9:16), para ler no WhatsApp
+    ebook.html?f=a4       -> A4
+  O script do fim corta cada capítulo em quantas páginas precisar (o que não cabe vai para uma
+  página de continuação) e numera as páginas. Para gerar os PDFs: ebook/gerar-pdf.ps1.
+-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+@font-face{font-family:'Archivo';font-weight:400 900;font-stretch:62% 125%;src:url(../public/fonts/archivo-latin-v1.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Archivo';font-weight:400 900;font-stretch:62% 125%;src:url(../public/fonts/archivo-latin-ext-v1.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+20A0-20AB,U+20AD-20C0}
+@font-face{font-family:'Instrument Sans';font-weight:400 700;src:url(../public/fonts/instrument-sans-latin-v1.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Instrument Sans';font-weight:400 700;src:url(../public/fonts/instrument-sans-latin-ext-v1.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+20A0-20AB,U+20AD-20C0}
+
+:root{
+  --dark:#12081C; --dark-2:#1E0B33; --cream:#FBF7FD; --cream-2:#F1E8F8; --ink:#1F1230; --ink-2:#4E3F5E;
+  --purple:#7E22CE; --purple-2:#A855F7; --pink:#E879F9; --gold:#FFD15C; --gold-d:#B7791F; --green:#16A34A;
+  --display:'Archivo','Arial Narrow',sans-serif; --body:'Instrument Sans',Arial,sans-serif;
+}
+html.celular{--W:540px;--H:960px;--padX:32px;--padT:36px;--padB:56px;--fs:15.5px;--cols:2}
+html.a4{--W:794px;--H:1123px;--padX:64px;--padT:64px;--padB:78px;--fs:15px;--cols:4}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#777}
+body{font-family:var(--body);font-size:var(--fs);line-height:1.5;color:var(--ink);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+img{display:block;max-width:100%}
+a{color:inherit}
+@media screen{.page{margin:0 auto 24px;box-shadow:0 10px 40px rgba(0,0,0,.4)}}
+
+/* ---------- página ---------- */
+.page{position:relative;width:var(--W);height:var(--H);overflow:hidden;background:var(--cream);padding:var(--padT) var(--padX) var(--padB);break-after:page;page-break-after:always}
+.page:last-child{break-after:auto;page-break-after:auto}
+.page.escura{background:radial-gradient(90% 55% at 50% 0,#3B1466 0,transparent 70%),var(--dark);color:#fff}
+.rodape{position:absolute;left:var(--padX);right:var(--padX);bottom:24px;display:flex;justify-content:space-between;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);opacity:.75}
+.escura .rodape{color:rgba(255,255,255,.7)}
+.sem-rodape .rodape{display:none}
+
+h1,h2,h3{font-family:var(--display);margin:0;line-height:1;text-wrap:balance}
+.cond{font-weight:900;font-stretch:72%;text-transform:uppercase;letter-spacing:-.005em}
+.gold{color:var(--gold)} .rosa{color:var(--pink)} .roxo{color:var(--purple)}
+p{margin:0 0 .8em}
+.tag{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:6px 12px;border-radius:99px;border:1px solid currentColor}
+
+/* ---------- capa ---------- */
+.capa{display:flex;flex-direction:column;align-items:center;text-align:center;padding-top:calc(var(--padT) - 6px)}
+.capa .tag{color:var(--gold)}
+.capa h1{font-size:calc(var(--W) * .17);margin:18px 0 8px;font-stretch:68%}
+.capa .sub{font-size:calc(var(--fs) * 1.08);color:rgba(255,255,255,.86);max-width:30em;margin:0 0 6px}
+.capa .autora{font-family:var(--display);font-weight:800;font-stretch:85%;font-size:calc(var(--fs) * 1.1);letter-spacing:.08em;text-transform:uppercase;color:var(--pink);margin-top:6px}
+.capa .imagem{margin-top:auto;width:auto;max-width:96%;max-height:52%;object-fit:contain;min-height:0}
+.capa .selo{position:absolute;right:calc(var(--padX) - 8px);top:calc(var(--H) * .5);transform:rotate(8deg);background:var(--gold);color:#2A1600;border-radius:14px;padding:10px 14px;font-family:var(--display);font-weight:900;font-stretch:78%;text-transform:uppercase;line-height:1.05;font-size:15px;box-shadow:0 12px 30px rgba(0,0,0,.4)}
+.capa .selo b{display:block;font-size:22px}
+
+/* ---------- carta e textos corridos ---------- */
+.titulo-pag{font-size:calc(var(--fs) * 2.5);margin:4px 0 22px}
+.carta p{font-size:calc(var(--fs) * 1.02)}
+.assina{font-family:var(--display);font-weight:800;font-stretch:85%;font-size:calc(var(--fs) * 1.3);color:var(--purple);margin-top:10px}
+.aviso{margin-top:18px;border-left:4px solid var(--gold-d);background:#FFF6DB;padding:12px 14px;border-radius:0 10px 10px 0;font-size:calc(var(--fs) * .86);color:#5B4300}
+
+/* ---------- sumário ---------- */
+.sumario{list-style:none;margin:0;padding:0}
+.sumario li{display:flex;gap:14px;align-items:baseline;padding:9px 0;border-bottom:1px dashed #D9C6EC}
+.sumario .n{font-family:var(--display);font-weight:900;font-stretch:75%;color:var(--purple-2);min-width:2.4em}
+.sumario .t{flex:1}
+.sumario .grupo{font-family:var(--display);font-weight:800;font-stretch:85%;text-transform:uppercase;letter-spacing:.06em;font-size:12px;color:var(--ink-2);border:0;padding:16px 0 4px}
+
+/* ---------- capítulo ---------- */
+.cap-head{margin-bottom:14px}
+.cap-head .num{display:inline-block;background:var(--purple);color:#fff;font-family:var(--display);font-weight:800;font-stretch:85%;letter-spacing:.1em;text-transform:uppercase;font-size:12px;padding:5px 10px;border-radius:6px}
+.cap-head h2{font-size:calc(var(--fs) * 2.1);margin:10px 0 8px;color:var(--ink)}
+.cap-head .lead{font-size:calc(var(--fs) * 1.04);color:var(--ink-2);margin:0}
+.cont-head{font-family:var(--display);font-weight:800;font-stretch:85%;text-transform:uppercase;letter-spacing:.08em;font-size:12px;color:var(--purple-2);margin-bottom:14px}
+.flow > *{margin-bottom:12px}
+.caixa.formula h3{color:var(--gold)}
+.flow h3{font-family:var(--display);font-weight:800;font-stretch:88%;font-size:calc(var(--fs) * 1.12);color:var(--purple);margin:0 0 6px}
+.check{list-style:none;margin:0;padding:0}
+.check li{position:relative;padding-left:26px;margin:0 0 7px}
+.check li::before{content:"";position:absolute;left:0;top:.28em;width:16px;height:16px;border-radius:5px;background:var(--purple-2);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='4'/%3E%3C/svg%3E");}
+.check li::after{content:"";position:absolute;left:5px;top:calc(.28em + 3px);width:5px;height:8px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.num-list{margin:0;padding-left:1.3em}
+.num-list li{margin:0 0 6px;padding-left:2px}
+.caixa{background:#fff;border:1px solid #E4D6F1;border-radius:14px;padding:14px 16px}
+.caixa.formula{background:var(--dark-2);color:#fff;border:0}
+.caixa.formula b{color:var(--gold)}
+.caixa.alerta{background:#FFF1F2;border-color:#FECDD3}
+.caixa.alerta h3{color:#BE123C}
+.dica{display:flex;gap:12px;align-items:flex-start;background:var(--cream-2);border-radius:14px;padding:12px 14px}
+.dica img{width:46px;height:46px;border-radius:50%;object-fit:cover;object-position:50% 12%;flex:none;background:var(--purple)}
+.dica b{color:var(--purple)}
+.teaser{background:linear-gradient(120deg,var(--dark-2),#4C1D95);color:#fff;border-radius:14px;padding:14px 16px;font-size:calc(var(--fs) * .95)}
+.teaser b{color:var(--gold)}
+.mono{font-variant-numeric:tabular-nums}
+table.ref{width:100%;border-collapse:collapse;font-size:calc(var(--fs) * .92)}
+table.ref td{padding:7px 8px;border-bottom:1px solid #E4D6F1}
+table.ref td:first-child{font-weight:700;color:var(--purple)}
+
+/* ---------- transição / oferta ---------- */
+.centro{display:flex;flex-direction:column;justify-content:center;text-align:center}
+.grande{font-size:calc(var(--W) * .105);margin:16px 0}
+.escura p{color:rgba(255,255,255,.86)}
+.data-box{display:inline-block;margin:10px auto 20px;background:var(--gold);color:#2A1600;border-radius:14px;padding:12px 20px;font-family:var(--display);font-weight:900;font-stretch:78%;text-transform:uppercase;font-size:calc(var(--fs) * 1.5);line-height:1.05}
+.botao{display:inline-flex;align-items:center;justify-content:center;gap:10px;margin:8px auto 0;background:linear-gradient(180deg,#86EFAC,#4ADE80 55%,#22C55E);color:#06301A;font-weight:700;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;border-radius:999px;padding:16px 28px;font-size:calc(var(--fs) * .98);border:2px solid rgba(255,255,255,.7)}
+.qr{margin:22px auto 6px;background:#fff;padding:12px;border-radius:14px;width:max-content}
+.qr-leg{font-size:12.5px;color:rgba(255,255,255,.7)}
+.faixa-img{margin:8px calc(var(--padX) * -1) 0;width:calc(100% + var(--padX) * 2);max-width:none}
+
+/* ---------- catálogo ---------- */
+.cat .flow{display:grid;grid-template-columns:repeat(var(--cols),minmax(0,1fr));gap:14px;align-content:start}
+.cat .flow > *{margin:0}
+.secao-cat{grid-column:1/-1;font-family:var(--display);font-weight:900;font-stretch:78%;text-transform:uppercase;font-size:calc(var(--fs) * 1.25);color:var(--purple);border-bottom:2px solid var(--purple-2);padding-bottom:4px;margin-top:4px}
+.secao-cat small{display:block;font-family:var(--body);font-weight:500;font-stretch:100%;text-transform:none;font-size:calc(var(--fs) * .8);color:var(--ink-2);margin-top:2px}
+.mini{background:#fff;border:1px solid #E4D6F1;border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.mini .capinha{aspect-ratio:720/1040;width:100%;object-fit:cover}
+.mini .txt{padding:9px 10px 11px}
+.mini h4{margin:0 0 4px;font-family:var(--display);font-weight:800;font-stretch:85%;font-size:calc(var(--fs) * .9);line-height:1.1;color:var(--ink)}
+.mini p{margin:0;font-size:calc(var(--fs) * .74);line-height:1.35;color:var(--ink-2)}
+/* capa gerada para os mini cursos novos, no estilo das capas que já existem */
+.gerada{aspect-ratio:720/1040;width:100%;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:10px;color:#fff;
+  background:radial-gradient(80% 60% at 30% 20%,rgba(255,255,255,.18),transparent 60%),linear-gradient(160deg,var(--c1,#6D28D9),var(--c2,#2E1065))}
+.gerada .por{position:absolute;top:8%;left:0;right:0;font-size:9px;font-weight:600;color:var(--gold);letter-spacing:.02em}
+.gerada .ico{font-size:26px;line-height:1;margin-bottom:8px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.4))}
+.gerada .nome{font-family:var(--display);font-weight:900;font-stretch:72%;text-transform:uppercase;font-size:20px;line-height:.95;color:var(--gold);text-shadow:0 2px 0 rgba(0,0,0,.35)}
+.gerada .tipo{position:absolute;bottom:7%;left:0;right:0;font-size:8.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.85)}
+html.a4 .gerada .nome{font-size:17px}
+html.a4 .gerada .ico{font-size:22px}
+/* no celular o catálogo vira lista: capinha pequena ao lado do texto */
+html.celular .cat .flow{grid-template-columns:minmax(0,1fr);gap:9px}
+html.celular .mini{flex-direction:row;align-items:center}
+html.celular .mini .capinha,html.celular .mini .gerada{width:70px;flex:none}
+html.celular .mini .gerada{padding:4px}
+html.celular .gerada .por,html.celular .gerada .tipo{display:none}
+html.celular .gerada .ico{font-size:16px;margin-bottom:4px}
+html.celular .gerada .nome{font-size:11px}
+html.celular .mini .txt{padding:8px 12px}
+html.celular .mini h4{font-size:calc(var(--fs) * 1)}
+html.celular .mini p{font-size:calc(var(--fs) * .84)}
+
+/* ---------- depoimentos ---------- */
+.dep .flow{columns:var(--dep-cols,1);column-gap:14px}
+html.a4 .dep .flow{--dep-cols:2}
+.dep .flow > *{break-inside:avoid}
+.bolha{background:#fff;border:1px solid #E4D6F1;border-radius:16px 16px 16px 4px;padding:12px 14px;font-size:calc(var(--fs) * .92)}
+.bolha cite{display:block;margin-top:6px;font-style:normal;font-weight:700;font-size:12.5px;color:var(--purple)}
+.nota{font-size:12px;color:var(--ink-2)}
+html.celular .dep .flow > *{margin-bottom:9px}
+html.celular .bolha{padding:9px 12px;font-size:calc(var(--fs) * .86);line-height:1.4}
+html.celular .bolha cite{margin-top:3px}
+
+/* ---------- sobre ---------- */
+.sobre .foto{width:62%;margin:0 auto 14px;border-radius:50%;aspect-ratio:1;object-fit:cover;object-position:50% 10%;background:radial-gradient(circle,#7E22CE,#3B0764);border:4px solid var(--gold)}
+html.a4 .sobre .foto{width:42%}
+.numeros{display:flex;gap:12px;margin:14px 0}
+.numeros div{flex:1;background:var(--cream-2);border-radius:12px;padding:10px;text-align:center}
+.numeros b{display:block;font-family:var(--display);font-weight:900;font-stretch:75%;font-size:calc(var(--fs) * 1.8);color:var(--purple);line-height:1}
+.numeros span{font-size:12.5px;color:var(--ink-2)}
+</style>
+</head>
+<body>
+
+<!-- =================== CAPA =================== -->
+<section class="page escura capa sem-rodape">
+  <span class="tag">Black Friday Vitalício · Enfermagem de Valor</span>
+  <h1 class="cond">Plantão <span class="gold">de Valor</span></h1>
+  <p class="sub">O guia prático da técnica de enfermagem: 10 lições para trabalhar com segurança e ganhar mais.</p>
+  <div class="autora">Izabel Gonçalves</div>
+  <div class="selo">Oferta abre<b>09/11 · 20h</b>só no grupo</div>
+  <img class="imagem" src="img/iza-capas.png" alt="Izabel Gonçalves com as capas dos cursos">
+</section>
+
+<!-- =================== CARTA =================== -->
+<section class="page carta">
+  <span class="tag roxo">Antes de começar</span>
+  <h2 class="titulo-pag cond">Oi, <span class="roxo">preciosa!</span></h2>
+  <div class="flow">
+    <p>Toda semana eu escuto a mesma pergunta: <b>"Iza, por onde eu começo?"</b>. Tem quem acabou de pegar o COREN e trava no primeiro plantão. Tem quem parou de atuar há anos e sente que perdeu o jeito. E tem quem já trabalha, mas quer ganhar mais com o que sabe.</p>
+    <p>Este guia é a minha resposta. Separei <b>10 lições curtas</b>, direto ao ponto, com o que eu gostaria que alguém tivesse me ensinado no começo: do cálculo de medicação à anotação de enfermagem, da bomba de infusão à forma de fazer o seu dinheiro render.</p>
+    <p>Cada lição é a porta de entrada de um <b>mini curso</b>. E no dia <b>09 de novembro, às 20h</b>, eu abro o acesso <b>vitalício</b> a todos eles, só para quem estiver no grupo do WhatsApp.</p>
+    <p>Lê com calma, salva no celular e volta nele antes do plantão.</p>
+    <div class="assina">Com carinho, Iza</div>
+    <div class="aviso"><b>Importante:</b> este guia é material de estudo. Ele não substitui o protocolo da sua instituição, a prescrição nem a orientação do enfermeiro responsável pelo seu setor.</div>
+  </div>
+</section>
+
+<!-- =================== SUMÁRIO =================== -->
+<section class="page">
+  <span class="tag roxo">Sumário</span>
+  <h2 class="titulo-pag cond">O que tem <span class="roxo">aqui dentro</span></h2>
+  <div class="flow">
+    <ul class="sumario">
+      <li class="grupo">Parte 1 · As 10 lições</li>
+      <li><span class="n">01</span><span class="t">Cálculo de medicação sem medo</span></li>
+      <li><span class="n">02</span><span class="t">Bomba de infusão: programar e conferir</span></li>
+      <li><span class="n">03</span><span class="t">Punção venosa periférica passo a passo</span></li>
+      <li><span class="n">04</span><span class="t">Alimentação enteral com segurança</span></li>
+      <li><span class="n">05</span><span class="t">Traqueostomia: aspiração e cuidados</span></li>
+      <li><span class="n">06</span><span class="t">Ventilação mecânica: o que a técnica observa</span></li>
+      <li><span class="n">07</span><span class="t">Cuidados básicos que salvam o plantão</span></li>
+      <li><span class="n">08</span><span class="t">Anotação de enfermagem que te protege</span></li>
+      <li><span class="n">09</span><span class="t">Saúde mental de quem cuida</span></li>
+      <li><span class="n">10</span><span class="t">Multiplicação financeira com a enfermagem</span></li>
+      <li class="grupo">Parte 2 · Black Friday Vitalício</li>
+      <li><span class="n">→</span><span class="t">Todos os mini cursos</span></li>
+      <li><span class="n">→</span><span class="t">O que dizem as alunas</span></li>
+      <li><span class="n">→</span><span class="t">Quem é a Iza</span></li>
+      <li><span class="n">→</span><span class="t">Como garantir o seu acesso vitalício</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- =================== LIÇÃO 01 =================== -->
+<section class="page cap" data-cap="Lição 01 · Cálculo de medicação">
+  <div class="cap-head">
+    <span class="num">Lição 01</span>
+    <h2 class="cond">Cálculo de medicação sem medo</h2>
+    <p class="lead">Quase todo cálculo do plantão se resolve com duas ferramentas: a regra de três e as fórmulas de gotejamento.</p>
+  </div>
+  <div class="flow">
+    <div class="caixa">
+      <h3>Regra de três, na prática</h3>
+      <p>Prescrição: <b>dipirona 500 mg</b>. Ampola disponível: <b>1 g em 2 mL</b> (1 g = 1.000 mg).</p>
+      <p class="mono" style="margin:0">1.000 mg ——— 2 mL<br>500 mg ——— x<br>x = (500 × 2) ÷ 1.000 = <b>1 mL</b></p>
+    </div>
+    <div class="caixa formula">
+      <h3 class="gold">Gotejamento (tempo em horas)</h3>
+      <p style="margin:0 0 4px"><b>Gotas/min</b> = volume (mL) ÷ (tempo × 3)</p>
+      <p style="margin:0"><b>Microgotas/min</b> = volume (mL) ÷ tempo</p>
+    </div>
+    <p><b>Exemplo:</b> 500 mL de SF 0,9% em 8 horas → 500 ÷ (8 × 3) = 20,8 ≈ <b>21 gotas/min</b>. Em microgotas: 500 ÷ 8 = 62,5 ≈ <b>63 microgotas/min</b>.</p>
+    <p><b>Para não esquecer:</b> 1 mL = 20 gotas = 60 microgotas. 1 gota = 3 microgotas.</p>
+    <div class="dica"><img src="img/iza.png" alt=""><div><b>Dica da Iza:</b> só arredonde no resultado final, nunca no meio da conta. E em medicação de alta vigilância, peça sempre a dupla checagem de outro profissional.</div></div>
+    <div class="teaser">No mini curso <b>Cálculo de Medicação</b> eu te mostro diluição, rediluição, insulina, heparina, porcentagem e transformação de soro, com exercícios do jeito que cai no plantão.</div>
+  </div>
+</section>
+
+<!-- =================== LIÇÃO 02 =================== -->
+<section class="page cap" data-cap="Lição 02 · Bomba de infusão">
+  <div class="cap-head">
+    <span class="num">Lição 02</span>
+    <h2 class="cond">Bomba de infusão: programar e conferir</h2>
+    <p class="lead">A bomba é precisa, mas só faz o que alguém programou. A segurança está na conferência.</p>
+  </div>
+  <div class="flow">
+    <div><h3>Antes de iniciar</h3>
+    <ul class="check">
+      <li>Confira a prescrição: medicamento, dose, diluição, via e velocidade.</li>
+      <li>Identifique o paciente com dois identificadores (nome completo e data de nascimento).</li>
+      <li>Use o equipo compatível com a bomba e retire todo o ar antes de conectar.</li>
+      <li>Programe a vazão em <b>mL/h</b> e o volume a ser infundido.</li>
+      <li>Leia a tela em voz alta antes de apertar "iniciar" e confira com a prescrição.</li>
+      <li>Rotule a solução e o equipo: nome do paciente, medicamento, data e horário.</li>
+    </ul></div>
+    <div class="caixa formula"><p style="margin:0"><b>Vazão (mL/h)</b> = volume (mL) ÷ tempo (h). Ex.: 250 mL em 5 h = <b>50 mL/h</b>.</p></div>
+    <div class="caixa alerta">
+      <h3>Quando o alarme tocar</h3>
+      <ul class="check" style="margin:0">
+        <li><b>Oclusão:</b> procure pinça fechada, equipo dobrado, membro flexionado ou acesso sem fluxo.</li>
+        <li><b>Ar na linha:</b> não aperte "continuar" sem retirar o ar, conforme o protocolo.</li>
+        <li><b>Fim de infusão:</b> confira a prescrição e comunique o enfermeiro.</li>
+        <li>Nunca silencie um alarme sem descobrir a causa.</li>
+      </ul>
+    </div>
+    <div class="dica"><img src="img/iza.png" alt=""><div><b>Dica da Iza:</b> drogas como noradrenalina, insulina, heparina e potássio são de alta vigilância. Nelas a dupla checagem não é opcional.</div></div>
+    <div class="teaser">No mini curso <b>Bomba de Infusão</b> você vê a programação na prática, os alarmes mais comuns e o que fazer em cada um.</div>
+  </div>
+</section>
+
+<!-- =================== LIÇÃO 03 =================== -->
+<section class="page cap" data-cap="Lição 03 · Punção venosa">
+  <div class="cap-head">
+    <span class="num">Lição 03</span>
+    <h2 class="cond">Punção venosa periférica passo a passo</h2>
+    <p class="lead">Acertar a veia de primeira começa antes da agulha: na escolha do local e no preparo.</p>
+  </div>
+  <div class="flow">
+    <ol class="num-list">
+      <li>Confira a prescrição, identifique o paciente e explique o procedimento.</li>
+      <li>Higienize as mãos e separe o material: cateter do calibre adequado, garrote, álcool 70%, luvas, seringa com SF 0,9% e curativo de fixação.</li>
+      <li>Escolha a veia começando pela parte mais distal (mão, antebraço) e evitando articulações.</li>
+      <li>Garroteie alguns centímetros acima do local escolhido.</li>
+      <li>Faça a antissepsia com álcool 70%, espere secar e <b>não palpe mais</b> o local.</li>
+      <li>Tracione a pele, entre com o bisel para cima, em ângulo baixo (cerca de 15 a 30°).</li>
+      <li>Viu o refluxo? Avance o cateter, recue a agulha e solte o garrote.</li>
+      <li>Teste com SF 0,9%, observe se não há infiltração, fixe e identifique: data, horário, calibre e seu nome.</li>
+      <li>Descarte a agulha no coletor de perfurocortantes e registre o procedimento.</li>
+    </ol>
+    <div class="caixa alerta">
+      <h3>Não puncione</h3>
+      <p style="margin:0">No braço com fístula arteriovenosa, do lado de mastectomia ou esvaziamento axilar e em áreas com edema, lesão ou flebite. Se não conseguir, não insista: siga o limite de tentativas do protocolo e peça apoio.</p>
+    </div>
+    <div class="dica"><img src="img/iza.png" alt=""><div><b>Dica da Iza:</b> dor, vermelhidão, calor ou um "cordão" endurecido na veia são sinais de flebite. Retire o acesso e comunique.</div></div>
+    <div class="teaser">No mini curso <b>Punção Venosa</b> eu mostro como escolher a veia em idosos, crianças e pacientes de veias difíceis.</div>
+  </div>
+</section>
+
+<!-- =================== LIÇÃO 04 =================== -->
+<section class="page cap" data-cap="Lição 04 · Alimentação enteral">
+  <div class="cap-head">
+    <span class="num">Lição 04</span>
+    <h2 class="cond">Alimentação enteral com segurança</h2>
+    <p class="lead">Os dois grandes riscos da dieta por sonda são a broncoaspiração e a sonda entupida. Os dois se evitam com rotina.</p>
+  </div>
+  <div class="flow">
+    <div><h3>Antes de instalar a dieta</h3>
+    <ul class="check">
+      <li>Confira o rótulo: nome do paciente, tipo de dieta, volume, horário e validade.</li>
+      <li>Eleve a cabeceira entre <b>30 e 45°</b> e mantenha assim durante a dieta e por pelo menos 30 minutos depois.</li>
+      <li>Confira a marcação da sonda na fixação. Se a marca mudou, <b>não infunda</b> e chame o enfermeiro.</li>
+      <li>Observe se o abdome está distendido ou se o paciente tem náusea.</li>
+    </ul></div>
+    <div><h3>Lavagem e medicamentos</h3>
+    <ul class="check">
+      <li>Lave a sonda com água antes e depois da dieta e de cada medicamento, no volume do protocolo (no adulto, em geral 20 a 30 mL).</li>
+      <li>Dê um medicamento de cada vez, bem triturado e diluído, lavando entre eles.</li>
+      <li>Nunca misture medicamento dentro da dieta.</li>
+      <li>Comprimido de liberação prolongada ou revestido não pode ser triturado: confira com a farmácia.</li>
+    </ul></div>
+    <div class="caixa alerta"><h3>Pare a dieta e comunique</h3><p style="margin:0">Tosse, engasgo ou falta de ar durante a infusão, vômito, distensão abdominal ou diarreia.</p></div>
+    <div class="teaser">No mini curso <b>Alimentação Enteral</b> você aprende tipos de sonda, dieta contínua e intermitente e como evitar as complicações mais comuns.</div>
+  </div>
+</section>
+
+<!-- =================== LIÇÃO 05 =================== -->
+<section class="page cap" data-cap="Lição 05 · Traqueostomia">
+  <div class="cap-head">
+    <span class="num">Lição 05</span>
+    <h2 class="cond">Traqueostomia: aspiração e cuidados</h2>
+    <p class="lead">Paciente traqueostomizado depende de uma via aérea limpa e bem fixada. Os cuidados são simples, mas não podem falhar.</p>
+  </div>
+  <div class="flow">
+    <div><h3>Aspiração</h3>
+    <ul class="check">
+      <li>Aspire quando houver necessidade: secreção audível ou visível, queda de saturação ou desconforto. Não por horário fixo.</li>
+      <li>Técnica asséptica: mãos higienizadas, sonda estéril e luva estéril na mão que manipula a sonda.</li>
+      <li>Introduza a sonda sem aspirar; aspire só ao retirar, com movimentos rotatórios.</li>
+      <li>Cada aspiração deve durar no máximo 10 a 15 segundos, com a pressão definida no protocolo.</li>
+      <li>Observe e registre cor, aspecto e quantidade da secreção.</li>
+    </ul></div>
+    <div><h3>Cânula, cuff e curativo</h3>
+    <ul class="check">
+      <li>A pressão do cuff é medida com o cufômetro; a faixa usual é de 20 a 30 cmH₂O.</li>
+      <li>Limpe a pele ao redor com SF 0,9% e mantenha o curativo seco.</li>
+      <li>Troque a fixação com duas pessoas: uma segura a cânula o tempo todo.</li>
+      <li>Deixe à beira do leito o aspirador testado e uma cânula reserva.</li>
+    </ul></div>
+    <div class="caixa alerta"><h3>Chame ajuda na hora</h3><p style="margin:0">Desconforto respiratório que não melhora com a aspiração, sangramento, inchaço com "estalinhos" na pele do pescoço ou saída da cânula.</p></div>
+    <div class="teaser">No mini curso <b>Traqueostomia</b> você vê a aspiração passo a passo, a troca de curativo e o que fazer em uma decanulação.</div>
+  </div>
+</section>
+
+<!-- =================== LIÇÃO 06 =================== -->
+<section class="page cap" data-cap="Lição 06 · Ventilação mecânica">
+  <div class="cap-head">
+    <span class="num">Lição 06</span>
+    <h2 class="cond">Ventilação mecânica: o que a técnica observa</h2>
+    <p class="lead">Quem ajusta o ventilador é a equipe responsável. O seu papel é observar, prevenir complicações e comunicar rápido.</p>
+  </div>
+  <div class="flow">
+    <div class="caixa alerta"><h3>O alarme tocou?</h3><p style="margin:0">Olhe primeiro para o <b>paciente</b> (cor, esforço para respirar, saturação), depois para o aparelho. Nunca silencie sem descobrir a causa e chame a equipe.</p></div>
+    <div><h3>Prevenção de pneumonia associada à ventilação</h3>
+    <ul class="check">
+      <li>Cabeceira elevada entre 30 e 45°, salvo contraindicação.</li>
+      <li>Higiene oral conforme o protocolo da instituição.</li>
+      <li>Aspiração quando necessária, com técnica asséptica.</li>
+      <li>Circuito sem água acumulada. A água do circuito nunca deve voltar para o paciente.</li>
+      <li>Pressão do cuff conferida conforme a rotina do setor.</li>
+    </ul></div>
+    <div><h3>Tubo bem cuidado</h3>
+    <ul class="check">
+      <li>Confira a fixação e anote o número do tubo na altura da rima labial.</li>
+      <li>Na mudança de decúbito, segure o tubo e cuide para o circuito não tracionar.</li>
+      <li>Registre saturação, frequência respiratória, secreção e intercorrências.</li>
+    </ul></div>
+    <div class="dica"><img src="img/iza.png" alt=""><div><b>Dica da Iza:</b> o número do tubo na rima labial mudou de um plantão para o outro? Isso é informação importante: comunique antes de mexer em qualquer coisa.</div></div>
+    <div class="teaser">No mini curso <b>Ventilação Mecânica</b> você entende os modos, os alarmes e os cuidados de quem está à beira do leito.</div>
+  </div>
+</section>
+
+<!-- =================== LIÇÃO 07 =================== -->
+<section class="page cap" data-cap="Lição 07 · Cuidados básicos">
+  <div class="cap-head">
+    <span class="num">Lição 07</span>
+    <h2 class="cond">Cuidados básicos que salvam o plantão</h2>
+    <p class="lead">Sinais vitais bem aferidos e rotinas de segurança percebem a piora do paciente antes de qualquer aparelho.</p>
+  </div>
+  <div class="flow">
+    <div><h3>Valores de referência no adulto em repouso</h3>
+    <table class="ref">
+      <tr><td>Frequência cardíaca</td><td>60 a 100 bpm</td></tr>
+      <tr><td>Frequência respiratória</td><td>12 a 20 irpm</td></tr>
+      <tr><td>Pressão arterial</td><td>Ideal abaixo de 120 × 80 mmHg; a partir de 140 × 90 mmHg, comunique</td></tr>
+      <tr><td>Temperatura axilar</td><td>Em geral de 36 a 37,2 °C (febre a partir de 37,8 °C, conforme o protocolo)</td></tr>
+      <tr><td>Saturação de O₂</td><td>Em geral 95% ou mais em quem não tem doença pulmonar crônica</td></tr>
+    </table></div>
+    <div><h3>Rotinas de segurança</h3>
+    <ul class="check">
+      <li>Higienize as mãos antes e depois de tocar o paciente e o ambiente dele.</li>
+      <li>Identifique o paciente antes de qualquer procedimento ou medicação.</li>
+      <li>Prevenção de quedas: cama baixa, grades elevadas e campainha ao alcance.</li>
+      <li>Prevenção de lesão por pressão: mudança de decúbito a cada 2 horas no acamado, pele limpa, seca e hidratada.</li>
+      <li>Qualquer valor fora do esperado ou mudança no paciente: comunique e registre.</li>
+    </ul></div>
+    <div class="teaser">No mini curso <b>Cuidados Básicos</b> você revisa sinais vitais, higiene, conforto, mudança de decúbito, glicemia capilar e admissão do paciente.</div>
+  </div>
+</section>
+
+<!-- =================== LIÇÃO 08 =================== -->
+<section class="page cap" data-cap="Lição 08 · Anotação de enfermagem">
+  <div class="cap-head">
+    <span class="num">Lição 08</span>
+    <h2 class="cond">Anotação de enfermagem que te protege</h2>
+    <p class="lead">O que não foi registrado, para a lei, não foi feito. A anotação é o seu respaldo.</p>
+  </div>
+  <div class="flow">
+    <p><b>Anotação ou evolução?</b> A <b>anotação</b> é feita por toda a equipe de enfermagem, incluindo técnicos e auxiliares. A <b>evolução</b> de enfermagem é privativa do enfermeiro.</p>
+    <div><h3>Regras de ouro</h3>
+    <ul class="check">
+      <li>Data e horário em cada registro.</li>
+      <li>Letra legível, sem rasura, sem corretivo e sem espaços em branco.</li>
+      <li>Errou? Escreva "digo" e continue com a informação correta.</li>
+      <li>Use só abreviações padronizadas pela instituição.</li>
+      <li>Registre o que você fez e observou, não suposições.</li>
+      <li>Termine com nome, categoria e número do COREN.</li>
+    </ul></div>
+    <div class="caixa">
+      <h3>Modelo de anotação</h3>
+      <p style="margin:0;font-size:.92em"><b>08h00</b> · Paciente no leito, consciente, orientado e comunicativo. Refere dor em região abdominal, nota 5 de 10. Sinais vitais: PA 130 × 80 mmHg, FC 88 bpm, FR 18 irpm, Tax 36,5 °C, SpO₂ 97% em ar ambiente. Acesso venoso periférico em membro superior esquerdo, sem sinais flogísticos. Comunicado o enfermeiro sobre a dor. <i>Maria Silva, Téc. Enf., COREN 000000.</i></p>
+    </div>
+    <div class="teaser">No mini curso <b>Anotação e Evolução de Enfermagem</b> você treina com casos reais do plantão e aprende o que nunca pode faltar no registro.</div>
+  </div>
+</section>
+
+<!-- =================== LIÇÃO 09 =================== -->
+<section class="page cap" data-cap="Lição 09 · Saúde mental">
+  <div class="cap-head">
+    <span class="num">Lição 09</span>
+    <h2 class="cond">Saúde mental de quem cuida</h2>
+    <p class="lead">Medo de plantão, insegurança e cansaço não são fraqueza. São sinais de que você também precisa de cuidado.</p>
+  </div>
+  <div class="flow">
+    <p>Muita aluna chega até mim achando que "o problema é ela". Na maioria das vezes, o problema foi a formação que não preparou para a realidade do plantão. <b>Preparo diminui o medo.</b></p>
+    <div><h3>Para chegar mais tranquila no plantão</h3>
+    <ul class="check">
+      <li>Chegue alguns minutos antes e faça a passagem de plantão com calma, leito a leito.</li>
+      <li>Tenha o seu checklist do setor: medicações de horário, curativos, exames, pendências.</li>
+      <li>Não sabe? Pergunte. Perguntar é sinal de responsabilidade, não de incompetência.</li>
+    </ul></div>
+    <div><h3>Sinais de esgotamento</h3>
+    <ul class="check">
+      <li>Cansaço que não passa nem depois de descansar.</li>
+      <li>Irritação fácil, insônia, choro frequente ou vontade de largar tudo.</li>
+    </ul></div>
+    <div class="caixa"><h3>Precisa de ajuda agora?</h3><p style="margin:0">Ligue <b>188</b>, o CVV (Centro de Valorização da Vida): gratuito, 24 horas, todos os dias. Você também pode procurar a UBS ou o CAPS da sua cidade.</p></div>
+    <div class="teaser">No mini curso <b>Saúde Mental</b> eu falo de ansiedade, medo do plantão, limites e de como cuidar de você sem largar a profissão que você ama.</div>
+  </div>
+</section>
+
+<!-- =================== LIÇÃO 10 =================== -->
+<section class="page cap" data-cap="Lição 10 · Multiplicação financeira">
+  <div class="cap-head">
+    <span class="num">Lição 10</span>
+    <h2 class="cond">Multiplicação financeira com a enfermagem</h2>
+    <p class="lead">O mesmo COREN pode abrir mais de uma fonte de renda. O segredo é saber onde procurar e organizar o que entra.</p>
+  </div>
+  <div class="flow">
+    <div><h3>Caminhos de renda</h3>
+    <ul class="check">
+      <li>Plantões extras e coberturas de folga.</li>
+      <li>Home care e acompanhamento de pacientes.</li>
+      <li>Atendimentos particulares de procedimentos que você domina, como o furo de orelha humanizado, a perfuração auricular, a limpeza de ouvido e o acompanhamento no pós-operatório, sempre dentro do que a sua categoria e a legislação permitem.</li>
+    </ul></div>
+    <div><h3>Organização que faz o dinheiro render</h3>
+    <ul class="check">
+      <li>Anote tudo o que entra e tudo o que sai, nem que seja no caderno.</li>
+      <li>Separe o dinheiro do plantão extra antes de gastar.</li>
+      <li>Monte uma reserva de emergência antes de assumir parcelas novas.</li>
+      <li>No atendimento particular, o preço precisa cobrir material, deslocamento e o seu tempo.</li>
+    </ul></div>
+    <div class="dica"><img src="img/iza.png" alt=""><div><b>Dica da Iza:</b> não é sobre trabalhar até cansar. É sobre ser chamada pelo que você sabe fazer bem.</div></div>
+    <div class="teaser">No mini curso <b>Multiplicação Financeira</b> você aprende a organizar, guardar e fazer crescer o que a enfermagem traz. E os cursos de procedimentos ensinam serviços para você oferecer.</div>
+  </div>
+</section>
+
+<!-- =================== TRANSIÇÃO =================== -->
+<section class="page escura centro">
+  <span class="tag gold" style="align-self:center">Parte 2</span>
+  <h2 class="grande cond">Isso foi só <span class="gold">o começo</span></h2>
+  <p>Cada lição deste guia é um pedaço de um mini curso completo, com aula em vídeo, passo a passo e certificado.</p>
+  <p>No dia <b>09 de novembro, às 20h</b>, eu abro a <b>Black Friday Vitalício</b>: acesso para sempre a <b>todos</b> os mini cursos e a todos os que eu lançar depois.</p>
+  <img class="faixa-img" src="img/capas-faixa.png" alt="Capas dos cursos">
+  <p style="margin-top:14px"><b>A oferta só aparece dentro do grupo do WhatsApp.</b></p>
+  <a class="botao" href="https://sndflw.com/i/z5IpBtnaNxw3utC4y051" style="align-self:center">Entrar no grupo do WhatsApp</a>
+</section>
+
+<!-- =================== CATÁLOGO =================== -->
+<section class="page cat" data-cap="Todos os mini cursos">
+  <div class="cap-head">
+    <span class="num">Black Friday Vitalício</span>
+    <h2 class="cond">Todos os mini cursos</h2>
+    <p class="lead">A Formação Técnico de Enfermagem de Valor virou mini cursos: você estuda exatamente o que precisa, na ordem que quiser.</p>
+  </div>
+  <div class="flow">
+    <div class="secao-cat">Plantão de Valor<small>Técnica e segurança à beira do leito</small></div>
+    <div class="mini"><div class="gerada" style="--c1:#7C3AED;--c2:#2E1065"><span class="por">Izabel Gonçalves</span><span class="ico">💉</span><span class="nome">Bomba de Infusão</span><span class="tipo">Mini curso</span></div><div class="txt"><h4>Bomba de Infusão</h4><p>Programar, conferir e responder aos alarmes com segurança.</p></div></div>
+    <div class="mini"><div class="gerada" style="--c1:#6D28D9;--c2:#1E1B4B"><span class="por">Izabel Gonçalves</span><span class="ico">🫁</span><span class="nome">Ventilação Mecânica</span><span class="tipo">Mini curso</span></div><div class="txt"><h4>Ventilação Mecânica</h4><p>O que observar no paciente ventilado e como agir nos alarmes.</p></div></div>
+    <div class="mini"><div class="gerada" style="--c1:#9333EA;--c2:#3B0764"><span class="por">Izabel Gonçalves</span><span class="ico">🩺</span><span class="nome">Traqueos&shy;tomia</span><span class="tipo">Mini curso</span></div><div class="txt"><h4>Traqueostomia</h4><p>Aspiração, curativo, fixação e cuidados com o cuff.</p></div></div>
+    <div class="mini"><div class="gerada" style="--c1:#A21CAF;--c2:#3B0764"><span class="por">Izabel Gonçalves</span><span class="ico">🥣</span><span class="nome">Alimentação Enteral</span><span class="tipo">Mini curso</span></div><div class="txt"><h4>Alimentação Enteral</h4><p>Dieta e medicação pela sonda sem obstrução e sem broncoaspiração.</p></div></div>
+    <div class="mini"><div class="gerada" style="--c1:#7E22CE;--c2:#312E81"><span class="por">Izabel Gonçalves</span><span class="ico">🤲</span><span class="nome">Cuidados Básicos</span><span class="tipo">Mini curso</span></div><div class="txt"><h4>Cuidados Básicos</h4><p>Sinais vitais, higiene, conforto, decúbito e prevenção de quedas e lesões.</p></div></div>
+    <div class="mini"><div class="gerada" style="--c1:#C026D3;--c2:#4A044E"><span class="por">Izabel Gonçalves</span><span class="ico">🩸</span><span class="nome">Punção Venosa</span><span class="tipo">Mini curso</span></div><div class="txt"><h4>Punção Venosa</h4><p>Escolha da veia, técnica e manutenção do acesso periférico.</p></div></div>
+    <div class="mini"><div class="gerada" style="--c1:#5B21B6;--c2:#1E1B4B"><span class="por">Izabel Gonçalves</span><span class="ico">🧮</span><span class="nome">Cálculo de Medicação</span><span class="tipo">Mini curso</span></div><div class="txt"><h4>Cálculo de Medicação</h4><p>Regra de três, diluição e gotejamento sem medo.</p></div></div>
+    <div class="mini"><div class="gerada" style="--c1:#86198F;--c2:#2E1065"><span class="por">Izabel Gonçalves</span><span class="ico">📝</span><span class="nome">Anotação e Evolução</span><span class="tipo">Mini curso</span></div><div class="txt"><h4>Anotação e Evolução de Enfermagem</h4><p>Registrar certo, com respaldo legal.</p></div></div>
+    <div class="mini"><div class="gerada" style="--c1:#4C1D95;--c2:#0F0A1E"><span class="por">Izabel Gonçalves</span><span class="ico">🧭</span><span class="nome">GPS do Plantão</span><span class="tipo">Método 3D</span></div><div class="txt"><h4>GPS do Plantão</h4><p>O Método 3D para assumir plantões de baixa, média e alta complexidade.</p></div></div>
+
+    <div class="secao-cat">Carreira e vida<small>Cuidar de você e do seu futuro</small></div>
+    <div class="mini"><div class="gerada" style="--c1:#DB2777;--c2:#4A044E"><span class="por">Izabel Gonçalves</span><span class="ico">💜</span><span class="nome">Saúde Mental</span><span class="tipo">Mini curso</span></div><div class="txt"><h4>Saúde Mental</h4><p>Ansiedade, medo do plantão e limites: cuidar de quem cuida.</p></div></div>
+    <div class="mini"><div class="gerada" style="--c1:#CA8A04;--c2:#3B0764"><span class="por">Izabel Gonçalves</span><span class="ico">💰</span><span class="nome">Multiplicação Financeira</span><span class="tipo">Mini curso</span></div><div class="txt"><h4>Multiplicação Financeira</h4><p>Organizar, guardar e fazer crescer o que a enfermagem traz.</p></div></div>
+    <div class="mini"><div class="gerada" style="--c1:#9333EA;--c2:#1E0B33"><span class="por">Izabel Gonçalves</span><span class="ico">⭐</span><span class="nome">Club Plantão de Valor</span><span class="tipo">Clube</span></div><div class="txt"><h4>Club Plantão de Valor</h4><p>O clube de quem vive de plantão: conteúdo contínuo e troca entre colegas.</p></div></div>
+
+    <div class="secao-cat">Renda extra com procedimentos<small>Serviços para você oferecer</small></div>
+    <div class="mini"><img class="capinha" src="img/furo-de-orelha.jpg" alt=""><div class="txt"><h4>Furo de Orelha Humanizado</h4><p>Perfuração do lóbulo com acolhimento, do bebê ao adulto.</p></div></div>
+    <div class="mini"><img class="capinha" src="img/body-piercing.jpg" alt=""><div class="txt"><h4>Body Piercing</h4><p>Hélix, tragus, conch, daith, rook e outros pontos da orelha.</p></div></div>
+    <div class="mini"><img class="capinha" src="img/valor-sonoro.jpg" alt=""><div class="txt"><h4>Valor Sonoro · Cone Chinês</h4><p>Limpeza de ouvido e terapia com cone chinês.</p></div></div>
+    <div class="mini"><img class="capinha" src="img/pos-cirurgia.jpg" alt=""><div class="txt"><h4>Cuidados Pós Cirurgia Plástica</h4><p>Curativos, drenos, sinais de alerta e recuperação.</p></div></div>
+    <div class="mini"><img class="capinha" src="img/novos-cursos.jpg" alt=""><div class="txt"><h4>+ Todos os próximos</h4><p>Cada curso novo entra no seu acesso, sem pagar nada a mais.</p></div></div>
+  </div>
+</section>
+
+<!-- =================== DEPOIMENTOS =================== -->
+<section class="page dep" data-cap="O que dizem as alunas">
+  <div class="cap-head">
+    <span class="num">Depoimentos</span>
+    <h2 class="cond">O que dizem as alunas</h2>
+    <p class="lead">Mensagens reais que chegaram para a Iza.</p>
+  </div>
+  <div class="flow">
+    <div class="bolha">"Eu sou uma técnica de enfermagem de valor e minha vida mudou em 24 horas com o curso da Iza. Só gratidão."<cite>Keila</cite></div>
+    <div class="bolha">"O método 3Ds é essencial pra nós técnicos de enfermagem, pois nele aprendemos tudo e ficamos preparadas pra pegar qualquer plantão de alta complexidade."<cite>Kathiuscia</cite></div>
+    <div class="bolha">"Comecei um plantão dia 03/01. Através do método tomei coragem, depois de 3 anos que havia deixado de pegar plantão."<cite>Rosália, turma Girassol</cite></div>
+    <div class="bolha">"Vc foi maravilhosa, eu aprendi muito com vc, já estou trabalhando."<cite>Célia</cite></div>
+    <div class="bolha">"Faço parte do PSF, amo o que faço e o seu curso só somou na minha vida. Muito obrigada, gratidão!"<cite>Aluna da Estratégia Saúde da Família</cite></div>
+    <div class="bolha">"Vai fazer 1 ano que eu conheço a Iza e hoje eu faturo mais de 10 mil reais com tudo que eu aprendi com a Iza!"<cite>Michele</cite></div>
+    <div class="bolha">"Iza, consegui reformar a casa da minha mãe. E estou vendo o meu primeiro terreno para comprar e construir minha casa."<cite>Dany</cite></div>
+    <div class="bolha">"Recebi uma proposta incrível de trabalho… pra receber 10.000."<cite>Aluna, por WhatsApp</cite></div>
+    <div class="bolha">"Hoje meu coração está cheio de gratidão, sendo sua aluna como técnica de enfermagem de valor. Amando tudo!"<cite>Cristiane</cite></div>
+    <p class="nota">Depoimentos reais, enviados por alunas. Os resultados variam de pessoa para pessoa e dependem da dedicação de cada uma.</p>
+  </div>
+</section>
+
+<!-- =================== SOBRE =================== -->
+<section class="page sobre" data-cap="Quem é a Iza">
+  <span class="tag roxo">Quem ensina</span>
+  <h2 class="titulo-pag cond" style="margin-bottom:16px">Izabel <span class="roxo">Gonçalves</span></h2>
+  <div class="flow">
+    <img class="foto" src="img/iza.png" alt="Izabel Gonçalves">
+    <p>Eu sou a <b>Iza</b>, enfermeira, criadora do <b>Método 3D</b> e da <b>Escola Enfermagem de Valor</b>.</p>
+    <div class="numeros"><div><b>+5 mil</b><span>profissionais formados</span></div><div><b>Método 3D</b><span>plantão sem medo</span></div></div>
+    <p>Meu trabalho é preparar técnicas e técnicos de enfermagem para a realidade do plantão, com segurança e com valor, e mostrar que a enfermagem pode abrir mais de uma porta de renda.</p>
+    <p>Nesta Black Friday eu abro, pela primeira vez, o acesso vitalício a tudo o que eu ensino.</p>
+  </div>
+</section>
+
+<!-- =================== OFERTA =================== -->
+<section class="page escura centro">
+  <span class="tag gold" style="align-self:center">Black Friday Vitalício</span>
+  <h2 class="grande cond">Todos os mini cursos. <span class="gold">Para sempre.</span></h2>
+  <div class="data-box" style="align-self:center">09 de novembro · 20h</div>
+  <p>Pague uma vez e estude para sempre: os mini cursos de hoje e todos os que eu lançar depois.</p>
+  <p><b>A oferta é liberada só dentro do grupo do WhatsApp</b>, com preço especial para quem estiver lá. Fora do grupo, ela não aparece.</p>
+  <a class="botao" href="https://sndflw.com/i/z5IpBtnaNxw3utC4y051" style="align-self:center">Quero entrar no grupo</a>
+  <div class="qr" id="qr"></div>
+  <div class="qr-leg">Aponte a câmera do celular para entrar no grupo</div>
+</section>
+
+<!-- =================== CONTRACAPA =================== -->
+<section class="page escura centro sem-rodape">
+  <h2 class="cond" style="font-size:calc(var(--W) * .12)">Plantão <span class="gold">de Valor</span></h2>
+  <p style="margin-top:14px">Escola Enfermagem de Valor · Izabel Gonçalves</p>
+  <p style="font-size:12px;opacity:.7">© 2026 · Todos os direitos reservados. Material de estudo: não substitui o protocolo da sua instituição nem a orientação do enfermeiro responsável.</p>
+</section>
+
+<script>
+(function () {
+  "use strict";
+  var formato = /f=a4/.test(location.search) ? "a4" : "celular";
+  document.documentElement.className = formato;
+  var tam = formato === "a4" ? "210mm 297mm" : "540px 960px";
+  var st = document.createElement("style");
+  st.textContent = "@page{size:" + tam + ";margin:0}";
+  document.head.appendChild(st);
+
+  function cortar() {
+    // O que não cabe na página vai, bloco a bloco, para uma página de continuação logo depois dela.
+    var i = 0;
+    while (true) {
+      var paginas = document.querySelectorAll(".page");
+      if (i >= paginas.length) break;
+      var p = paginas[i++];
+      var flow = p.querySelector(":scope > .flow");
+      if (!flow) continue;
+      var nova = null;
+      while (p.scrollHeight > p.clientHeight + 1 && flow.children.length > 1) {
+        if (!nova) {
+          nova = document.createElement("section");
+          nova.className = p.className;
+          if (p.dataset.cap) nova.dataset.cap = p.dataset.cap;
+          var h = document.createElement("div");
+          h.className = "cont-head";
+          h.textContent = (p.dataset.cap || "") + " · continuação";
+          var f2 = document.createElement("div");
+          f2.className = "flow";
+          nova.appendChild(h);
+          nova.appendChild(f2);
+          p.after(nova);
+        }
+        nova.querySelector(".flow").prepend(flow.lastElementChild);
+      }
+      // Título de seção não fica sozinho no pé da página: desce junto com o que ele apresenta.
+      while (nova && flow.children.length > 1 && flow.lastElementChild.classList.contains("secao-cat")) {
+        nova.querySelector(".flow").prepend(flow.lastElementChild);
+      }
+    }
+  }
+
+  function numerar() {
+    var paginas = document.querySelectorAll(".page");
+    paginas.forEach(function (p, n) {
+      var r = document.createElement("div");
+      r.className = "rodape";
+      r.innerHTML = "<span>Plantão de Valor · Izabel Gonçalves</span><span>" + (n + 1) + "</span>";
+      p.appendChild(r);
+    });
+    // Para conferir na geração: páginas que ainda transbordam (um bloco sozinho maior que a página).
+    var cheias = [];
+    paginas.forEach(function (p, n) { if (p.scrollHeight > p.clientHeight + 1) cheias.push(n + 1); });
+    document.documentElement.setAttribute("data-transbordam", cheias.join(","));
+    document.documentElement.setAttribute("data-paginas", paginas.length);
+  }
+
+  function qr() {
+    var el = document.getElementById("qr");
+    if (!el) return;
+    if (typeof QRCode !== "function") { el.style.display = "none"; return; }
+    new QRCode(el, { text: "https://sndflw.com/i/z5IpBtnaNxw3utC4y051", width: 150, height: 150, correctLevel: QRCode.CorrectLevel.M });
+  }
+
+  // ?p=3-8 mostra só essas páginas (para conferir na tela; não use na geração do PDF).
+  function filtrar() {
+    var m = /p=(\d+)-(\d+)/.exec(location.search);
+    if (!m) return;
+    document.querySelectorAll(".page").forEach(function (p, n) { if (n + 1 < +m[1] || n + 1 > +m[2]) p.style.display = "none"; });
+  }
+
+  function montar() { cortar(); numerar(); qr(); filtrar(); document.documentElement.setAttribute("data-pronto", "1"); }
+  // Espera imagens (load) e fontes: as alturas só valem depois das duas.
+  window.addEventListener("load", function () {
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(montar, montar); else montar();
+  });
+})();
+</script>
+</body>
+</html>

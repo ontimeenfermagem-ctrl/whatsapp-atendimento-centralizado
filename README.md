@@ -362,3 +362,17 @@ vendendo e não é mexido). As regras vêm das mesmas cópias do paginas em
 
 Para voltar a só captar, o `checkout` volta a `null` no paginas. Aqui, os `href` voltam a `#` e o
 texto do botão do pop-up volta a "Enviar minha ficha" (ver também "Nada trava" acima).
+
+## Ebook "Plantão de Valor" (Black Friday Vitalício)
+
+Fica em `ebook/` e não é servido pelo site. `ebook/ebook.html` é a fonte única dos dois PDFs:
+`?f=celular` (páginas 540×960, para o WhatsApp) e `?f=a4`. O script do fim do HTML corta cada
+capítulo em quantas páginas precisar e numera as páginas. Para gerar de novo:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File ebook\gerar-pdf.ps1
+```
+
+Saem `ebook/saida/Plantao-de-Valor-celular.pdf` e `Plantao-de-Valor-A4.pdf` (Edge headless; precisa
+de internet só para o QR code). Para conferir algumas páginas na tela: `ebook.html?f=celular&p=4-8`.
+O conteúdo técnico das lições deve ser revisado pela Iza antes de cada nova versão.
