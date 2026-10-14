@@ -376,3 +376,7 @@ powershell -ExecutionPolicy Bypass -File ebook\gerar-pdf.ps1
 Saem `ebook/saida/Plantao-de-Valor-celular.pdf` e `Plantao-de-Valor-A4.pdf` (Edge headless; precisa
 de internet só para o QR code). Para conferir algumas páginas na tela: `ebook.html?f=celular&p=4-8`.
 O conteúdo técnico das lições deve ser revisado pela Iza antes de cada nova versão.
+
+Links públicos (rota no `server.js`, servem os arquivos de `ebook/saida/` direto, sem cache):
+`/ebook-plantao-de-valor.pdf` (celular) e `/ebook-plantao-de-valor-a4.pdf` (A4). Gerou PDF novo?
+Commit + deploy e o mesmo link já entrega a versão nova.

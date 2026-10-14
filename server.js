@@ -99,6 +99,23 @@ app.get(BF_TY_AB, enviarPagina('bf_out_ls_26-obrigada-a-b'));
 const BF_TY_B = '/BF_out_LS_26-obrigada-b';
 app.get(BF_TY_B, enviarPagina('bf_out_ls_26-obrigada-b'));
 
+// Ebook "Plantao de Valor": servido direto de ebook/saida (o que o ebook/gerar-pdf.ps1 gera), sem
+// copia em public/. Abre no navegador (inline) com nome de arquivo bonito para quem baixar, e sempre
+// revalidado: gerou e fez deploy de uma versao nova, o mesmo link ja entrega ela.
+function enviarEbook(arquivo, nome) {
+  const caminho = path.join(__dirname, 'ebook', 'saida', arquivo);
+  return (req, res) =>
+    res.sendFile(caminho, {
+      headers: {
+        'Content-Type': 'application/pdf',
+        'Content-Disposition': `inline; filename="${nome}"`,
+        'Cache-Control': 'no-cache',
+      },
+    });
+}
+app.get('/ebook-plantao-de-valor.pdf', enviarEbook('Plantao-de-Valor-celular.pdf', 'Plantao-de-Valor-Iza.pdf'));
+app.get('/ebook-plantao-de-valor-a4.pdf', enviarEbook('Plantao-de-Valor-A4.pdf', 'Plantao-de-Valor-Iza-A4.pdf'));
+
 // Pagina de pagamento pendente (Pix aguardando confirmacao).
 const WAIT = '/igps_set_lp_26-aguardando-pagamento';
 app.get(WAIT, enviarPagina('igps_set_lp_26-aguardando-pagamento'));
